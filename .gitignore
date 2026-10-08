@@ -1,0 +1,58 @@
+# Real environment configuration; examples remain versioned.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+id_ed25519*
+secrets/
+credentials/
+credentials.json
+service-account*.json
+
+# Dependencies and virtual environments.
+node_modules/
+.venv/
+venv/
+env/
+__pypackages__/
+
+# Build output, caches, test reports, logs.
+dist/
+build/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.vite/
+coverage/
+.coverage*
+htmlcov/
+playwright-report/
+test-results/
+*.log
+logs/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+
+# Local runtime state; SQL migrations and text fixtures are not excluded.
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db-journal
+local-data/
+
+# Task scratch files and local delivery archives.
+work/
+*.zip
