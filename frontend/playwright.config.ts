@@ -5,7 +5,7 @@ import path from 'node:path'
 const root = fileURLToPath(new URL('../', import.meta.url))
 const python = path.join(root, '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python')
 export default defineConfig({
-  testDir: './tests', workers: 1, retries: 0,
+  testDir: './tests', testIgnore: 'live*.spec.ts', workers: 1, retries: 0,
   use: { baseURL: 'http://127.0.0.1:15173', channel: process.env.PLAYWRIGHT_CHANNEL, trace: 'retain-on-failure' },
   webServer: [
     { command: `"${python}" -m backend.app.server`, cwd: root, url: 'http://127.0.0.1:18080/api/health/ready', reuseExistingServer: false,

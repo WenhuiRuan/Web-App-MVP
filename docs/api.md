@@ -1,12 +1,12 @@
 # HTTP API 与 SSE 契约 v1
 
-阶段4A/4B/4C已实现对应后端流程，2026-10-09；前端讨论页面仍消费模拟客户端，真实SSE尚未挂载。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
+更新于2026-10-10，阶段5已接通持久化SSE及默认前端业务客户端，后端继续使用确定性替身。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
 
 ## 实现状态与机器契约
 
 - **基础接口已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述真实可用端点。
 - **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
-- **讨论接口已挂载**：POST/GET `/api/discussions`、GET `/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、POST `/{discussion_id}/summary-retry`、GET `/{discussion_id}/operations/{operation_id}`（均/api/discussions前缀）。只有SSE仍未挂载，返回统一404。
+- **讨论接口已挂载**：POST/GET `/api/discussions`、GET `/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、POST `/{discussion_id}/summary-retry`、GET `/{discussion_id}/operations/{operation_id}`（均/api/discussions前缀）。以及GET `/{discussion_id}/events`。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
 
@@ -16,7 +16,7 @@
 |---|---|---|
 | GET /api/health/live | 200 `{"status":"ok"}` | 只证明进程响应，不检查数据库/模型 |
 | GET /api/health/ready | 200 `{"status":"ready","database":"ready","model_mode":"mock"}` | 503 DATABASE_UNAVAILABLE / MODEL_NOT_CONFIGURED |
-| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":true}` | true表示确定性后端完整讨论/总结流程可运行，不代表真实模型/SSE/前端业务已接通；未实现provider为unavailable/false |
+| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.5.0","phase":5,"model_mode":"mock","discussion_engine_available":true}` | true表示确定性后端完整讨论/总结流程可运行，不代表真实模型服务或内容质量已验证；未实现provider为unavailable/false |
 
 所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
 
@@ -39,7 +39,7 @@ active 仅 RUNNING/SUMMARIZING；all 包含草稿、生成、失败、完成等�
 
 异步操作的 HTTP 202 只代表已受理，后续成功/失败通过 Operation、Snapshot 和 SSE 展现，不能将202当作阵容/总结成功。operation.status 与 discussion.state 分开。异步失败写状态和事件；原已返回202不能改成500。
 
-阶段4A/4B：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；4B随后由唯一后台任务自动开场/调度、提取、总结直至COMPLETED或明确失败。同revision的新start键返回首个成功start的operation_id和run_id，不重复调度。即使run中断或已进入总结，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
+阶段4A/4B：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation、Snapshot或SSE事件。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；4B随后由唯一后台任务自动开场/调度、提取、总结直至COMPLETED或明确失败。同revision的新start键返回首个成功start的operation_id和run_id，不重复调度。即使run中断或已进入总结，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
 
 服务关闭/重启：生成为INTERRUPTED/roster，讨论推进为INTERRUPTED/discussion，总结为INTERRUPTED/summary，failure_code=SERVICE_INTERRUPTED。保留已提交内容，不自动重放；roster与summary可用新命令键重试，discussion中断不恢复。原start保持SUCCEEDED；处理中手动总结操作为INTERRUPTED。容量GENERATING/RUNNING/SUMMARIZING默认合计3，READY不占容量；active列表只RUNNING/SUMMARIZING。
 
@@ -113,11 +113,12 @@ Idempotency-Key: 55555555-5555-4555-8555-555555555555
 
 | type | payload | 公开投影处理 |
 |---|---|---|
-| discussion.state_changed | state、version、failure_stage? | 更新生命周期；READY/GENERATING不属于最终完成 |
+| discussion.state_changed | state、version、failure_stage?、failure_code? | 更新生命周期；READY/GENERATING不属于最终完成 |
 | roster.ready | roster_revision、participants[] | 用整套阵容替换；run_id必须null |
 | participant.status_changed | participant_id、state、public_focus、version | 更新一个小窗，不追加 transcript |
 | turn.committed | id、discussion_id、run_id、participant_id、turn_no、kind、content、created_at | 确认归属后追加正式消息；身份/颜色从已冻结阵容关联 |
 | insights.updated | version、through_turn、items[{id,kind,content,source_message_ids}] | 用新批次替换面板；忽略旧版本，引用必须来自已知正式消息 |
+| insights.status_changed | state、version、through_turn、error_code | 更新最新提取任务状态，失败保留成功观点批次 |
 | summary.ready | content、through_turn、created_at | 展示自然语言；必须在 COMPLETED 状态事件前 |
 | operation.failed | operation_id、stage、code、message、retryable | 展示脱敏错误；配套 FAILED/INTERRUPTED 状态事件后关闭 |
 
@@ -137,11 +138,12 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 ### 连接、排序和恢复
 
 1. 同一读事务获取快照与 k，客户端先应用快照，再 GET events?after=k。
-2. 服务端校验游标；自动重连的 Last-Event-ID 优先于 after，必须属于 URL 的 discussion_id，且不超过现有高水位。初始无游标按0补全部事件。
+2. 服务端校验游标；Last-Event-ID（原生EventSource或外部客户端）优先于 after，必须属于 URL 的 discussion_id，且不超过现有高水位。初始无游标按0补全部事件。
 3. 只从持久化表按 seq 升序分批读取（100条/批；空闲250ms轮询），不在补传后切换到可能漏消息的内存流。
 4. 客户端 ≤k 丢弃、k+1 应用并推进游标，>k+1 或未知版本重取快照。议题切换关闭旧订阅，重新建投影。
 5. 每15秒心跳不占序号；浏览器断线不停止后端讨论；COMPLETED/FAILED/INTERRUPTED的状态事件应用后关闭连接，用户重试后重新取快照订阅。
-6. HTTP响应头发送前可返回结构化错误；连接已经建立后不能再改HTTP状态，意外流错误直接断开并由客户端恢复。业务操作失败用持久化事件表达。
+6. 当前前端fetch流断开后重新取Snapshot，再用after续订；没有假称fetch自动携带Last-Event-ID。离线事件取消reader，在线立即恢复，其他流异常按1/2/4/8/10秒退避；活性监测40秒。
+7. HTTP响应头发送前可返回结构化错误；连接已经建立后不能再改HTTP状态，意外流错误直接断开并由客户端恢复。业务操作失败用持久化事件表达。
 
 ## 模型调用边界（已实现接口与模拟，无真实网络）
 
@@ -197,7 +199,7 @@ Idempotency-Key: 55555555-5555-4555-8555-555555555555
 {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111","run_id":"22222222-2222-4222-8222-222222222222","seq":20,"type":"operation.failed","occurred_at":"2026-10-09T00:00:00Z","payload":{"operation_id":"33333333-3333-4333-8333-333333333333","stage":"summary","code":"MODEL_TIMEOUT","message":"总结生成失败，消息和观点已保留，可以重试总结。","retryable":true}}
 ```
 
-该事件是失败分支的字段示例，seq依实际持久化高水位分配；本阶段只能轮询快照/操作，SSE线发送尚未实现。insights.updated与summary.ready完整来源/正文/封装样例见contracts.json（两位专家来源）；ModelRequest完整提取/总结上下文同文件model_requests。
+该事件是失败分支的字段示例，seq依实际持久化高水位分配；当前已通过真实SSE发送。insights.updated与summary.ready完整来源/正文/封装样例见contracts.json（两位专家来源）；ModelRequest完整提取/总结上下文同文件model_requests。
 
 ## 阶段5已挂载SSE
 

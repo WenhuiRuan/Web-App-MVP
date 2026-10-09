@@ -1,6 +1,6 @@
 # SDD 架构基线
 
-SDD基线：阶段2，2026-10-08；更新于2026-10-09。4A生命周期、4B自主调度、4C观点提取/自然语言总结/恢复均完成对应后端验证。确定性模式自动到COMPLETED；前端业务联调与SSE留阶段5，真实模型留阶段6。模块细节见backend-lifecycle、backend-orchestration和backend-synthesis。
+SDD基线：阶段2，2026-10-08；更新于2026-10-10。4A生命周期、4B自主调度、4C观点提取/自然语言总结/恢复均完成对应后端验证。确定性模式自动到COMPLETED；阶段5已接通SSE与前端业务并完成替身下真实服务E2E；真实模型留阶段6。模块细节见backend-lifecycle、backend-orchestration和backend-synthesis。
 
 ## 模块与依赖
 
@@ -12,7 +12,7 @@ SDD基线：阶段2，2026-10-08；更新于2026-10-09。4A生命周期、4B自�
 | 发言调度 | 本轮有效意图 → 一个获选角色 | 4B已实现：纯评分/回应/近期惩罚与连续占用回退，唯一领取及消息提交 |
 | 主持人控制 | 公开上下文、运行额度 → 追问/串联/结束 | 4B已实现：开场先行，无候选追问、专家发言后串联、决定结束冻结边界 |
 | 观点提取 | 正式消息冻结前缀 → InsightBatch/InsightStatus | 4C已实现：SynthesisEngine/SynthesisRepository，来源/版本/领取、原子事件与有限失败；总结单独捕获边界 |
-| 事件分发 | 与业务写入同事务的 Event → SSE | 每讨论有序持久化日志，读库补传；本阶段冻结协议，后续实现推送 |
+| 事件分发 | 与业务写入同事务的 Event → SSE | 每讨论有序持久化日志，读库补传；阶段5已挂载SSE短事务读库及补发 |
 
 ```mermaid
 flowchart TD
@@ -24,7 +24,7 @@ flowchart TD
   PORT -.-> REAL[真实供应商适配: 后续]
   APP --> DB[SQLite Repository 与事务]
   DB --> EV[持久化事件表]
-  EV -->|后续 SSE| UI
+  EV -->|SSE| UI
 ```
 
 Python包backend/app：contracts定义公开/模型格式，model_gateway定义协议与独立模拟，config/database/main提供基础设施；4A的lifecycle/repository/tasks/discussion_api已扩展为4B的scheduling纯仲裁、run_repository事务和engine自动循环。纯领域规则不依赖FastAPI/SQLite/供应商SDK；全部模型IO通过ModelGateway执行。
@@ -64,15 +64,15 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 
 自动重连有效 Last-Event-ID 优先于 after，完整刷新重新取快照。ID 形式 `discussion_uuid:seq`；不同 discussion 前缀、负数、非整数、游标超出现有高水位返回 409 CURSOR_INVALID；所有读请求先做存在性校验。seq 严格 +1，客户端丢弃 ≤已应用游标，对跳号或未知 schema_version 关闭连接并重新取快照；禁止悄悄跳过。MVP 不清理事件，删除功能不开放；若未来压缩，过期游标返回 409 SNAPSHOT_REQUIRED。
 
-`: heartbeat` 每 15 秒无 ID；数据 `retry: 2000` 建议重连间隔；UTF-8/text-event-stream、Cache-Control no-cache、X-Accel-Buffering no。终止状态事件到达且其 seq 已应用后客户端主动关闭，避免 EventSource 自动重连循环。生成阶段 READY 仍允许连接继续等 start；失败/中断关闭后，用户重试命令再取快照并新建订阅。慢消费者从持久化日志拉取，无无界内存队列；后续设置写入超时断开后仍可补传。本阶段只实现契约和格式验证，不启动 SSE 路由。
+`: heartbeat` 每 15 秒无 ID；数据 `retry: 2000` 建议重连间隔；UTF-8/text-event-stream、Cache-Control no-cache、X-Accel-Buffering no。终止状态事件到达且其 seq 已应用后客户端主动关闭，避免 EventSource 自动重连循环。生成阶段 READY 仍允许连接继续等 start；失败/中断关闭后，用户重试命令再取快照并新建订阅。慢消费者从持久化日志拉取，无无界内存队列；后续设置写入超时断开后仍可补传。阶段5已实现SSE路由与恢复检查。
 
 ## 工程与安全边界
 
-当前运行路由包括三个基础接口及创建、列表、快照、嘉宾生成、启动、总结重试和操作查询；SSE仍设计未挂载。前端页面消费独立模拟客户端，基础连接检查通过Vite同源代理访问后端，不读取根.env。后端默认loopback，无身份系统，不对公网发布。
+当前运行路由包括三个基础接口及创建、列表、快照、嘉宾生成、启动、总结重试和操作查询；包括SSE持久化事件订阅。前端默认通过统一HTTP/SSE客户端，独立台本仅在mode=mock；全部业务请求通过Vite同源代理访问后端，不读取根.env。后端默认loopback，无身份系统，不对公网发布。
 
 日志白名单仅含生成的 request_id、HTTP 方法、匹配的路由模板、状态和耗时；不记录请求 body/query/header、模型上下文/输出、环境值和异常原文。关闭 Uvicorn access log；统一错误不回显 Pydantic input/ctx 或原始异常；未匹配路径记录固定 `<unmatched>`。配置中密钥用 SecretStr，禁止 dump 配置。真实适配器尚未实现，非 mock 模式 readiness 返回 503。
 
-迁移、模型边界、任务隔离、调度/提取/总结及恢复均有后端检查；真实SSE重连、前端业务投影与完整E2E留阶段5。
+迁移、模型边界、任务隔离、调度/提取/总结及恢复均有后端检查；阶段5另有真实SSE、前端业务投影与完整浏览器E2E；真实模型留阶段6。
 
 
 ## 4C-1运行中观点更新
@@ -99,3 +99,5 @@ SSE路由→短事务event_page→异步stream。持久化events是唯一业务�
 统一composition入口transport/client选择默认HttpDiscussionClient，显式mode=mock才动态加载台本及浏览器记录。页面和hooks不导入mock。流使用fetch+可取消reader读取标准SSE，校验帧id/type/讨论/schema及seq，注释心跳只更新40秒连接活性监测，不投影消息。HTTP10秒预算，命令UUID幂等键；创建表单同参数失败重发保持同键，创建成功后即便阵容受理失败也进入已创建讨论以便重试。
 
 useDiscussion先快照后after订阅，重复seq忽略，缺口/旧run/格式异常关闭旧reader，保留内容并以1/2/4/8/10秒退避重新读取快照与续订。generation和alive同时守卫fetch和连接回调；切场组件key及cleanup清理timer/AbortController/订阅。终态保留内容并关闭订阅；总结重试受理后显式重新快照，不重放消息。恢复不会重建同场Transcript，原阅读位置和新内容提示继续生效。观点任务状态与成功观点内容分离，FAILED/INTERRUPTED显示独立提示并保留旧批次。
+
+服务关闭：生产Uvicorn宽限5秒，开放的SSE不会无限阻止lifespan清理；宽限后取消观察者流，再由TaskSupervisor取消/收集后台任务并持久化中断。仅断开观察者不触发此服务关闭过程。真实TCP补测保留未关闭reader，证明进程能退出并保存INTERRUPTED/discussion。流网络离线主动abort、在线立即快照恢复。SSE流故障注入仅位于backend/tests/e2e_server.py，生产create_app没有_test接口。

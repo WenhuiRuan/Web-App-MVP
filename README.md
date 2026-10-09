@@ -1,6 +1,6 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。阶段5正在接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。运行模型仍为后端独立确定性ModelGateway，不代表真实模型分析。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
+本地多专家圆桌讨论应用。阶段5已接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。运行模型仍为后端独立确定性ModelGateway，不代表真实模型分析。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
 
 ## 环境与安装
 
@@ -106,23 +106,27 @@ npm run build
 # Windows 若已安装 Edge，可免下载浏览器：
 $env:PLAYWRIGHT_CHANNEL='msedge'
 npm run test:smoke
+# 真实业务：自动启动临时库、可控后端替身和Vite，HTTP/SSE实际走服务
+npm run test:live
 Pop-Location
 ```
 
-无 Edge 时在 frontend 执行 `npm exec playwright install chromium`，并移除 `PLAYWRIGHT_CHANNEL` 环境变量后执行冒烟。Playwright 自动在18080/15173启动并关闭独立测试服务，测试库使用项目 work/；若端口占用请先结束占用者。foundation.spec.ts的两项检查贯穿真实浏览器→Vite代理→FastAPI基础接口/SQLite，并覆盖503；discussion.spec.ts使用前端模拟数据验证用户流程、故障恢复和四种尺寸，projection.spec.ts检查公开事件投影。**这些均不是完整业务后端E2E**。截图保存在work/stage3-screenshots；浏览器测试后可运行 `python -m scripts.validate_frontend_capture` 校验实际模拟快照与事件格式。
+无Edge时可在frontend执行 `npm exec playwright install chromium`，移除PLAYWRIGHT_CHANNEL（其他浏览器尚未实机验收）。默认test:smoke在18080/15173运行基础/独立前端mock/投影与客户端检查；新test:live在18081/15174运行真实业务E2E，临时数据库每次新建work/stage5-e2e-*，不接触正常数据。端口被占时明确失败，不终止用户进程。test:live使用backend/tests/e2e_server中的可控ModelGateway，测试故障接口仅此专用服务拥有，禁止把测试服务当作日常服务。服务由Playwright统一启动和关闭。
+
+实际业务E2E包含创建/阵容/确认/两次运行中观点/总结、首页加入/刷新、断网继续推进/恢复、gap/重复帧/提前关闭、总结重试、观点失败保留、双场隔离、三个尺寸增长滚动及密钥哨兵。截图work/stage5-screenshots，机器报告work/stage5-e2e-report.json，临时库信息work/stage5-e2e-last.json。静态1920等既有布局结果沿用阶段3。独立台本格式检查仍可运行 `python -m scripts.validate_frontend_capture`。
 
 数据契约修改后运行 `python -m scripts.export_contracts` 再执行检查。JSON Schema验证形状，Pydantic另外验证跨字段归属、阵容基数/身份、句数、来源等；单独JSON Schema通过不代表全部业务规则成立。
 
-smoke_lifecycle自行启动临时loopback后端、独立work数据库，验证两场各8条发言/观点/总结及强制重启后数据保留。smoke_synthesis用受控后端替身和真实TCP HTTP，验证双场失败隔离、并发总结重试、中断/重启及新键恢复；报告在work/*-smoke-*/report.json。4C新增及受影响pytest168项通过（当时45新增）；收尾再补2项格式负例，相关55项回归通过，新增总数47；未受影响42项纯规则沿用4B结果，未重复执行。本批没有布局/截图/前端构建检查，frontend/src及依赖锁未改，仅基础浏览器测试的系统能力断言同步为true，浏览器检查仍需后续阶段执行。
+smoke_lifecycle/smoke_synthesis是阶段4真实TCP验证脚本，历史结果沿用。阶段5SSE新增及受影响检查74 passed，另外生命周期/任务/发言/总结/模拟样例受影响回归111 passed；开放SSE关闭真实TCP补测1 passed。以上是分别运行结果，不宣称单次全量。前端类型检查/生产构建通过，真实业务E2E13 passed；前端回归最后结果见progress。既有纯仲裁/生命周期规则与静态布局未重复运行。
 
 ## 已完成、限制与后续
 
-- 已完成：前端模拟闭环、工程基础、后端生命周期/阵容/唯一运行、自主调度/主持控制、观点来源与版本/原子事件、独立预算总结/COMPLETED及失败/中断幂等重试。
-- 未实现：真实SSE订阅与恢复、前端业务API接入、真实模型适配与内容质量验收、五条最终质量样例。
+- 已完成：前述后端规则与恢复、持久化SSE、默认前端业务闭环和替身下真实HTTP/SSE浏览器E2E。
+- 未完成：真实模型适配、真实内容质量/语义证据/费用与时延验收、五条最终质量样例及最终材料/远程交付。
 - 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
 - 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：阶段5接入HTTP/SSE、同步公开投影及完整业务E2E；阶段6真实服务、内容质量及最终交付。
+- 下一步：阶段6依据用户提供的后端服务配置做真实ModelGateway适配、脱敏错误/限流/取消验证、内容质量与交付材料。
 
-生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认前端模拟无需后端；Ctrl+C停止。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
+生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认业务模式须同时运行后端；独立前端演示添加?mode=mock。Ctrl+C停止，服务5秒宽限后取消开放流并清理任务。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 
 设计索引：[需求](docs/requirements.md)、[架构](docs/architecture.md)、[数据模型](docs/data-model.md)、[API](docs/api.md)、[验收](docs/acceptance.md)、[决策](docs/decisions.md)、[进展](docs/progress.md)、[Prompt](docs/prompt-log.md)。

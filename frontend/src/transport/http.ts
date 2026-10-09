@@ -70,6 +70,8 @@ export class HttpDiscussionClient implements DiscussionClient {
     const controller = new AbortController()
     let active = true
     let lastActivity = Date.now()
+    const offline = () => controller.abort()
+    if (typeof window !== 'undefined') window.addEventListener('offline', offline)
     const watchdog = setInterval(() => { if (Date.now() - lastActivity > 40000) controller.abort() }, 1000)
     observer.connection('connecting')
     void (async () => {
@@ -92,8 +94,8 @@ export class HttpDiscussionClient implements DiscussionClient {
         if (active) throw new ClientError('SSE_CLOSED', '事件连接已关闭，正在恢复内容。', true)
       } catch (error) {
         if (active) { observer.connection('offline'); observer.failed?.(error instanceof ClientError ? error : new ClientError('SSE_DISCONNECTED', '连接中断，正在自动恢复。', true)) }
-      } finally { clearInterval(watchdog) }
+      } finally { clearInterval(watchdog); if (typeof window !== 'undefined') window.removeEventListener('offline', offline) }
     })()
-    return () => { active = false; clearInterval(watchdog); controller.abort() }
+    return () => { active = false; clearInterval(watchdog); if (typeof window !== 'undefined') window.removeEventListener('offline', offline); controller.abort() }
   }
 }

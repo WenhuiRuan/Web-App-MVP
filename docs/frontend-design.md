@@ -1,12 +1,12 @@
 # 前端页面与演播厅交互设计
 
-阶段3，2026-10-09；依据 U4 和阶段2冻结契约。本阶段 DDD 指设计驱动前端实现。所有圆桌内容均为预设模拟，不构成真实讨论引擎、网络 SSE 或模型能力的验收。
+阶段3设计基线，阶段5更新于2026-10-10。DDD按设计驱动解释，保留原布局；默认HTTP/SSE真实业务，显式mode=mock为独立台本，后端模型仍确定性替身。
 
 ## 页面与视觉层级
 
 首页 → 创建话题/人数 → 生成中 → 阵容确认 → 演播厅 → 主持人总结；列表同时提供进行中讨论与已保存记录。首页有加载骨架、空态、失败重试。创建默认4位专家，主持人另计，限制2–6位；话题 trim 后1–500 Unicode码点。生成失败保留原话题，重新生成成功后才能确认。
 
-演播厅顶部放议题、讨论状态、模拟连接状态和切换讨论；桌面左侧嘉宾，中间正式发言，右侧观点与总结。角色姓名、职业、立场及专属色贯穿卡片和发言。每位角色拥有独立状态和公开关注点，发言者同时在卡片与最新发言中高亮。状态使用文字及形状，颜色不是唯一提示。
+演播厅顶部放议题、讨论状态、实时连接状态和切换讨论；桌面左侧嘉宾，中间正式发言，右侧观点与总结。角色姓名、职业、立场及专属色贯穿卡片和发言。每位角色拥有独立状态和公开关注点，发言者同时在卡片与最新发言中高亮。状态使用文字及形状，颜色不是唯一提示。
 
 界面采用暖灰底、浅色卡片、深绿主操作、琥珀色模拟标记；角色使用固定且互异的七种颜色。根容器100dvh，导航和页脚固定在布局内；main和各面板以min-height:0分配可用高度，滚动发生在页面内容区或嘉宾/Transcript/观点区域。超宽屏演播厅整体限宽1780px，Transcript不超过760px，正文限制阅读长度。窄屏用“嘉宾/现场发言/观点与总结”分区切换，保留同一批数据和各区域滚动容器。总结采用原生dialog，独立滚动、Escape关闭、返回触发按钮焦点。
 
@@ -18,18 +18,19 @@ main（hash路由、导航、演示工具）
   useDiscussionList / useDiscussion（请求、订阅生命周期）
   PersonCard / Transcript / Insights / SummaryText
   transport/types + projection（公开数据类型与事件投影）
-  mocks/client（唯一的台本、时钟、故障、存储拥有者）
+  transport/client + http（默认HTTP/SSE、解析、取消和恢复）
+  mocks/client（显式mode=mock时的台本、时钟、故障、存储拥有者）
   data/samples/frontend-demo.json（可校验台本）
 ```
 
-组件通过DiscussionClient使用list/create/generate/start/snapshot/subscribe/retrySummary；mock客户端实现此接口。后续在组合入口替换为HTTP/SSE适配器，组件无需知道模型供应商。当前没有实现网络SSE解析、HTTP错误解析、供应商请求或后端业务路由；基础连通检查仍位于 `/?view=system`，调用真实FastAPI健康接口。
+组件通过DiscussionClient使用list/create/generate/start/snapshot/subscribe/retrySummary；由组合入口选择真实HTTP/SSE或独立mock，组件无需知道模型供应商。已实现SSE/HTTP解析、公开事件投影与后台故障显示，未实现真实供应商请求；基础连通检查仍位于 `/?view=system`，调用真实FastAPI健康接口。
 
 使用同源hash路由，刷新可返回原讨论，无需Web服务器额外配置。讨论路径作为Room的React key，切换时卸载旧状态；hook cleanup中AbortController取消快照请求、关闭订阅，并用alive标志拒绝迟到回调。
 
 ## 快照、事件与阅读位置
 
 1. 获取该讨论完整Snapshot及last_event_seq=k；订阅k之后的事件。
-2. mock中补传与登记在同一JavaScript任务内完成，避免交接期间遗漏；这只证明前端消费流程，真实服务器的数据库轮询补传尚未实现。
+2. mock中补传与登记在同一JavaScript任务内完成，避免交接期间遗漏；这只证明前端消费流程，阶段5已用真实服务器数据库轮询补发及浏览器恢复另外验证。
 3. projectEvent只接收当前discussion/run，忽略重复seq，要求连续序号；缺口、版本不支持、角色或发言归属不匹配、洞察引用不存在时停止订阅并显示重新连接。
 4. 重新连接先读取最新快照，再补传其后的事件；保留相同讨论已展示内容和Transcript容器。终态关闭订阅，已完成记录可继续查看。
 5. 正式发言只由turn.committed加入Transcript；角色准备、举手等不会成为发言行。消息以id为键、turn_no排序；只有在用户接近底部48px以内才自动跟随。
@@ -55,4 +56,6 @@ localStorage键为`ai-panel-studio.frontend-demo.v1`，保存每场模拟快照�
 
 测试见frontend/tests/discussion.spec.ts、projection.spec.ts；前者是真实Edge浏览器中的前端模拟交互，后者检查公开事件投影。backend/tests/test_frontend_demo.py核对静态台本契约、发言数量和专家来源。基础foundation.spec.ts继续验证真实前端代理到后端基础接口，二者不可混称完整业务E2E。
 
-四个强制视口为1366×768、1920×1080、2560×1080、390×844。浏览器测试覆盖各页面、内部滚动、超宽阅读宽度、窄屏分区与来源定位，保存截图到work/stage3-screenshots；实际结果与修复记录见progress和acceptance。下一阶段先按TDD完成领域规则和真实持久化，再以HTTP/SSE适配器替换mock，补齐真实断线、任务隔离、故障恢复与模型质量验收。
+四个强制视口为1366×768、1920×1080、2560×1080、390×844。浏览器测试覆盖各页面、内部滚动、超宽阅读宽度、窄屏分区与来源定位，保存截图到work/stage3-screenshots；实际结果与修复记录见progress和acceptance。阶段4领域规则/持久化与阶段5HTTP/SSE已完成。阶段5动态增长另测1366/2560/390，1920静态结果沿用阶段3。截图在work/stage5-screenshots，真实模型质量仍待阶段6。
+
+提取状态独立于成功观点批次：失败/中断显示保留提示，PENDING显示边界，任何失败都不清空已有观点。总结按自然语言换行分段，错误/中断可重试原运行。浏览器测试直接访问服务，测试专用模型/流故障接口不在生产挂载。

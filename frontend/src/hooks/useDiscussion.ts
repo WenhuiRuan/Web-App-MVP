@@ -27,31 +27,37 @@ export function useDiscussion(id: string) {
     const load = async () => {
       const token = ++generation
       try {
-      const value = await discussionClient.snapshot(id, controller.signal)
-      if (!alive || token !== generation) return
-      if (value.discussion.id !== id) throw new ClientError('SNAPSHOT_REQUIRED', '快照讨论归属不匹配。', true)
-      current = value; setSnapshot(value)
-      setError(undefined)
-      if (['COMPLETED', 'FAILED', 'INTERRUPTED'].includes(value.discussion.state)) { setConnection('live'); return }
-      close = discussionClient.subscribe(id, value.last_event_seq, {
-        connection: state => { if (alive && token === generation) setConnection(state) },
-        failed: failure => { if (alive && token === generation) recover(failure) },
-        event: event => {
-          if (!alive || token !== generation || !current || event.discussion_id !== id) return
-          try {
-            current = projectEvent(current, event); setSnapshot(current)
-            failures = 0
-            if (event.type === 'operation.failed') setError(event.payload.message)
-            if (['COMPLETED', 'FAILED', 'INTERRUPTED'].includes(current.discussion.state)) { close?.(); setConnection('live') }
-          } catch (failure) {
-            recover(failure)
-          }
-        },
-      })
+        const value = await discussionClient.snapshot(id, controller.signal)
+        if (!alive || token !== generation) return
+        if (value.discussion.id !== id) throw new ClientError('SNAPSHOT_REQUIRED', '快照讨论归属不匹配。', true)
+        current = value; setSnapshot(value)
+        setError(undefined)
+        if (['COMPLETED', 'FAILED', 'INTERRUPTED'].includes(value.discussion.state)) { setConnection('live'); return }
+        close = discussionClient.subscribe(id, value.last_event_seq, {
+          connection: state => { if (alive && token === generation) setConnection(state) },
+          failed: failure => { if (alive && token === generation) recover(failure) },
+          event: event => {
+            if (!alive || token !== generation || !current || event.discussion_id !== id) return
+            try {
+              current = projectEvent(current, event); setSnapshot(current)
+              failures = 0
+              if (event.type === 'operation.failed') setError(event.payload.message)
+              if (['COMPLETED', 'FAILED', 'INTERRUPTED'].includes(current.discussion.state)) { close?.(); setConnection('live') }
+            } catch (failure) {
+              recover(failure)
+            }
+          },
+        })
       } catch (failure) { if (alive && !controller.signal.aborted && token === generation) recover(failure) }
     }
+    const online = () => {
+      if (!alive || isMockMode) return
+      clearTimeout(timer); timer = undefined; ++generation; close?.(); close = undefined
+      setConnection('connecting'); void load()
+    }
+    window.addEventListener('online', online)
     void load()
-    return () => { alive = false; ++generation; clearTimeout(timer); controller.abort(); close?.() }
+    return () => { alive = false; ++generation; window.removeEventListener('online', online); clearTimeout(timer); controller.abort(); close?.() }
   }, [id, attempt])
   return { snapshot, connection, error, reconnect: () => setAttempt(n => n + 1), clearError: () => setError(undefined) }
 }
