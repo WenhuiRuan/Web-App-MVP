@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime,timezone
 from uuid import UUID,uuid4
 
-from .contracts import Message,ModelRequest
+from .contracts import Message,ModelRequest,Snapshot
 from .lifecycle import LifecycleError
 from .model_gateway import validate_result,utterance_text
 from .repository import DiscussionRepository,timestamp
@@ -12,7 +12,7 @@ from .scheduling import stop_reason,validate_intents
 
 @dataclass(frozen=True)
 class RunContext:
-    snapshot: object
+    snapshot: Snapshot
     cycle: int
     remaining_seconds: float
 

@@ -399,4 +399,5 @@ class ContractExamples(Contract):
     error: ErrorResponse
     events: tuple[Event, ...]
     model_request: ModelRequest
+    model_requests: tuple[ModelRequest,...] = ()
     model_results: tuple[ModelResult, ...]

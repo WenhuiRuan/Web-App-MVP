@@ -1,6 +1,6 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。当前完成阶段3前端模拟流程及**阶段4第一批：后端生命周期、嘉宾生成和持久化**。真实FastAPI/SQLite已支持创建、查询、后台生成完整阵容、确认唯一运行实例、操作查询与中断恢复；后端使用独立确定性ModelGateway。前端仍明确标记模拟模式，播放“四天工作制”台本，尚未接入业务API。自动讨论、真实SSE和真实模型适配待后续。开发工具为Codex，应用运行时模型由后端独立配置。
+本地多专家圆桌讨论应用。当前完成阶段3前端模拟流程及**阶段4第二批：后端自主发言调度与主持控制**。真实FastAPI/SQLite支持创建/阵容/唯一运行及自动开场、专家意图仲裁、追问/串联/结束、发言持久化和总结边界冻结；后端使用独立确定性ModelGateway。前端仍明确标记模拟模式，播放“四天工作制”台本，尚未接入业务API。观点提炼、最终总结、真实SSE和真实模型适配待后续。开发工具为Codex，应用运行时模型由后端独立配置。
 
 ## 环境与安装
 
@@ -36,8 +36,8 @@ Pop-Location
 | LOG_LEVEL | INFO；DEBUG/INFO/WARNING/ERROR | 日志级别；不打印请求体或密钥 |
 | MODEL_PROVIDER | mock | 当前仅mock适配可用；其他值ready返回503 |
 | MODEL_BASE_URL / MODEL_NAME / MODEL_API_KEY | 空 | 真实服务后续配置；Key仅后端读取，不进入响应/日志/数据库 |
-| MODEL_TIMEOUT_SECONDS / MODEL_MAX_CONCURRENCY | 30 / 4 | 嘉宾模型调用超时与全局并发上限 |
-| DISCUSSION_MAX_ACTIVE / DISCUSSION_MAX_TURNS / DISCUSSION_MAX_SECONDS | 3 / 20 / 300 | 活动容量已执行：GENERATING/RUNNING/SUMMARIZING合计；发言/时长额度写入run，自动执行待下一批 |
+| MODEL_TIMEOUT_SECONDS / MODEL_MAX_CONCURRENCY / MODEL_MAX_ATTEMPTS | 30 / 4 / 2 | 全部模型任务超时、全局并发和最多尝试次数（含首次，1–3）；run剩余时长优先 |
+| DISCUSSION_MAX_ACTIVE / DISCUSSION_MAX_TURNS / DISCUSSION_MAX_SECONDS | 3 / 20 / 300 | 活动容量已执行：GENERATING/RUNNING/SUMMARIZING合计；发言/时长额度已执行；到期冻结实际消息边界并进入SUMMARIZING |
 | SUMMARY_MAX_SECONDS | 60 | 后续总结独立时间预算 |
 
 若修改后端端口，启动前端前设置进程变量 `$env:PANEL_BACKEND_ORIGIN='http://127.0.0.1:新端口'`；它只是 Vite 服务端代理目标，不是模型配置。不要把密钥放入任何 `PANEL_PUBLIC_*` 或 `VITE_*` 变量。
@@ -83,12 +83,12 @@ Pop-Location
 | GET /api/discussions | active/all过滤、稳定排序与游标分页 |
 | GET /api/discussions/{id} | 一致性快照及事件高水位 |
 | POST /api/discussions/{id}/roster-generation | 后台生成；202受理后通过快照或操作查询等待READY |
-| POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run，当前不自动发言 |
+| POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run及唯一后台讨论任务，自动推进至SUMMARIZING |
 | GET /api/discussions/{id}/operations/{operation_id} | 查询本讨论操作的处理状态和安全错误码 |
 
-请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；总结重试和SSE仍为false。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；再POST start并提交当前roster_revision，返回202及run_id。所有命令需要UUID幂等键：网络重发使用原键，明确失败后的重新生成使用新键。
+请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；总结重试和SSE仍为false。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；再POST start并提交当前roster_revision，返回202及run_id；后台自动开场和讨论，可轮询Snapshot查看正式消息/角色状态直至SUMMARIZING。所有命令需要UUID幂等键：网络重发使用原键，明确失败后的重新生成使用新键。
 
-服务为**单进程、单worker、单数据库所有者**。关闭或异常重启后，未完成生成/运行标INTERRUPTED并保留已提交内容；roster阶段可用新键重试。重复start只重放原受理响应及既有run，不恢复中断运行；当前状态请读Snapshot。数据库完全不可写时无法保存中断标记，需要在恢复可写后的下次启动处理。后端实现与验证细节见[生命周期说明](docs/backend-lifecycle.md)。
+服务为**单进程、单worker、单数据库所有者**。关闭或异常重启后，未完成生成/运行标INTERRUPTED并保留已提交内容；roster阶段可用新键重试。重复start只重放原受理响应及既有run，不恢复中断运行；当前状态请读Snapshot。数据库完全不可写时无法保存中断标记，需要在恢复可写后的下次启动处理。后端实现与验证细节见[生命周期说明](docs/backend-lifecycle.md)和[自动调度说明](docs/backend-orchestration.md)。
 
 ## 验证命令
 
@@ -110,15 +110,15 @@ Pop-Location
 
 数据契约修改后运行 `python -m scripts.export_contracts` 再执行检查。JSON Schema验证形状，Pydantic另外验证跨字段归属、阵容基数/身份、句数、来源等；单独JSON Schema通过不代表全部业务规则成立。
 
-smoke_lifecycle自行启动临时loopback后端、创建独立work数据库，用真实HTTP检查两场生成/并发确认，再强制停止它自己创建的进程并重启检查持久化与中断状态。命令退出时清理自有进程，报告和日志留在work/lifecycle-smoke-*；不使用正常运行数据库，也不连接真实模型。当前验证：pytest105通过，Playwright16通过，类型/构建及契约检查通过；完整记录见progress。
+smoke_lifecycle自行启动临时loopback后端、创建独立work数据库，用真实HTTP检查两场生成/并发确认及自动推进，再强制停止自有进程并重启检查持久化。报告和日志留在work/lifecycle-smoke-*，正常运行库和真实模型均不参与。本批pytest165项通过；HTTP两场各8条正式消息至SUMMARIZING，重启保留16条消息。契约/文档检查通过，详细结果见progress；前端src未改，沿用前期构建/浏览器验证历史，本批未重跑布局测试。
 
 ## 已完成、限制与后续
 
-- 已完成：阶段3前端模拟闭环；阶段2工程基础；阶段4A创建/查询、后台嘉宾生成与校验、失败重试、幂等并发确认、操作查询、原子事件、双讨论隔离及关闭/重启恢复。
-- 未实现：参与意图收集、发言调度、主持推进、实时洞察、总结工作流、真实SSE订阅与恢复、前端业务API接入、真实模型适配、五条最终质量样例。
+- 已完成：阶段3前端模拟闭环；阶段2工程基础；阶段4A生命周期及阶段4B自主调度/主持控制、角色/短发言原子保存、有限模型重试、结束条件/冻结边界及双场隔离。
+- 未实现：实时洞察、最终总结/总结重试、真实SSE订阅与恢复、前端业务API接入、真实模型适配、五条最终质量样例。
 - 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
 - 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：阶段4下一批按TDD实现自主发言调度和主持人控制，随后完成观点/总结；阶段5接入HTTP/SSE与完整业务E2E，阶段6真实服务与最终交付。
+- 下一步：阶段4下一批按TDD实现观点提取与最终总结；阶段5接入HTTP/SSE与完整业务E2E，阶段6真实服务与最终交付。
 
 生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认前端模拟无需后端；Ctrl+C停止。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 

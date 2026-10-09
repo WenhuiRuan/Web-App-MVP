@@ -22,11 +22,15 @@ class ScenarioGateway(DeterministicModelGateway):
         self.mode = mode
         self.requests = []
         self.release = threading.Event()
+        self.discussion_release = threading.Event()  # Hold automatic speaking while testing roster/start transactions.
         if not gate:
             self.release.set()
         self.active = self.max_active = 0
 
     async def generate(self, request):
+        if request.task!='roster':
+            while not self.discussion_release.is_set(): await asyncio.sleep(.005)
+            return await super().generate(request)
         self.requests.append(request)
         self.active += 1
         self.max_active = max(self.max_active, self.active)

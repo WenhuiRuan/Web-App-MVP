@@ -14,6 +14,8 @@ class TaskSupervisor:
     def __init__(self, repository, settings, gateway_getter):
         self.repository, self.settings, self.gateway_getter = repository, settings, gateway_getter
         self.tasks: dict[str, asyncio.Task] = {}
+        self.run_tasks: dict[str, asyncio.Task] = {}
+        self.scheduled_runs: set[str] = set()
         self.admissions: set[asyncio.Task] = set()
         self.database_workers: set[asyncio.Task] = set()
         self.semaphore = asyncio.Semaphore(settings.model_max_concurrency)
@@ -23,7 +25,49 @@ class TaskSupervisor:
         return await self._command(self._admit_generation, discussion_id, key)
 
     async def start(self, discussion_id, body, key):
-        return await self._command(self._db_call, self.repository.start, discussion_id, body, key, self.settings)
+        return await self._command(self._admit_start, discussion_id, body, key)
+
+    async def _admit_start(self, discussion_id, body, key):
+        response=await self._db_call(self.repository.start,discussion_id,body,key,self.settings)
+        rid=response.body['run_id']
+        snapshot=await self._db_call(self.repository.snapshot,discussion_id)
+        if not self.closing and snapshot.discussion.state=='RUNNING' and rid not in self.scheduled_runs:
+            self.scheduled_runs.add(rid)
+            task=asyncio.create_task(self._run_discussion(discussion_id,rid),name=f'discussion:{discussion_id}:{rid}')
+            self.run_tasks[rid]=task
+            task.add_done_callback(lambda finished:self._run_finished(rid,finished))
+        return response
+
+    def _run_finished(self,rid,task):
+        self.run_tasks.pop(rid,None)
+        if not task.cancelled() and task.exception() is not None:
+            logger.error('discussion_task_requires_restart_recovery')
+
+    async def _run_discussion(self,did,rid):
+        from .engine import DiscussionEngine,ModelCallFailure,RunDeadline
+        try:
+            await DiscussionEngine(self).run(did,rid)
+            return
+        except asyncio.CancelledError:
+            raise
+        except RunDeadline:
+            try:
+                await self._db_call(self.repository.finish_run,did,rid,'time_limit')
+                return
+            except RepositoryUnavailable:
+                code='DATABASE_UNAVAILABLE'
+        except ModelCallFailure as exc:
+            code=exc.code
+        except (InvalidModelResult,ValidationError):
+            code='MODEL_RESULT_INVALID'
+        except RepositoryUnavailable:
+            code='DATABASE_UNAVAILABLE'
+        except Exception:
+            code='TASK_FAILED'
+        try:
+            await self._db_call(self.repository.fail_run,did,rid,code)
+        except RepositoryUnavailable:
+            logger.error('discussion_failure_requires_restart_recovery')
 
     async def _command(self, function, *args):
         if self.closing:
@@ -96,7 +140,7 @@ class TaskSupervisor:
 
     async def close(self):
         self.closing = True
-        tasks = [*self.admissions, *self.tasks.values()]
+        tasks = [*self.admissions, *self.tasks.values(), *self.run_tasks.values()]
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
@@ -107,4 +151,6 @@ class TaskSupervisor:
         except RepositoryUnavailable:
             logger.error('shutdown_recovery_requires_writable_database_on_restart')
         self.tasks.clear()
+        self.run_tasks.clear()
+        self.scheduled_runs.clear()
         self.admissions.clear()

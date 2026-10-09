@@ -1,4 +1,5 @@
 """No network calls, no shared chat memory and no discussion scheduling."""
+import asyncio
 from typing import Protocol
 from uuid import uuid5
 
@@ -62,6 +63,8 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
 
 class DeterministicModelGateway:
     async def generate(self, request: ModelRequest) -> ModelResult:
+        if request.task!='roster':
+            await asyncio.sleep(.002)
         if request.task == 'roster':
             personas = [('主持人', '圆桌主持', '梳理问题与分歧'), ('林衡', '产品研究员', '关注用户价值'), ('陈谨', '风险分析师', '关注风险与边界'), ('周实', '工程师', '关注执行成本'), ('沈知', '社会研究者', '关注群体影响'), ('许远', '战略顾问', '关注长期收益'), ('顾微', '体验设计师', '关注参与者体验')]
             colors = ['#64748B', '#2563EB', '#D97706', '#059669', '#9333EA', '#DB2777', '#0891B2']
@@ -70,11 +73,22 @@ class DeterministicModelGateway:
                 for index, (name, title, stance) in enumerate(personas[:request.expert_count + 1])
             ]}
         elif request.task == 'intent':
-            raw = {'task': 'intent', 'kind': 'REBUT' if request.messages else 'REQUEST', 'target_message_id': request.messages[-1].id if request.messages else None, 'relevance': 70, 'public_focus': '模拟：准备从实施成本角度回应。'}
+            actor=next(p for p in request.participants if p.id==request.actor_id)
+            seed=int(actor.id.hex[-4:],16)
+            target=next((m for m in reversed(request.messages) if m.participant_id!=actor.id),None)
+            kind='PASS' if (seed+len(request.messages))%5==0 else ('REBUT' if seed%2 else 'SUPPLEMENT') if target else 'REQUEST'
+            raw = {'task': 'intent', 'kind':kind, 'target_message_id':target.id if target and kind in ('REBUT','SUPPLEMENT') else None,'relevance':50+(seed+len(request.messages)*11)%51,'public_focus':f'模拟：{actor.stance}'}
         elif request.task == 'utterance':
-            raw = {'task': 'utterance', 'sentences': ['这是确定性模拟发言。', '正式讨论将在后续阶段实现。']}
+            actor=next(p for p in request.participants if p.id==request.actor_id)
+            host_lines={'opening':'本场先梳理议题的价值、成本与边界。','followup':'请进一步说明适用条件和验证方式。','linking':'目前已有不同视角，请回应前文并区分证据与假设。'}
+            if request.host_task:
+                sentences=[host_lines[request.host_task]]
+            else:
+                target=next((m.turn_no for m in request.messages if m.id==request.target_message_id),None)
+                sentences=[f'从{actor.stance}的角度，我对第{target}条发言提出{request.participation_kind}意见。' if target else f'从{actor.stance}的角度，需要先验证方案的适用条件。','这是确定性模型的工程演示内容。']
+            raw = {'task':'utterance','sentences':sentences}
         elif request.task == 'host_control':
-            raw = {'task': 'host_control', 'action': 'followup', 'public_focus': '模拟：邀请补充边界条件。'}
+            raw = {'task':'host_control','action':'end' if len(request.messages)>=8 else 'linking' if len(request.messages)%3==0 else 'followup','public_focus':'模拟：梳理适用条件与已公开分歧。'}
         elif request.task == 'insights':
             raw = {'task': 'insights', 'items': []}
         else:

@@ -35,16 +35,16 @@ def ready(client, topic='启动测试', count=None):
     return did, accepted
 
 
-def test_confirm_freezes_roster_creates_idle_run_and_operation_without_scheduling(setup):
+def test_confirm_freezes_roster_and_operation_while_opening_is_in_flight(setup):
     client, gateway = setup()
     did, generation = ready(client)
     accepted = start(client, did)
     snapshot = wait_for(client, did, 'RUNNING')
     assert snapshot['discussion']['run_id'] == accepted['run_id']
     assert len(snapshot['role_states']) == 5
-    assert all(s['state']=='IDLE' and not s['public_focus'] for s in snapshot['role_states'])
+    assert sum(s['state']=='SPEAKING' for s in snapshot['role_states'])<=1
     assert snapshot['messages'] == [] and snapshot['summary'] is None
-    assert len(gateway.requests) == 1  # Start must not invoke an utterance/model task.
+    assert len(gateway.requests) == 1  # Only roster requests are recorded by this gated fixture.
     assert operation(client,did,generation['operation_id'])['status'] == 'SUCCEEDED'
     op = operation(client,did,accepted['operation_id'])
     assert op == {'id':accepted['operation_id'],'discussion_id':did,'kind':'start','status':'SUCCEEDED','error_code':None}
@@ -54,8 +54,10 @@ def test_confirm_freezes_roster_creates_idle_run_and_operation_without_schedulin
         assert (run['max_turns'],run['max_seconds']) == (20,300)
         assert conn.execute('SELECT confirmed_at FROM rosters WHERE discussion_id=?',(did,)).fetchone()[0]
     stream = events(client,did)
-    assert stream[-1]['payload']['state']=='RUNNING' and stream[-1]['run_id']==accepted['run_id']
-    assert [e['seq'] for e in stream] == list(range(1,6))
+    running_events=[e for e in stream if e['type']=='discussion.state_changed' and e['payload']['state']=='RUNNING']
+    assert len(running_events)==1 and running_events[0]['run_id']==accepted['run_id']
+    assert [e['seq'] for e in stream] == list(range(1,len(stream)+1))
+    assert sum(e['payload'].get('state')=='RUNNING' for e in stream)==1
     assert [d['id'] for d in client.get('/api/discussions').json()['items']] == [did]
 
 
@@ -200,6 +202,7 @@ def test_shutdown_interrupts_pending_generation_restart_preserves_topic_and_allo
 def test_run_shutdown_restart_is_interrupted_and_canonical_start_replays_without_new_run(tmp_path):
     settings=settings_at(tmp_path); key=uuid4()
     with TestClient(create_app(settings)) as client:
+        client.app.state.model_gateway=ScenarioGateway()
         did,_=ready(client); accepted=start(client,did,key)
         before=wait_for(client,did,'RUNNING')
     with TestClient(create_app(settings)) as client:

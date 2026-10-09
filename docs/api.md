@@ -16,7 +16,7 @@
 |---|---|---|
 | GET /api/health/live | 200 `{"status":"ok"}` | 只证明进程响应，不检查数据库/模型 |
 | GET /api/health/ready | 200 `{"status":"ready","database":"ready","model_mode":"mock"}` | 503 DATABASE_UNAVAILABLE / MODEL_NOT_CONFIGURED |
-| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":false}` | 引擎标false因尚无自动发言循环；非mock配置时model_mode=unavailable；不返回供应商地址、模型名称、密钥或完整settings |
+| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":false}` | 完整引擎标false因最终总结链路未实现，4B自动调度已可运行；非mock配置时model_mode=unavailable；不返回供应商地址、模型名称、密钥或完整settings |
 
 所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
 
@@ -39,7 +39,7 @@ active 仅 RUNNING/SUMMARIZING；all 包含草稿、生成、失败、完成等�
 
 异步操作的 HTTP 202 只代表已受理，后续成功/失败通过 Operation、Snapshot 和 SSE 展现，不能将202当作阵容/总结成功。operation.status 与 discussion.state 分开。异步失败写状态和事件；原已返回202不能改成500。
 
-阶段4A：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；不表示已经产生发言。同revision的新start键记独立幂等操作记录，但返回首个成功start的operation_id和run_id，避免重复启动。即使run中断，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
+阶段4A/4B：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；4B随后由唯一后台任务自动开场/调度直至SUMMARIZING。同revision的新start键返回首个成功start的operation_id和run_id，不重复调度。即使run中断或已进入总结，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
 
 服务关闭/重启：未完成生成标INTERRUPTED/roster及SERVICE_INTERRUPTED，新key可重试；活动run标INTERRUPTED/discussion并保留阵容和已提交数据，不自动续跑；原start操作保持SUCCEEDED。此阶段没有恢复讨论运行接口。容量为GENERATING/RUNNING/SUMMARIZING合计默认3，READY不占容量；列表active仍只RUNNING/SUMMARIZING。
 
@@ -145,5 +145,17 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 ## 模型调用边界（已实现接口与模拟，无真实网络）
 
 `ModelGateway.generate(ModelRequest) -> ModelResult` 是异步协议。task 为 roster/intent/utterance/host_control/insights/summary；请求始终携带 discussion_id、topic、人数、阵容版本，运行中另含 run_id、participants、messages 和需要的 actor_id。上下文跨讨论引用被拒绝。
+
+4B模型请求补充cycle（intent/utterance/host_control必须≥1）、participation_kind、target_message_id、host_task及public_focus。主持utterance必须host_task=opening/followup/linking，不能携带专家参与类型；专家utterance必须REQUEST/INTERRUPT/SUPPLEMENT/REBUT，不可PASS或host_task。SUPPLEMENT/REBUT需target，所有target来自当前消息且不得自回应。只有utterance携带这些发言任务字段，intent/host_control结果才返回公开关注点。完整可校验请求见contracts.json新增model_requests（含专家反驳与主持串联）。模型输出的额外reasoning字段被拒绝。
+
+专家发言请求示意（participants/messages使用同run完整上下文，不省略给供应商）：
+
+```json
+{"task":"utterance","cycle":2,"participation_kind":"REBUT","target_message_id":"66666666-6666-4666-8666-666666666666","host_task":null,"public_focus":"核对实施成本"}
+```
+
+上述只是新增字段片段；可执行完整实例以机器样例为准。主持发言片段为`{"task":"utterance","cycle":3,"host_task":"linking","participation_kind":null,"target_message_id":null}`。每个专家intent请求携带本轮公开Transcript，返回kind/target/relevance/public_focus，内部意图不出现在正式messages或turn.committed。
+
+运行错误：Snapshot.discussion新增可空failure_code（固定安全码），FAILED/discussion表示推进失败且已提交messages保留。operation.failed关联该run最初start操作，但start.status仍SUCCEEDED；其完成的是建立run的命令。运行额度或host_control end后冻结数据库runs.summary_through_turn；Snapshot状态SUMMARIZING、summary=null，本批不会生成洞察/总结。角色与turn事件已经持久化，仅能通过快照观察，真实SSE发送仍待后续。
 
 结果通过 task 判别联合类型解析，结构错误抛出固定 `InvalidModelResult('MODEL_RESULT_INVALID')`，不携带原文。roster 检查人数、唯一姓名/颜色/ID、归属；intent 检查回应目标；utterance 要求1–2句结构；insights 检查来源；summary 为普通自然语言。确定性模拟同请求同结果、无网络/时钟/共享历史，不代表真实 AI 质量，也不会自动循环讨论。有限修复、真实重试和终止预算由后续调用编排负责。

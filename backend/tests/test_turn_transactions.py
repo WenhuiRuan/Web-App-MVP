@@ -3,7 +3,7 @@ from uuid import UUID,uuid4
 
 import pytest
 
-from backend.app.contracts import IntentResult
+from backend.app.contracts import IntentResult,StartDiscussion
 from backend.app.lifecycle import LifecycleError,RepositoryUnavailable
 from backend.tests.test_roster_tasks import setup,events
 from backend.tests.test_start_recovery import ready,start
@@ -12,8 +12,9 @@ from backend.tests.test_start_recovery import ready,start
 def running(setup,**settings):
     client,gateway=setup(**settings)
     did,_=ready(client)
-    accepted=start(client,did)
-    return client,client.app.state.repository,UUID(did),UUID(accepted['run_id'])
+    repo=client.app.state.repository
+    accepted=repo.start(UUID(did),StartDiscussion(roster_revision=1),uuid4(),client.app.state.tasks.settings).body
+    return client,repo,UUID(did),UUID(accepted['run_id'])
 
 
 def opening(repo,did,rid):

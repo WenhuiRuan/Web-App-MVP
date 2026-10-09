@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     model_api_key: SecretStr = Field(default=SecretStr(''), repr=False, exclude=True)
     model_timeout_seconds: int = Field(default=30, ge=1, le=120)
     model_max_concurrency: int = Field(default=4, ge=1, le=16)
+    model_max_attempts: int = Field(default=2, ge=1, le=3)
     discussion_max_active: int = Field(default=3, ge=1, le=10)
     discussion_max_turns: int = Field(default=20, ge=1, le=100)
     discussion_max_seconds: int = Field(default=300, ge=10, le=3600)

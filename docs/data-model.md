@@ -1,6 +1,6 @@
 # 数据模型与 SQLite 约束
 
-阶段 2，2026-10-09。物理 schema 已建立，业务写入流程后续实现。唯一事实来源分别为 `db/migrations/001_initial.sql`（存储）和 `backend/app/contracts.py`（公开/模型边界）；导出的 JSON Schema 见 `contracts/schema.json`。
+2026-10-09，阶段4B。生命周期与发言事务已实现。存储来源为db/migrations/001_initial.sql及前向002_discussion_turns.sql，公开/模型边界为backend/app/contracts.py；导出的JSON Schema见contracts/schema.json。
 
 ## ER 图
 
@@ -15,6 +15,9 @@ erDiagram
     runs ||--o{ messages : publishes
     participants ||--o{ messages : speaks
     runs ||--o{ speaking_intents : collects
+    runs ||--o{ turn_claims : claims
+    participants ||--o{ turn_claims : prepares
+    messages o|--o{ turn_claims : responds_to
     participants ||--o{ speaking_intents : requests
     messages o|--o{ speaking_intents : target
     runs ||--o{ insight_batches : derives
@@ -58,11 +61,13 @@ erDiagram
 
 ## 关键写入事务设计
 
-阶段4A已实现创建、嘉宾受理/完成/失败、start和中断恢复在BEGIN IMMEDIATE内同时更新业务、操作与对应事件；正式发言、洞察、总结事务留下一批。取last_event_seq+1插入，触发器原子推进；后续SSE只读取已提交事件。任何写入错误整体回滚，不能有部分阵容或成功通知。Repository先通过EventAdapter与Snapshot验证跨字段约束，SQL json_valid本身只验证JSON语法。001迁移未修改，新增逻辑复用既有表/索引。
+阶段4A/4B以BEGIN IMMEDIATE同时更新生命周期/阵容/意图/角色/正式消息与对应事件；洞察和总结事务待下一批。取last_event_seq+1插入，触发器原子推进；后续SSE只读取已提交事件。写入错误整体回滚，模型等待在事务外。Repository通过EventAdapter/Snapshot及轮次守卫验证跨字段约束；SQL json_valid只验证语法。001未修改，002新增轮次及领取存储。
 
 快照使用一个读事务，同一版本中的 participants/messages/insights/summary 和事件高水位一起读取。并发写入通过 WAL 读写隔离；SQLite 仍是单写者，5 秒 busy timeout；应用未来遇忙再做有界退避。网络等待绝不放在写事务中。
 
-已实施的SQL约束测试：跨讨论角色引用被拒绝；run不能重复启动；同时发言者唯一；事件跳号、跨讨论run被拒绝；迁移失败回滚。阶段4A应用测试补齐合法生成/启动状态、revision检查、完整阵容与事件提交、幂等/并发、写入失败全回滚、迟到回调守卫、关闭及重启中断。待后续：当轮有效申请、公平仲裁、消息/事件同事务领域写入、summary前置条件及完整运行结束。
+已实施的SQL约束测试：跨讨论角色引用被拒绝；run不能重复启动；同时发言者唯一；事件跳号、跨讨论run被拒绝；迁移失败回滚。阶段4A应用测试补齐合法生成/启动状态、revision检查、完整阵容与事件提交、幂等/并发、写入失败全回滚、迟到回调守卫、关闭及重启中断。4B新增应用约束详见下一段；summary生成前置条件与完整完成流程待4C。
+
+4B补齐当轮申请/占用仲裁、角色与消息事件原子提交、迟到/重复拒绝及总结边界冻结。002字段：runs.cycle≥0、stop_reason=turn_limit/time_limit/host_end、error_code；discussions.failure_code公开固定错误码；turn_claims包含id、discussion_id/run_id/roster_revision、cycle、based_on_turn、participant_id、参与类型/回应目标或host_task、public_focus、PREPARING/SPEAKING/COMMITTED/CANCELLED。同run/cycle唯一、同run最多一个待提交领取；id作为成功message_id。FK限定全部引用，应用要求专家领取匹配本轮已存意图。
 
 ## 初始化与迁移
 

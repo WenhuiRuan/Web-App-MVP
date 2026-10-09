@@ -1549,6 +1549,14 @@
     "model_request": {
       "$ref": "#/$defs/ModelRequest"
     },
+    "model_requests": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ModelRequest"
+      },
+      "title": "Model Requests",
+      "type": "array"
+    },
     "model_results": {
       "items": {
         "discriminator": {
