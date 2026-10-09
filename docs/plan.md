@@ -1,6 +1,6 @@
 # 分阶段实施计划
 
-更新：2026-10-09。阶段1完成；用户U3授权阶段2的数据/接口契约及工程初始化。阶段3–6仍为后续计划。本阶段工程骨架、迁移、基础接口和模型模拟属于新增授权，不等于提前实现完整讨论引擎。
+更新：2026-10-09。阶段1/2完成；阶段3前端模拟页面与交互已按U4及四种强制视口验收完成。阶段4–6仍为后续计划，本阶段不提前实现后端讨论引擎。
 
 ## 1. 依赖与拆解原则
 
@@ -24,7 +24,7 @@ flowchart LR
 |---|---|---|---|---|
 | 1 需求分析与实施规划 | U1/U2、附件、初始目录状态 | requirements、acceptance、plan、decisions、AGENTS、progress、prompt-log、.gitignore；main 独立仓库 | 48 条来源要求均有验收映射；用户流程/状态/异常/范围/决策/Q 齐全；忽略规则正反例通过；只存在规划文件；无远程；首次提交 | docs: establish requirements and implementation plan |
 | 2 SDD：规格、领域模型与工程初始化 | 阶段1；U3已授权，普通参数按默认值记录 | 固化模块/模型/状态/API/SSE/ER与示例；初始化前后端和依赖锁；SQLite迁移；健康/配置/日志/错误；模型协议/模拟；README和启动脚本 | 前后端启动及连通、迁移重复/回滚、契约正反例与隔离结构检查通过；完整引擎未实现；见AC-S2系列 | feat: establish SDD contracts and application foundation |
-| 3 DDD：设计驱动前端组件与页面 | 阶段 2 契约和视口/交互基线 | 用户流程线框与状态稿；React/TS/Vite 页面骨架；首页、创建、阵容确认、演播厅、总结；角色卡/转录/洞察/连接状态组件；显式假数据适配 | 类型检查/构建通过；三种视口无整页溢出；中文、内部滚动、空态/失败态可见；假数据明确标记，UI 不声称真实模型已通 | ui: build discussion flow and studio components |
+| 3 DDD：设计驱动前端组件与页面 | 阶段 2 契约和视口/交互基线 | 用户流程线框与状态稿；React/TS/Vite 页面骨架；首页、创建、阵容确认、演播厅、总结；角色卡/转录/洞察/连接状态组件；显式假数据适配 | 类型检查/构建通过；四种指定视口无整页溢出，主要操作与区域滚动可用；中文、内部滚动、空态/失败态可见；假数据明确标记，UI 不声称真实模型已通 | feat: build simulated roundtable frontend and studio interactions |
 | 4 TDD：领域规则、持久化与模型接口 | 阶段 2；前端进度不阻塞领域规则 | 分小批 red→green→refactor；领域状态/阵容校验/意图仲裁/提炼来源/结束策略；FastAPI 命令查询；SQLite 初始化/迁移；受监管任务；ModelGateway 与替身；持久化事件 | 核心规则 pytest 通过；真实 SQLite 隔离/唯一约束/原子事件/重启测试通过；HTTP 假上游测试覆盖超时/格式/重试；先失败证据可追踪 | tests: specify core rules；feat: implement tested orchestration（按实际批次提交） |
 | 5 E2E：联调与质量闭环 | 阶段 3+4；稳定契约 | 真前端+真后端+临时 SQLite+确定性模型替身；SSE 恢复；跨页双讨论隔离；响应式；密钥哨兵；故障注入；修复回归 | AC-F01～F15 结构/行为部分、AC-T02～T05、AC-R01～R10 适用项通过；记录未满足质量/真实性部分；类型/构建/后端测试和 Playwright 全链路通过 | test/e2e: cover discussion lifecycle and recovery；fix: … |
 | 6 真实模型、样例和最终交付 | 阶段 5；Q-09 服务配置/预算；Q-01/Q-07 最终要求 | 接入指定运行时服务；至少 5 个议题/嘉宾样例；真实冒烟与内容复核；README/API/ER 与实现对齐；≥5 实际 Prompt；1–1.5 页过程说明；交付包；经授权再创建远程/上传 | 干净环境按 README 完整运行；真实服务与替身验收分开；材料 D-01～D-11 逐项检查；无密钥/运行库；阻塞项未解决不得宣称最终全部完成 | docs: finalize verified delivery and workflow |
@@ -52,7 +52,7 @@ ai-panel-studio/
   .env.example                  # 已有无密钥默认配置
   README.md                     # 已有启动/验证指南
   docs/                         # 当前规划及持续记录
-  frontend/                     # 当前工程状态页、Playwright基础冒烟
+  frontend/                     # 页面/组件/模拟客户端/事件投影，Playwright前端模拟及基础连通检查
   backend/                      # app基础接口/契约/配置/迁移/模型协议；tests检查
   scripts/                      # 安装、启动、契约导出
   db/migrations/                # 已有001初始化SQL
@@ -66,4 +66,4 @@ ai-panel-studio/
 
 若时间紧，削减范围外体验，不删附件硬要求，不跳过关键测试，也不把静态样例宣传为动态生成。每次收缩范围同步 requirements、acceptance、decisions。
 
-阶段2输入/结束策略、领域状态及API/SSE契约已冻结，工程基础已建立。下一阶段为DDD前端交互与页面；业务调度、事务写入、SSE恢复仍按阶段4/5逐项实现和验证；真实模型接入待后续配置。
+阶段3在冻结契约之上实现前端模拟流程，设计与边界见frontend-design。下一阶段为阶段4：先以失败测试定义状态转换/阵容/幂等/意图仲裁/来源提炼，再实现后端讨论持久化及受监管任务；真实HTTP/SSE适配与双讨论完整E2E在阶段5完成，真实模型与费用/质量验证留阶段6。

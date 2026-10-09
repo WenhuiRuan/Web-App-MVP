@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ID = r'(?:S2-\d{2}|[FTPDS]-\d{2})'
+ID = r'(?:S[23]-\d{2}|[FTPDS]-\d{2})'
 
 
 def main():

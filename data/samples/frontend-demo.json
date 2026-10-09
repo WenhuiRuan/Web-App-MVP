@@ -1,0 +1,1428 @@
+{
+  "description": "预设前端演示台本，不来自真实模型。",
+  "initial": {
+    "discussion": {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "topic": "我们该推行四天工作制吗？",
+      "expert_count": 4,
+      "state": "READY",
+      "version": 2,
+      "roster_revision": 1,
+      "run_id": null,
+      "failure_stage": null,
+      "created_at": "2026-10-09T03:00:00Z",
+      "updated_at": "2026-10-09T03:00:00Z"
+    },
+    "participants": [
+      {
+        "id": "27761239-1564-572b-8808-fdc427b657a7",
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "roster_revision": 1,
+        "kind": "HOST",
+        "name": "文澜",
+        "title": "圆桌主持人",
+        "stance": "梳理议题，推动不同观点相互回应",
+        "color": "#64748B"
+      },
+      {
+        "id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "顾言",
+        "title": "组织行为研究员",
+        "stance": "支持用试点验证效率与协作收益",
+        "color": "#20857A"
+      },
+      {
+        "id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "林澈",
+        "title": "企业经营顾问",
+        "stance": "关注服务覆盖、交付与执行成本",
+        "color": "#B76D40"
+      },
+      {
+        "id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "沈知",
+        "title": "劳动经济学者",
+        "stance": "关注岗位公平与隐性的劳动强度",
+        "color": "#8168A1"
+      },
+      {
+        "id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "许衡",
+        "title": "产品与工程负责人",
+        "stance": "主张按岗位分层、可撤回的试点",
+        "color": "#4679AA"
+      }
+    ],
+    "role_states": [],
+    "messages": [],
+    "insights": {
+      "version": 0,
+      "through_turn": 0,
+      "items": []
+    },
+    "summary": null,
+    "last_event_seq": 4
+  },
+  "profiles": [
+    {
+      "id": "27761239-1564-572b-8808-fdc427b657a7",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "HOST",
+      "name": "文澜",
+      "title": "圆桌主持人",
+      "stance": "梳理议题，推动不同观点相互回应",
+      "color": "#64748B"
+    },
+    {
+      "id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "顾言",
+      "title": "组织行为研究员",
+      "stance": "支持用试点验证效率与协作收益",
+      "color": "#20857A"
+    },
+    {
+      "id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "林澈",
+      "title": "企业经营顾问",
+      "stance": "关注服务覆盖、交付与执行成本",
+      "color": "#B76D40"
+    },
+    {
+      "id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "沈知",
+      "title": "劳动经济学者",
+      "stance": "关注岗位公平与隐性的劳动强度",
+      "color": "#8168A1"
+    },
+    {
+      "id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "许衡",
+      "title": "产品与工程负责人",
+      "stance": "主张按岗位分层、可撤回的试点",
+      "color": "#4679AA"
+    },
+    {
+      "id": "74e9594c-4e99-5664-b8b2-d30e80687720",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "周朔",
+      "title": "公共服务设计师",
+      "stance": "关注不同人群的服务可及性",
+      "color": "#B75D82"
+    },
+    {
+      "id": "592a102c-e507-52a3-a3de-0eda14641578",
+      "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "陈序",
+      "title": "战略研究员",
+      "stance": "关注长期效果与评估边界",
+      "color": "#798C46"
+    }
+  ],
+  "groups": [
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 6,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "PREPARING",
+          "public_focus": "明确讨论边界",
+          "version": 1
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 7,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "SPEAKING",
+          "public_focus": "明确讨论边界",
+          "version": 2
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 8,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "655aaec6-5176-504e-a775-d4e9cf4c9178",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "今天讨论四天工作制，我们先把效率、服务覆盖和岗位公平放到同一张桌上。请先说明你支持或担忧的条件。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 9,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "IDLE",
+          "public_focus": "明确讨论边界",
+          "version": 3
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 10,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "PREPARING",
+          "public_focus": "用试点验证产出",
+          "version": 1
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 11,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "SPEAKING",
+          "public_focus": "用试点验证产出",
+          "version": 2
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 12,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我支持先做小范围试点，因为缩短工作周可能促使团队减少低效会议。判断标准应是产出和协作质量，而不是在线时长。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 13,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "IDLE",
+          "public_focus": "用试点验证产出",
+          "version": 3
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 14,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "PREPARING",
+          "public_focus": "反驳效率与工时的直接等同",
+          "version": 1
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 15,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "SPEAKING",
+          "public_focus": "反驳效率与工时的直接等同",
+          "version": 2
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 16,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "fe1f66ca-ca08-51f3-9799-585178a6a2ab",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我不同意把减少会议直接等同于可减少一个工作日，客户支持和交付窗口并不会同步缩短。若靠加班补齐，成本可能只是被转移。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 17,
+        "type": "insights.updated",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "version": 1,
+          "through_turn": 3,
+          "items": [
+            {
+              "id": "2c8ce527-497d-5fe3-8d3e-e4fb77464819",
+              "kind": "disagreement",
+              "content": "效率改善能否抵消服务覆盖与执行成本，仍需证据验证。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "fe1f66ca-ca08-51f3-9799-585178a6a2ab"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 18,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "IDLE",
+          "public_focus": "反驳效率与工时的直接等同",
+          "version": 3
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 19,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "PREPARING",
+          "public_focus": "补充岗位公平与隐性加班",
+          "version": 1
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 20,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "SPEAKING",
+          "public_focus": "补充岗位公平与隐性加班",
+          "version": 2
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 21,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "0e0811ee-cdf5-57de-9f0e-b41673ed73c4",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "我补充一个公平问题：可以远程工作的岗位更容易受益，轮班岗位却可能承担补位压力。试点必须同时记录加班和岗位之间的负担变化。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 22,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "IDLE",
+          "public_focus": "补充岗位公平与隐性加班",
+          "version": 3
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 23,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "PREPARING",
+          "public_focus": "提出分层与错峰试点",
+          "version": 1
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 24,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "SPEAKING",
+          "public_focus": "提出分层与错峰试点",
+          "version": 2
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 25,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "031a5db7-d158-56db-8bee-357465f8dec7",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "服务覆盖的担忧可以通过错峰排班来检验，但不应假设所有岗位都适用。建议先选择边界清楚的团队，并保留现有客户服务时段。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 26,
+        "type": "insights.updated",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "version": 2,
+          "through_turn": 5,
+          "items": [
+            {
+              "id": "e6566c35-8ee8-5dd4-9551-1af448174ffc",
+              "kind": "consensus",
+              "content": "先开展有明确边界的试点，避免直接统一推广。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "031a5db7-d158-56db-8bee-357465f8dec7"
+              ]
+            },
+            {
+              "id": "2c8ce527-497d-5fe3-8d3e-e4fb77464819",
+              "kind": "disagreement",
+              "content": "效率改善能否抵消服务覆盖与执行成本，仍需证据验证。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "fe1f66ca-ca08-51f3-9799-585178a6a2ab"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 27,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "IDLE",
+          "public_focus": "提出分层与错峰试点",
+          "version": 3
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 28,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "PREPARING",
+          "public_focus": "追问判断改变的证据",
+          "version": 4
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 29,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "SPEAKING",
+          "public_focus": "追问判断改变的证据",
+          "version": 5
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 30,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "15943d5c-ce82-51c1-b062-e39f165e3aee",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "turn_no": 6,
+          "kind": "followup",
+          "content": "目前分歧不在是否减少低效工作，而在效率收益能否覆盖服务与公平成本。什么证据能让各位调整判断？",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 31,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "IDLE",
+          "public_focus": "追问判断改变的证据",
+          "version": 6
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 32,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "PREPARING",
+          "public_focus": "提出对照与扩大的条件",
+          "version": 4
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 33,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "SPEAKING",
+          "public_focus": "提出对照与扩大的条件",
+          "version": 5
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 34,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "35281b4b-8fc7-511a-b61e-b22a239bcf01",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "turn_no": 7,
+          "kind": "statement",
+          "content": "若试点中产出保持、协作等待减少，而且加班没有上升，我会支持继续扩大。这个判断也需要与未参加试点的团队比较。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 35,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "IDLE",
+          "public_focus": "提出对照与扩大的条件",
+          "version": 6
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 36,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "PREPARING",
+          "public_focus": "回应并增加外部服务指标",
+          "version": 4
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 37,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "SPEAKING",
+          "public_focus": "回应并增加外部服务指标",
+          "version": 5
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 38,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "9688fb3f-6b59-5ae3-99f2-0c1bf8b4927f",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "这些条件还应加上客户响应时间和交付稳定性，否则内部效率可能掩盖外部损失。我可以接受可撤回的试点，但暂不支持统一推广。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 39,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "IDLE",
+          "public_focus": "回应并增加外部服务指标",
+          "version": 6
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 40,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "PREPARING",
+          "public_focus": "回应并增加岗位分层指标",
+          "version": 4
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 41,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "SPEAKING",
+          "public_focus": "回应并增加岗位分层指标",
+          "version": 5
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 42,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "e51d928e-edf6-5de7-9326-728fc0a7d0ad",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "我同意设置对照组，还需要按岗位拆开数据，避免平均值掩盖个别群体的额外负担。员工反馈也要能匿名表达。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 43,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "IDLE",
+          "public_focus": "回应并增加岗位分层指标",
+          "version": 6
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 44,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "PREPARING",
+          "public_focus": "整合可检查的试点指标",
+          "version": 4
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 45,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "SPEAKING",
+          "public_focus": "整合可检查的试点指标",
+          "version": 5
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 46,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "ff891261-05cc-5b65-8d2c-a60c7f9ed143",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "我们可以把产出、响应时间、加班和岗位反馈一起作为试点评估项。任何一项明显恶化，都应触发复盘或暂停扩展。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 47,
+        "type": "insights.updated",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "version": 3,
+          "through_turn": 10,
+          "items": [
+            {
+              "id": "e6566c35-8ee8-5dd4-9551-1af448174ffc",
+              "kind": "consensus",
+              "content": "先开展有明确边界的试点，避免直接统一推广。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "031a5db7-d158-56db-8bee-357465f8dec7"
+              ]
+            },
+            {
+              "id": "4ae26f40-fe01-5761-be8b-5b48db27f5b8",
+              "kind": "consensus",
+              "content": "评估应同时覆盖产出、客户响应、加班与岗位公平，而非只看平均效率。",
+              "source_message_ids": [
+                "35281b4b-8fc7-511a-b61e-b22a239bcf01",
+                "9688fb3f-6b59-5ae3-99f2-0c1bf8b4927f",
+                "e51d928e-edf6-5de7-9326-728fc0a7d0ad",
+                "ff891261-05cc-5b65-8d2c-a60c7f9ed143"
+              ]
+            },
+            {
+              "id": "2c8ce527-497d-5fe3-8d3e-e4fb77464819",
+              "kind": "disagreement",
+              "content": "效率改善能否抵消服务覆盖与执行成本，仍需证据验证。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "fe1f66ca-ca08-51f3-9799-585178a6a2ab"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 48,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "IDLE",
+          "public_focus": "整合可检查的试点指标",
+          "version": 6
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 49,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "PREPARING",
+          "public_focus": "串联共识并定位剩余分歧",
+          "version": 7
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 50,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "SPEAKING",
+          "public_focus": "串联共识并定位剩余分歧",
+          "version": 8
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 51,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "98b94e60-ccf0-5afd-bbf5-36294db393e2",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "turn_no": 11,
+          "kind": "linking",
+          "content": "各位已经形成了关于试点与多维评估的共同方向，但对适用范围仍有保留。接下来请回应是否应该让所有岗位采用同一制度。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 52,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "IDLE",
+          "public_focus": "串联共识并定位剩余分歧",
+          "version": 9
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 53,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "PREPARING",
+          "public_focus": "支持有条件地逐步扩大",
+          "version": 7
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 54,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "SPEAKING",
+          "public_focus": "支持有条件地逐步扩大",
+          "version": 8
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 55,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "82a26371-24ac-5ac7-9b32-f1df55291932",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "turn_no": 12,
+          "kind": "statement",
+          "content": "我倾向在验证有效后逐步扩大，而不是长期停留在少数团队。扩大前仍需保留已经明确的评估门槛。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 56,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "8e09c43a-cd1d-55f4-a765-f7e914a34fa4",
+          "state": "IDLE",
+          "public_focus": "支持有条件地逐步扩大",
+          "version": 9
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 57,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "PREPARING",
+          "public_focus": "反驳统一形式等于公平",
+          "version": 7
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 58,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "SPEAKING",
+          "public_focus": "反驳统一形式等于公平",
+          "version": 8
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 59,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "91d6ab16-038d-59ac-92c5-04664eda0cd5",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "turn_no": 13,
+          "kind": "statement",
+          "content": "我反对把同一形式当作公平的唯一答案，有些岗位可能更需要排班自主权而不是少一天出勤。扩大时应比较不同安排带来的实际收益。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 60,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "f589f2a6-1e30-5d0e-aba3-22393b3a644f",
+          "state": "IDLE",
+          "public_focus": "反驳统一形式等于公平",
+          "version": 9
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 61,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "PREPARING",
+          "public_focus": "支持按服务责任区分方案",
+          "version": 7
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 62,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "SPEAKING",
+          "public_focus": "支持按服务责任区分方案",
+          "version": 8
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 63,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "22cb33b9-de93-5b9b-8b0e-e84aa7dc99ac",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "turn_no": 14,
+          "kind": "statement",
+          "content": "我赞同按实际服务责任区分方案，这比统一制度更容易控制风险。具体阈值还需要结合每个团队的历史数据确定。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 64,
+        "type": "insights.updated",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "version": 4,
+          "through_turn": 14,
+          "items": [
+            {
+              "id": "e6566c35-8ee8-5dd4-9551-1af448174ffc",
+              "kind": "consensus",
+              "content": "先开展有明确边界的试点，避免直接统一推广。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "031a5db7-d158-56db-8bee-357465f8dec7"
+              ]
+            },
+            {
+              "id": "4ae26f40-fe01-5761-be8b-5b48db27f5b8",
+              "kind": "consensus",
+              "content": "评估应同时覆盖产出、客户响应、加班与岗位公平，而非只看平均效率。",
+              "source_message_ids": [
+                "35281b4b-8fc7-511a-b61e-b22a239bcf01",
+                "9688fb3f-6b59-5ae3-99f2-0c1bf8b4927f",
+                "e51d928e-edf6-5de7-9326-728fc0a7d0ad",
+                "ff891261-05cc-5b65-8d2c-a60c7f9ed143"
+              ]
+            },
+            {
+              "id": "2c8ce527-497d-5fe3-8d3e-e4fb77464819",
+              "kind": "disagreement",
+              "content": "效率改善能否抵消服务覆盖与执行成本，仍需证据验证。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "fe1f66ca-ca08-51f3-9799-585178a6a2ab"
+              ]
+            },
+            {
+              "id": "bfa0692f-50d3-53fe-a40c-a97122c95471",
+              "kind": "disagreement",
+              "content": "有效试点之后是否采用统一形式、如何扩大范围，尚未形成一致意见。",
+              "source_message_ids": [
+                "82a26371-24ac-5ac7-9b32-f1df55291932",
+                "91d6ab16-038d-59ac-92c5-04664eda0cd5",
+                "22cb33b9-de93-5b9b-8b0e-e84aa7dc99ac"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 65,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "cace15c3-ae6f-5946-aa8c-451c42d572d7",
+          "state": "IDLE",
+          "public_focus": "支持按服务责任区分方案",
+          "version": 9
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 66,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "PREPARING",
+          "public_focus": "将范围和退出条件落到方案",
+          "version": 7
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 67,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "SPEAKING",
+          "public_focus": "将范围和退出条件落到方案",
+          "version": 8
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 68,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "97fc0420-a81d-53d9-86d4-9855b2421207",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "turn_no": 15,
+          "kind": "statement",
+          "content": "可以先公布试点边界、评价方法和退出条件，再邀请不同岗位共同设计安排。这样既能继续探索，也不把试点结论夸大为普遍结论。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 69,
+        "type": "insights.updated",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "version": 5,
+          "through_turn": 15,
+          "items": [
+            {
+              "id": "e6566c35-8ee8-5dd4-9551-1af448174ffc",
+              "kind": "consensus",
+              "content": "先开展有明确边界的试点，避免直接统一推广。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "031a5db7-d158-56db-8bee-357465f8dec7"
+              ]
+            },
+            {
+              "id": "4ae26f40-fe01-5761-be8b-5b48db27f5b8",
+              "kind": "consensus",
+              "content": "评估应同时覆盖产出、客户响应、加班与岗位公平，而非只看平均效率。",
+              "source_message_ids": [
+                "35281b4b-8fc7-511a-b61e-b22a239bcf01",
+                "9688fb3f-6b59-5ae3-99f2-0c1bf8b4927f",
+                "e51d928e-edf6-5de7-9326-728fc0a7d0ad",
+                "ff891261-05cc-5b65-8d2c-a60c7f9ed143"
+              ]
+            },
+            {
+              "id": "2c8ce527-497d-5fe3-8d3e-e4fb77464819",
+              "kind": "disagreement",
+              "content": "效率改善能否抵消服务覆盖与执行成本，仍需证据验证。",
+              "source_message_ids": [
+                "52e4fc57-79a3-5d5e-8e30-d1abd4ab385e",
+                "fe1f66ca-ca08-51f3-9799-585178a6a2ab"
+              ]
+            },
+            {
+              "id": "bfa0692f-50d3-53fe-a40c-a97122c95471",
+              "kind": "disagreement",
+              "content": "有效试点之后是否采用统一形式、如何扩大范围，尚未形成一致意见。",
+              "source_message_ids": [
+                "82a26371-24ac-5ac7-9b32-f1df55291932",
+                "91d6ab16-038d-59ac-92c5-04664eda0cd5",
+                "22cb33b9-de93-5b9b-8b0e-e84aa7dc99ac"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 70,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "c3a9407d-bc6d-5bd2-9ed8-9d8ac0881e36",
+          "state": "IDLE",
+          "public_focus": "将范围和退出条件落到方案",
+          "version": 9
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 71,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "PREPARING",
+          "public_focus": "保留分歧并进入总结",
+          "version": 10
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 72,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "SPEAKING",
+          "public_focus": "保留分歧并进入总结",
+          "version": 11
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 73,
+        "type": "turn.committed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "id": "58dfec93-df16-55b1-bbf2-6b9eae1ef763",
+          "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "turn_no": 16,
+          "kind": "linking",
+          "content": "我们保留了推广范围与制度形式两项分歧，也明确了试点不能以加班和服务下降为代价。下面整理本场结论与尚待验证的问题。",
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 74,
+        "type": "participant.status_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "participant_id": "27761239-1564-572b-8808-fdc427b657a7",
+          "state": "IDLE",
+          "public_focus": "本场讨论结束",
+          "version": 12
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 75,
+        "type": "discussion.state_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "state": "SUMMARIZING",
+          "version": 4,
+          "failure_stage": null
+        }
+      }
+    ],
+    [
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 76,
+        "type": "summary.ready",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "content": "本场讨论没有给出四天工作制应当全面推广的结论，而是形成了一个有边界的探索方向：先做可撤回的试点，再根据证据决定是否扩展。\n\n共同认可的评估维度包括产出与协作质量、客户响应与交付稳定性、实际加班，以及不同岗位的负担和反馈。减少低效工作不能以额外加班或服务下降为代价。\n\n仍然存在两项分歧：效率收益能否覆盖执行成本；有效试点之后应采用统一制度，还是为不同岗位提供不同安排。接下来的任务是明确试点范围、基线数据和退出条件，而不是把预设讨论当作已验证的现实结论。",
+          "through_turn": 16,
+          "created_at": "2026-10-09T03:00:00Z"
+        }
+      },
+      {
+        "schema_version": 1,
+        "discussion_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "run_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "seq": 77,
+        "type": "discussion.state_changed",
+        "occurred_at": "2026-10-09T03:00:00Z",
+        "payload": {
+          "state": "COMPLETED",
+          "version": 5,
+          "failure_stage": null
+        }
+      }
+    ]
+  ],
+  "summary": {
+    "content": "本场讨论没有给出四天工作制应当全面推广的结论，而是形成了一个有边界的探索方向：先做可撤回的试点，再根据证据决定是否扩展。\n\n共同认可的评估维度包括产出与协作质量、客户响应与交付稳定性、实际加班，以及不同岗位的负担和反馈。减少低效工作不能以额外加班或服务下降为代价。\n\n仍然存在两项分歧：效率收益能否覆盖执行成本；有效试点之后应采用统一制度，还是为不同岗位提供不同安排。接下来的任务是明确试点范围、基线数据和退出条件，而不是把预设讨论当作已验证的现实结论。",
+    "through_turn": 16,
+    "created_at": "2026-10-09T03:00:00Z"
+  }
+}
