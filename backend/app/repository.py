@@ -53,7 +53,7 @@ class DiscussionRepository:
         return row
 
     def _public_discussion(self, row):
-        return Discussion.model_validate({k: row[k] for k in ('id','topic','expert_count','state','version','roster_revision','failure_stage','created_at','updated_at')} | {'run_id': row['current_run_id']})
+        return Discussion.model_validate({k: row[k] for k in ('id','topic','expert_count','state','version','roster_revision','failure_stage','failure_code','created_at','updated_at')} | {'run_id': row['current_run_id']})
 
     def _replay(self, conn, scope, kind, key, body):
         digest = hashlib.sha256(encoded(body).encode('utf-8')).hexdigest()
@@ -137,10 +137,10 @@ class DiscussionRepository:
                 next_cursor = base64.urlsafe_b64encode(encoded([last['created_at'], last['id']]).encode()).decode().rstrip('=')
             return DiscussionList(items=[self._public_discussion(row) for row in selected], next_cursor=next_cursor)
 
-    def _transition(self, conn, discussion_id, state, failure_stage=None):
+    def _transition(self, conn, discussion_id, state, failure_stage=None, failure_code=None):
         row = self._discussion(conn, discussion_id)
         version = row['version'] + 1
-        conn.execute('UPDATE discussions SET state=?,failure_stage=?,version=?,updated_at=? WHERE id=?', (state, failure_stage, version, timestamp(), str(discussion_id)))
+        conn.execute('UPDATE discussions SET state=?,failure_stage=?,failure_code=?,version=?,updated_at=? WHERE id=?', (state, failure_stage,failure_code,version, timestamp(), str(discussion_id)))
         self._event(conn, discussion_id, 'discussion.state_changed', {'state':state,'version':version,'failure_stage':failure_stage}, row['current_run_id'])
 
     def _capacity(self, conn, max_active):
@@ -268,6 +268,20 @@ class DiscussionRepository:
                     self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':stage,'code':'SERVICE_INTERRUPTED','message':'服务工作已中断，已提交内容保留，请查看当前状态。','retryable':stage in ('roster','summary')},run_id)
                 if run_id:
                     conn.execute("UPDATE runs SET status='INTERRUPTED',ended_at=? WHERE discussion_id=? AND id=? AND status='ACTIVE'", (timestamp(),did,run_id))
-                    conn.execute("UPDATE role_states SET state='IDLE',public_focus='',version=version+1 WHERE discussion_id=? AND run_id=?", (did,run_id))
+                    self._reset_roles(conn,did,run_id)
                 self._transition(conn,did,'INTERRUPTED',stage)
             return len(rows)
+
+    def _role(self, conn, did, rid, actor, state, focus=''):
+        from .contracts import RoleState
+        row=conn.execute('SELECT state,public_focus,version FROM role_states WHERE discussion_id=? AND run_id=? AND participant_id=?',(str(did),str(rid),str(actor))).fetchone()
+        if row is None: raise LifecycleError('INVALID_INTENT','角色不属于本运行。')
+        if row['state']==state and row['public_focus']==focus: return
+        value=RoleState(participant_id=actor,state=state,public_focus=focus,version=row['version']+1)
+        conn.execute('UPDATE role_states SET state=?,public_focus=?,version=? WHERE discussion_id=? AND run_id=? AND participant_id=?',(state,focus,value.version,str(did),str(rid),str(actor)))
+        self._event(conn,did,'participant.status_changed',value.model_dump(mode='json'),rid)
+
+    def _reset_roles(self, conn, did, rid):
+        conn.execute("UPDATE turn_claims SET status='CANCELLED' WHERE discussion_id=? AND run_id=? AND status IN ('PREPARING','SPEAKING')",(str(did),str(rid)))
+        for role in list(conn.execute('SELECT participant_id FROM role_states WHERE discussion_id=? AND run_id=?',(str(did),str(rid)))):
+            self._role(conn,did,rid,role['participant_id'],'IDLE')

@@ -202,3 +202,13 @@ TaskSupervisor重构为统一管理受理、模型和数据库线程任务：请
 2026-10-09，起点main=40766dd且工作区干净。25个新场景先运行19失败/6通过；失败涉及缺失cycle/参与/主持字段、缺少调度模块及非法自回应未拒绝。实现后新25+旧契约19共44通过。
 
 新增ModelRequest cycle、participation_kind、target_message_id、host_task和public_focus，严格区分主持/专家发言；意图与主持控制要求正cycle，PASS不能带回应目标，反驳/补充目标必须存在且不是本人发言。纯调度以相关性+类型加权+回应新近性-近期使用惩罚排序，立即上一发言者不能连发；无合格候选返回主持回退，UUID作为稳定同分裁决。具体默认权重为REBUT20/SUPPLEMENT12/INTERRUPT8、最近3条每次25惩罚，属于实现建议。自动任务与事务还未实现。契约产物已重新导出。
+
+4B-1提交e4baeb5，契约/调度/机器产物46项通过，文档107需求/117验收映射检查通过。
+
+## 阶段4第二批：4B-2轮次、领取和发言事务
+
+16项新增真实SQLite测试先全部失败（缺少begin_cycle等推进接口）；实现后16通过。新增002迁移，保持001历史字节不变；增加run.cycle/stop_reason/error_code、discussion.failure_code与作用域复合FK的turn_claims。升级既有001数据库和重复执行有明确检查。
+
+RunRepository复用原事务/事件/快照设施，以当前RUNNING+ACTIVE、run/revision/cycle和消息边界守卫每个意图/领取/发言提交。角色状态与事件同事务；完整意图一次记录，选中专家的领取必须对应本轮已存意图。message_id采用claim_id，消息/turn.committed/回IDLE/领取完成同事务，重复与过期结果被拒绝。发言/时间额度在开始、领取和提交处检查，必要时取消领取、回IDLE、冻结summary_through_turn并进入SUMMARIZING。运行失败保留已提交消息、存固定错误和FAILED/discussion；恢复也取消悬空领取。
+
+本小批尚未自动调用这些推进接口，后台循环留4B-3；核心事务与模型IO分离。写消息/成功事件失败均测试原投影完全不变，非法长句/多句不入库。最终本小批全量测试结果以实际收尾命令记录。

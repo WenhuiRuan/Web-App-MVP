@@ -16,6 +16,13 @@ class ModelGateway(Protocol):
     async def generate(self, request: ModelRequest) -> ModelResult: ...
 
 
+def utterance_text(result):
+    value=''.join(s if s[-1] in '。！？!?.' else s+'。' for s in result.sentences)
+    if len(value)>400:
+        raise InvalidModelResult()
+    return value
+
+
 def validate_result(request: ModelRequest, raw: object) -> ModelResult:
     """Never propagate raw provider output or validation input to callers."""
     try:
@@ -41,6 +48,8 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
                 raise ValueError('pass cannot respond')
             if result.target_message_id and any(m.id==result.target_message_id and m.participant_id==request.actor_id for m in request.messages):
                 raise ValueError('self response')
+        if result.task=='utterance':
+            utterance_text(result)
         if result.task == 'insights':
             if len({i.id for i in result.items}) != len(result.items):
                 raise ValueError('duplicate insight')

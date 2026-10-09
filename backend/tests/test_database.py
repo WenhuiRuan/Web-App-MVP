@@ -17,7 +17,7 @@ def seed(db):
 
 def test_migration_repeat_keeps_data_and_constraints(tmp_path):
     db = Database(tmp_path / 'test.sqlite3')
-    assert db.migrate() == [1]
+    assert db.migrate() == [1,2]
     seed(db)
     assert db.migrate() == []
     with db.connect() as conn:
@@ -100,3 +100,20 @@ def test_event_and_high_watermark_rollback_together(tmp_path):
             conn.execute("DELETE FROM events WHERE discussion_id='a'")
         with pytest.raises(sqlite3.IntegrityError):
             conn.execute("UPDATE events SET payload='[]' WHERE discussion_id='a'")
+
+
+def test_second_migration_upgrades_existing_runs_without_editing_first_history(tmp_path):
+    old_dir=tmp_path/'old'
+    old_dir.mkdir()
+    source=Path(__file__).resolve().parents[2]/'db/migrations/001_initial.sql'
+    (old_dir/source.name).write_bytes(source.read_bytes())
+    db=Database(tmp_path/'upgrade.db',migrations_dir=old_dir)
+    assert db.migrate()==[1]
+    seed(db)
+    upgraded=Database(db.path)
+    assert upgraded.migrate()==[2] and upgraded.migrate()==[]
+    with upgraded.connect() as conn:
+        assert conn.execute('SELECT count(*) FROM runs').fetchone()[0]==2
+        assert conn.execute('SELECT cycle FROM runs').fetchone()[0]==0
+        assert conn.execute('SELECT count(*) FROM turn_claims').fetchone()[0]==0
+        assert not list(conn.execute('PRAGMA foreign_key_check'))

@@ -123,6 +123,7 @@ class Discussion(Contract):
     roster_revision: Nonnegative
     run_id: UUID | None
     failure_stage: FailureStage | None = None
+    failure_code: Annotated[str, StringConstraints(max_length=64)] | None = None
     created_at: AwareDatetime
     updated_at: AwareDatetime
 

@@ -15,7 +15,7 @@ from .config import Settings, load_settings
 from .contracts import Contract, ErrorResponse
 from .database import Database
 from .model_gateway import DeterministicModelGateway
-from .repository import DiscussionRepository
+from .run_repository import RunRepository
 from .lifecycle import LifecycleError, RepositoryUnavailable
 from .discussion_api import router
 from .tasks import TaskSupervisor
@@ -59,7 +59,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def lifespan(app: FastAPI):
         database.migrate()
         app.state.database = database
-        app.state.repository = DiscussionRepository(database)
+        app.state.repository = RunRepository(database)
         await asyncio.to_thread(app.state.repository.recover_unfinished)
         app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else None
         app.state.tasks = TaskSupervisor(app.state.repository, config, lambda: app.state.model_gateway)

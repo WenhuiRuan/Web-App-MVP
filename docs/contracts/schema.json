@@ -96,6 +96,19 @@
           "default": null,
           "title": "Failure Stage"
         },
+        "failure_code": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Code"
+        },
         "created_at": {
           "format": "date-time",
           "title": "Created At",
