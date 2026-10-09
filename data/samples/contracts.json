@@ -1,0 +1,459 @@
+{
+  "create": {
+    "topic": "是否推行四天工作制？",
+    "expert_count": 4
+  },
+  "start": {
+    "roster_revision": 1
+  },
+  "accepted": {
+    "operation_id": "33333333-3333-4333-8333-333333333333",
+    "discussion_id": "11111111-1111-4111-8111-111111111111",
+    "state": "RUNNING",
+    "run_id": "22222222-2222-4222-8222-222222222222"
+  },
+  "snapshot": {
+    "discussion": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "topic": "是否推行四天工作制？",
+      "expert_count": 4,
+      "state": "COMPLETED",
+      "version": 5,
+      "roster_revision": 1,
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "failure_stage": null,
+      "created_at": "2026-10-09T00:00:00Z",
+      "updated_at": "2026-10-09T00:00:00Z"
+    },
+    "participants": [
+      {
+        "id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "roster_revision": 1,
+        "kind": "HOST",
+        "name": "主持人",
+        "title": "圆桌主持",
+        "stance": "梳理问题与分歧",
+        "color": "#64748B"
+      },
+      {
+        "id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "林衡",
+        "title": "产品研究员",
+        "stance": "关注用户价值",
+        "color": "#2563EB"
+      },
+      {
+        "id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "陈谨",
+        "title": "风险分析师",
+        "stance": "关注风险与边界",
+        "color": "#D97706"
+      },
+      {
+        "id": "2e4e0489-268c-52e3-8f10-aa6221d816c2",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "周实",
+        "title": "工程师",
+        "stance": "关注执行成本",
+        "color": "#059669"
+      },
+      {
+        "id": "ab02449b-f382-5013-a374-8991bac702ec",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "roster_revision": 1,
+        "kind": "EXPERT",
+        "name": "沈知",
+        "title": "社会研究者",
+        "stance": "关注群体影响",
+        "color": "#9333EA"
+      }
+    ],
+    "role_states": [
+      {
+        "participant_id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+        "state": "IDLE",
+        "public_focus": "",
+        "version": 1
+      },
+      {
+        "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+        "state": "IDLE",
+        "public_focus": "",
+        "version": 1
+      },
+      {
+        "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+        "state": "IDLE",
+        "public_focus": "",
+        "version": 1
+      },
+      {
+        "participant_id": "2e4e0489-268c-52e3-8f10-aa6221d816c2",
+        "state": "IDLE",
+        "public_focus": "",
+        "version": 1
+      },
+      {
+        "participant_id": "ab02449b-f382-5013-a374-8991bac702ec",
+        "state": "IDLE",
+        "public_focus": "",
+        "version": 1
+      }
+    ],
+    "messages": [
+      {
+        "id": "65c4b175-4391-5515-aa92-32da98a4d695",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+        "turn_no": 1,
+        "kind": "opening",
+        "content": "我们先讨论效率与成本。",
+        "created_at": "2026-10-09T00:00:00Z"
+      }
+    ],
+    "insights": {
+      "version": 1,
+      "through_turn": 1,
+      "items": [
+        {
+          "id": "e818bca0-7422-54a8-a34d-5b9b69ad78ab",
+          "kind": "consensus",
+          "content": "讨论将同时关注效率与成本。",
+          "source_message_ids": [
+            "65c4b175-4391-5515-aa92-32da98a4d695"
+          ]
+        }
+      ]
+    },
+    "summary": {
+      "content": "本次明确了效率与成本两个讨论维度，尚不足以确定具体方案。",
+      "through_turn": 1,
+      "created_at": "2026-10-09T00:00:00Z"
+    },
+    "last_event_seq": 8
+  },
+  "listing": {
+    "items": [
+      {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "topic": "是否推行四天工作制？",
+        "expert_count": 4,
+        "state": "COMPLETED",
+        "version": 5,
+        "roster_revision": 1,
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "failure_stage": null,
+        "created_at": "2026-10-09T00:00:00Z",
+        "updated_at": "2026-10-09T00:00:00Z"
+      }
+    ],
+    "next_cursor": null
+  },
+  "operation": {
+    "id": "33333333-3333-4333-8333-333333333333",
+    "discussion_id": "11111111-1111-4111-8111-111111111111",
+    "kind": "start",
+    "status": "SUCCEEDED",
+    "error_code": null
+  },
+  "error": {
+    "error": {
+      "code": "ROSTER_VERSION_CONFLICT",
+      "message": "阵容版本已变更，请刷新后确认。",
+      "retryable": false,
+      "request_id": "33333333-3333-4333-8333-333333333333",
+      "details": []
+    }
+  },
+  "events": [
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": null,
+      "seq": 1,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "discussion.state_changed",
+      "payload": {
+        "state": "DRAFT",
+        "version": 0,
+        "failure_stage": null
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": null,
+      "seq": 2,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "roster.ready",
+      "payload": {
+        "roster_revision": 1,
+        "participants": [
+          {
+            "id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+            "discussion_id": "11111111-1111-4111-8111-111111111111",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "圆桌主持",
+            "stance": "梳理问题与分歧",
+            "color": "#64748B"
+          },
+          {
+            "id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+            "discussion_id": "11111111-1111-4111-8111-111111111111",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "林衡",
+            "title": "产品研究员",
+            "stance": "关注用户价值",
+            "color": "#2563EB"
+          },
+          {
+            "id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+            "discussion_id": "11111111-1111-4111-8111-111111111111",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "陈谨",
+            "title": "风险分析师",
+            "stance": "关注风险与边界",
+            "color": "#D97706"
+          },
+          {
+            "id": "2e4e0489-268c-52e3-8f10-aa6221d816c2",
+            "discussion_id": "11111111-1111-4111-8111-111111111111",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "周实",
+            "title": "工程师",
+            "stance": "关注执行成本",
+            "color": "#059669"
+          },
+          {
+            "id": "ab02449b-f382-5013-a374-8991bac702ec",
+            "discussion_id": "11111111-1111-4111-8111-111111111111",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "沈知",
+            "title": "社会研究者",
+            "stance": "关注群体影响",
+            "color": "#9333EA"
+          }
+        ]
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 3,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "discussion.state_changed",
+      "payload": {
+        "state": "RUNNING",
+        "version": 3,
+        "failure_stage": null
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 4,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "participant.status_changed",
+      "payload": {
+        "participant_id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+        "state": "SPEAKING",
+        "public_focus": "",
+        "version": 1
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 5,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "turn.committed",
+      "payload": {
+        "id": "65c4b175-4391-5515-aa92-32da98a4d695",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+        "turn_no": 1,
+        "kind": "opening",
+        "content": "我们先讨论效率与成本。",
+        "created_at": "2026-10-09T00:00:00Z"
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 6,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "insights.updated",
+      "payload": {
+        "version": 1,
+        "through_turn": 1,
+        "items": [
+          {
+            "id": "e818bca0-7422-54a8-a34d-5b9b69ad78ab",
+            "kind": "consensus",
+            "content": "讨论将同时关注效率与成本。",
+            "source_message_ids": [
+              "65c4b175-4391-5515-aa92-32da98a4d695"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 7,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "summary.ready",
+      "payload": {
+        "content": "本次明确了效率与成本两个讨论维度，尚不足以确定具体方案。",
+        "through_turn": 1,
+        "created_at": "2026-10-09T00:00:00Z"
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 8,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "discussion.state_changed",
+      "payload": {
+        "state": "COMPLETED",
+        "version": 5,
+        "failure_stage": null
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "44444444-4444-4444-8444-444444444444",
+      "run_id": null,
+      "seq": 1,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "operation.failed",
+      "payload": {
+        "operation_id": "33333333-3333-4333-8333-333333333333",
+        "stage": "roster",
+        "code": "MODEL_TIMEOUT",
+        "message": "嘉宾生成超时，可重试。",
+        "retryable": true
+      }
+    }
+  ],
+  "model_request": {
+    "task": "roster",
+    "discussion_id": "11111111-1111-4111-8111-111111111111",
+    "run_id": null,
+    "topic": "是否推行四天工作制？",
+    "expert_count": 4,
+    "roster_revision": 1,
+    "actor_id": null,
+    "participants": [],
+    "messages": []
+  },
+  "model_results": [
+    {
+      "task": "roster",
+      "participants": [
+        {
+          "id": "05ac7f67-4f49-5948-b17f-29b2e63fdc57",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "主持人",
+          "title": "圆桌主持",
+          "stance": "梳理问题与分歧",
+          "color": "#64748B"
+        },
+        {
+          "id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林衡",
+          "title": "产品研究员",
+          "stance": "关注用户价值",
+          "color": "#2563EB"
+        },
+        {
+          "id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "陈谨",
+          "title": "风险分析师",
+          "stance": "关注风险与边界",
+          "color": "#D97706"
+        },
+        {
+          "id": "2e4e0489-268c-52e3-8f10-aa6221d816c2",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "周实",
+          "title": "工程师",
+          "stance": "关注执行成本",
+          "color": "#059669"
+        },
+        {
+          "id": "ab02449b-f382-5013-a374-8991bac702ec",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "沈知",
+          "title": "社会研究者",
+          "stance": "关注群体影响",
+          "color": "#9333EA"
+        }
+      ]
+    },
+    {
+      "task": "intent",
+      "kind": "REBUT",
+      "target_message_id": "65c4b175-4391-5515-aa92-32da98a4d695",
+      "relevance": 70,
+      "public_focus": "模拟：准备从实施成本角度回应。"
+    },
+    {
+      "task": "utterance",
+      "sentences": [
+        "这是确定性模拟发言。",
+        "正式讨论将在后续阶段实现。"
+      ]
+    },
+    {
+      "task": "host_control",
+      "action": "followup",
+      "public_focus": "模拟：邀请补充边界条件。"
+    },
+    {
+      "task": "insights",
+      "items": []
+    },
+    {
+      "task": "summary",
+      "content": "确定性模拟摘要：目前上下文包含 1 条正式消息。此结果仅用于工程校验。"
+    }
+  ]
+}

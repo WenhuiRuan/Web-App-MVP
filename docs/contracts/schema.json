@@ -1,0 +1,1531 @@
+{
+  "$defs": {
+    "CreateDiscussion": {
+      "additionalProperties": false,
+      "properties": {
+        "topic": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Topic",
+          "type": "string"
+        },
+        "expert_count": {
+          "default": 4,
+          "maximum": 6,
+          "minimum": 2,
+          "title": "Expert Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "topic"
+      ],
+      "title": "CreateDiscussion",
+      "type": "object"
+    },
+    "Discussion": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "topic": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Topic",
+          "type": "string"
+        },
+        "expert_count": {
+          "maximum": 6,
+          "minimum": 2,
+          "title": "Expert Count",
+          "type": "integer"
+        },
+        "state": {
+          "enum": [
+            "DRAFT",
+            "GENERATING",
+            "READY",
+            "RUNNING",
+            "SUMMARIZING",
+            "COMPLETED",
+            "FAILED",
+            "INTERRUPTED"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        },
+        "roster_revision": {
+          "minimum": 0,
+          "title": "Roster Revision",
+          "type": "integer"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Run Id"
+        },
+        "failure_stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "roster",
+                "discussion",
+                "summary"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Stage"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "topic",
+        "expert_count",
+        "state",
+        "version",
+        "roster_revision",
+        "run_id",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "Discussion",
+      "type": "object"
+    },
+    "DiscussionList": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/Discussion"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Cursor"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "DiscussionList",
+      "type": "object"
+    },
+    "ErrorBody": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "request_id": {
+          "format": "uuid",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "details": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ErrorDetail"
+          },
+          "title": "Details",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "request_id"
+      ],
+      "title": "ErrorBody",
+      "type": "object"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "reason"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "ErrorResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "$ref": "#/$defs/ErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "title": "ErrorResponse",
+      "type": "object"
+    },
+    "FailureEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Run Id"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "operation.failed",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/FailurePayload"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "FailureEvent",
+      "type": "object"
+    },
+    "FailurePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "operation_id": {
+          "format": "uuid",
+          "title": "Operation Id",
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "roster",
+            "discussion",
+            "summary"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "operation_id",
+        "stage",
+        "code",
+        "message",
+        "retryable"
+      ],
+      "title": "FailurePayload",
+      "type": "object"
+    },
+    "HostControlResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "host_control",
+          "title": "Task",
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "followup",
+            "linking",
+            "end"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "public_focus": {
+          "maxLength": 140,
+          "minLength": 1,
+          "title": "Public Focus",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task",
+        "action",
+        "public_focus"
+      ],
+      "title": "HostControlResult",
+      "type": "object"
+    },
+    "Insight": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "consensus",
+            "disagreement"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "content": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "source_message_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Message Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "content",
+        "source_message_ids"
+      ],
+      "title": "Insight",
+      "type": "object"
+    },
+    "InsightBatch": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        },
+        "through_turn": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Through Turn",
+          "type": "integer"
+        },
+        "items": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Insight"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "title": "InsightBatch",
+      "type": "object"
+    },
+    "InsightsEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "insights.updated",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/InsightBatch"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "InsightsEvent",
+      "type": "object"
+    },
+    "InsightsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "insights",
+          "title": "Task",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/Insight"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task",
+        "items"
+      ],
+      "title": "InsightsResult",
+      "type": "object"
+    },
+    "IntentResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "intent",
+          "title": "Task",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "PASS",
+            "REQUEST",
+            "INTERRUPT",
+            "SUPPLEMENT",
+            "REBUT"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "target_message_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Message Id"
+        },
+        "relevance": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Relevance",
+          "type": "integer"
+        },
+        "public_focus": {
+          "maxLength": 140,
+          "minLength": 1,
+          "title": "Public Focus",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task",
+        "kind",
+        "relevance",
+        "public_focus"
+      ],
+      "title": "IntentResult",
+      "type": "object"
+    },
+    "Message": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "participant_id": {
+          "format": "uuid",
+          "title": "Participant Id",
+          "type": "string"
+        },
+        "turn_no": {
+          "minimum": 1,
+          "title": "Turn No",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "opening",
+            "statement",
+            "followup",
+            "linking"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "content": {
+          "maxLength": 400,
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "discussion_id",
+        "run_id",
+        "participant_id",
+        "turn_no",
+        "kind",
+        "content",
+        "created_at"
+      ],
+      "title": "Message",
+      "type": "object"
+    },
+    "ModelRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "enum": [
+            "roster",
+            "intent",
+            "utterance",
+            "host_control",
+            "insights",
+            "summary"
+          ],
+          "title": "Task",
+          "type": "string"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Run Id"
+        },
+        "topic": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Topic",
+          "type": "string"
+        },
+        "expert_count": {
+          "default": 4,
+          "maximum": 6,
+          "minimum": 2,
+          "title": "Expert Count",
+          "type": "integer"
+        },
+        "roster_revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Roster Revision",
+          "type": "integer"
+        },
+        "actor_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actor Id"
+        },
+        "participants": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Participant"
+          },
+          "title": "Participants",
+          "type": "array"
+        },
+        "messages": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Message"
+          },
+          "title": "Messages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task",
+        "discussion_id",
+        "topic"
+      ],
+      "title": "ModelRequest",
+      "type": "object"
+    },
+    "Operation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "discussion_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Discussion Id"
+        },
+        "kind": {
+          "enum": [
+            "create",
+            "roster-generation",
+            "start",
+            "summary-retry"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ACCEPTED",
+            "RUNNING",
+            "SUCCEEDED",
+            "FAILED",
+            "INTERRUPTED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        }
+      },
+      "required": [
+        "id",
+        "discussion_id",
+        "kind",
+        "status"
+      ],
+      "title": "Operation",
+      "type": "object"
+    },
+    "OperationAccepted": {
+      "additionalProperties": false,
+      "properties": {
+        "operation_id": {
+          "format": "uuid",
+          "title": "Operation Id",
+          "type": "string"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "DRAFT",
+            "GENERATING",
+            "READY",
+            "RUNNING",
+            "SUMMARIZING",
+            "COMPLETED",
+            "FAILED",
+            "INTERRUPTED"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Run Id"
+        }
+      },
+      "required": [
+        "operation_id",
+        "discussion_id",
+        "state"
+      ],
+      "title": "OperationAccepted",
+      "type": "object"
+    },
+    "Participant": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "roster_revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Roster Revision",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "HOST",
+            "EXPERT"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 50,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "stance": {
+          "maxLength": 140,
+          "minLength": 1,
+          "title": "Stance",
+          "type": "string"
+        },
+        "color": {
+          "pattern": "^#[0-9A-F]{6}$",
+          "title": "Color",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "discussion_id",
+        "kind",
+        "name",
+        "title",
+        "stance",
+        "color"
+      ],
+      "title": "Participant",
+      "type": "object"
+    },
+    "RoleEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "participant.status_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/RoleState"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "RoleEvent",
+      "type": "object"
+    },
+    "RoleState": {
+      "additionalProperties": false,
+      "properties": {
+        "participant_id": {
+          "format": "uuid",
+          "title": "Participant Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "IDLE",
+            "PREPARING",
+            "SPEAKING"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "public_focus": {
+          "default": "",
+          "maxLength": 140,
+          "title": "Public Focus",
+          "type": "string"
+        },
+        "version": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "participant_id",
+        "state"
+      ],
+      "title": "RoleState",
+      "type": "object"
+    },
+    "RosterEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Run Id"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "roster.ready",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/RosterPayload"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "RosterEvent",
+      "type": "object"
+    },
+    "RosterPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "roster_revision": {
+          "minimum": 1,
+          "title": "Roster Revision",
+          "type": "integer"
+        },
+        "participants": {
+          "items": {
+            "$ref": "#/$defs/Participant"
+          },
+          "title": "Participants",
+          "type": "array"
+        }
+      },
+      "required": [
+        "roster_revision",
+        "participants"
+      ],
+      "title": "RosterPayload",
+      "type": "object"
+    },
+    "RosterResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "roster",
+          "title": "Task",
+          "type": "string"
+        },
+        "participants": {
+          "items": {
+            "$ref": "#/$defs/Participant"
+          },
+          "title": "Participants",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task",
+        "participants"
+      ],
+      "title": "RosterResult",
+      "type": "object"
+    },
+    "Snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "discussion": {
+          "$ref": "#/$defs/Discussion"
+        },
+        "participants": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Participant"
+          },
+          "title": "Participants",
+          "type": "array"
+        },
+        "role_states": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/RoleState"
+          },
+          "title": "Role States",
+          "type": "array"
+        },
+        "messages": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Message"
+          },
+          "title": "Messages",
+          "type": "array"
+        },
+        "insights": {
+          "$ref": "#/$defs/InsightBatch"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Summary"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "last_event_seq": {
+          "minimum": 0,
+          "title": "Last Event Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "discussion",
+        "last_event_seq"
+      ],
+      "title": "Snapshot",
+      "type": "object"
+    },
+    "StartDiscussion": {
+      "additionalProperties": false,
+      "properties": {
+        "roster_revision": {
+          "minimum": 1,
+          "title": "Roster Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "roster_revision"
+      ],
+      "title": "StartDiscussion",
+      "type": "object"
+    },
+    "StateEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Run Id"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "discussion.state_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/StatePayload"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "StateEvent",
+      "type": "object"
+    },
+    "StatePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "DRAFT",
+            "GENERATING",
+            "READY",
+            "RUNNING",
+            "SUMMARIZING",
+            "COMPLETED",
+            "FAILED",
+            "INTERRUPTED"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        },
+        "failure_stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "roster",
+                "discussion",
+                "summary"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Stage"
+        }
+      },
+      "required": [
+        "state",
+        "version"
+      ],
+      "title": "StatePayload",
+      "type": "object"
+    },
+    "Summary": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "through_turn": {
+          "minimum": 0,
+          "title": "Through Turn",
+          "type": "integer"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "content",
+        "through_turn",
+        "created_at"
+      ],
+      "title": "Summary",
+      "type": "object"
+    },
+    "SummaryEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "summary.ready",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/Summary"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "SummaryEvent",
+      "type": "object"
+    },
+    "SummaryResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "summary",
+          "title": "Task",
+          "type": "string"
+        },
+        "content": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task",
+        "content"
+      ],
+      "title": "SummaryResult",
+      "type": "object"
+    },
+    "TurnEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.committed",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/Message"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "TurnEvent",
+      "type": "object"
+    },
+    "UtteranceResult": {
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "const": "utterance",
+          "title": "Task",
+          "type": "string"
+        },
+        "sentences": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Sentences",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task",
+        "sentences"
+      ],
+      "title": "UtteranceResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "create": {
+      "$ref": "#/$defs/CreateDiscussion"
+    },
+    "start": {
+      "$ref": "#/$defs/StartDiscussion"
+    },
+    "accepted": {
+      "$ref": "#/$defs/OperationAccepted"
+    },
+    "snapshot": {
+      "$ref": "#/$defs/Snapshot"
+    },
+    "listing": {
+      "$ref": "#/$defs/DiscussionList"
+    },
+    "operation": {
+      "$ref": "#/$defs/Operation"
+    },
+    "error": {
+      "$ref": "#/$defs/ErrorResponse"
+    },
+    "events": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "discussion.state_changed": "#/$defs/StateEvent",
+            "insights.updated": "#/$defs/InsightsEvent",
+            "operation.failed": "#/$defs/FailureEvent",
+            "participant.status_changed": "#/$defs/RoleEvent",
+            "roster.ready": "#/$defs/RosterEvent",
+            "summary.ready": "#/$defs/SummaryEvent",
+            "turn.committed": "#/$defs/TurnEvent"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/StateEvent"
+          },
+          {
+            "$ref": "#/$defs/RosterEvent"
+          },
+          {
+            "$ref": "#/$defs/RoleEvent"
+          },
+          {
+            "$ref": "#/$defs/TurnEvent"
+          },
+          {
+            "$ref": "#/$defs/InsightsEvent"
+          },
+          {
+            "$ref": "#/$defs/SummaryEvent"
+          },
+          {
+            "$ref": "#/$defs/FailureEvent"
+          }
+        ]
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "model_request": {
+      "$ref": "#/$defs/ModelRequest"
+    },
+    "model_results": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "host_control": "#/$defs/HostControlResult",
+            "insights": "#/$defs/InsightsResult",
+            "intent": "#/$defs/IntentResult",
+            "roster": "#/$defs/RosterResult",
+            "summary": "#/$defs/SummaryResult",
+            "utterance": "#/$defs/UtteranceResult"
+          },
+          "propertyName": "task"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/RosterResult"
+          },
+          {
+            "$ref": "#/$defs/IntentResult"
+          },
+          {
+            "$ref": "#/$defs/UtteranceResult"
+          },
+          {
+            "$ref": "#/$defs/HostControlResult"
+          },
+          {
+            "$ref": "#/$defs/InsightsResult"
+          },
+          {
+            "$ref": "#/$defs/SummaryResult"
+          }
+        ]
+      },
+      "title": "Model Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "create",
+    "start",
+    "accepted",
+    "snapshot",
+    "listing",
+    "operation",
+    "error",
+    "events",
+    "model_request",
+    "model_results"
+  ],
+  "title": "ContractExamples",
+  "type": "object"
+}

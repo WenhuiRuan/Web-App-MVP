@@ -1,6 +1,6 @@
 # 分阶段实施计划
 
-日期：2026-10-08。当前只执行阶段 1；阶段 2–6 是未来计划，不构成本次实施授权。所有操作以独立项目根目录为工作目录，每阶段维护 progress、prompt-log、验收状态并提交。
+更新：2026-10-09。阶段1完成；用户U3授权阶段2的数据/接口契约及工程初始化。阶段3–6仍为后续计划。本阶段工程骨架、迁移、基础接口和模型模拟属于新增授权，不等于提前实现完整讨论引擎。
 
 ## 1. 依赖与拆解原则
 
@@ -23,7 +23,7 @@ flowchart LR
 | 阶段 | 输入与依赖 | 工作及产物 | 验收出口 | 提交建议 |
 |---|---|---|---|---|
 | 1 需求分析与实施规划 | U1/U2、附件、初始目录状态 | requirements、acceptance、plan、decisions、AGENTS、progress、prompt-log、.gitignore；main 独立仓库 | 48 条来源要求均有验收映射；用户流程/状态/异常/范围/决策/Q 齐全；忽略规则正反例通过；只存在规划文件；无远程；首次提交 | docs: establish requirements and implementation plan |
-| 2 SDD：规格、领域模型与 API | 阶段 1；获得继续实施指令；核对 Q-02～Q-06、Q-08、Q-10 | 固化人数/终止/重试规则；API/OpenAPI、SSE JSON Schema 与示例、最终 ER、迁移策略、状态矩阵、错误码、分句规则；确定依赖版本；定义测试替身契约 | 每个动作/状态/事件可映射需求与验收；快照游标、幂等、隔离/失败语义无歧义；契约正反例校验通过；未决范围有明确处理 | docs/schema: define domain and API contracts |
+| 2 SDD：规格、领域模型与工程初始化 | 阶段1；U3已授权，普通参数按默认值记录 | 固化模块/模型/状态/API/SSE/ER与示例；初始化前后端和依赖锁；SQLite迁移；健康/配置/日志/错误；模型协议/模拟；README和启动脚本 | 前后端启动及连通、迁移重复/回滚、契约正反例与隔离结构检查通过；完整引擎未实现；见AC-S2系列 | feat: establish SDD contracts and application foundation |
 | 3 DDD：设计驱动前端组件与页面 | 阶段 2 契约和视口/交互基线 | 用户流程线框与状态稿；React/TS/Vite 页面骨架；首页、创建、阵容确认、演播厅、总结；角色卡/转录/洞察/连接状态组件；显式假数据适配 | 类型检查/构建通过；三种视口无整页溢出；中文、内部滚动、空态/失败态可见；假数据明确标记，UI 不声称真实模型已通 | ui: build discussion flow and studio components |
 | 4 TDD：领域规则、持久化与模型接口 | 阶段 2；前端进度不阻塞领域规则 | 分小批 red→green→refactor；领域状态/阵容校验/意图仲裁/提炼来源/结束策略；FastAPI 命令查询；SQLite 初始化/迁移；受监管任务；ModelGateway 与替身；持久化事件 | 核心规则 pytest 通过；真实 SQLite 隔离/唯一约束/原子事件/重启测试通过；HTTP 假上游测试覆盖超时/格式/重试；先失败证据可追踪 | tests: specify core rules；feat: implement tested orchestration（按实际批次提交） |
 | 5 E2E：联调与质量闭环 | 阶段 3+4；稳定契约 | 真前端+真后端+临时 SQLite+确定性模型替身；SSE 恢复；跨页双讨论隔离；响应式；密钥哨兵；故障注入；修复回归 | AC-F01～F15 结构/行为部分、AC-T02～T05、AC-R01～R10 适用项通过；记录未满足质量/真实性部分；类型/构建/后端测试和 Playwright 全链路通过 | test/e2e: cover discussion lifecycle and recovery；fix: … |
@@ -43,20 +43,20 @@ flowchart LR
 
 不为文档或可逆低影响样式强造业务测试；阶段 1 用文件、编号、引用、Git/忽略规则和人工一致性检查。覆盖率数字不能替代关键行为测试；阶段 2 依据已冻结规则确定必要分支，而非先承诺任意百分比。
 
-## 4. 未来目录方向（本阶段不创建源码空壳）
+## 4. 目录方向（阶段2已有基础，业务模块后续扩展）
 
 ```text
 ai-panel-studio/
   AGENTS.md
   .gitignore
-  .env.example                  # 后续创建，只含占位配置
-  README.md                     # 后续实际运行方式确定后编写
+  .env.example                  # 已有无密钥默认配置
+  README.md                     # 已有启动/验证指南
   docs/                         # 当前规划及持续记录
-  frontend/                     # 后续 React 页面/组件/协议类型
-  backend/                      # 后续 domain/application/infrastructure/api
-  tests/                        # 后续单元/集成及 Playwright 场景
-  db/migrations/                # 后续文本 SQL 或迁移代码
-  data/samples/                 # 后续至少 5 份可重现文本样例
+  frontend/                     # 当前工程状态页、Playwright基础冒烟
+  backend/                      # app基础接口/契约/配置/迁移/模型协议；tests检查
+  scripts/                      # 安装、启动、契约导出
+  db/migrations/                # 已有001初始化SQL
+  data/samples/                 # 当前契约示例；最终5份质量样例待后续
   work/                         # 本地临时证据，忽略
 ```
 
@@ -66,4 +66,4 @@ ai-panel-studio/
 
 若时间紧，削减范围外体验，不删附件硬要求，不跳过关键测试，也不把静态样例宣传为动态生成。每次收缩范围同步 requirements、acceptance、decisions。
 
-下一阶段首先冻结输入/结束策略、领域状态及 API/SSE 契约；在获得继续实施指令前，不安装依赖、不生成脚手架、不接入真实模型。
+阶段2输入/结束策略、领域状态及API/SSE契约已冻结，工程基础已建立。下一阶段为DDD前端交互与页面；业务调度、事务写入、SSE恢复仍按阶段4/5逐项实现和验证；真实模型接入待后续配置。
