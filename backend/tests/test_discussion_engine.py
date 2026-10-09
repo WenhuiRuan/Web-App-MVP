@@ -107,7 +107,7 @@ def test_host_end_freezes_boundary_without_summary_or_extra_utterance(engine_set
     client,gateway=engine_setup('host_end',discussion_max_turns=20)
     did,accepted=start_ready(client); snapshot=wait_for(client,did,'SUMMARIZING')
     assert len(snapshot['messages'])==2 and snapshot['summary'] is None and snapshot['insights']['items']==[]
-    assert not any(r.task in ('summary','insights') for r in gateway.requests)
+    assert not any(r.task=='summary' for r in gateway.requests)  # 4C-1 may extract an empty batch.
     before=len(gateway.requests); assert start(client,did)==accepted
     time.sleep(.03)
     assert len(gateway.requests)==before

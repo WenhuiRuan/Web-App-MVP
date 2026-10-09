@@ -47,12 +47,16 @@ class TaskSupervisor:
         from .engine import DiscussionEngine,ModelCallFailure,RunDeadline
         try:
             await DiscussionEngine(self).run(did,rid)
+            from .synthesis import SynthesisEngine
+            await SynthesisEngine(self).extract(did,rid)
             return
         except asyncio.CancelledError:
             raise
         except RunDeadline:
             try:
                 await self._db_call(self.repository.finish_run,did,rid,'time_limit')
+                from .synthesis import SynthesisEngine
+                await SynthesisEngine(self).extract(did,rid)
                 return
             except RepositoryUnavailable:
                 code='DATABASE_UNAVAILABLE'

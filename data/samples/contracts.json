@@ -120,28 +120,64 @@
         "kind": "opening",
         "content": "我们先讨论效率与成本。",
         "created_at": "2026-10-09T00:00:00Z"
+      },
+      {
+        "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+        "turn_no": 2,
+        "kind": "statement",
+        "content": "我认可先小规模试点，成本上限需另行验证。",
+        "created_at": "2026-10-09T00:00:00Z"
+      },
+      {
+        "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+        "turn_no": 3,
+        "kind": "statement",
+        "content": "我同意先试点，但成本上限仍有分歧。",
+        "created_at": "2026-10-09T00:00:00Z"
       }
     ],
     "insights": {
       "version": 1,
-      "through_turn": 1,
+      "through_turn": 3,
       "items": [
         {
           "id": "e818bca0-7422-54a8-a34d-5b9b69ad78ab",
           "kind": "consensus",
-          "content": "讨论将同时关注效率与成本。",
+          "content": "两位专家认可先进行小规模试点。",
           "source_message_ids": [
-            "65c4b175-4391-5515-aa92-32da98a4d695"
+            "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+            "a0586831-6bc6-5ea1-b0ff-1aa124370228"
+          ]
+        },
+        {
+          "id": "1419f119-cfa9-5374-9712-0e31191dc9a6",
+          "kind": "disagreement",
+          "content": "成本上限仍需讨论。",
+          "source_message_ids": [
+            "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+            "a0586831-6bc6-5ea1-b0ff-1aa124370228"
           ]
         }
       ]
     },
+    "insight_status": {
+      "state": "IDLE",
+      "version": 0,
+      "through_turn": 0,
+      "error_code": null
+    },
     "summary": {
-      "content": "本次明确了效率与成本两个讨论维度，尚不足以确定具体方案。",
-      "through_turn": 1,
+      "content": "主要观点是先通过小规模试点验证方案。两位专家认可先试点，成本上限仍需进一步讨论。",
+      "through_turn": 3,
       "created_at": "2026-10-09T00:00:00Z"
     },
-    "last_event_seq": 8
+    "last_event_seq": 11
   },
   "listing": {
     "items": [
@@ -305,17 +341,63 @@
       "run_id": "22222222-2222-4222-8222-222222222222",
       "seq": 6,
       "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "turn.committed",
+      "payload": {
+        "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+        "turn_no": 2,
+        "kind": "statement",
+        "content": "我认可先小规模试点，成本上限需另行验证。",
+        "created_at": "2026-10-09T00:00:00Z"
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 7,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "turn.committed",
+      "payload": {
+        "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+        "discussion_id": "11111111-1111-4111-8111-111111111111",
+        "run_id": "22222222-2222-4222-8222-222222222222",
+        "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+        "turn_no": 3,
+        "kind": "statement",
+        "content": "我同意先试点，但成本上限仍有分歧。",
+        "created_at": "2026-10-09T00:00:00Z"
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 8,
+      "occurred_at": "2026-10-09T00:00:00Z",
       "type": "insights.updated",
       "payload": {
         "version": 1,
-        "through_turn": 1,
+        "through_turn": 3,
         "items": [
           {
             "id": "e818bca0-7422-54a8-a34d-5b9b69ad78ab",
             "kind": "consensus",
-            "content": "讨论将同时关注效率与成本。",
+            "content": "两位专家认可先进行小规模试点。",
             "source_message_ids": [
-              "65c4b175-4391-5515-aa92-32da98a4d695"
+              "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+              "a0586831-6bc6-5ea1-b0ff-1aa124370228"
+            ]
+          },
+          {
+            "id": "1419f119-cfa9-5374-9712-0e31191dc9a6",
+            "kind": "disagreement",
+            "content": "成本上限仍需讨论。",
+            "source_message_ids": [
+              "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+              "a0586831-6bc6-5ea1-b0ff-1aa124370228"
             ]
           }
         ]
@@ -325,12 +407,25 @@
       "schema_version": 1,
       "discussion_id": "11111111-1111-4111-8111-111111111111",
       "run_id": "22222222-2222-4222-8222-222222222222",
-      "seq": 7,
+      "seq": 9,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "discussion.state_changed",
+      "payload": {
+        "state": "SUMMARIZING",
+        "version": 4,
+        "failure_stage": null
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 10,
       "occurred_at": "2026-10-09T00:00:00Z",
       "type": "summary.ready",
       "payload": {
-        "content": "本次明确了效率与成本两个讨论维度，尚不足以确定具体方案。",
-        "through_turn": 1,
+        "content": "主要观点是先通过小规模试点验证方案。两位专家认可先试点，成本上限仍需进一步讨论。",
+        "through_turn": 3,
         "created_at": "2026-10-09T00:00:00Z"
       }
     },
@@ -338,7 +433,7 @@
       "schema_version": 1,
       "discussion_id": "11111111-1111-4111-8111-111111111111",
       "run_id": "22222222-2222-4222-8222-222222222222",
-      "seq": 8,
+      "seq": 11,
       "occurred_at": "2026-10-09T00:00:00Z",
       "type": "discussion.state_changed",
       "payload": {
@@ -377,7 +472,9 @@
     "participation_kind": null,
     "target_message_id": null,
     "host_task": null,
-    "public_focus": ""
+    "public_focus": "",
+    "through_turn": null,
+    "insight_version": null
   },
   "model_requests": [
     {
@@ -394,7 +491,9 @@
       "participation_kind": null,
       "target_message_id": null,
       "host_task": null,
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": null,
+      "insight_version": null
     },
     {
       "task": "intent",
@@ -466,13 +565,35 @@
           "kind": "opening",
           "content": "我们先讨论效率与成本。",
           "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我认可先小规模试点，成本上限需另行验证。",
+          "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我同意先试点，但成本上限仍有分歧。",
+          "created_at": "2026-10-09T00:00:00Z"
         }
       ],
       "cycle": 1,
       "participation_kind": null,
       "target_message_id": null,
       "host_task": null,
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": null,
+      "insight_version": null
     },
     {
       "task": "utterance",
@@ -544,13 +665,35 @@
           "kind": "opening",
           "content": "我们先讨论效率与成本。",
           "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我认可先小规模试点，成本上限需另行验证。",
+          "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我同意先试点，但成本上限仍有分歧。",
+          "created_at": "2026-10-09T00:00:00Z"
         }
       ],
       "cycle": 1,
       "participation_kind": null,
       "target_message_id": null,
       "host_task": "linking",
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": null,
+      "insight_version": null
     },
     {
       "task": "host_control",
@@ -622,13 +765,35 @@
           "kind": "opening",
           "content": "我们先讨论效率与成本。",
           "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我认可先小规模试点，成本上限需另行验证。",
+          "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我同意先试点，但成本上限仍有分歧。",
+          "created_at": "2026-10-09T00:00:00Z"
         }
       ],
       "cycle": 1,
       "participation_kind": null,
       "target_message_id": null,
       "host_task": null,
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": null,
+      "insight_version": null
     },
     {
       "task": "insights",
@@ -700,13 +865,35 @@
           "kind": "opening",
           "content": "我们先讨论效率与成本。",
           "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我认可先小规模试点，成本上限需另行验证。",
+          "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我同意先试点，但成本上限仍有分歧。",
+          "created_at": "2026-10-09T00:00:00Z"
         }
       ],
       "cycle": 1,
       "participation_kind": null,
       "target_message_id": null,
       "host_task": null,
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": 3,
+      "insight_version": 1
     },
     {
       "task": "summary",
@@ -778,13 +965,35 @@
           "kind": "opening",
           "content": "我们先讨论效率与成本。",
           "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "dea6e8e8-268b-5263-9d07-a36b031e7e67",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我认可先小规模试点，成本上限需另行验证。",
+          "created_at": "2026-10-09T00:00:00Z"
+        },
+        {
+          "id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+          "discussion_id": "11111111-1111-4111-8111-111111111111",
+          "run_id": "22222222-2222-4222-8222-222222222222",
+          "participant_id": "24eb32e2-959a-5c0e-a2f1-1a16a32ca537",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我同意先试点，但成本上限仍有分歧。",
+          "created_at": "2026-10-09T00:00:00Z"
         }
       ],
       "cycle": 1,
       "participation_kind": null,
       "target_message_id": null,
       "host_task": null,
-      "public_focus": ""
+      "public_focus": "",
+      "through_turn": null,
+      "insight_version": null
     },
     {
       "task": "utterance",
@@ -862,7 +1071,9 @@
       "participation_kind": "REBUT",
       "target_message_id": "65c4b175-4391-5515-aa92-32da98a4d695",
       "host_task": null,
-      "public_focus": "核对实施成本"
+      "public_focus": "核对实施成本",
+      "through_turn": null,
+      "insight_version": null
     }
   ],
   "model_results": [
@@ -923,9 +1134,9 @@
     },
     {
       "task": "intent",
-      "kind": "PASS",
-      "target_message_id": null,
-      "relevance": 86,
+      "kind": "REBUT",
+      "target_message_id": "a0586831-6bc6-5ea1-b0ff-1aa124370228",
+      "relevance": 57,
       "public_focus": "模拟：关注用户价值"
     },
     {
@@ -936,7 +1147,7 @@
     },
     {
       "task": "host_control",
-      "action": "followup",
+      "action": "linking",
       "public_focus": "模拟：梳理适用条件与已公开分歧。"
     },
     {
@@ -945,7 +1156,7 @@
     },
     {
       "task": "summary",
-      "content": "确定性模拟摘要：目前上下文包含 1 条正式消息。此结果仅用于工程校验。"
+      "content": "确定性模拟摘要：目前上下文包含 3 条正式消息。此结果仅用于工程校验。"
     }
   ]
 }

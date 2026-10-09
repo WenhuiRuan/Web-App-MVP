@@ -76,3 +76,17 @@ erDiagram
 迁移命名为连续 `001_*.sql`、`002_*.sql`。每次读取历史并核对所有 SHA-256，在 `BEGIN IMMEDIATE` 内依次执行完整 SQL 语句和写版本记录；本批任一失败回滚整批。使用 `sqlite3.complete_statement` 拆分包括触发器在内的完整语句，不用会隐式提交的 executescript。`.gitattributes` 固定 SQL LF，避免系统换行差异改变迁移校验值。已应用脚本改动、版本缺口、数据库比代码新均拒绝运行。
 
 只支持前向迁移，无自动降级、drop/recreate 或清库；需要破坏性变更时后续单独设计数据迁移与备份。SQLite≥3.37 支持 STRICT；本机实际版本记录在 progress。JSON/CSV 样例与迁移入 Git，本地 `.db/.sqlite3`、WAL/SHM 及 `.env` 不入 Git。本阶段 `data/samples/contracts.json` 是结构示例，不算最终五条高质量讨论样例。
+
+
+## 003观点领取迁移（4C-1）
+
+001/002不修改历史；003新增insight_jobs(id PK,discussion_id,run_id,version,through_turn,state,error_code)，每run/version与每run/through_turn唯一，run作用域复合FK。state为PENDING/SUCCEEDED/FAILED/INTERRUPTED/SUPERSEDED；领取更高边界时旧PENDING变SUPERSEDED，公开投影只读最新领取。insight_batches/insights/insight_sources沿用原表，insight_sources新增BEFORE INSERT边界触发器。版本以领取编号计，空成功批次也持久化；失败保留旧成功批次。业务层要求每项至少两位不同专家来源，数据库单条来源FK不等同于语义共识验证。
+
+```mermaid
+erDiagram
+    runs ||--o{ insight_jobs : scopes
+    insight_jobs ||--o| insight_batches : commits_version
+    insight_batches ||--o{ insights : contains
+    insights ||--|{ insight_sources : cites
+    messages ||--o{ insight_sources : evidence
+```

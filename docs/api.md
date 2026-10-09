@@ -159,3 +159,10 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 运行错误：Snapshot.discussion新增可空failure_code（固定安全码），FAILED/discussion表示推进失败且已提交messages保留。operation.failed关联该run最初start操作，但start.status仍SUCCEEDED；其完成的是建立run的命令。运行额度或host_control end后冻结数据库runs.summary_through_turn；Snapshot状态SUMMARIZING、summary=null，本批不会生成洞察/总结。角色与turn事件已经持久化，仅能通过快照观察，真实SSE发送仍待后续。
 
 结果通过 task 判别联合类型解析，结构错误抛出固定 `InvalidModelResult('MODEL_RESULT_INVALID')`，不携带原文。roster 检查人数、唯一姓名/颜色/ID、归属；intent 检查回应目标；utterance 要求1–2句结构；insights 检查来源；summary 为普通自然语言。确定性模拟同请求同结果、无网络/时钟/共享历史，不代表真实 AI 质量，也不会自动循环讨论。有限修复、真实重试和终止预算由后续调用编排负责。
+
+
+## 4C-1实时观点契约
+
+已实现每2条正式发言后提取、结束补最后边界。ModelRequest(task=insights)必须给出through_turn与正insight_version，messages必须是从turn1开始的完整前缀；participants属于当前讨论/run阵容。结果items可为空，每项至少引用两位不同专家的正式消息，归属与边界在模型校验、提交重建上下文和数据库复合FK/触发器中检查。
+
+Snapshot新增insight_status={state,version,through_turn,error_code}，默认IDLE/0/0/null；state为PENDING/SUCCEEDED/FAILED/INTERRUPTED。insights仍表示最新成功批次，失败不清空已有观点；失败状态由快照轮询可见，尚无真实SSE。insights.updated只在完整批次事务成功后出现，version是领取序号，失败可能使成功版本跳号，客户端用较大版本整批替换。同边界不重复领取，旧领取不得提交。默认INSIGHT_MAX_SECONDS=10，MODEL_MAX_ATTEMPTS=2；失败后下一新消息边界继续，结束补提取失败仍允许后续总结使用旧成功观点。

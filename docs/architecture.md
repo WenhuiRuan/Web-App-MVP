@@ -73,3 +73,8 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 日志白名单仅含生成的 request_id、HTTP 方法、匹配的路由模板、状态和耗时；不记录请求 body/query/header、模型上下文/输出、环境值和异常原文。关闭 Uvicorn access log；统一错误不回显 Pydantic input/ctx 或原始异常；未匹配路径记录固定 `<unmatched>`。配置中密钥用 SecretStr，禁止 dump 配置。真实适配器尚未实现，非 mock 模式 readiness 返回 503。
 
 迁移顺序、结构性约束、模型校验及基础错误用自动检查验证；实际任务隔离、SSE 断线重连、调度与崩溃恢复留在阶段 4/5 按 TDD/E2E 验证。
+
+
+## 4C-1运行中观点更新
+
+SynthesisRepository继承RunRepository，新增领取/归属/最新版本守卫和观点事务；SynthesisEngine复用已验证的有限模型调用机制，使用独立INSIGHT_MAX_SECONDS。DiscussionEngine在每2条正式消息提交后调用提取，TaskSupervisor在正常结束/时长结束后补最后边界。当前采用串行有限提取以保持公开事件顺序；提取等待计入讨论实际运行时长，失败后继续推进。模型IO全在事务外，失败仅影响最新提取状态，已有观点保留。总结/恢复在4C后两个小批接续，详见backend-synthesis。

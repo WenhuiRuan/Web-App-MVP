@@ -1226,6 +1226,49 @@
         "title": "InsightBatch",
         "type": "object"
       },
+      "InsightStatus": {
+        "additionalProperties": false,
+        "properties": {
+          "state": {
+            "default": "IDLE",
+            "enum": [
+              "IDLE",
+              "PENDING",
+              "SUCCEEDED",
+              "FAILED",
+              "INTERRUPTED"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "version": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Version",
+            "type": "integer"
+          },
+          "through_turn": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Through Turn",
+            "type": "integer"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error Code"
+          }
+        },
+        "title": "InsightStatus",
+        "type": "object"
+      },
       "LiveResponse": {
         "properties": {
           "status": {
@@ -1571,6 +1614,9 @@
           },
           "insights": {
             "$ref": "#/components/schemas/InsightBatch"
+          },
+          "insight_status": {
+            "$ref": "#/components/schemas/InsightStatus"
           },
           "summary": {
             "anyOf": [
@@ -2075,6 +2121,32 @@
             "maxLength": 140,
             "title": "Public Focus",
             "type": "string"
+          },
+          "through_turn": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Through Turn"
+          },
+          "insight_version": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Insight Version"
           }
         },
         "required": [

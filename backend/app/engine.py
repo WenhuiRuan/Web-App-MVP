@@ -86,7 +86,11 @@ class DiscussionEngine:
         claim=await self.db(partial(self.repository.prepare_turn,context,actor,**task))
         if claim is None or not await self.db(self.repository.mark_speaking,context,claim.id): return False
         output=await self.call_model(claim.request)
-        return await self.db(self.repository.commit_turn,context,claim.id,output)
+        committed=await self.db(self.repository.commit_turn,context,claim.id,output)
+        if committed and (len(context.snapshot.messages)+1)%2==0:
+            from .synthesis import SynthesisEngine
+            await SynthesisEngine(self.supervisor).extract(context.snapshot.discussion.id,context.snapshot.discussion.run_id)
+        return committed
 
     async def run(self,did,rid):
         first=True

@@ -108,6 +108,26 @@ class InsightBatch(Contract):
     items: tuple[Insight, ...] = ()
 
 
+def validate_insight_evidence(participants, messages, items):
+    experts = {p.id for p in participants if p.kind == 'EXPERT'}
+    by_id = {m.id:m for m in messages}
+    if len({i.id for i in items}) != len(items):
+        raise ValueError('duplicate insight')
+    for item in items:
+        if not set(item.source_message_ids) <= by_id.keys():
+            raise ValueError('unknown source')
+        actors = {by_id[source].participant_id for source in item.source_message_ids} & experts
+        if len(actors) < 2:
+            raise ValueError('evidence requires two distinct experts')
+
+
+class InsightStatus(Contract):
+    state: Literal['IDLE','PENDING','SUCCEEDED','FAILED','INTERRUPTED'] = 'IDLE'
+    version: Nonnegative = 0
+    through_turn: Nonnegative = 0
+    error_code: str | None = None
+
+
 class Summary(Contract):
     content: Annotated[str, StringConstraints(min_length=1, max_length=4000)]
     through_turn: Nonnegative
@@ -134,6 +154,7 @@ class Snapshot(Contract):
     role_states: tuple[RoleState, ...] = ()
     messages: tuple[Message, ...] = ()
     insights: InsightBatch = Field(default_factory=InsightBatch)
+    insight_status: InsightStatus = Field(default_factory=InsightStatus)
     summary: Summary | None = None
     last_event_seq: Nonnegative
 
@@ -160,6 +181,7 @@ class Snapshot(Contract):
         sources = {m.id for m in self.messages if m.turn_no <= self.insights.through_turn}
         if self.insights.through_turn > len(self.messages) or any(not set(i.source_message_ids) <= sources for i in self.insights.items):
             raise ValueError('invalid insight source')
+        validate_insight_evidence(self.participants, self.messages, self.insights.items)
         if self.summary and self.summary.through_turn != len(self.messages):
             raise ValueError('summary boundary mismatch')
         if d.state == 'COMPLETED' and self.summary is None:
@@ -307,6 +329,9 @@ class ModelRequest(Contract):
     host_task: Literal['opening','followup','linking'] | None = None
     public_focus: Annotated[str, StringConstraints(max_length=140)] = ''
 
+    through_turn: Nonnegative | None = None
+    insight_version: Positive | None = None
+
     @model_validator(mode='after')
     def context_scope(self) -> Self:
         ids = {p.id for p in self.participants}
@@ -343,6 +368,13 @@ class ModelRequest(Contract):
             raise ValueError('context messages must be unique and ordered')
         if self.task == 'roster' and (self.run_id or self.messages or self.participants or self.actor_id):
             raise ValueError('roster generation has no existing run context')
+        if self.task == 'insights':
+            if self.through_turn is None or self.insight_version is None:
+                raise ValueError('insights require boundary and version')
+            if [m.turn_no for m in self.messages] != list(range(1,self.through_turn+1)):
+                raise ValueError('insights require full frozen prefix')
+        elif self.insight_version is not None or self.through_turn is not None:
+            raise ValueError('extraction fields belong to insights')
         return self
 
 

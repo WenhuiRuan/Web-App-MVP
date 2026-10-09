@@ -23,8 +23,12 @@ def example_data():
     roster = asyncio.run(gateway.generate(req)).model_dump(mode='json')
     participants = roster['participants']
     message = {'id': str(uuid5(d, 'message-1')), 'discussion_id': str(d), 'run_id': str(run), 'participant_id': participants[0]['id'], 'turn_no': 1, 'kind': 'opening', 'content': '我们先讨论效率与成本。', 'created_at': timestamp}
-    batch = {'version': 1, 'through_turn': 1, 'items': [{'id': str(uuid5(d, 'insight-1')), 'kind': 'consensus', 'content': '讨论将同时关注效率与成本。', 'source_message_ids': [message['id']]}]}
-    summary = {'content': '本次明确了效率与成本两个讨论维度，尚不足以确定具体方案。', 'through_turn': 1, 'created_at': timestamp}
+    expert_messages=[{**message,'id':str(uuid5(d,f'message-{n}')),'participant_id':participants[n-1]['id'],'turn_no':n,'kind':'statement','content':text} for n,text in [(2,'我认可先小规模试点，成本上限需另行验证。'),(3,'我同意先试点，但成本上限仍有分歧。')]]
+    messages=[message,*expert_messages]
+    batch = {'version': 1, 'through_turn': 3, 'items': [
+        {'id': str(uuid5(d, 'insight-1')), 'kind': 'consensus', 'content': '两位专家认可先进行小规模试点。', 'source_message_ids': [m['id'] for m in expert_messages]},
+        {'id': str(uuid5(d, 'insight-2')), 'kind': 'disagreement', 'content': '成本上限仍需讨论。', 'source_message_ids': [m['id'] for m in expert_messages]}]}
+    summary = {'content': '主要观点是先通过小规模试点验证方案。两位专家认可先试点，成本上限仍需进一步讨论。', 'through_turn': 3, 'created_at': timestamp}
     discussion = {'id': str(d), 'topic': req.topic, 'expert_count': 4, 'state': 'COMPLETED', 'version': 5, 'roster_revision': 1, 'run_id': str(run), 'failure_stage': None, 'created_at': timestamp, 'updated_at': timestamp}
     role_states = [{'participant_id': p['id'], 'state': 'IDLE', 'public_focus': '', 'version': 1} for p in participants]
     def event(seq, kind, payload, rid=run):
@@ -35,9 +39,12 @@ def example_data():
         event(3, 'discussion.state_changed', {'state': 'RUNNING', 'version': 3}),
         event(4, 'participant.status_changed', {**role_states[0], 'state': 'SPEAKING'}),
         event(5, 'turn.committed', message),
-        event(6, 'insights.updated', batch),
-        event(7, 'summary.ready', summary),
-        event(8, 'discussion.state_changed', {'state': 'COMPLETED', 'version': 5}),
+        event(6, 'turn.committed', expert_messages[0]),
+        event(7, 'turn.committed', expert_messages[1]),
+        event(8, 'insights.updated', batch),
+        event(9, 'discussion.state_changed', {'state':'SUMMARIZING','version':4}),
+        event(10, 'summary.ready', summary),
+        event(11, 'discussion.state_changed', {'state': 'COMPLETED', 'version': 5}),
     ]
     # A standalone failure example, not a transition after COMPLETED.
     failure = event(1, 'operation.failed', {'operation_id': str(op), 'stage': 'roster', 'code': 'MODEL_TIMEOUT', 'message': '嘉宾生成超时，可重试。', 'retryable': True}, None)
@@ -45,7 +52,7 @@ def example_data():
     results = [roster]
     requests = [req]
     for task in ('intent', 'utterance', 'host_control', 'insights', 'summary'):
-        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=[message],cycle=1,host_task='linking' if task=='utterance' else None)
+        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=messages,cycle=1,host_task='linking' if task=='utterance' else None,through_turn=3 if task=='insights' else None,insight_version=1 if task=='insights' else None)
         results.append(asyncio.run(gateway.generate(context)).model_dump(mode='json'))
         requests.append(context)
     expert_context=ModelRequest(task='utterance',discussion_id=d,run_id=run,topic=req.topic,expert_count=4,actor_id=participants[1]['id'],participants=participants,messages=[message],cycle=2,participation_kind='REBUT',target_message_id=message['id'],public_focus='核对实施成本')
@@ -53,7 +60,7 @@ def example_data():
     return ContractExamples.model_validate({
         'create': {'topic': req.topic, 'expert_count': 4}, 'start': {'roster_revision': 1},
         'accepted': {'operation_id': str(op), 'discussion_id': str(d), 'state': 'RUNNING', 'run_id': str(run)},
-        'snapshot': {'discussion': discussion, 'participants': participants, 'role_states': role_states, 'messages': [message], 'insights': batch, 'summary': summary, 'last_event_seq': 8},
+        'snapshot': {'discussion': discussion, 'participants': participants, 'role_states': role_states, 'messages': messages, 'insights': batch, 'summary': summary, 'last_event_seq': 11},
         'listing': {'items': [discussion], 'next_cursor': None},
         'operation': {'id': str(op), 'discussion_id': str(d), 'kind': 'start', 'status': 'SUCCEEDED', 'error_code': None},
         'error': {'error': {'code': 'ROSTER_VERSION_CONFLICT', 'message': '阵容版本已变更，请刷新后确认。', 'retryable': False, 'request_id': str(op), 'details': []}},

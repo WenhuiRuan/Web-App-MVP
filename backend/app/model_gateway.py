@@ -5,7 +5,7 @@ from uuid import uuid5
 
 from pydantic import ValidationError
 
-from .contracts import ModelRequest, ModelResult, ModelResultAdapter
+from .contracts import ModelRequest, ModelResult, ModelResultAdapter, validate_insight_evidence
 
 
 class InvalidModelResult(ValueError):
@@ -56,6 +56,7 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
                 raise ValueError('duplicate insight')
             if any(not set(i.source_message_ids) <= message_ids for i in result.items):
                 raise ValueError('foreign source')
+            validate_insight_evidence(request.participants, request.messages, result.items)
         return result
     except (ValidationError, ValueError, TypeError):
         raise InvalidModelResult() from None
@@ -90,7 +91,13 @@ class DeterministicModelGateway:
         elif request.task == 'host_control':
             raw = {'task':'host_control','action':'end' if len(request.messages)>=8 else 'linking' if len(request.messages)%3==0 else 'followup','public_focus':'模拟：梳理适用条件与已公开分歧。'}
         elif request.task == 'insights':
-            raw = {'task': 'insights', 'items': []}
+            experts={p.id for p in request.participants if p.kind=='EXPERT'}
+            by_actor={}
+            for message in request.messages:
+                if message.participant_id in experts and '这是确定性模型的工程演示内容' in message.content:
+                    by_actor[message.participant_id]=message
+            sources=[m.id for m in list(by_actor.values())[:2]]
+            raw = {'task': 'insights', 'items': [] if len(sources)<2 else [{'id':uuid5(request.run_id,f'insight:{request.through_turn}:demo'),'kind':'consensus','content':'两位专家均明确声明其发言是确定性模型的工程演示内容。','source_message_ids':sources}]}
         else:
             raw = {'task': 'summary', 'content': f'确定性模拟摘要：目前上下文包含 {len(request.messages)} 条正式消息。此结果仅用于工程校验。'}
         return validate_result(request, raw)

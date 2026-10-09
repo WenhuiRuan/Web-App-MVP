@@ -78,7 +78,10 @@ class DiscussionRepository:
         did, revision, run_id = row['id'], row['roster_revision'], row['current_run_id']
         people = [dict(r) for r in conn.execute('SELECT id,discussion_id,roster_revision,kind,name,title,stance,color FROM participants WHERE discussion_id=? AND roster_revision=? ORDER BY CASE kind WHEN \'HOST\' THEN 0 ELSE 1 END,id', (did, revision))]
         roles, messages, insights, summary = [], [], {'version': 0, 'through_turn': 0, 'items': []}, None
+        insight_status = {}
         if run_id:
+            job = conn.execute('SELECT state,version,through_turn,error_code FROM insight_jobs WHERE discussion_id=? AND run_id=? ORDER BY version DESC LIMIT 1',(did,run_id)).fetchone()
+            insight_status = dict(job) if job else {}
             roles = [dict(r) for r in conn.execute('SELECT participant_id,state,public_focus,version FROM role_states WHERE discussion_id=? AND run_id=? ORDER BY participant_id', (did, run_id))]
             messages = [dict(r) for r in conn.execute('SELECT id,discussion_id,run_id,participant_id,turn_no,kind,content,created_at FROM messages WHERE discussion_id=? AND run_id=? ORDER BY turn_no', (did, run_id))]
             batch = conn.execute('SELECT version,through_turn FROM insight_batches WHERE discussion_id=? AND run_id=? ORDER BY version DESC LIMIT 1', (did, run_id)).fetchone()
@@ -90,7 +93,7 @@ class DiscussionRepository:
                 insights = dict(batch) | {'items': items}
             value = conn.execute('SELECT content,through_turn,created_at FROM summaries WHERE discussion_id=? AND run_id=?', (did, run_id)).fetchone()
             summary = dict(value) if value else None
-        return Snapshot.model_validate(dict(discussion=self._public_discussion(row), participants=people, role_states=roles, messages=messages, insights=insights, summary=summary, last_event_seq=row['last_event_seq']))
+        return Snapshot.model_validate(dict(discussion=self._public_discussion(row), participants=people, role_states=roles, messages=messages, insights=insights, insight_status=insight_status, summary=summary, last_event_seq=row['last_event_seq']))
 
     def create(self, body: CreateDiscussion, key: UUID):
         with self.transaction() as conn:
@@ -267,6 +270,7 @@ class DiscussionRepository:
                     conn.execute("UPDATE operations SET status='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE id=? AND discussion_id=?", (op['id'],did))
                     self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':stage,'code':'SERVICE_INTERRUPTED','message':'服务工作已中断，已提交内容保留，请查看当前状态。','retryable':stage in ('roster','summary')},run_id)
                 if run_id:
+                    conn.execute("UPDATE insight_jobs SET state='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE discussion_id=? AND run_id=? AND state='PENDING'",(did,run_id))
                     conn.execute("UPDATE runs SET status='INTERRUPTED',ended_at=? WHERE discussion_id=? AND id=? AND status='ACTIVE'", (timestamp(),did,run_id))
                     self._reset_roles(conn,did,run_id)
                 self._transition(conn,did,'INTERRUPTED',stage)
