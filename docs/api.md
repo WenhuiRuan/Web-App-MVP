@@ -1,12 +1,12 @@
 # HTTP API 与 SSE 契约 v1
 
-阶段 2，2026-10-09。基础地址 `http://127.0.0.1:8000`；前端使用同源 `/api` 代理。UUID 标识、UTC 带时区时间、JSON 字符串为 UTF-8。请求结构禁止多余字段。浏览器不携带供应商密钥，不存在读取完整后端配置的接口。
+阶段4第一批实现中，2026-10-09；阶段2契约基线保留。基础地址 `http://127.0.0.1:8000`；前端使用同源 `/api` 代理。UUID 标识、UTC 带时区时间、JSON 字符串为 UTF-8。请求结构禁止多余字段。浏览器不携带供应商密钥，不存在读取完整后端配置的接口。
 
 ## 实现状态与机器契约
 
 - **已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述这些真实可用端点。
 - **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
-- **仅定义，后续实现**：下述所有 discussions 和 SSE 路由。本阶段调用它们返回统一 404，未实现不返回假业务数据。
+- **4A-1已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`；其余业务操作仍待本批后续，SSE与总结重试留后续批次。未挂载路由返回统一404。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
 
@@ -20,7 +20,7 @@
 
 所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
 
-## 讨论接口（设计冻结，尚未挂载）
+## 讨论接口（契约冻结，逐批挂载；状态见上节及x-implemented）
 
 | 方法与路径 | 请求 | 成功 | 典型错误 |
 |---|---|---|---|

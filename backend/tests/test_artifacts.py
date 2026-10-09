@@ -32,5 +32,5 @@ def test_openapi_refs_resolve_and_future_routes_are_explicit():
                 walk(value)
     walk(spec)
     assert spec['paths']['/api/health/ready']['get']['x-implemented'] is True
-    assert spec['paths']['/api/discussions']['post']['x-implemented'] is False
+    assert spec['paths']['/api/discussions']['post']['x-implemented'] is True
     assert spec['paths']['/api/discussions/{discussion_id}/events']['get']['x-implemented'] is False

@@ -60,7 +60,7 @@ def example_data():
 def contract_openapi():
     spec = create_app(Settings(_env_file=None)).openapi()
     spec['info']['title'] = 'AI Panel Studio — target HTTP and SSE contract'
-    spec['info']['description'] = 'x-implemented=false routes are design contracts, not mounted in stage 2.'
+    spec['info']['description'] = 'x-implemented marks mounted routes; false routes remain future design contracts.'
     schema = ContractExamples.model_json_schema()
     definitions = schema.pop('$defs')
     definitions['Event'] = {k: v for k, v in EventAdapter.json_schema().items() if k != '$defs'}
@@ -82,6 +82,8 @@ def contract_openapi():
     def response(name, description):
         return {'description': description, 'content': {'application/json': {'schema': {'$ref': '#/components/schemas/' + name}}}}
     for path, method, body, result, status in endpoints:
+        if method in spec['paths'].get(path, {}):
+            continue
         params = []
         for field in ('discussion_id', 'operation_id'):
             if '{' + field + '}' in path:

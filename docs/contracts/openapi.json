@@ -3,7 +3,7 @@
   "info": {
     "title": "AI Panel Studio — target HTTP and SSE contract",
     "version": "0.2.0",
-    "description": "x-implemented=false routes are design contracts, not mounted in stage 2."
+    "description": "x-implemented marks mounted routes; false routes remain future design contracts."
   },
   "paths": {
     "/api/health/live": {
@@ -135,8 +135,8 @@
     },
     "/api/discussions": {
       "post": {
-        "x-implemented": false,
-        "summary": "Planned: POST /api/discussions",
+        "summary": "Create Discussion",
+        "operationId": "create_discussion_api_discussions_post",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -144,72 +144,11 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Idempotency-Key"
             }
           }
         ],
-        "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success (idempotent replay uses original status and body)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Snapshot"
-                }
-              }
-            }
-          }
-        },
         "requestBody": {
           "required": true,
           "content": {
@@ -219,174 +158,10 @@
               }
             }
           }
-        }
-      },
-      "get": {
-        "x-implemented": false,
-        "summary": "Planned: GET /api/discussions",
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "active",
-                "all"
-              ],
-              "default": "active"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        },
         "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success (idempotent replay uses original status and body)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DiscussionList"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/discussions/{discussion_id}": {
-      "get": {
-        "x-implemented": false,
-        "summary": "Planned: GET /api/discussions/{discussion_id}",
-        "parameters": [
-          {
-            "name": "discussion_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success (idempotent replay uses original status and body)",
+          "201": {
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
@@ -394,8 +169,252 @@
                 }
               }
             }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
-        }
+        },
+        "x-implemented": true
+      },
+      "get": {
+        "summary": "List Discussions",
+        "operationId": "list_discussions_api_discussions_get",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "active",
+                "all"
+              ],
+              "type": "string",
+              "default": "active",
+              "title": "Status"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionList"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-implemented": true
+      }
+    },
+    "/api/discussions/{discussion_id}": {
+      "get": {
+        "summary": "Get Snapshot",
+        "operationId": "get_snapshot_api_discussions__discussion_id__get",
+        "parameters": [
+          {
+            "name": "discussion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Discussion Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snapshot"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-implemented": true
       }
     },
     "/api/discussions/{discussion_id}/roster-generation": {
@@ -886,156 +905,6 @@
   },
   "components": {
     "schemas": {
-      "ErrorBody": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "title": "Code",
-            "type": "string"
-          },
-          "message": {
-            "title": "Message",
-            "type": "string"
-          },
-          "retryable": {
-            "title": "Retryable",
-            "type": "boolean"
-          },
-          "request_id": {
-            "format": "uuid",
-            "title": "Request Id",
-            "type": "string"
-          },
-          "details": {
-            "default": [],
-            "items": {
-              "$ref": "#/components/schemas/ErrorDetail"
-            },
-            "title": "Details",
-            "type": "array"
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "retryable",
-          "request_id"
-        ],
-        "title": "ErrorBody",
-        "type": "object"
-      },
-      "ErrorDetail": {
-        "additionalProperties": false,
-        "properties": {
-          "field": {
-            "title": "Field",
-            "type": "string"
-          },
-          "reason": {
-            "title": "Reason",
-            "type": "string"
-          }
-        },
-        "required": [
-          "field",
-          "reason"
-        ],
-        "title": "ErrorDetail",
-        "type": "object"
-      },
-      "ErrorResponse": {
-        "additionalProperties": false,
-        "properties": {
-          "error": {
-            "$ref": "#/components/schemas/ErrorBody"
-          }
-        },
-        "required": [
-          "error"
-        ],
-        "title": "ErrorResponse",
-        "type": "object"
-      },
-      "LiveResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "const": "ok",
-            "title": "Status",
-            "default": "ok"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "LiveResponse"
-      },
-      "ReadyResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "const": "ready",
-            "title": "Status",
-            "default": "ready"
-          },
-          "database": {
-            "type": "string",
-            "const": "ready",
-            "title": "Database",
-            "default": "ready"
-          },
-          "model_mode": {
-            "type": "string",
-            "const": "mock",
-            "title": "Model Mode",
-            "default": "mock"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "ReadyResponse"
-      },
-      "SystemInfo": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "const": "AI Panel Studio",
-            "title": "Name",
-            "default": "AI Panel Studio"
-          },
-          "version": {
-            "type": "string",
-            "const": "0.2.0",
-            "title": "Version",
-            "default": "0.2.0"
-          },
-          "phase": {
-            "type": "integer",
-            "const": 2,
-            "title": "Phase",
-            "default": 2
-          },
-          "model_mode": {
-            "type": "string",
-            "enum": [
-              "mock",
-              "unavailable"
-            ],
-            "title": "Model Mode"
-          },
-          "discussion_engine_available": {
-            "type": "boolean",
-            "const": false,
-            "title": "Discussion Engine Available",
-            "default": false
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "model_mode"
-        ],
-        "title": "SystemInfo"
-      },
       "CreateDiscussion": {
         "additionalProperties": false,
         "properties": {
@@ -1186,6 +1055,472 @@
         "title": "DiscussionList",
         "type": "object"
       },
+      "ErrorBody": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "retryable": {
+            "title": "Retryable",
+            "type": "boolean"
+          },
+          "request_id": {
+            "format": "uuid",
+            "title": "Request Id",
+            "type": "string"
+          },
+          "details": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "title": "Details",
+            "type": "array"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "retryable",
+          "request_id"
+        ],
+        "title": "ErrorBody",
+        "type": "object"
+      },
+      "ErrorDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "field": {
+            "title": "Field",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "reason"
+        ],
+        "title": "ErrorDetail",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "Insight": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "consensus",
+              "disagreement"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "content": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "source_message_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Message Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "content",
+          "source_message_ids"
+        ],
+        "title": "Insight",
+        "type": "object"
+      },
+      "InsightBatch": {
+        "additionalProperties": false,
+        "properties": {
+          "version": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Version",
+            "type": "integer"
+          },
+          "through_turn": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Through Turn",
+            "type": "integer"
+          },
+          "items": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Insight"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "title": "InsightBatch",
+        "type": "object"
+      },
+      "LiveResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status",
+            "default": "ok"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "LiveResponse"
+      },
+      "Message": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "discussion_id": {
+            "format": "uuid",
+            "title": "Discussion Id",
+            "type": "string"
+          },
+          "run_id": {
+            "format": "uuid",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "participant_id": {
+            "format": "uuid",
+            "title": "Participant Id",
+            "type": "string"
+          },
+          "turn_no": {
+            "minimum": 1,
+            "title": "Turn No",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "opening",
+              "statement",
+              "followup",
+              "linking"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "content": {
+            "maxLength": 400,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "discussion_id",
+          "run_id",
+          "participant_id",
+          "turn_no",
+          "kind",
+          "content",
+          "created_at"
+        ],
+        "title": "Message",
+        "type": "object"
+      },
+      "Participant": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "discussion_id": {
+            "format": "uuid",
+            "title": "Discussion Id",
+            "type": "string"
+          },
+          "roster_revision": {
+            "default": 1,
+            "minimum": 1,
+            "title": "Roster Revision",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "HOST",
+              "EXPERT"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "stance": {
+            "maxLength": 140,
+            "minLength": 1,
+            "title": "Stance",
+            "type": "string"
+          },
+          "color": {
+            "pattern": "^#[0-9A-F]{6}$",
+            "title": "Color",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "discussion_id",
+          "kind",
+          "name",
+          "title",
+          "stance",
+          "color"
+        ],
+        "title": "Participant",
+        "type": "object"
+      },
+      "ReadyResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ready",
+            "title": "Status",
+            "default": "ready"
+          },
+          "database": {
+            "type": "string",
+            "const": "ready",
+            "title": "Database",
+            "default": "ready"
+          },
+          "model_mode": {
+            "type": "string",
+            "const": "mock",
+            "title": "Model Mode",
+            "default": "mock"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ReadyResponse"
+      },
+      "RoleState": {
+        "additionalProperties": false,
+        "properties": {
+          "participant_id": {
+            "format": "uuid",
+            "title": "Participant Id",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "IDLE",
+              "PREPARING",
+              "SPEAKING"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "public_focus": {
+            "default": "",
+            "maxLength": 140,
+            "title": "Public Focus",
+            "type": "string"
+          },
+          "version": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "participant_id",
+          "state"
+        ],
+        "title": "RoleState",
+        "type": "object"
+      },
+      "Snapshot": {
+        "additionalProperties": false,
+        "properties": {
+          "discussion": {
+            "$ref": "#/components/schemas/Discussion"
+          },
+          "participants": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            },
+            "title": "Participants",
+            "type": "array"
+          },
+          "role_states": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/RoleState"
+            },
+            "title": "Role States",
+            "type": "array"
+          },
+          "messages": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "insights": {
+            "$ref": "#/components/schemas/InsightBatch"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Summary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "last_event_seq": {
+            "minimum": 0,
+            "title": "Last Event Seq",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "discussion",
+          "last_event_seq"
+        ],
+        "title": "Snapshot",
+        "type": "object"
+      },
+      "Summary": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "through_turn": {
+            "minimum": 0,
+            "title": "Through Turn",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "through_turn",
+          "created_at"
+        ],
+        "title": "Summary",
+        "type": "object"
+      },
+      "SystemInfo": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "const": "AI Panel Studio",
+            "title": "Name",
+            "default": "AI Panel Studio"
+          },
+          "version": {
+            "type": "string",
+            "const": "0.2.0",
+            "title": "Version",
+            "default": "0.2.0"
+          },
+          "phase": {
+            "type": "integer",
+            "const": 2,
+            "title": "Phase",
+            "default": 2
+          },
+          "model_mode": {
+            "type": "string",
+            "enum": [
+              "mock",
+              "unavailable"
+            ],
+            "title": "Model Mode"
+          },
+          "discussion_engine_available": {
+            "type": "boolean",
+            "const": false,
+            "title": "Discussion Engine Available",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_mode"
+        ],
+        "title": "SystemInfo"
+      },
       "FailureEvent": {
         "additionalProperties": false,
         "properties": {
@@ -1314,74 +1649,6 @@
         "title": "HostControlResult",
         "type": "object"
       },
-      "Insight": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "title": "Id",
-            "type": "string"
-          },
-          "kind": {
-            "enum": [
-              "consensus",
-              "disagreement"
-            ],
-            "title": "Kind",
-            "type": "string"
-          },
-          "content": {
-            "maxLength": 500,
-            "minLength": 1,
-            "title": "Content",
-            "type": "string"
-          },
-          "source_message_ids": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "minItems": 1,
-            "title": "Source Message Ids",
-            "type": "array"
-          }
-        },
-        "required": [
-          "id",
-          "kind",
-          "content",
-          "source_message_ids"
-        ],
-        "title": "Insight",
-        "type": "object"
-      },
-      "InsightBatch": {
-        "additionalProperties": false,
-        "properties": {
-          "version": {
-            "default": 0,
-            "minimum": 0,
-            "title": "Version",
-            "type": "integer"
-          },
-          "through_turn": {
-            "default": 0,
-            "minimum": 0,
-            "title": "Through Turn",
-            "type": "integer"
-          },
-          "items": {
-            "default": [],
-            "items": {
-              "$ref": "#/components/schemas/Insight"
-            },
-            "title": "Items",
-            "type": "array"
-          }
-        },
-        "title": "InsightBatch",
-        "type": "object"
-      },
       "InsightsEvent": {
         "additionalProperties": false,
         "properties": {
@@ -1506,69 +1773,6 @@
           "public_focus"
         ],
         "title": "IntentResult",
-        "type": "object"
-      },
-      "Message": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "title": "Id",
-            "type": "string"
-          },
-          "discussion_id": {
-            "format": "uuid",
-            "title": "Discussion Id",
-            "type": "string"
-          },
-          "run_id": {
-            "format": "uuid",
-            "title": "Run Id",
-            "type": "string"
-          },
-          "participant_id": {
-            "format": "uuid",
-            "title": "Participant Id",
-            "type": "string"
-          },
-          "turn_no": {
-            "minimum": 1,
-            "title": "Turn No",
-            "type": "integer"
-          },
-          "kind": {
-            "enum": [
-              "opening",
-              "statement",
-              "followup",
-              "linking"
-            ],
-            "title": "Kind",
-            "type": "string"
-          },
-          "content": {
-            "maxLength": 400,
-            "minLength": 1,
-            "title": "Content",
-            "type": "string"
-          },
-          "created_at": {
-            "format": "date-time",
-            "title": "Created At",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "discussion_id",
-          "run_id",
-          "participant_id",
-          "turn_no",
-          "kind",
-          "content",
-          "created_at"
-        ],
-        "title": "Message",
         "type": "object"
       },
       "ModelRequest": {
@@ -1773,69 +1977,6 @@
         "title": "OperationAccepted",
         "type": "object"
       },
-      "Participant": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "title": "Id",
-            "type": "string"
-          },
-          "discussion_id": {
-            "format": "uuid",
-            "title": "Discussion Id",
-            "type": "string"
-          },
-          "roster_revision": {
-            "default": 1,
-            "minimum": 1,
-            "title": "Roster Revision",
-            "type": "integer"
-          },
-          "kind": {
-            "enum": [
-              "HOST",
-              "EXPERT"
-            ],
-            "title": "Kind",
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "title": "Name",
-            "type": "string"
-          },
-          "title": {
-            "maxLength": 100,
-            "minLength": 1,
-            "title": "Title",
-            "type": "string"
-          },
-          "stance": {
-            "maxLength": 140,
-            "minLength": 1,
-            "title": "Stance",
-            "type": "string"
-          },
-          "color": {
-            "pattern": "^#[0-9A-F]{6}$",
-            "title": "Color",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "discussion_id",
-          "kind",
-          "name",
-          "title",
-          "stance",
-          "color"
-        ],
-        "title": "Participant",
-        "type": "object"
-      },
       "RoleEvent": {
         "additionalProperties": false,
         "properties": {
@@ -1883,43 +2024,6 @@
           "payload"
         ],
         "title": "RoleEvent",
-        "type": "object"
-      },
-      "RoleState": {
-        "additionalProperties": false,
-        "properties": {
-          "participant_id": {
-            "format": "uuid",
-            "title": "Participant Id",
-            "type": "string"
-          },
-          "state": {
-            "enum": [
-              "IDLE",
-              "PREPARING",
-              "SPEAKING"
-            ],
-            "title": "State",
-            "type": "string"
-          },
-          "public_focus": {
-            "default": "",
-            "maxLength": 140,
-            "title": "Public Focus",
-            "type": "string"
-          },
-          "version": {
-            "default": 0,
-            "minimum": 0,
-            "title": "Version",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "participant_id",
-          "state"
-        ],
-        "title": "RoleState",
         "type": "object"
       },
       "RosterEvent": {
@@ -2022,63 +2126,6 @@
           "participants"
         ],
         "title": "RosterResult",
-        "type": "object"
-      },
-      "Snapshot": {
-        "additionalProperties": false,
-        "properties": {
-          "discussion": {
-            "$ref": "#/components/schemas/Discussion"
-          },
-          "participants": {
-            "default": [],
-            "items": {
-              "$ref": "#/components/schemas/Participant"
-            },
-            "title": "Participants",
-            "type": "array"
-          },
-          "role_states": {
-            "default": [],
-            "items": {
-              "$ref": "#/components/schemas/RoleState"
-            },
-            "title": "Role States",
-            "type": "array"
-          },
-          "messages": {
-            "default": [],
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            },
-            "title": "Messages",
-            "type": "array"
-          },
-          "insights": {
-            "$ref": "#/components/schemas/InsightBatch"
-          },
-          "summary": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Summary"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null
-          },
-          "last_event_seq": {
-            "minimum": 0,
-            "title": "Last Event Seq",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "discussion",
-          "last_event_seq"
-        ],
-        "title": "Snapshot",
         "type": "object"
       },
       "StartDiscussion": {
@@ -2197,34 +2244,6 @@
           "version"
         ],
         "title": "StatePayload",
-        "type": "object"
-      },
-      "Summary": {
-        "additionalProperties": false,
-        "properties": {
-          "content": {
-            "maxLength": 4000,
-            "minLength": 1,
-            "title": "Content",
-            "type": "string"
-          },
-          "through_turn": {
-            "minimum": 0,
-            "title": "Through Turn",
-            "type": "integer"
-          },
-          "created_at": {
-            "format": "date-time",
-            "title": "Created At",
-            "type": "string"
-          }
-        },
-        "required": [
-          "content",
-          "through_turn",
-          "created_at"
-        ],
-        "title": "Summary",
         "type": "object"
       },
       "SummaryEvent": {

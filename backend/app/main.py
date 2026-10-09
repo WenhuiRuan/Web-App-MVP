@@ -14,6 +14,9 @@ from .config import Settings, load_settings
 from .contracts import Contract, ErrorResponse
 from .database import Database
 from .model_gateway import DeterministicModelGateway
+from .repository import DiscussionRepository
+from .lifecycle import LifecycleError, RepositoryUnavailable
+from .discussion_api import router
 
 logger = logging.getLogger('panel')
 
@@ -54,6 +57,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def lifespan(app: FastAPI):
         database.migrate()
         app.state.database = database
+        app.state.repository = DiscussionRepository(database)
         app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else None
         yield
 
@@ -84,6 +88,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def application_error(request, exc):
         return error_response(request, exc.status, exc.code, exc.message, exc.retryable)
 
+    @app.exception_handler(LifecycleError)
+    async def lifecycle_error(request, exc):
+        status = 404 if exc.code in ('DISCUSSION_NOT_FOUND', 'OPERATION_NOT_FOUND') else 422 if exc.code == 'VALIDATION_ERROR' else 409
+        return error_response(request, status, exc.code, exc.message)
+
+    @app.exception_handler(RepositoryUnavailable)
+    async def repository_error(request, _exc):
+        return error_response(request, 503, 'DATABASE_UNAVAILABLE', '数据库暂时无法完成操作。', True)
+
     @app.exception_handler(HTTPException)
     async def http_error(request, exc):
         code = {404: 'NOT_FOUND', 405: 'METHOD_NOT_ALLOWED'}.get(exc.status_code, 'HTTP_ERROR')
@@ -108,4 +121,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def system_info():
         return SystemInfo(model_mode='mock' if config.model_provider == 'mock' else 'unavailable')
 
+    app.include_router(router)
     return app
