@@ -1,12 +1,12 @@
 # HTTP API 与 SSE 契约 v1
 
-阶段4第一批已实现并验证，2026-10-09；阶段2契约基线保留。基础地址 `http://127.0.0.1:8000`；前端基础检查使用同源 `/api` 代理，讨论页面仍消费前端模拟。UUID 标识、UTC 带时区时间、JSON 字符串为 UTF-8。请求结构禁止多余字段。浏览器不携带供应商密钥，不存在读取完整后端配置的接口。
+阶段4A/4B/4C已实现对应后端流程，2026-10-09；前端讨论页面仍消费模拟客户端，真实SSE尚未挂载。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
 
 ## 实现状态与机器契约
 
 - **基础接口已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述真实可用端点。
 - **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
-- **4A已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、GET `/{discussion_id}/operations/{operation_id}`（后三者同/api/discussions前缀）。SSE与总结重试留后续批次。未挂载路由返回统一404。
+- **讨论接口已挂载**：POST/GET `/api/discussions`、GET `/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、POST `/{discussion_id}/summary-retry`、GET `/{discussion_id}/operations/{operation_id}`（均/api/discussions前缀）。只有SSE仍未挂载，返回统一404。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
 
@@ -16,7 +16,7 @@
 |---|---|---|
 | GET /api/health/live | 200 `{"status":"ok"}` | 只证明进程响应，不检查数据库/模型 |
 | GET /api/health/ready | 200 `{"status":"ready","database":"ready","model_mode":"mock"}` | 503 DATABASE_UNAVAILABLE / MODEL_NOT_CONFIGURED |
-| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":false}` | 完整引擎标false因最终总结链路未实现，4B自动调度已可运行；非mock配置时model_mode=unavailable；不返回供应商地址、模型名称、密钥或完整settings |
+| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":true}` | true表示确定性后端完整讨论/总结流程可运行，不代表真实模型/SSE/前端业务已接通；未实现provider为unavailable/false |
 
 所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
 
@@ -35,13 +35,13 @@
 
 active 仅 RUNNING/SUMMARIZING；all 包含草稿、生成、失败、完成等。列表按 created_at DESC, id DESC，cursor 是相应二元组的 base64url 不透明游标，不使用 offset；到末尾 next_cursor=null。列表不携带 transcript。快照包含完整 transcript；本 MVP 最多20条正式消息，不需要历史消息分页。
 
-所有命令 Idempotency-Key 格式为 UUID。相同 scope+command+key、相同规范化 body 返回原 HTTP 状态和原响应（即使任务后来失败）；不同 body 为409。显式失败后重试用新键，网络超时重发用原键。规范化 JSON 用已校验模型数据（含默认值、trim文本）、排序字段、UTF-8 进行 SHA-256；创建 scope=global，其余=discussion_id。同议题不同键重复 start、同 revision 已有 run 时返回既有 run，不能再调度。摘要重试已成功时返回原完成操作的响应，无新任务；尚在处理中也仅返回当前操作。
+所有命令 Idempotency-Key 格式为 UUID。相同 scope+command+key、相同规范化 body 返回原 HTTP 状态和原响应（即使任务后来失败）；不同 body 为409。显式失败后重试用新键，网络超时重发用原键。规范化 JSON 用已校验模型数据（含默认值、trim文本）、排序字段、UTF-8 进行 SHA-256；创建 scope=global，其余=discussion_id。同议题不同键重复 start、同 revision 已有 run 时返回既有 run，不能再调度。总结重试同键重放原响应，无新任务；处理中不同新键加入该重试的规范操作。COMPLETED后新键409，初次自动总结处理中也409。
 
 异步操作的 HTTP 202 只代表已受理，后续成功/失败通过 Operation、Snapshot 和 SSE 展现，不能将202当作阵容/总结成功。operation.status 与 discussion.state 分开。异步失败写状态和事件；原已返回202不能改成500。
 
-阶段4A/4B：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；4B随后由唯一后台任务自动开场/调度直至SUMMARIZING。同revision的新start键返回首个成功start的operation_id和run_id，不重复调度。即使run中断或已进入总结，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
+阶段4A/4B：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；4B随后由唯一后台任务自动开场/调度、提取、总结直至COMPLETED或明确失败。同revision的新start键返回首个成功start的operation_id和run_id，不重复调度。即使run中断或已进入总结，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
 
-服务关闭/重启：未完成生成标INTERRUPTED/roster及SERVICE_INTERRUPTED，新key可重试；活动run标INTERRUPTED/discussion并保留阵容和已提交数据，不自动续跑；原start操作保持SUCCEEDED。此阶段没有恢复讨论运行接口。容量为GENERATING/RUNNING/SUMMARIZING合计默认3，READY不占容量；列表active仍只RUNNING/SUMMARIZING。
+服务关闭/重启：生成为INTERRUPTED/roster，讨论推进为INTERRUPTED/discussion，总结为INTERRUPTED/summary，failure_code=SERVICE_INTERRUPTED。保留已提交内容，不自动重放；roster与summary可用新命令键重试，discussion中断不恢复。原start保持SUCCEEDED；处理中手动总结操作为INTERRUPTED。容量GENERATING/RUNNING/SUMMARIZING默认合计3，READY不占容量；active列表只RUNNING/SUMMARIZING。
 
 ### 创建请求与响应
 
@@ -64,6 +64,7 @@ Idempotency-Key: 33333333-3333-4333-8333-333333333333
   },
   "participants": [], "role_states": [], "messages": [],
   "insights": {"version":0,"through_turn":0,"items":[]},
+  "insight_status": {"state":"IDLE","version":0,"through_turn":0,"error_code":null},
   "summary": null, "last_event_seq": 1
 }
 ```
@@ -156,9 +157,9 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 
 上述只是新增字段片段；可执行完整实例以机器样例为准。主持发言片段为`{"task":"utterance","cycle":3,"host_task":"linking","participation_kind":null,"target_message_id":null}`。每个专家intent请求携带本轮公开Transcript，返回kind/target/relevance/public_focus，内部意图不出现在正式messages或turn.committed。
 
-运行错误：Snapshot.discussion新增可空failure_code（固定安全码），FAILED/discussion表示推进失败且已提交messages保留。operation.failed关联该run最初start操作，但start.status仍SUCCEEDED；其完成的是建立run的命令。运行额度或host_control end后冻结数据库runs.summary_through_turn；Snapshot状态SUMMARIZING、summary=null，本批不会生成洞察/总结。角色与turn事件已经持久化，仅能通过快照观察，真实SSE发送仍待后续。
+运行错误：Snapshot.discussion新增可空failure_code（固定安全码），FAILED/discussion表示推进失败且已提交messages保留。operation.failed关联该run最初start操作，但start.status仍SUCCEEDED；其完成的是建立run的命令。运行额度或host_control end后冻结数据库runs.summary_through_turn；SUMMARIZING期间summary=null，4C随后提取最后边界并生成总结至COMPLETED；失败可以重试总结。角色与turn事件已经持久化，仅能通过快照观察，真实SSE发送仍待后续。
 
-结果通过 task 判别联合类型解析，结构错误抛出固定 `InvalidModelResult('MODEL_RESULT_INVALID')`，不携带原文。roster 检查人数、唯一姓名/颜色/ID、归属；intent 检查回应目标；utterance 要求1–2句结构；insights 检查来源；summary 为普通自然语言。确定性模拟同请求同结果、无网络/时钟/共享历史，不代表真实 AI 质量，也不会自动循环讨论。有限修复、真实重试和终止预算由后续调用编排负责。
+结果通过task判别联合类型解析，结构错误固定InvalidModelResult，不携带原文。roster/intent/utterance沿用既有归属/短句检查；insights增加多人来源和完整消息边界，summary增加主持身份/冻结边界/观点来源及自然语言正文。确定性Gateway不访问网络、不保存共享聊天历史；DiscussionEngine/SynthesisEngine负责调用与有限重试，真实模型质量待后续。
 
 
 ## 4C-1实时观点契约
@@ -172,4 +173,28 @@ Snapshot新增insight_status={state,version,through_turn,error_code}，默认IDL
 
 SUMMARIZING后先补最后观点边界，随后自动调用ModelRequest(task=summary,actor_id=主持人,through_turn=冻结边界,insights=最新成功批次)。messages为1..through_turn完整前缀；insights.through_turn不超过冻结边界，来源继续验证。结果content必须是1..4000字符自然语言，拒绝原始JSON和代码块；含主要观点、共识不足/已有共识、未解决分歧，语义内容质量留真实模型验收。
 
-summary.ready与run完成/COMPLETED同事务。普通turn停止后不再新增消息。SUMMARY_MAX_SECONDS=60总预算从总结任务开始计，包括Semaphore等待；每次调用还受MODEL_TIMEOUT_SECONDS限制，最多MODEL_MAX_ATTEMPTS次。自动总结失败发布operation.failed(stage=summary,retryable=true)，引用最初start操作，该操作仍SUCCEEDED；Snapshot为FAILED/summary及安全failure_code，消息/观点/边界保留。HTTP summary-retry在4C-3接续。
+summary.ready与run完成/COMPLETED同事务。普通turn停止后不再新增消息。SUMMARY_MAX_SECONDS=60总预算从总结任务开始计，包括Semaphore等待；每次调用还受MODEL_TIMEOUT_SECONDS限制，最多MODEL_MAX_ATTEMPTS次。自动总结失败发布operation.failed(stage=summary,retryable=true)，引用最初start操作，该操作仍SUCCEEDED；Snapshot为FAILED/summary及安全failure_code，消息/观点/边界保留。HTTP summary-retry已实现，行为见下一节。
+
+## 4C-3总结重试与错误示例
+
+`POST /api/discussions/{id}/summary-retry`只在FAILED/INTERRUPTED且failure_stage=summary时新建重试；SUMMARIZING中的手动重试允许其他键加入，初次自动总结处理中或COMPLETED后新键返回409 INVALID_STATE。相同键始终返回原202，不因服务重启而恢复旧任务。未配置模型503 MODEL_NOT_CONFIGURED、容量已满503 CAPACITY_EXCEEDED、写事务失败503 DATABASE_UNAVAILABLE；非法body/键422，未知讨论404。上述均沿用ErrorResponse，不返回原始模型结果。
+
+```http
+POST /api/discussions/11111111-1111-4111-8111-111111111111/summary-retry
+Content-Type: application/json
+Idempotency-Key: 55555555-5555-4555-8555-555555555555
+
+{}
+```
+
+```json
+{"operation_id":"33333333-3333-4333-8333-333333333333","discussion_id":"11111111-1111-4111-8111-111111111111","state":"SUMMARIZING","run_id":"22222222-2222-4222-8222-222222222222"}
+```
+
+操作查询在受理后为`kind=summary-retry,status=RUNNING,error_code=null`；成功SUCCEEDED，失败FAILED加安全code，中断INTERRUPTED/SERVICE_INTERRUPTED。同run并发新键记录别名操作但返回首个规范operation_id，别名状态与规范任务结果同步。新尝试只增加summary_jobs.attempt，不重置summary_through_turn、生成阵容或重放讨论；捕获的insight_version保持不变，重试不重新提取观点。
+
+```json
+{"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111","run_id":"22222222-2222-4222-8222-222222222222","seq":20,"type":"operation.failed","occurred_at":"2026-10-09T00:00:00Z","payload":{"operation_id":"33333333-3333-4333-8333-333333333333","stage":"summary","code":"MODEL_TIMEOUT","message":"总结生成失败，消息和观点已保留，可以重试总结。","retryable":true}}
+```
+
+该事件是失败分支的字段示例，seq依实际持久化高水位分配；本阶段只能轮询快照/操作，SSE线发送尚未实现。insights.updated与summary.ready完整来源/正文/封装样例见contracts.json（两位专家来源）；ModelRequest完整提取/总结上下文同文件model_requests。

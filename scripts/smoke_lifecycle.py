@@ -87,31 +87,33 @@ def main():
             started=list(pool.map(lambda key:http('POST',path,{'roster_revision':1},key,202),[uuid4(),uuid4()]))
         assert started[0]==started[1]
         other=http('POST',f'/api/discussions/{dids[1]}/start',{'roster_revision':1},uuid4(),202)
-        running=[poll(did,'SUMMARIZING') for did in dids]
+        running=[poll(did,'COMPLETED') for did in dids]
         for snapshot in running:
             assert len(snapshot['messages'])==8 and snapshot['messages'][0]['kind']=='opening'
             assert [m['turn_no'] for m in snapshot['messages']]==list(range(1,9))
-            assert snapshot['summary'] is None and snapshot['insights']['items']==[]
+            assert snapshot['summary']['through_turn']==8
+            assert snapshot['insights']['through_turn']==8
         assert started[0]['run_id']!=other['run_id']
         for did,accepted in zip(dids,generated):
             assert Operation.model_validate(http('GET',f"/api/discussions/{did}/operations/{accepted['operation_id']}" )).status=='SUCCEEDED'
         foreign=http('GET',f"/api/discussions/{dids[1]}/operations/{started[0]['operation_id']}",expected=404)
         assert foreign['error']['code']=='OPERATION_NOT_FOUND'
-        assert len(http('GET','/api/discussions')['items'])==2
-        report['checks'].append('Concurrent confirmation returned one canonical run; two isolated runs automatically committed 8 messages each and stopped at SUMMARIZING through host control')
+        assert len(http('GET','/api/discussions')['items'])==0
+        report['checks'].append('Concurrent confirmation returned one canonical run; two isolated runs committed 8 messages each, updated evidence and completed host summaries')
         report['before_restart']=running
         # Terminate only the process owned by this script: exercise abrupt restart, not graceful close.
         first.terminate(); first.wait(timeout=10)
         launch()
-        recovered=[poll(did,'INTERRUPTED') for did in dids]
+        recovered=[poll(did,'COMPLETED') for did in dids]
         assert [s['participants'] for s in recovered]==[s['participants'] for s in running]
-        assert all(s['discussion']['failure_stage']=='summary' for s in recovered)
+        assert [s['insights'] for s in recovered]==[s['insights'] for s in running]
+        assert [s['summary'] for s in recovered]==[s['summary'] for s in running]
         assert [s['messages'] for s in recovered]==[s['messages'] for s in running]
         assert poll(draft['discussion']['id'],'DRAFT')['discussion']['topic']=='重启保留草稿'
         assert http('POST',path,{'roster_revision':1},uuid4(),202)==started[0]
         assert http('POST',f'/api/discussions/{dids[0]}/roster-generation',{},generation_keys[0],202)==generated[0]
         assert http('GET','/api/discussions')['items']==[]
-        report['checks'].append('Abrupt restart preserved 16 messages and rosters; pending summaries became INTERRUPTED/summary; old commands did not create/resume a run')
+        report['checks'].append('Abrupt restart preserved 16 messages, rosters, insights and completed summaries; old commands did not create/resume a run')
         report['after_restart']=recovered
         database=Database(db_path)
         with database.connect(create=False) as conn:

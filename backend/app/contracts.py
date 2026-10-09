@@ -130,8 +130,8 @@ class InsightStatus(Contract):
 
 
 def validate_natural_summary(value: str) -> str:
-    if value.startswith('```'):
-        raise ValueError('summary cannot be a code block')
+    if '```' in value or value.startswith(('{','[')):
+        raise ValueError('summary cannot contain structured output or code blocks')
     try:
         json.loads(value)
     except ValueError:

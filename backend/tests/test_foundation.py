@@ -28,7 +28,7 @@ def test_health_and_secret_boundary(tmp_path, caplog):
         assert client.get('/api/health/ready').json()['database'] == 'ready'
         info = client.get('/api/system').json()
         assert info['model_mode'] == 'mock'
-        assert info['discussion_engine_available'] is False
+        assert info['discussion_engine_available'] is True
         for path, code in [('/missing?' + sentinel, 404), ('/test/raise', 500)]:
             response = client.get(path, headers={'X-Request-ID': sentinel})
             assert response.status_code == code

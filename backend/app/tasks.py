@@ -16,6 +16,8 @@ class TaskSupervisor:
         self.tasks: dict[str, asyncio.Task] = {}
         self.run_tasks: dict[str, asyncio.Task] = {}
         self.scheduled_runs: set[str] = set()
+        self.summary_tasks: dict[str, asyncio.Task] = {}
+        self.scheduled_summaries: set[str] = set()
         self.admissions: set[asyncio.Task] = set()
         self.database_workers: set[asyncio.Task] = set()
         self.semaphore = asyncio.Semaphore(settings.model_max_concurrency)
@@ -26,6 +28,26 @@ class TaskSupervisor:
 
     async def start(self, discussion_id, body, key):
         return await self._command(self._admit_start, discussion_id, body, key)
+
+    async def retry_summary(self,discussion_id,key):
+        return await self._command(self._admit_summary_retry,discussion_id,key)
+
+    async def _admit_summary_retry(self,did,key):
+        response,claim=await self._db_call(self.repository.admit_summary_retry,did,key,self.settings,self.gateway_getter() is not None)
+        if self.closing: raise LifecycleError('SERVICE_SHUTTING_DOWN','服务正在关闭，请稍后重试。')
+        if claim is not None:
+            jid=str(claim.id)
+            if jid not in self.scheduled_summaries:
+                from .synthesis import SynthesisEngine
+                self.scheduled_summaries.add(jid)
+                task=asyncio.create_task(SynthesisEngine(self).summarize(did,claim.request.run_id,claim),name=f'summary:{did}:{jid}')
+                self.summary_tasks[jid]=task
+                task.add_done_callback(lambda finished:self._summary_finished(jid,finished))
+        return response
+
+    def _summary_finished(self,jid,task):
+        self.summary_tasks.pop(jid,None)
+        if not task.cancelled() and task.exception() is not None: logger.error('summary_task_requires_restart_recovery')
 
     async def _admit_start(self, discussion_id, body, key):
         response=await self._db_call(self.repository.start,discussion_id,body,key,self.settings)
@@ -146,7 +168,7 @@ class TaskSupervisor:
 
     async def close(self):
         self.closing = True
-        tasks = [*self.admissions, *self.tasks.values(), *self.run_tasks.values()]
+        tasks = [*self.admissions, *self.tasks.values(), *self.run_tasks.values(), *self.summary_tasks.values()]
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
@@ -159,4 +181,6 @@ class TaskSupervisor:
         self.tasks.clear()
         self.run_tasks.clear()
         self.scheduled_runs.clear()
+        self.summary_tasks.clear()
+        self.scheduled_summaries.clear()
         self.admissions.clear()

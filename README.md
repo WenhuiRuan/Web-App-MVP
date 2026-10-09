@@ -1,6 +1,6 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。当前完成阶段3前端模拟流程及**阶段4第二批：后端自主发言调度与主持控制**。真实FastAPI/SQLite支持创建/阵容/唯一运行及自动开场、专家意图仲裁、追问/串联/结束、发言持久化和总结边界冻结；后端使用独立确定性ModelGateway。前端仍明确标记模拟模式，播放“四天工作制”台本，尚未接入业务API。观点提炼、最终总结、真实SSE和真实模型适配待后续。开发工具为Codex，应用运行时模型由后端独立配置。
+本地多专家圆桌讨论应用。当前完成阶段3前端模拟流程及阶段4A/4B/4C后端生命周期、自主调度、实时观点提取、主持人总结和失败恢复。真实FastAPI/SQLite从确认启动自动推进到COMPLETED，使用独立确定性ModelGateway；失败或中断可只重试原run总结。前端仍明确标记模拟模式，播放“四天工作制”台本，尚未接入业务API。真实SSE与真实模型适配待后续。开发工具为Codex，应用运行时模型由后端独立配置。
 
 ## 环境与安装
 
@@ -38,7 +38,7 @@ Pop-Location
 | MODEL_BASE_URL / MODEL_NAME / MODEL_API_KEY | 空 | 真实服务后续配置；Key仅后端读取，不进入响应/日志/数据库 |
 | MODEL_TIMEOUT_SECONDS / MODEL_MAX_CONCURRENCY / MODEL_MAX_ATTEMPTS | 30 / 4 / 2 | 全部模型任务超时、全局并发和最多尝试次数（含首次，1–3）；run剩余时长优先 |
 | DISCUSSION_MAX_ACTIVE / DISCUSSION_MAX_TURNS / DISCUSSION_MAX_SECONDS | 3 / 20 / 300 | 活动容量已执行：GENERATING/RUNNING/SUMMARIZING合计；发言/时长额度已执行；到期冻结实际消息边界并进入SUMMARIZING |
-| SUMMARY_MAX_SECONDS | 60 | 后续总结独立时间预算 |
+| SUMMARY_MAX_SECONDS / INSIGHT_MAX_SECONDS | 60 / 10 | 总结与每次提取的独立有限总预算，包含队列等待；均最多MODEL_MAX_ATTEMPTS次尝试 |
 
 若修改后端端口，启动前端前设置进程变量 `$env:PANEL_BACKEND_ORIGIN='http://127.0.0.1:新端口'`；它只是 Vite 服务端代理目标，不是模型配置。不要把密钥放入任何 `PANEL_PUBLIC_*` 或 `VITE_*` 变量。
 
@@ -58,7 +58,7 @@ Pop-Location
 .\scripts\start-frontend.ps1
 ```
 
-访问 [本地前端](http://127.0.0.1:5173) 体验模拟流程；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪 · 确定性模拟模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供三个基础接口和六类讨论接口，可直接试用。
+访问 [本地前端](http://127.0.0.1:5173) 体验模拟流程；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪 · 确定性模拟模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供三个基础接口和七类讨论接口，可直接试用。
 
 其他系统的等价启动方式（未实机验证）：`python3 -m venv .venv`，用 `.venv/bin/python -m pip install -r backend/requirements.lock` 安装；用 `.venv/bin/python -m backend.app.server` 启动；前端目录执行 `npm ci` 和 `npm run dev`。
 
@@ -70,7 +70,7 @@ Pop-Location
 .\.venv\Scripts\python.exe -m backend.app.database --path work/check.sqlite3
 ```
 
-首次输出 `Migrations applied: [1]`，重复输出 `[]`，不会清空数据。迁移有校验和、版本顺序及事务回滚；已应用SQL不修改，新变更加新版本。没有自动降级/删除数据操作。不要把本地数据库或 WAL/SHM 文件放入提交或交付包。
+空库首次输出 `Migrations applied: [1, 2, 3, 4]`，重复输出 `[]`，不会清空数据。迁移有校验和、版本顺序及事务回滚；已应用SQL不修改，新变更加新版本。没有自动降级/删除数据操作。不要把本地数据库或 WAL/SHM 文件放入提交或交付包。
 
 ## 实际可用接口与设计契约
 
@@ -83,12 +83,13 @@ Pop-Location
 | GET /api/discussions | active/all过滤、稳定排序与游标分页 |
 | GET /api/discussions/{id} | 一致性快照及事件高水位 |
 | POST /api/discussions/{id}/roster-generation | 后台生成；202受理后通过快照或操作查询等待READY |
-| POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run及唯一后台讨论任务，自动推进至SUMMARIZING |
+| POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run及后台任务，自动发言/提取/总结至COMPLETED或明确失败 |
+| POST /api/discussions/{id}/summary-retry | 总结失败/中断后重试同run边界；重复及并发不新增有效任务 |
 | GET /api/discussions/{id}/operations/{operation_id} | 查询本讨论操作的处理状态和安全错误码 |
 
-请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；总结重试和SSE仍为false。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；再POST start并提交当前roster_revision，返回202及run_id；后台自动开场和讨论，可轮询Snapshot查看正式消息/角色状态直至SUMMARIZING。所有命令需要UUID幂等键：网络重发使用原键，明确失败后的重新生成使用新键。
+请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；总结重试已挂载，SSE仍为false。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；POST start提交当前roster_revision，返回202/run_id并自动推进。每2条正式消息更新观点，结束补尾，冻结边界后生成总结。轮询Snapshot可见insights、insight_status、summary与生命周期。所有命令需要UUID幂等键；网络重发原键，显式失败或中断后的重试使用新键。
 
-服务为**单进程、单worker、单数据库所有者**。关闭或异常重启后，未完成生成/运行标INTERRUPTED并保留已提交内容；roster阶段可用新键重试。重复start只重放原受理响应及既有run，不恢复中断运行；当前状态请读Snapshot。数据库完全不可写时无法保存中断标记，需要在恢复可写后的下次启动处理。后端实现与验证细节见[生命周期说明](docs/backend-lifecycle.md)和[自动调度说明](docs/backend-orchestration.md)。
+服务为**单进程、单worker、单数据库所有者**。未完成任务在关闭/重启后标INTERRUPTED；roster阶段可以新键生成，summary阶段通过POST `/api/discussions/{id}/summary-retry`（无body或`{}`）新键重试原run与冻结边界。不会重放发言/生成阵容；同一键返回原202响应，当前状态读Snapshot/Operation。并发重试键合并有效任务。讨论阶段中断不自动续跑。数据库持续不可写时需恢复可写后的下次启动处理。详见[生命周期](docs/backend-lifecycle.md)、[调度](docs/backend-orchestration.md)和[观点/总结](docs/backend-synthesis.md)。
 
 ## 验证命令
 
@@ -97,6 +98,7 @@ Pop-Location
 .\.venv\Scripts\python.exe -m scripts.export_contracts --check
 .\.venv\Scripts\python.exe -m scripts.check_docs
 .\.venv\Scripts\python.exe -m scripts.smoke_lifecycle
+.\.venv\Scripts\python.exe -m scripts.smoke_synthesis
 .\.venv\Scripts\python.exe -m pip check
 Push-Location frontend
 npm run build
@@ -110,15 +112,15 @@ Pop-Location
 
 数据契约修改后运行 `python -m scripts.export_contracts` 再执行检查。JSON Schema验证形状，Pydantic另外验证跨字段归属、阵容基数/身份、句数、来源等；单独JSON Schema通过不代表全部业务规则成立。
 
-smoke_lifecycle自行启动临时loopback后端、创建独立work数据库，用真实HTTP检查两场生成/并发确认及自动推进，再强制停止自有进程并重启检查持久化。报告和日志留在work/lifecycle-smoke-*，正常运行库和真实模型均不参与。本批pytest165项通过；HTTP两场各8条正式消息至SUMMARIZING，重启保留16条消息。契约/文档检查通过，详细结果见progress；前端src未改，沿用前期构建/浏览器验证历史，本批未重跑布局测试。
+smoke_lifecycle自行启动临时loopback后端、独立work数据库，验证两场各8条发言/观点/总结及强制重启后数据保留。smoke_synthesis用受控后端替身和真实TCP HTTP，验证双场失败隔离、并发总结重试、中断/重启及新键恢复；报告在work/*-smoke-*/report.json。4C新增及受影响pytest168项通过（当时45新增）；收尾再补2项格式负例，相关55项回归通过，新增总数47；未受影响42项纯规则沿用4B结果，未重复执行。本批没有布局/截图/前端构建检查，frontend/src及依赖锁未改，仅基础浏览器测试的系统能力断言同步为true，浏览器检查仍需后续阶段执行。
 
 ## 已完成、限制与后续
 
-- 已完成：阶段3前端模拟闭环；阶段2工程基础；阶段4A生命周期及阶段4B自主调度/主持控制、角色/短发言原子保存、有限模型重试、结束条件/冻结边界及双场隔离。
-- 未实现：实时洞察、最终总结/总结重试、真实SSE订阅与恢复、前端业务API接入、真实模型适配、五条最终质量样例。
+- 已完成：前端模拟闭环、工程基础、后端生命周期/阵容/唯一运行、自主调度/主持控制、观点来源与版本/原子事件、独立预算总结/COMPLETED及失败/中断幂等重试。
+- 未实现：真实SSE订阅与恢复、前端业务API接入、真实模型适配与内容质量验收、五条最终质量样例。
 - 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
 - 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：阶段4下一批按TDD实现观点提取与最终总结；阶段5接入HTTP/SSE与完整业务E2E，阶段6真实服务与最终交付。
+- 下一步：阶段5接入HTTP/SSE、同步公开投影及完整业务E2E；阶段6真实服务、内容质量及最终交付。
 
 生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认前端模拟无需后端；Ctrl+C停止。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 

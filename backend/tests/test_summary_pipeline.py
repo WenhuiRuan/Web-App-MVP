@@ -39,7 +39,7 @@ def test_summary_uses_host_frozen_messages_and_commits_complete_with_event(setup
         assert tuple(run)[:2]==('COMPLETED',3) and run['ended_at']
 
 
-@pytest.mark.parametrize('content',['', '  ', '{"content":"原始JSON"}', '["原始JSON"]', '```json\n{}\n```', '长'*4001],ids=['empty','blank','object','array','code','long'])
+@pytest.mark.parametrize('content',['', '  ', '{"content":"原始JSON"}', '["原始JSON"]', '```json\n{}\n```', '长'*4001,'{"content":"未闭合JSON"','以下是总结：\n```json\n{}\n```'],ids=['empty','blank','object','array','code','long','malformed-json','embedded-code'])
 def test_summary_rejects_non_natural_body_without_completion(setup,content):
     client,repo,did,rid=summarizing(setup); claim=repo.claim_summary(did,rid)
     with pytest.raises(InvalidModelResult): repo.complete_summary(claim,{'task':'summary','content':content})

@@ -38,7 +38,7 @@ class SystemInfo(Contract):
     version: Literal['0.4.0'] = '0.4.0'
     phase: Literal[4] = 4
     model_mode: Literal['mock', 'unavailable']
-    discussion_engine_available: Literal[False] = False
+    discussion_engine_available: bool
 
 
 class ApplicationError(Exception):
@@ -129,7 +129,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get('/api/system', response_model=SystemInfo)
     def system_info():
-        return SystemInfo(model_mode='mock' if config.model_provider == 'mock' else 'unavailable')
+        return SystemInfo(model_mode='mock' if config.model_provider == 'mock' else 'unavailable',discussion_engine_available=config.model_provider=='mock')
 
     app.include_router(router)
     return app

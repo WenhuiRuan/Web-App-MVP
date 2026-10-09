@@ -719,8 +719,8 @@
     },
     "/api/discussions/{discussion_id}/summary-retry": {
       "post": {
-        "x-implemented": false,
-        "summary": "Planned: POST /api/discussions/{discussion_id}/summary-retry",
+        "summary": "Retry Summary",
+        "operationId": "retry_summary_api_discussions__discussion_id__summary_retry_post",
         "parameters": [
           {
             "name": "discussion_id",
@@ -728,7 +728,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Discussion Id"
             }
           },
           {
@@ -737,63 +738,31 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Idempotency-Key"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/EmptyCommand"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
         "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
           "202": {
-            "description": "Success (idempotent replay uses original status and body)",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
@@ -801,20 +770,59 @@
                 }
               }
             }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "maxProperties": 0
-              }
-            }
-          }
-        }
+        "x-implemented": true
       }
     },
     "/api/discussions/{discussion_id}/events": {
@@ -1715,15 +1723,14 @@
           },
           "discussion_engine_available": {
             "type": "boolean",
-            "const": false,
-            "title": "Discussion Engine Available",
-            "default": false
+            "title": "Discussion Engine Available"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
-          "model_mode"
+          "model_mode",
+          "discussion_engine_available"
         ],
         "title": "SystemInfo"
       },

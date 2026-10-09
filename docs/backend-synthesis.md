@@ -16,4 +16,18 @@
 
 ## 验证记录
 
-本批尚在实施，具体结果按实际进展追加到[progress.md](progress.md)。SSE、前端业务接入和真实模型验证不在当前范围。
+本批已完成对应后端验证，具体结果见[progress.md](progress.md)。SSE、前端业务接入和真实模型验证不在当前范围。
+
+## 完成后的编排与恢复
+
+DiscussionEngine提交每条正式消息后，在偶数边界同步等待SynthesisEngine.extract。提取等待有限且计入讨论真实时长；不足两位专家可以成功提交空批，最后失败的公开insight_status与上一成功insights并存。终止时Supervisor补最后未领取边界并调用summarize；提取失败不阻止总结。
+
+每次总结捕获主持人、原run、冻结前缀及成功观点版本；Summary不追加到messages。初次自动领取无operation_id，手动summary-retry关联独立操作。FAILED/INTERRUPTED/summary接受新键，进行中的手动重试接受其他键加入，初次自动总结进行中与COMPLETED后新键409。相同键始终重放受理响应，不恢复中断任务；状态通过Snapshot/Operation查询。
+
+摘要重试只激活原run的总结阶段；运行started_at/stop_reason/边界、消息、阵容、观点保持。数据库唯一PENDING领取与进程任务登记共同防重复。关闭统一取消/收集任务，排空数据库工作后标中断；即使模型吞取消后返回，closing/cancelling检查也拒绝提交。永久拒绝取消/永不返回的适配仍需未来进程隔离或供应商侧机制，当前适配须合作取消。
+
+## 实际验证与限制
+
+14项观点、19项总结、14项恢复共47新增均已通过。先运行新增及受影响回归168项（当时45新增），收尾两项格式负例先失败再修复后，相关55项回归通过。独立TCP报告work/synthesis-smoke-8xiz3ce0/report.json：两场各8条消息，非空观点在RUNNING的turn4/6/8更新；A总结两次非法失败，B正常完成，A并发重试合并一个任务；中断重启后新键总结成功且原消息/观点/边界不变。基础smoke_lifecycle也验证完成数据强制重启保留。
+
+证据约束验证归属、边界与至少两位专家，并不能证明模型语义正确；默认Gateway仅生成工程模拟内容。自然语言校验拒绝JSON/代码块/空白/超长，不能自动证明总结忠实度。单进程/worker/database owner、持续不可写需下次可写启动恢复；前端仍模拟，SSE/真实服务/真实内容质量/五份样例/完整浏览器业务E2E未完成。

@@ -1,23 +1,23 @@
 # SDD 架构基线
 
-SDD基线：阶段2，版本0.2，2026-10-08；更新于2026-10-09。阶段4A实现生命周期，4B实现自动意图仲裁、主持控制与正式发言，推进至SUMMARIZING；细节见backend-lifecycle.md及backend-orchestration.md。观点提炼、最终总结和SSE仍待后续。最终业务契约见api.md、data-model.md；机器契约与运行时OpenAPI的范围有明确区别。
+SDD基线：阶段2，2026-10-08；更新于2026-10-09。4A生命周期、4B自主调度、4C观点提取/自然语言总结/恢复均完成对应后端验证。确定性模式自动到COMPLETED；前端业务联调与SSE留阶段5，真实模型留阶段6。模块细节见backend-lifecycle、backend-orchestration和backend-synthesis。
 
 ## 模块与依赖
 
 | 模块 | 输入 → 输出 | 边界与后续实现位置 |
 |---|---|---|
-| 讨论管理 | 创建/开始/重试命令 → Discussion、Operation | 4A已实现：discussion_api→lifecycle/repository/tasks；生命周期、幂等和一致性查询 |
+| 讨论管理 | 创建/开始/重试命令 → Discussion、Operation | 4A/4C已实现：discussion_api→repository/tasks；生命周期、启动及总结重试幂等和一致性查询 |
 | 嘉宾生成 | 议题、人数 → RosterRevision、Participant | 4A已实现：TaskSupervisor调用ModelGateway并校验结果，repository原子提交后才READY |
 | 参与意图 | 本讨论公开上下文、角色 → SpeakingIntent | 4B已实现：并发评估、归属/target验证、结构化意图保存；不进入正式消息 |
 | 发言调度 | 本轮有效意图 → 一个获选角色 | 4B已实现：纯评分/回应/近期惩罚与连续占用回退，唯一领取及消息提交 |
 | 主持人控制 | 公开上下文、运行额度 → 追问/串联/结束 | 4B已实现：开场先行，无候选追问、专家发言后串联、决定结束冻结边界 |
-| 观点提取 | 截至 turn_no 的正式消息 → InsightBatch | 版本化全量洞察快照、来源引用；与总结分开；后续 TDD |
+| 观点提取 | 正式消息冻结前缀 → InsightBatch/InsightStatus | 4C已实现：SynthesisEngine/SynthesisRepository，来源/版本/领取、原子事件与有限失败；总结单独捕获边界 |
 | 事件分发 | 与业务写入同事务的 Event → SSE | 每讨论有序持久化日志，读库补传；本阶段冻结协议，后续实现推送 |
 
 ```mermaid
 flowchart TD
-  UI[React + TypeScript] -->|HTTP /api| API[FastAPI 基础接口 / 后续业务路由]
-  API --> APP[后续应用层: 七个业务模块]
+  UI[React + TypeScript] -->|HTTP /api| API[FastAPI 基础与讨论业务路由]
+  API --> APP[TaskSupervisor / DiscussionEngine / SynthesisEngine]
   APP --> DOMAIN[纯领域规则与契约]
   APP --> PORT[ModelGateway 协议]
   PORT --> MOCK[确定性模拟: 本阶段可调用]
@@ -29,7 +29,7 @@ flowchart TD
 
 Python包backend/app：contracts定义公开/模型格式，model_gateway定义协议与独立模拟，config/database/main提供基础设施；4A的lifecycle/repository/tasks/discussion_api已扩展为4B的scheduling纯仲裁、run_repository事务和engine自动循环。纯领域规则不依赖FastAPI/SQLite/供应商SDK；全部模型IO通过ModelGateway执行。
 
-## 冻结的状态与命令规则（4B执行至SUMMARIZING；总结/完成仍为设计）
+## 状态与命令规则（4C已执行至COMPLETED及总结恢复）
 
 | 当前状态 | 触发 | 目标 | 前提/失败 |
 |---|---|---|---|
@@ -47,14 +47,14 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 
 启动幂等：命令需要 UUID Idempotency-Key。创建作用域 global，其他命令为 discussion_id+命令名；规范化请求摘要相同则返回原 HTTP 状态/响应，不再次排队；摘要不同返回 409 IDEMPOTENCY_CONFLICT。BEGIN IMMEDIATE 内检查状态/revision、写 run/operation/state/event 后提交，提交后受监管任务领取操作。不同键的重复 start 在该 revision 已有 run 时返回该 run，不新增任务（不论原 run 是否已终止）；旧 revision 返回 409 ROSTER_VERSION_CONFLICT。数据库唯一索引进一步阻止双 active run。
 
-默认专家 4（2–6，不含主持人），议题 trim 后 1–500 Unicode 码点。正式消息最多 20 条（含开场/追问/串联），运行调度限 300 秒；总结额外最多 60 秒。主持人可提早结束；无人申请时追问，连续两轮无人申请则进入总结。每个调用超时 30 秒，临时网络/429 最多额外重试 2 次（1/2 秒退避，尊重 Retry-After 但不超过剩余期限），非法结构最多修复 1 次，整体期限优先；401/403 不重试。上述是普通默认值，真实成本上限待服务接入设置，不宣称已执行。
+默认专家4（2–6，不含主持人），议题trim后1–500码点；默认最多20条正式消息、运行300秒，主持可提前结束，无候选时追问。每2条正式消息提取一次，提取总预算10秒；总结独立60秒。模型每次超时30秒，全局并发4、最多2次尝试（含首次），总预算优先；没有额外“连续无人申请自动结束”规则。真实429/鉴权/费用策略待适配接入，不把设计建议写成现行行为。
 
 发言以 1–2 个句子数组生成，每句 1–200 码点；句界为 。！？!? 与非数字间的英文句点，连续终止标点算一个句界，句末标点可省略。缩写含句点易误判，模拟/提示词使用完整词；最终正式消息拼接后 ≤400 码点。总结独立自然语言字段（≤4000 码点），不作为 1–2 句短发言。语义质量仍需人工检查。
 
 ## 四层隔离
 
 1. 数据库：所有子记录显式 discussion_id，run/roster/participant/message 引用通过复合外键保证同议题、同 run/阵容；Repository 查询必须以 discussion_id 起始，不提供跨议题“最近发言”。本阶段已建立这些结构性约束。
-2. 运行任务：未来单 Uvicorn worker、任务注册表以 discussion_id/operation_id 标识，每议题锁和 run/roster 版本守卫；至多 3 活动讨论，模型 IO 全局并发 4；不因观察者数量新增任务。此调度未实现。
+2. 运行任务：单Uvicorn worker、单数据库所有者；run_tasks/scheduled_runs保证run最多一个讨论循环，summary_jobs唯一PENDING及summary_tasks/scheduled_summaries保证手动重试任务唯一。默认3活动讨论、模型全局并发4；受理/关闭/SQLite线程统一收集，轮次/领取/取消标记拒绝迟到结果。
 3. 模型上下文：不可变请求携带 discussion_id、run_id、participants、messages；构造/校验拒绝外来归属。服务适配器不共享可变聊天历史；后续上下文预算为公开滚动摘要+最近消息，按本 run 构建；不读取 Codex 历史或凭据。
 4. 订阅：每页一条 `/discussions/{id}/events`，按该 id 查询日志，发送事件再次校验归属；前端切换议题关闭旧连接、清空投影并重新取快照。不同议题 seq 相同合法，不可把 seq 当全局 ID。
 
@@ -68,18 +68,22 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 
 ## 工程与安全边界
 
-本阶段运行路由只有 `/api/health/live`、`/api/health/ready`、`/api/system` 与 FastAPI 文档；其余核心契约尚未挂载，实际请求返回统一 404，不冒充业务成功。前端通过 Vite 同源 `/api` 代理访问后端，前端根不读取项目 .env，不使用 VITE_* 传模型配置。后端限定默认 loopback，无身份系统，不对公网发布。
+当前运行路由包括三个基础接口及创建、列表、快照、嘉宾生成、启动、总结重试和操作查询；SSE仍设计未挂载。前端页面消费独立模拟客户端，基础连接检查通过Vite同源代理访问后端，不读取根.env。后端默认loopback，无身份系统，不对公网发布。
 
 日志白名单仅含生成的 request_id、HTTP 方法、匹配的路由模板、状态和耗时；不记录请求 body/query/header、模型上下文/输出、环境值和异常原文。关闭 Uvicorn access log；统一错误不回显 Pydantic input/ctx 或原始异常；未匹配路径记录固定 `<unmatched>`。配置中密钥用 SecretStr，禁止 dump 配置。真实适配器尚未实现，非 mock 模式 readiness 返回 503。
 
-迁移顺序、结构性约束、模型校验及基础错误用自动检查验证；实际任务隔离、SSE 断线重连、调度与崩溃恢复留在阶段 4/5 按 TDD/E2E 验证。
+迁移、模型边界、任务隔离、调度/提取/总结及恢复均有后端检查；真实SSE重连、前端业务投影与完整E2E留阶段5。
 
 
 ## 4C-1运行中观点更新
 
-SynthesisRepository继承RunRepository，新增领取/归属/最新版本守卫和观点事务；SynthesisEngine复用已验证的有限模型调用机制，使用独立INSIGHT_MAX_SECONDS。DiscussionEngine在每2条正式消息提交后调用提取，TaskSupervisor在正常结束/时长结束后补最后边界。当前采用串行有限提取以保持公开事件顺序；提取等待计入讨论实际运行时长，失败后继续推进。模型IO全在事务外，失败仅影响最新提取状态，已有观点保留。总结/恢复在4C后两个小批接续，详见backend-synthesis。
+SynthesisRepository继承RunRepository，新增领取/归属/最新版本守卫和观点事务；SynthesisEngine复用已验证的有限模型调用机制，使用独立INSIGHT_MAX_SECONDS。DiscussionEngine在每2条正式消息提交后调用提取，TaskSupervisor在正常结束/时长结束后补最后边界。当前采用串行有限提取以保持公开事件顺序；提取等待计入讨论实际运行时长，失败后继续推进。模型IO全在事务外，失败仅影响最新提取状态，已有观点保留。总结/恢复已由4C-2/3完成，详见backend-synthesis。
 
 
 ## 4C-2主持人总结
 
-TaskSupervisor在讨论循环正常/预算结束后执行最终提取和总结；SynthesisEngine每次任务独立计时，不继承DiscussionEngine的到期deadline。持久化summary_jobs领取与状态守卫阻止重复/中断结果提交，SynthesisRepository从冻结边界和捕获观点版本重建请求后校验，完成事务保证总结及状态一致。失败仅进入FAILED/summary，保留已提交消息和观点，手动恢复接口在4C-3实现。
+TaskSupervisor在讨论循环正常/预算结束后执行最终提取和总结；SynthesisEngine每次任务独立计时，不继承DiscussionEngine的到期deadline。持久化summary_jobs领取与状态守卫阻止重复/中断结果提交，SynthesisRepository从冻结边界和捕获观点版本重建请求后校验，完成事务保证总结及状态一致。失败仅进入FAILED/summary，保留已提交消息和观点，手动恢复接口已由4C-3实现。
+
+## 4C-3恢复与任务监督
+
+summary-retry受理在单写事务内校验FAILED/INTERRUPTED/summary、容量与冻结边界，重置原run活动状态、创建操作和新领取并切SUMMARIZING。并发键加入同一领取与规范操作响应，所有别名操作随该结果更新。持久化领取与进程scheduled_summaries双重守卫；服务关闭取消并收集所有任务、排空SQLite工作后统一标记中断。模型若吞取消后返回，call_model以closing/cancelling标记拒绝返回结果。

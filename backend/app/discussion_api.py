@@ -42,3 +42,9 @@ async def start_discussion(discussion_id: UUID, body: StartDiscussion, request: 
 @router.get('/{discussion_id}/operations/{operation_id}', response_model=Operation)
 def get_operation(discussion_id: UUID, operation_id: UUID, request: Request):
     return request.app.state.repository.operation(discussion_id, operation_id)
+
+
+@router.post('/{discussion_id}/summary-retry',status_code=202,response_model=OperationAccepted)
+async def retry_summary(discussion_id: UUID,request: Request,idempotency_key: Key,body: EmptyCommand | None=None):
+    response=await request.app.state.tasks.retry_summary(discussion_id,idempotency_key)
+    return JSONResponse(response.body,status_code=response.status)

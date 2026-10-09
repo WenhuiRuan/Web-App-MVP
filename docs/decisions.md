@@ -173,3 +173,9 @@ ModelGateway 需要覆盖阵容生成、专家意图、公开短发言、洞察�
 ## ADR-35：冻结边界与独立总结预算（已采用）
 
 总结单独计时默认60秒，包含队列等待并沿用每次超时及最多2次尝试；不复用讨论截止时间。主持请求包含完整冻结消息前缀和捕获版本的最新成功观点；正文拒绝可解析JSON与代码块，完整语义须未来真实模型复核。持久化summary_jobs与唯一PENDING索引保护唯一提交，总结/成功事件/COMPLETED同事务并加数据库触发器。自动总结使用空operation_id，失败事件沿用原start操作（建立run已成功），后续显式重试单独创建summary-retry操作。
+
+## ADR-36：总结幂等恢复与完成能力标志（已采用）
+
+FAILED/INTERRUPTED/summary的新键只重试原run及冻结边界，manual PENDING新键加入规范操作并同步别名状态。初次自动总结进行中/COMPLETED后新键409，相同键永远重放202，不自动恢复中断任务。持久化PENDING唯一索引与进程scheduled_summaries保证一个有效任务；模型返回后检查预算、closing/cancelling，吞取消迟到结果拒绝提交。
+
+4C完成后discussion_engine_available在mock配置为true，在未实现provider为false；它表示本地后端完整讨论/总结流程可运行，不证明真实模型或SSE/前端接通。覆盖ADR-27/33当时的false选择；前端页面与台本不变，只同步基础浏览器测试能力断言（本批未运行浏览器）。SSE联调需同步insight_status公开投影及失败显示，留阶段5。

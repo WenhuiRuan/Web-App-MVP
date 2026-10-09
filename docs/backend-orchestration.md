@@ -1,6 +1,6 @@
 # 阶段4B：自主调度与主持控制
 
-2026-10-09。自动讨论推进至SUMMARIZING，观点提取、最终总结、SSE与前端业务适配留后续。后端使用独立ModelGateway，前端仍播放阶段3模拟台本。
+2026-10-09，4B历史记录：本批推进至SUMMARIZING。4C后来完成观点/总结/恢复，当前流程见[backend-synthesis.md](backend-synthesis.md)；SSE与前端业务仍待后续。后端ModelGateway独立于前端模拟台本。
 
 ## 模块与运行任务
 

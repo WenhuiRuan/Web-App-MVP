@@ -44,6 +44,8 @@ class DiscussionEngine:
                         call_timeout=asyncio.timeout(min(available,self.supervisor.settings.model_timeout_seconds))
                         async with call_timeout:
                             raw=await self.supervisor.gateway_getter().generate(request)
+                        if self.supervisor.closing or asyncio.current_task().cancelling():
+                            raise asyncio.CancelledError()
                         if budget_timeout.expired() or (call_timeout.expired() and budget_limited) or time.monotonic()>=self.deadline:
                             raise RunDeadline()
                         if call_timeout.expired(): raise ModelCallFailure('MODEL_TIMEOUT')

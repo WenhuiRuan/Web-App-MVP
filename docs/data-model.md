@@ -1,6 +1,6 @@
 # 数据模型与 SQLite 约束
 
-2026-10-09，阶段4B。生命周期与发言事务已实现。存储来源为db/migrations/001_initial.sql及前向002_discussion_turns.sql，公开/模型边界为backend/app/contracts.py；导出的JSON Schema见contracts/schema.json。
+2026-10-09，阶段4C。生命周期、发言、观点与总结事务已实现。存储来源为db/migrations/001_initial.sql及不可改历史前向002/003/004迁移；公开/模型边界backend/app/contracts.py，机器Schema见contracts/schema.json。
 
 ## ER 图
 
@@ -65,7 +65,7 @@ erDiagram
 
 快照使用一个读事务，同一版本中的 participants/messages/insights/summary 和事件高水位一起读取。并发写入通过 WAL 读写隔离；SQLite 仍是单写者，5 秒 busy timeout；应用未来遇忙再做有界退避。网络等待绝不放在写事务中。
 
-已实施的SQL约束测试：跨讨论角色引用被拒绝；run不能重复启动；同时发言者唯一；事件跳号、跨讨论run被拒绝；迁移失败回滚。阶段4A应用测试补齐合法生成/启动状态、revision检查、完整阵容与事件提交、幂等/并发、写入失败全回滚、迟到回调守卫、关闭及重启中断。4B新增应用约束详见下一段；summary生成前置条件与完整完成流程待4C。
+已实施的SQL约束测试：跨讨论角色引用被拒绝；run不能重复启动；同时发言者唯一；事件跳号、跨讨论run被拒绝；迁移失败回滚。阶段4A应用测试补齐合法生成/启动状态、revision检查、完整阵容与事件提交、幂等/并发、写入失败全回滚、迟到回调守卫、关闭及重启中断。4B新增应用约束详见下一段；4C补齐summary前置条件、原子完成及失败/中断重试，详见003/004迁移章节。
 
 4B补齐当轮申请/占用仲裁、角色与消息事件原子提交、迟到/重复拒绝及总结边界冻结。002字段：runs.cycle≥0、stop_reason=turn_limit/time_limit/host_end、error_code；discussions.failure_code公开固定错误码；turn_claims包含id、discussion_id/run_id/roster_revision、cycle、based_on_turn、participant_id、参与类型/回应目标或host_task、public_focus、PREPARING/SPEAKING/COMMITTED/CANCELLED。同run/cycle唯一、同run最多一个待提交领取；id作为成功message_id。FK限定全部引用，应用要求专家领取匹配本轮已存意图。
 
@@ -103,3 +103,9 @@ erDiagram
     runs ||--o| summaries : frozen_result
     insight_batches o|--o{ summary_jobs : captured_version
 ```
+
+## 4C-3恢复事务及模型IO边界
+
+受理重试：原run重新ACTIVE、清error/ended_at，保持started_at/stop_reason/summary_through_turn；同事务写summary-retry操作、新summary_jobs及SUMMARIZING事件。并发请求记录别名操作并复用现有PENDING领取，不另建任务。失败受理整体回滚（包括状态、operation和job）。成功/失败时同步更新以规范operation_id关联的全部别名操作；原start命令保持SUCCEEDED。
+
+服务关闭/启动恢复把未完成summary_jobs标INTERRUPTED，未完成insight_jobs标INTERRUPTED，保留已成功批次和消息；Discussion标原阶段INTERRUPTED、安全码SERVICE_INTERRUPTED，不自动调模型。失败/中断后的新请求增加attempt，晚到的旧job因status/当前生命周期守卫拒绝。取消SQLite线程不能取消事务，监督器先收集线程再恢复；模型请求与重试始终在事务之外。

@@ -5,7 +5,8 @@ from uuid import UUID, uuid4
 from .contracts import InsightBatch, ModelRequest, Summary
 from .model_gateway import validate_result
 from .run_repository import RunRepository
-from .repository import timestamp
+from .repository import timestamp, StoredResponse
+from .lifecycle import LifecycleError
 
 
 @dataclass(frozen=True)
@@ -118,7 +119,7 @@ class SynthesisRepository(RunRepository):
             conn.execute('INSERT INTO summaries(discussion_id,run_id,content,through_turn,created_at) VALUES (?,?,?,?,?)',(did,rid,summary.content,summary.through_turn,summary.created_at.isoformat()))
             self._event(conn,did,'summary.ready',summary.model_dump(mode='json'),rid)
             conn.execute("UPDATE summary_jobs SET status='SUCCEEDED' WHERE id=?",(str(claim.id),))
-            if job['operation_id']: conn.execute("UPDATE operations SET status='SUCCEEDED',error_code=NULL WHERE discussion_id=? AND id=?",(did,job['operation_id']))
+            if job['operation_id']: conn.execute("UPDATE operations SET status='SUCCEEDED',error_code=NULL WHERE discussion_id=? AND kind='summary-retry' AND json_extract(response_json,'$.operation_id')=?",(did,job['operation_id']))
             conn.execute("UPDATE runs SET status='COMPLETED',error_code=NULL,ended_at=? WHERE discussion_id=? AND id=?",(timestamp(),did,rid))
             self._transition(conn,did,'COMPLETED')
             self._snapshot(conn,did)
@@ -133,8 +134,40 @@ class SynthesisRepository(RunRepository):
             conn.execute("UPDATE summary_jobs SET status='FAILED',error_code=? WHERE id=?",(code,str(claim.id)))
             conn.execute("UPDATE runs SET status='FAILED',error_code=?,ended_at=? WHERE discussion_id=? AND id=?",(code,timestamp(),did,rid))
             op=job['operation_id']
-            if op: conn.execute("UPDATE operations SET status='FAILED',error_code=? WHERE discussion_id=? AND id=?",(code,did,op))
+            if op: conn.execute("UPDATE operations SET status='FAILED',error_code=? WHERE discussion_id=? AND kind='summary-retry' AND json_extract(response_json,'$.operation_id')=?",(code,did,op))
             else: op=conn.execute("SELECT id FROM operations WHERE discussion_id=? AND kind='start' AND json_extract(response_json,'$.run_id')=? ORDER BY rowid LIMIT 1",(did,rid)).fetchone()['id']
             self._event(conn,did,'operation.failed',{'operation_id':op,'stage':'summary','code':code,'message':'总结生成失败，消息和观点已保留，可以重试总结。','retryable':True},rid)
             self._transition(conn,did,'FAILED','summary',code)
             return True
+
+    def admit_summary_retry(self,did,key,settings,gateway_available):
+        did=str(did)
+        with self.transaction() as conn:
+            cached,digest=self._replay(conn,did,'summary-retry',key,{})
+            if cached:
+                job=conn.execute("SELECT * FROM summary_jobs WHERE discussion_id=? AND operation_id=? AND status='PENDING'",(did,cached.body['operation_id'])).fetchone()
+                return cached,SynthesisClaim(UUID(job['id']),self._summary_request(conn,job)) if job else None
+            row=self._discussion(conn,did); rid=row['current_run_id']
+            pending=conn.execute("SELECT * FROM summary_jobs WHERE discussion_id=? AND run_id=? AND status='PENDING'",(did,rid)).fetchone()
+            if row['state']=='SUMMARIZING' and pending and pending['operation_id']:
+                op=conn.execute('SELECT response_status,response_json FROM operations WHERE discussion_id=? AND id=?',(did,pending['operation_id'])).fetchone()
+                import json
+                response=StoredResponse(op['response_status'],json.loads(op['response_json']))
+                self._save_operation(conn,uuid4(),did,did,'summary-retry',key,digest,'RUNNING',response)
+                return response,SynthesisClaim(UUID(pending['id']),self._summary_request(conn,pending))
+            if row['state'] not in ('FAILED','INTERRUPTED') or row['failure_stage']!='summary' or rid is None:
+                raise LifecycleError('INVALID_STATE','只有总结失败或中断后才能重试；进行中的重试请使用原操作。')
+            run=conn.execute('SELECT * FROM runs WHERE discussion_id=? AND id=?',(did,rid)).fetchone()
+            if run is None or run['summary_through_turn'] is None or pending is not None:
+                raise LifecycleError('INVALID_STATE','总结消息边界或任务状态不完整。')
+            if not gateway_available: raise LifecycleError('MODEL_NOT_CONFIGURED','真实模型适配尚未实现，请使用 mock 模式。')
+            self._capacity(conn,settings.discussion_max_active)
+            conn.execute("UPDATE runs SET status='ACTIVE',error_code=NULL,ended_at=NULL WHERE discussion_id=? AND id=?",(did,rid))
+            self._transition(conn,did,'SUMMARIZING')
+            op_id=uuid4()
+            response=StoredResponse(202,{'operation_id':str(op_id),'discussion_id':did,'state':'SUMMARIZING','run_id':rid})
+            self._save_operation(conn,op_id,did,did,'summary-retry',key,digest,'RUNNING',response)
+            claim=self._new_summary_job(conn,did,rid,op_id)
+            if claim is None: raise LifecycleError('INVALID_STATE','总结任务无法领取。')
+            self._snapshot(conn,did)
+            return response,claim
