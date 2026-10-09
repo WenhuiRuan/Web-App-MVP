@@ -16,6 +16,11 @@ class SynthesisClaim:
 
 
 class SynthesisRepository(RunRepository):
+    def _insight_status_event(self, conn, job_id):
+        job = conn.execute('SELECT * FROM insight_jobs WHERE id=?', (str(job_id),)).fetchone()
+        self._event(conn, job['discussion_id'], 'insights.status_changed',
+                    {k: job[k] for k in ('state', 'version', 'through_turn', 'error_code')}, job['run_id'])
+
     def _synthesis_run(self, conn, did, rid):
         return conn.execute("SELECT r.* FROM runs r JOIN discussions d ON d.id=r.discussion_id AND d.current_run_id=r.id WHERE r.discussion_id=? AND r.id=? AND r.status='ACTIVE' AND d.state IN ('RUNNING','SUMMARIZING')", (str(did),str(rid))).fetchone()
 
@@ -37,6 +42,7 @@ class SynthesisRepository(RunRepository):
             jid=uuid4()
             conn.execute('INSERT INTO insight_jobs(id,discussion_id,run_id,version,through_turn) VALUES (?,?,?,?,?)',(str(jid),str(did),str(rid),previous+1,boundary))
             job=conn.execute('SELECT * FROM insight_jobs WHERE id=?',(str(jid),)).fetchone()
+            self._insight_status_event(conn, jid)
             return SynthesisClaim(jid,self._insight_request(conn,job))
 
     def _insight_guard(self, conn, claim):
@@ -62,6 +68,7 @@ class SynthesisRepository(RunRepository):
                     conn.execute('INSERT INTO insight_sources(discussion_id,run_id,batch_version,insight_id,message_id) VALUES (?,?,?,?,?)',(did,rid,version,str(item.id),str(source)))
             self._event(conn,did,'insights.updated',batch.model_dump(mode='json'),rid)
             conn.execute("UPDATE insight_jobs SET state='SUCCEEDED' WHERE id=?",(str(claim.id),))
+            self._insight_status_event(conn, claim.id)
             self._snapshot(conn,did)
             return True
 
@@ -70,6 +77,7 @@ class SynthesisRepository(RunRepository):
         with self.transaction() as conn:
             if self._insight_guard(conn,claim) is None: return False
             conn.execute("UPDATE insight_jobs SET state='FAILED',error_code=? WHERE id=?",(code,str(claim.id)))
+            self._insight_status_event(conn, claim.id)
             return True
 
     def _summary_request(self,conn,job):

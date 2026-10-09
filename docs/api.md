@@ -198,3 +198,22 @@ Idempotency-Key: 55555555-5555-4555-8555-555555555555
 ```
 
 该事件是失败分支的字段示例，seq依实际持久化高水位分配；本阶段只能轮询快照/操作，SSE线发送尚未实现。insights.updated与summary.ready完整来源/正文/封装样例见contracts.json（两位专家来源）；ModelRequest完整提取/总结上下文同文件model_requests。
+
+## 阶段5已挂载SSE
+
+GET `/api/discussions/{discussion_id}/events?after=0` 为实际接口；游标表示最后已接收的seq（不再次发送）。Last-Event-ID存在时优先，必须是本讨论UUID:非负整数；格式/跨场/超过持久化高水位返回409 CURSOR_INVALID，after格式/负数422，不存在讨论404。UUID规范化比较，无鉴权账号，本地单用户讨论归属指路径中的讨论。
+
+先GET快照，取同一读取事务的last_event_seq，再订阅after；订阅建立前后的新提交从数据库补发。每页100，250ms轮询，每次只在短只读事务内读取，yield/等待前释放连接。UTF-8，Cache-Control:no-cache,no-transform，X-Accel-Buffering:no。初始retry:2000，15秒注释心跳不增加seq。终态COMPLETED/FAILED/INTERRUPTED在该次高水位全部发送后关闭；重试总结前端重新快照与新订阅。DRAFT/GENERATING/READY保持连接。
+
+```text
+id: 11111111-1111-4111-8111-111111111111:12
+event: insights.status_changed
+data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111","run_id":"22222222-2222-4222-8222-222222222222","seq":12,"type":"insights.status_changed","occurred_at":"2026-10-10T00:00:00Z","payload":{"state":"FAILED","version":2,"through_turn":4,"error_code":"MODEL_TIMEOUT"}}
+
+: heartbeat
+
+```
+
+新增insights.status_changed：InsightStatus作为payload，PENDING/SUCCEEDED/FAILED/INTERRUPTED随任务事务提交，版本表示提取任务版本，独立于最后成功InsightBatch；失败保留已成功批次。SUCCEEDED紧随insights.updated。discussion.state_changed增加可空failure_code（旧事件缺省null），重试清空错误。旧存量消息和事件不重写，schema_version仍1，此为兼容字段/类型扩展；旧客户端收到未知类型需刷新快照，部署时前后端共同升级。
+
+流开始后的数据库/传输异常通过关闭连接表示，不能在SSE中返回JSON错误；客户端恢复快照。观察者取消只取消本订阅，运行任务归TaskSupervisor管理。

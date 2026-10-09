@@ -244,6 +244,7 @@ class StatePayload(Contract):
     state: State
     version: Nonnegative
     failure_stage: FailureStage | None = None
+    failure_code: str | None = None
 
 
 class RosterPayload(Contract):
@@ -313,6 +314,11 @@ class InsightsEvent(RunEvent):
     payload: InsightBatch
 
 
+class InsightStatusEvent(RunEvent):
+    type: Literal['insights.status_changed']
+    payload: InsightStatus
+
+
 class SummaryEvent(RunEvent):
     type: Literal['summary.ready']
     payload: Summary
@@ -323,7 +329,7 @@ class FailureEvent(EventBase):
     payload: FailurePayload
 
 
-Event = Annotated[StateEvent | RosterEvent | RoleEvent | TurnEvent | InsightsEvent | SummaryEvent | FailureEvent, Field(discriminator='type')]
+Event = Annotated[StateEvent | RosterEvent | RoleEvent | TurnEvent | InsightsEvent | InsightStatusEvent | SummaryEvent | FailureEvent, Field(discriminator='type')]
 EventAdapter = TypeAdapter(Event)
 
 

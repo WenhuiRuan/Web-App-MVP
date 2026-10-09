@@ -472,6 +472,55 @@
       "title": "InsightStatus",
       "type": "object"
     },
+    "InsightStatusEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "discussion_id": {
+          "format": "uuid",
+          "title": "Discussion Id",
+          "type": "string"
+        },
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "type": {
+          "const": "insights.status_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/InsightStatus"
+        }
+      },
+      "required": [
+        "discussion_id",
+        "run_id",
+        "seq",
+        "occurred_at",
+        "type",
+        "payload"
+      ],
+      "title": "InsightStatusEvent",
+      "type": "object"
+    },
     "InsightsEvent": {
       "additionalProperties": false,
       "properties": {
@@ -1372,6 +1421,18 @@
           ],
           "default": null,
           "title": "Failure Stage"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure Code"
         }
       },
       "required": [
@@ -1585,6 +1646,7 @@
         "discriminator": {
           "mapping": {
             "discussion.state_changed": "#/$defs/StateEvent",
+            "insights.status_changed": "#/$defs/InsightStatusEvent",
             "insights.updated": "#/$defs/InsightsEvent",
             "operation.failed": "#/$defs/FailureEvent",
             "participant.status_changed": "#/$defs/RoleEvent",
@@ -1609,6 +1671,9 @@
           },
           {
             "$ref": "#/$defs/InsightsEvent"
+          },
+          {
+            "$ref": "#/$defs/InsightStatusEvent"
           },
           {
             "$ref": "#/$defs/SummaryEvent"

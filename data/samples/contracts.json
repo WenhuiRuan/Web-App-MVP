@@ -224,7 +224,8 @@
       "payload": {
         "state": "DRAFT",
         "version": 0,
-        "failure_stage": null
+        "failure_stage": null,
+        "failure_code": null
       }
     },
     {
@@ -300,7 +301,8 @@
       "payload": {
         "state": "RUNNING",
         "version": 3,
-        "failure_stage": null
+        "failure_stage": null,
+        "failure_code": null
       }
     },
     {
@@ -413,7 +415,8 @@
       "payload": {
         "state": "SUMMARIZING",
         "version": 4,
-        "failure_stage": null
+        "failure_stage": null,
+        "failure_code": null
       }
     },
     {
@@ -439,7 +442,8 @@
       "payload": {
         "state": "COMPLETED",
         "version": 5,
-        "failure_stage": null
+        "failure_stage": null,
+        "failure_code": null
       }
     },
     {
@@ -455,6 +459,20 @@
         "code": "MODEL_TIMEOUT",
         "message": "嘉宾生成超时，可重试。",
         "retryable": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "discussion_id": "11111111-1111-4111-8111-111111111111",
+      "run_id": "22222222-2222-4222-8222-222222222222",
+      "seq": 1,
+      "occurred_at": "2026-10-09T00:00:00Z",
+      "type": "insights.status_changed",
+      "payload": {
+        "state": "FAILED",
+        "version": 2,
+        "through_turn": 3,
+        "error_code": "MODEL_TIMEOUT"
       }
     }
   ],

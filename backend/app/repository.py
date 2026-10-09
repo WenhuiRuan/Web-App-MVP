@@ -111,6 +111,15 @@ class DiscussionRepository:
         with self.transaction(write=False) as conn:
             return self._snapshot(conn, discussion_id)
 
+    def event_page(self, discussion_id, after, limit=100):
+        with self.transaction(write=False) as conn:
+            discussion = self._discussion(conn, discussion_id)
+            if after < 0 or after > discussion['last_event_seq']:
+                raise LifecycleError('CURSOR_INVALID', '事件游标超出本场范围，请重新读取快照。')
+            rows = conn.execute('SELECT * FROM events WHERE discussion_id=? AND seq>? ORDER BY seq LIMIT ?', (str(discussion_id), after, limit))
+            events = [EventAdapter.validate_python(dict(row) | {'payload': json.loads(row['payload'])}) for row in rows]
+            return events, discussion['last_event_seq'], discussion['state']
+
     def listing(self, status='active', limit=20, cursor=None):
         boundary = None
         if cursor is not None:
@@ -144,7 +153,7 @@ class DiscussionRepository:
         row = self._discussion(conn, discussion_id)
         version = row['version'] + 1
         conn.execute('UPDATE discussions SET state=?,failure_stage=?,failure_code=?,version=?,updated_at=? WHERE id=?', (state, failure_stage,failure_code,version, timestamp(), str(discussion_id)))
-        self._event(conn, discussion_id, 'discussion.state_changed', {'state':state,'version':version,'failure_stage':failure_stage}, row['current_run_id'])
+        self._event(conn, discussion_id, 'discussion.state_changed', {'state':state,'version':version,'failure_stage':failure_stage,'failure_code':failure_code}, row['current_run_id'])
 
     def _capacity(self, conn, max_active):
         from .lifecycle import require_capacity
@@ -271,7 +280,10 @@ class DiscussionRepository:
                     self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':stage,'code':'SERVICE_INTERRUPTED','message':'服务工作已中断，已提交内容保留，请查看当前状态。','retryable':stage in ('roster','summary')},run_id)
                 if run_id:
                     conn.execute("UPDATE summary_jobs SET status='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE discussion_id=? AND run_id=? AND status='PENDING'",(did,run_id))
+                    pending_insights = list(conn.execute("SELECT id FROM insight_jobs WHERE discussion_id=? AND run_id=? AND state='PENDING'", (did,run_id)))
                     conn.execute("UPDATE insight_jobs SET state='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE discussion_id=? AND run_id=? AND state='PENDING'",(did,run_id))
+                    for job in pending_insights:
+                        self._insight_status_event(conn, job['id'])
                     conn.execute("UPDATE runs SET status='INTERRUPTED',ended_at=? WHERE discussion_id=? AND id=? AND status='ACTIVE'", (timestamp(),did,run_id))
                     self._reset_roles(conn,did,run_id)
                 self._transition(conn,did,'INTERRUPTED',stage,'SERVICE_INTERRUPTED')

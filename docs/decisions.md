@@ -179,3 +179,7 @@ ModelGateway 需要覆盖阵容生成、专家意图、公开短发言、洞察�
 FAILED/INTERRUPTED/summary的新键只重试原run及冻结边界，manual PENDING新键加入规范操作并同步别名状态。初次自动总结进行中/COMPLETED后新键409，相同键永远重放202，不自动恢复中断任务。持久化PENDING唯一索引与进程scheduled_summaries保证一个有效任务；模型返回后检查预算、closing/cancelling，吞取消迟到结果拒绝提交。
 
 4C完成后discussion_engine_available在mock配置为true，在未实现provider为false；它表示本地后端完整讨论/总结流程可运行，不证明真实模型或SSE/前端接通。覆盖ADR-27/33当时的false选择；前端页面与台本不变，只同步基础浏览器测试能力断言（本批未运行浏览器）。SSE联调需同步insight_status公开投影及失败显示，留阶段5。
+
+## 阶段5实现决策
+
+SSE选择持久化轮询（250ms/100条一页/15秒心跳）以覆盖无人在线和重连。观点失败采用新增持久化状态事件而非仅轮询快照。前端默认真实业务客户端，通过显式mode=mock保留独立台本；后端仍MODEL_PROVIDER=mock，真实供应商适配留下一阶段。不新增依赖，系统版本0.5.0/phase5。

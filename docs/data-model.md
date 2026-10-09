@@ -109,3 +109,7 @@ erDiagram
 受理重试：原run重新ACTIVE、清error/ended_at，保持started_at/stop_reason/summary_through_turn；同事务写summary-retry操作、新summary_jobs及SUMMARIZING事件。并发请求记录别名操作并复用现有PENDING领取，不另建任务。失败受理整体回滚（包括状态、operation和job）。成功/失败时同步更新以规范operation_id关联的全部别名操作；原start命令保持SUCCEEDED。
 
 服务关闭/启动恢复把未完成summary_jobs标INTERRUPTED，未完成insight_jobs标INTERRUPTED，保留已成功批次和消息；Discussion标原阶段INTERRUPTED、安全码SERVICE_INTERRUPTED，不自动调模型。失败/中断后的新请求增加attempt，晚到的旧job因status/当前生命周期守卫拒绝。取消SQLite线程不能取消事务，监督器先收集线程再恢复；模型请求与重试始终在事务之外。
+
+## 阶段5兼容迁移005
+
+events.type追加insights.status_changed；实体/关联不变，原ER图继续有效。已有insight_jobs状态与新事件在同事务中保存；快照InsightStatus与成功InsightBatch分离。005复制后替换events表并恢复原连续/不可变触发器，不重置seq，不重写历史payload。重复迁移为无操作，旧迁移校验和继续检查。

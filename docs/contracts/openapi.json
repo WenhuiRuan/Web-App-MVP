@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "AI Panel Studio — target HTTP and SSE contract",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "x-implemented marks mounted routes; false routes remain future design contracts."
   },
   "paths": {
@@ -827,8 +827,8 @@
     },
     "/api/discussions/{discussion_id}/events": {
       "get": {
-        "x-implemented": false,
-        "summary": "Planned: GET /api/discussions/{discussion_id}/events",
+        "summary": "Subscribe Events",
+        "operationId": "subscribe_events_api_discussions__discussion_id__events_get",
         "parameters": [
           {
             "name": "discussion_id",
@@ -836,80 +836,42 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Discussion Id"
             }
           },
           {
             "name": "after",
             "in": "query",
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": 0
+              "default": 0,
+              "title": "After"
             }
           },
           {
             "name": "Last-Event-ID",
             "in": "header",
+            "required": false,
             "schema": {
-              "type": "string",
-              "pattern": "^[0-9a-f-]{36}:[0-9]+$"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Last-Event-Id"
             }
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
           "200": {
-            "description": "UTF-8 SSE stream; data conforms to Event",
+            "description": "Successful Response",
             "content": {
               "text/event-stream": {
                 "schema": {
@@ -920,8 +882,59 @@
             "x-event-schema": {
               "$ref": "#/components/schemas/Event"
             }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
-        }
+        },
+        "x-implemented": true
       }
     }
   },
@@ -1703,15 +1716,15 @@
           },
           "version": {
             "type": "string",
-            "const": "0.4.0",
+            "const": "0.5.0",
             "title": "Version",
-            "default": "0.4.0"
+            "default": "0.5.0"
           },
           "phase": {
             "type": "integer",
-            "const": 4,
+            "const": 5,
             "title": "Phase",
-            "default": 4
+            "default": 5
           },
           "model_mode": {
             "type": "string",
@@ -1860,6 +1873,55 @@
           "public_focus"
         ],
         "title": "HostControlResult",
+        "type": "object"
+      },
+      "InsightStatusEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "schema_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "discussion_id": {
+            "format": "uuid",
+            "title": "Discussion Id",
+            "type": "string"
+          },
+          "run_id": {
+            "format": "uuid",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "seq": {
+            "minimum": 1,
+            "title": "Seq",
+            "type": "integer"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "type": {
+            "const": "insights.status_changed",
+            "title": "Type",
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/InsightStatus"
+          }
+        },
+        "required": [
+          "discussion_id",
+          "run_id",
+          "seq",
+          "occurred_at",
+          "type",
+          "payload"
+        ],
+        "title": "InsightStatusEvent",
         "type": "object"
       },
       "InsightsEvent": {
@@ -2412,6 +2474,18 @@
             ],
             "default": null,
             "title": "Failure Stage"
+          },
+          "failure_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Failure Code"
           }
         },
         "required": [
@@ -2572,6 +2646,7 @@
         "discriminator": {
           "mapping": {
             "discussion.state_changed": "#/components/schemas/StateEvent",
+            "insights.status_changed": "#/components/schemas/InsightStatusEvent",
             "insights.updated": "#/components/schemas/InsightsEvent",
             "operation.failed": "#/components/schemas/FailureEvent",
             "participant.status_changed": "#/components/schemas/RoleEvent",
@@ -2596,6 +2671,9 @@
           },
           {
             "$ref": "#/components/schemas/InsightsEvent"
+          },
+          {
+            "$ref": "#/components/schemas/InsightStatusEvent"
           },
           {
             "$ref": "#/components/schemas/SummaryEvent"

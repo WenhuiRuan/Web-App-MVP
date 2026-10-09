@@ -35,8 +35,8 @@ class ReadyResponse(Contract):
 
 class SystemInfo(Contract):
     name: Literal['AI Panel Studio'] = 'AI Panel Studio'
-    version: Literal['0.4.0'] = '0.4.0'
-    phase: Literal[4] = 4
+    version: Literal['0.5.0'] = '0.5.0'
+    phase: Literal[5] = 5
     model_mode: Literal['mock', 'unavailable']
     discussion_engine_available: bool
 
@@ -68,7 +68,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         finally:
             await app.state.tasks.close()
 
-    app = FastAPI(title='AI Panel Studio — lifecycle API', version='0.4.0', lifespan=lifespan,
+    app = FastAPI(title='AI Panel Studio — lifecycle API', version='0.5.0', lifespan=lifespan,
                   responses={422: {'model': ErrorResponse}, 500: {'model': ErrorResponse}})
 
     @app.middleware('http')

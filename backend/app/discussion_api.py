@@ -3,7 +3,7 @@ from typing import Annotated, Literal
 from uuid import UUID
 
 from fastapi import APIRouter, Header, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 from .contracts import CreateDiscussion, DiscussionList, EmptyCommand, ErrorResponse, Operation, OperationAccepted, Snapshot, StartDiscussion
 
@@ -48,3 +48,18 @@ def get_operation(discussion_id: UUID, operation_id: UUID, request: Request):
 async def retry_summary(discussion_id: UUID,request: Request,idempotency_key: Key,body: EmptyCommand | None=None):
     response=await request.app.state.tasks.retry_summary(discussion_id,idempotency_key)
     return JSONResponse(response.body,status_code=response.status)
+
+
+@router.get('/{discussion_id}/events', response_class=StreamingResponse,
+            responses={200: {'content': {'text/event-stream': {'schema': {'type': 'string'}}}}})
+async def subscribe_events(discussion_id: UUID, request: Request,
+                           after: Annotated[int, Query(ge=0)] = 0,
+                           last_event_id: Annotated[str | None, Header(alias='Last-Event-ID', max_length=100)] = None):
+    import asyncio
+    from .sse import cursor_for, event_stream
+    cursor = cursor_for(discussion_id, after, last_event_id)
+    repository = request.app.state.repository
+    await asyncio.to_thread(repository.event_page, discussion_id, cursor)
+    return StreamingResponse(event_stream(request, repository, discussion_id, cursor),
+                             media_type='text/event-stream',
+                             headers={'Cache-Control': 'no-cache, no-transform', 'X-Accel-Buffering': 'no'})

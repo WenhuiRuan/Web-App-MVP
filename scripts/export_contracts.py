@@ -64,7 +64,7 @@ def example_data():
         'listing': {'items': [discussion], 'next_cursor': None},
         'operation': {'id': str(op), 'discussion_id': str(d), 'kind': 'start', 'status': 'SUCCEEDED', 'error_code': None},
         'error': {'error': {'code': 'ROSTER_VERSION_CONFLICT', 'message': '阵容版本已变更，请刷新后确认。', 'retryable': False, 'request_id': str(op), 'details': []}},
-        'events': [*events, failure], 'model_request': req, 'model_requests':requests, 'model_results': results,
+        'events': [*events, failure, event(1, 'insights.status_changed', {'state':'FAILED','version':2,'through_turn':3,'error_code':'MODEL_TIMEOUT'})], 'model_request': req, 'model_requests':requests, 'model_results': results,
     }).model_dump(mode='json')
 
 
@@ -122,6 +122,8 @@ def contract_openapi():
                 {'name': 'cursor', 'in': 'query', 'schema': {'type': 'string'}},
             ]
         spec['paths'].setdefault(path, {})[method] = operation
+    stream = spec['paths']['/api/discussions/{discussion_id}/events']['get']
+    stream['responses']['200']['x-event-schema'] = {'$ref': '#/components/schemas/Event'}
     return spec
 
 

@@ -302,3 +302,9 @@ summary-retry新键在事务内复用原run/边界，创建新领取和规范操
 收尾格式补测：未闭合JSON和嵌入代码块两项先失败（work/stage4c3-format-red.txt），收紧正文校验为拒绝结构化输出开头及任何代码围栏。新增总数47（14观点/19总结/14恢复）；上述168项运行发生在补测前，包含原45新增；格式变更后的相关回归结果以下追加，不把不同时点结果混成一次全量运行。
 
 格式收尾回归：test_summary_pipeline/test_summary_recovery/test_contracts/test_artifacts/test_frontend_demo共55 passed（33.28秒），pytest退出0；未闭合JSON和嵌入代码块不得提交总结。契约导出检查、文档122需求/132验收/15文档及既有3场模拟快照/231事件格式检查均退出0，Git diff无空白错误。
+
+## 阶段5：5-1 SSE（2026-10-10）
+
+12关键用例先失败，work/stage5-sse-red.txt（4.55秒）；实现后15新增，相关迁移/观点/恢复/契约/基础服务共74通过（34.57秒），work/stage5-sse-green.txt。仍1条既有Starlette/httpx弃用提示。005升级保留旧事件/高水位/触发器，新增公开insights.status_changed，failure_code进入状态事件；SSE补发/优先级/范围/跨场/多页/心跳/释放事务/终态关闭已验证。测试heartbeat用可调短阈值，浏览器真实断线由5-3验证。
+
+修正受影响历史断言：迁移版本新增5，SSE的x-implemented现为true；不变的仲裁规则/静态布局未重跑。5-2/5-3未完成，真实模型仍后续。提交题名feat: stream durable discussion events with recovery cursors。
