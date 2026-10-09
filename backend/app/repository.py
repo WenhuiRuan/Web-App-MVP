@@ -213,3 +213,61 @@ class DiscussionRepository:
             self._event(conn,row['id'],'operation.failed',{'operation_id':str(operation_id),'stage':'roster','code':code,'message':message,'retryable':True})
             self._transition(conn,row['id'],'FAILED','roster')
             return True
+
+    def start(self, discussion_id, body, key, settings):
+        from .lifecycle import should_create_run
+        did = str(discussion_id)
+        with self.transaction() as conn:
+            cached, digest = self._replay(conn, did, 'start', key, body.model_dump(mode='json'))
+            if cached:
+                return cached
+            row = self._discussion(conn, did)
+            create_run = should_create_run(row['state'], row['roster_revision'], body.roster_revision, row['current_run_id'] is not None)
+            op_id = uuid4()
+            if not create_run:
+                # Each new key is recorded, but its response points at the first successful command.
+                previous = conn.execute("SELECT response_status,response_json FROM operations WHERE discussion_id=? AND kind='start' AND status='SUCCEEDED' AND json_extract(response_json,'$.run_id')=? ORDER BY rowid LIMIT 1", (did,row['current_run_id'])).fetchone()
+                if previous is None:
+                    raise LifecycleError('INVALID_STATE', '运行记录不完整，请检查本地数据库。')
+                response = StoredResponse(previous['response_status'], json.loads(previous['response_json']))
+            else:
+                self._capacity(conn, settings.discussion_max_active)
+                snapshot = self._snapshot(conn, did)  # Full validated roster before confirmation.
+                run_id, at = uuid4(), timestamp()
+                conn.execute('INSERT INTO runs(id,discussion_id,roster_revision,max_turns,max_seconds,started_at) VALUES (?,?,?,?,?,?)',
+                             (str(run_id),did,body.roster_revision,settings.discussion_max_turns,settings.discussion_max_seconds,at))
+                conn.execute('UPDATE rosters SET confirmed_at=? WHERE discussion_id=? AND revision=?', (at,did,body.roster_revision))
+                conn.execute('UPDATE discussions SET current_run_id=? WHERE id=?', (str(run_id),did))
+                for person in snapshot.participants:
+                    conn.execute('INSERT INTO role_states(discussion_id,run_id,roster_revision,participant_id) VALUES (?,?,?,?)',
+                                 (did,str(run_id),body.roster_revision,str(person.id)))
+                self._transition(conn,did,'RUNNING')
+                response = StoredResponse(202, {'operation_id':str(op_id),'discussion_id':did,'state':'RUNNING','run_id':str(run_id)})
+                self._snapshot(conn,did)
+            self._save_operation(conn,op_id,did,did,'start',key,digest,'SUCCEEDED',response)
+            return response
+
+    def operation(self, discussion_id, operation_id):
+        from .contracts import Operation
+        with self.transaction(write=False) as conn:
+            row = conn.execute('SELECT id,discussion_id,kind,status,error_code FROM operations WHERE id=? AND discussion_id=?', (str(operation_id),str(discussion_id))).fetchone()
+            if row is None:
+                raise LifecycleError('OPERATION_NOT_FOUND', '操作不存在。')
+            return Operation.model_validate(dict(row))
+
+    def recover_unfinished(self):
+        """Single application owner only; no model calls or automatic task replay."""
+        with self.transaction() as conn:
+            rows = list(conn.execute("SELECT * FROM discussions WHERE state IN ('GENERATING','RUNNING','SUMMARIZING') ORDER BY id"))
+            for row in rows:
+                did, run_id = row['id'], row['current_run_id']
+                stage = {'GENERATING':'roster','RUNNING':'discussion','SUMMARIZING':'summary'}[row['state']]
+                operations = list(conn.execute("SELECT id FROM operations WHERE discussion_id=? AND status IN ('ACCEPTED','RUNNING')", (did,)))
+                for op in operations:
+                    conn.execute("UPDATE operations SET status='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE id=? AND discussion_id=?", (op['id'],did))
+                    self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':stage,'code':'SERVICE_INTERRUPTED','message':'服务工作已中断，已提交内容保留，请查看当前状态。','retryable':stage in ('roster','summary')},run_id)
+                if run_id:
+                    conn.execute("UPDATE runs SET status='INTERRUPTED',ended_at=? WHERE discussion_id=? AND id=? AND status='ACTIVE'", (timestamp(),did,run_id))
+                    conn.execute("UPDATE role_states SET state='IDLE',public_focus='',version=version+1 WHERE discussion_id=? AND run_id=?", (did,run_id))
+                self._transition(conn,did,'INTERRUPTED',stage)
+            return len(rows)

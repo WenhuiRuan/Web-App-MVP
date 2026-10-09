@@ -1,13 +1,13 @@
 # SDD 架构基线
 
-阶段 2；版本 0.2；2026-10-08。本阶段实现工程底座，不实现讨论引擎。最终业务契约见 api.md、data-model.md；机器契约与运行时 OpenAPI 的范围有明确区别。
+SDD基线：阶段2，版本0.2，2026-10-08；更新于2026-10-09。阶段4A已按TDD实现讨论管理、嘉宾生成、确认run及操作查询/持久化事件；执行细节见backend-lifecycle.md。自动发言、主持控制、观点提炼、总结和SSE仍为后续设计。最终业务契约见api.md、data-model.md；机器契约与运行时OpenAPI的范围有明确区别。
 
 ## 模块与依赖
 
 | 模块 | 输入 → 输出 | 边界与后续实现位置 |
 |---|---|---|
-| 讨论管理 | 创建/开始/重试命令 → Discussion、Operation | 管理生命周期和幂等；application/discussions，后续 TDD |
-| 嘉宾生成 | 议题、人数 → RosterRevision、Participant | ModelGateway 输出必须校验，完整后才 READY；后续 TDD 编排 |
+| 讨论管理 | 创建/开始/重试命令 → Discussion、Operation | 4A已实现：discussion_api→lifecycle/repository/tasks；生命周期、幂等和一致性查询 |
+| 嘉宾生成 | 议题、人数 → RosterRevision、Participant | 4A已实现：TaskSupervisor调用ModelGateway并校验结果，repository原子提交后才READY |
 | 参与意图 | 本讨论公开上下文、角色 → SpeakingIntent | 内部申请，不是正式发言；禁止隐藏推理；后续 TDD 收集 |
 | 发言调度 | 本轮有效意图 → 一个获选角色 | 关联度、等待与占用仲裁，不固定轮流；后续 TDD |
 | 主持人控制 | 覆盖情况、运行额度 → 追问/串联/结束 | 开场后推进，结束时冻结 transcript 边界；后续 TDD |
@@ -27,9 +27,9 @@ flowchart TD
   EV -->|后续 SSE| UI
 ```
 
-Python 包 `backend/app`：contracts.py 定义公开和模型数据格式；model_gateway.py 定义统一调用协议和可验证模拟；config.py / database.py / main.py 提供基础设施。它们不负责自动讨论。未来 domain 不依赖 FastAPI/SQLite/供应商 SDK，application 依赖接口而非具体实现。
+Python包backend/app：contracts定义公开/模型格式，model_gateway定义异步协议与独立模拟，config/database/main提供基础设施；4A新增lifecycle纯规则、repository事务、tasks监督器和discussion_api传输层。生命周期规则不依赖FastAPI/SQLite/供应商SDK；模型通过ModelGateway调用。当前这些模块不执行自动讨论循环。
 
-## 冻结的状态与命令规则（设计，尚未执行）
+## 冻结的状态与命令规则（4A执行至RUNNING及中断；后续流程为设计）
 
 | 当前状态 | 触发 | 目标 | 前提/失败 |
 |---|---|---|---|

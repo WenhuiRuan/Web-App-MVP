@@ -1,6 +1,6 @@
 # 实际进展记录
 
-更新：2026-10-09（Asia/Shanghai）。第三阶段已完成并提交ea0c0f6；当前阶段：4第一批TDD生命周期、嘉宾生成与持久化（进行中）。阶段1/2/3历史记录保留，当前批次结果见末节。
+更新：2026-10-09（Asia/Shanghai）。第三阶段已完成并提交ea0c0f6；当前阶段：4第一批TDD生命周期、嘉宾生成与持久化已完成验证；第四阶段整体尚未完成，下一批为自主发言调度与主持人控制。阶段1/2/3历史记录保留，当前批次结果见末节。
 
 ## 阶段1范围与实际产出（历史）
 
@@ -158,3 +158,41 @@
 新测试覆盖9类非法模型输出（缺必要字段、缺主持、人数、讨论归属、revision、重复ID/姓名/色标、错task），超时/未知异常、新键重试/旧失败键重放、角色/成功事件写失败回滚，2/6专家双讨论并发不串场，模型并发1时的排队和活动容量边界。后台模型来自独立DeterministicModelGateway，不读取前端台本。
 
 普通默认值进一步明确：容量统计GENERATING/RUNNING/SUMMARIZING中的工作讨论（默认3），列表active仍只RUNNING/SUMMARIZING；模型并发默认4。就绪阵容释放生成容量，确认启动时再检查运行容量。TaskSupervisor目前负责生成任务取消/收集，关闭后的持久化中断与重启恢复在4A-3先测试后实现，尚不宣称已完成。
+
+
+4A-2收尾：全量pytest75通过（原31+4A新增44），契约导出检查及文档93需求/103验收/13文档检查通过。已提交8aee0c2；4A-1对应05c65e8。
+
+## 阶段4第一批：4A-3 确认运行、操作查询与恢复
+
+先新增23个真实接口/SQLite/关闭恢复场景及7个启动纯规则场景，与原10个规则一起运行，实际28失败、12通过。失败来自start/operations尚未挂载、启动纯规则缺失及未完成状态未标中断；其中两个新增场景在旧实现已通过，未伪称全部先失败。原始输出在work/stage4a3-red.txt。实现后40项通过，全量105项通过。
+
+实现READY/revision/容量校验和唯一run事务，包含confirmed_at、current_run_id、IDLE角色、RUNNING事件与成功操作；同key重放，新key同revision返回首个成功命令并记录新key，已有run不重复建立或调度。API按讨论查询操作，归属错误404。启动写事件失败时，run/确认时间/角色/操作/状态整体回滚，保留READY阵容，原key可重试。
+
+TaskSupervisor重构为统一管理受理、模型和数据库线程任务：请求取消不丢已受理命令，关闭停止受理、取消并收集任务、等待已开始的SQLite写入、再恢复残余状态。启动也先恢复再接请求。GENERATING遗留及操作标INTERRUPTED/roster；RUNNING的run和讨论标INTERRUPTED/discussion，start命令仍SUCCEEDED；恢复幂等、无自动模型调用。迟到或其他讨论回调不能覆盖重试。若DB完全不可写，固定日志标记待下次恢复，不能声称已保存中断状态。
+
+后端安全系统信息更新为phase4/0.4.0，但自动讨论引擎仍false；前端src未改，只将基础浏览器测试阶段断言从2改4。SQL迁移001和依赖锁未变。阶段4A满足本批要求，第四阶段整体尚未完成。
+
+## 阶段4第一批最终验证与交付
+
+日期：2026-10-09（Asia/Shanghai）；Windows、Python3.12.10、SQLite3.49.1、Node24.18.0、Microsoft Edge；MODEL_PROVIDER=mock，不调用外部模型。
+
+| 检查 | 实际结果与证据边界 |
+|---|---|
+| python -m pytest -q | 105通过，退出0；原31项+本批74项。1条既有Starlette/httpx弃用提示，无新增依赖 |
+| npm --prefix frontend run build | TypeScript检查和Vite生产构建通过，退出0；JS297.59kB/gzip87.10kB，演播厅源文件未变 |
+| PLAYWRIGHT_CHANNEL=msedge，npm --prefix frontend run test:smoke | 16通过，退出0，约1.9分钟；12前端模拟流程/四视口、2真实基础代理、2事件投影。仍不是完整业务后端E2E |
+| python -m scripts.smoke_lifecycle | 退出0；自有Uvicorn进程+真实HTTP+SQLite，默认4/显式6专家的两场生成、并发不同key确认同run、操作归属、列表过滤、0条自动发言、强制终止自有进程并重启均通过 |
+| HTTP实测持久化证据 | work/lifecycle-smoke-xk1xusl6/report.json：重启前2个RUNNING，重启后2个INTERRUPTED/discussion；阵容保持5/7人，草稿保留；run总数仍2，事件逐场连续，foreign_key_check为空 |
+| python -m scripts.export_contracts --check / scripts.check_docs | 均退出0；机器契约一致，93条需求一一映射、103个验收编号、13份文档检查通过；真实六类路由标true，SSE/summary-retry仍false |
+| python -m scripts.validate_frontend_capture | 退出0；重新运行浏览器留下的3场模拟Snapshot和231事件符合公开契约，不代表真实后端发言 |
+| Git范围检查 | diff --check通过；frontend/src、001迁移与依赖锁无修改，未配置remote；仅无密钥.env.example调整容量说明 |
+
+**已验证**：创建及规范化幂等、严格参数/默认人数、列表/快照范围与稳定分页、独立后端模拟生成、九类非法输出拒绝、超时/未知异常脱敏、新key重试、同key/不同key并发唯一run、完整阵容及成功事件全事务、双讨论任务/数据隔离、迟到回调拒绝、关闭/重启持久化及显式中断、原基础/契约/前端回归。
+
+**未实现/未验证**：自主参与意图、非轮流发言仲裁、主持人开场/追问/串联/结束、正式消息/洞察/总结循环、真实SSE与前端业务接入、真实模型适配/质量/成本/时延、最终五份质量样例。SUMMARIZING恢复分支已设计实现，但本批没有总结工作流完整验收。
+
+**限制**：单应用所有者，不支持多worker同时管理同一数据库；当前start只建立run，运行不会自行结束。服务中断后只保留数据并标记，不自动续跑。确定性Gateway验证工程行为，不提供针对任意话题的真实专家分析。数据库持续不可写或真实适配拒绝取消不在当前成功恢复保证内。
+
+**提交**：05c65e8（创建/查询）、8aee0c2（嘉宾任务/原子阵容）；4A-3提交题名为feat: confirm unique runs and recover interrupted work，具体哈希以Git日志为准。只提交本批源码、测试、无密钥配置示例及文档；不提交work证据库/日志，不建远程、不推送。
+
+**下一批任务**：先写自主意图/反驳目标、同抢仲裁、单发言者、重复及迟到发言、主持控制与额度终止的失败测试，再实现自主发言调度和主持人控制；沿用本批run、事务事件与任务监督器。观点提炼、总结和SSE/完整业务E2E继续按后续工作包验收。

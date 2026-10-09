@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import time
@@ -34,8 +35,8 @@ class ReadyResponse(Contract):
 
 class SystemInfo(Contract):
     name: Literal['AI Panel Studio'] = 'AI Panel Studio'
-    version: Literal['0.2.0'] = '0.2.0'
-    phase: Literal[2] = 2
+    version: Literal['0.4.0'] = '0.4.0'
+    phase: Literal[4] = 4
     model_mode: Literal['mock', 'unavailable']
     discussion_engine_available: Literal[False] = False
 
@@ -59,6 +60,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         database.migrate()
         app.state.database = database
         app.state.repository = DiscussionRepository(database)
+        await asyncio.to_thread(app.state.repository.recover_unfinished)
         app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else None
         app.state.tasks = TaskSupervisor(app.state.repository, config, lambda: app.state.model_gateway)
         try:
@@ -66,7 +68,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         finally:
             await app.state.tasks.close()
 
-    app = FastAPI(title='AI Panel Studio — foundation API', version='0.2.0', lifespan=lifespan,
+    app = FastAPI(title='AI Panel Studio — lifecycle API', version='0.4.0', lifespan=lifespan,
                   responses={422: {'model': ErrorResponse}, 500: {'model': ErrorResponse}})
 
     @app.middleware('http')

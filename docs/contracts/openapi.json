@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "AI Panel Studio — target HTTP and SSE contract",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "description": "x-implemented marks mounted routes; false routes remain future design contracts."
   },
   "paths": {
@@ -527,8 +527,8 @@
     },
     "/api/discussions/{discussion_id}/start": {
       "post": {
-        "x-implemented": false,
-        "summary": "Planned: POST /api/discussions/{discussion_id}/start",
+        "summary": "Start Discussion",
+        "operationId": "start_discussion_api_discussions__discussion_id__start_post",
         "parameters": [
           {
             "name": "discussion_id",
@@ -536,7 +536,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Discussion Id"
             }
           },
           {
@@ -545,72 +546,11 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "title": "Idempotency-Key"
             }
           }
         ],
-        "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Success (idempotent replay uses original status and body)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationAccepted"
-                }
-              }
-            }
-          }
-        },
         "requestBody": {
           "required": true,
           "content": {
@@ -620,7 +560,161 @@
               }
             }
           }
-        }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationAccepted"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-implemented": true
+      }
+    },
+    "/api/discussions/{discussion_id}/operations/{operation_id}": {
+      "get": {
+        "summary": "Get Operation",
+        "operationId": "get_operation_api_discussions__discussion_id__operations__operation_id__get",
+        "parameters": [
+          {
+            "name": "discussion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Discussion Id"
+            }
+          },
+          {
+            "name": "operation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Operation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-implemented": true
       }
     },
     "/api/discussions/{discussion_id}/summary-retry": {
@@ -717,94 +811,6 @@
                 "type": "object",
                 "additionalProperties": false,
                 "maxProperties": 0
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/discussions/{discussion_id}/operations/{operation_id}": {
-      "get": {
-        "x-implemented": false,
-        "summary": "Planned: GET /api/discussions/{discussion_id}/operations/{operation_id}",
-        "parameters": [
-          {
-            "name": "discussion_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "State / idempotency / cursor conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success (idempotent replay uses original status and body)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Operation"
-                }
               }
             }
           }
@@ -1283,6 +1289,69 @@
         "title": "Message",
         "type": "object"
       },
+      "Operation": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "discussion_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discussion Id"
+          },
+          "kind": {
+            "enum": [
+              "create",
+              "roster-generation",
+              "start",
+              "summary-retry"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ACCEPTED",
+              "RUNNING",
+              "SUCCEEDED",
+              "FAILED",
+              "INTERRUPTED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error Code"
+          }
+        },
+        "required": [
+          "id",
+          "discussion_id",
+          "kind",
+          "status"
+        ],
+        "title": "Operation",
+        "type": "object"
+      },
       "OperationAccepted": {
         "additionalProperties": false,
         "properties": {
@@ -1514,6 +1583,21 @@
         "title": "Snapshot",
         "type": "object"
       },
+      "StartDiscussion": {
+        "additionalProperties": false,
+        "properties": {
+          "roster_revision": {
+            "minimum": 1,
+            "title": "Roster Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "roster_revision"
+        ],
+        "title": "StartDiscussion",
+        "type": "object"
+      },
       "Summary": {
         "additionalProperties": false,
         "properties": {
@@ -1552,15 +1636,15 @@
           },
           "version": {
             "type": "string",
-            "const": "0.2.0",
+            "const": "0.4.0",
             "title": "Version",
-            "default": "0.2.0"
+            "default": "0.4.0"
           },
           "phase": {
             "type": "integer",
-            "const": 2,
+            "const": 4,
             "title": "Phase",
-            "default": 2
+            "default": 4
           },
           "model_mode": {
             "type": "string",
@@ -1928,69 +2012,6 @@
         "title": "ModelRequest",
         "type": "object"
       },
-      "Operation": {
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "title": "Id",
-            "type": "string"
-          },
-          "discussion_id": {
-            "anyOf": [
-              {
-                "format": "uuid",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discussion Id"
-          },
-          "kind": {
-            "enum": [
-              "create",
-              "roster-generation",
-              "start",
-              "summary-retry"
-            ],
-            "title": "Kind",
-            "type": "string"
-          },
-          "status": {
-            "enum": [
-              "ACCEPTED",
-              "RUNNING",
-              "SUCCEEDED",
-              "FAILED",
-              "INTERRUPTED"
-            ],
-            "title": "Status",
-            "type": "string"
-          },
-          "error_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "title": "Error Code"
-          }
-        },
-        "required": [
-          "id",
-          "discussion_id",
-          "kind",
-          "status"
-        ],
-        "title": "Operation",
-        "type": "object"
-      },
       "RoleEvent": {
         "additionalProperties": false,
         "properties": {
@@ -2140,21 +2161,6 @@
           "participants"
         ],
         "title": "RosterResult",
-        "type": "object"
-      },
-      "StartDiscussion": {
-        "additionalProperties": false,
-        "properties": {
-          "roster_revision": {
-            "minimum": 1,
-            "title": "Roster Revision",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "roster_revision"
-        ],
-        "title": "StartDiscussion",
         "type": "object"
       },
       "StateEvent": {

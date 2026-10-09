@@ -8,7 +8,7 @@ test('real frontend reaches real backend through proxy, with no provider secret'
   await expect(page.getByText('数据库已就绪 · 确定性模拟模式')).toBeVisible()
   const response = await page.request.get('/api/system')
   expect(response.ok()).toBeTruthy()
-  expect(await response.json()).toMatchObject({ phase: 2, model_mode: 'mock', discussion_engine_available: false })
+  expect(await response.json()).toMatchObject({ phase: 4, model_mode: 'mock', discussion_engine_available: false })
   expect(await response.text()).not.toContain('browser-secret-sentinel')
   expect(await page.content()).not.toContain('browser-secret-sentinel')
   await page.getByRole('button', { name: '重新检查' }).click()

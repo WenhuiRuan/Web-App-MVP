@@ -8,7 +8,7 @@
 |---|---|---|
 | 4A-1 | 创建、列表、快照、规范化创建幂等、原子初始事件、读写错误 | 17个先失败用例实现通过；真实FastAPI/SQLite |
 | 4A-2 | 生命周期规则、后台嘉宾生成/校验/重试、完整阵容及事件原子提交、两讨论隔离 | 27个先失败规则/接口用例实现通过 |
-| 4A-3 | 启动幂等/并发、操作查询、任务统一关闭/重启恢复、完整接口运行检查 | 待先编写测试 |
+| 4A-3 | 启动幂等/并发、操作查询、任务统一关闭/重启恢复、完整接口运行检查 | 新增30个场景（与10个旧规则共40）：先28失败/12通过，实现后40通过；全量105通过 |
 
 ## 已实现的数据与接口边界
 
@@ -24,6 +24,26 @@ TaskSupervisor归应用lifespan所有；注册表按operation_id去重，全局S
 
 admit_generation在BEGIN IMMEDIATE中做状态/容量检查、operation及GENERATING事件。complete_generation以operation状态和当前discussion/revision为守卫，在一事务写完整roster/participants、roster.ready、READY、成功operation，并验证完整Snapshot；任何失败回滚。失败另事务写operation.failed+FAILED(roster)，保留topic；新幂等键可以重试，旧键仅重放原202。
 
-生成错误：MODEL_TIMEOUT、MODEL_RESULT_INVALID、TASK_FAILED、DATABASE_UNAVAILABLE，公开说明固定脱敏。数据库完全不可写时无法再记录失败，日志仅固定恢复标记，后续启动恢复规则将在4A-3实现，不伪造成功。
+生成错误：MODEL_TIMEOUT、MODEL_RESULT_INVALID、TASK_FAILED、DATABASE_UNAVAILABLE，公开说明固定脱敏。数据库完全不可写时无法再记录失败，日志仅固定恢复标记，下次数据库可写且启动恢复成功后标INTERRUPTED，不伪造成功。
 
 容量：默认3个工作讨论，统计GENERATING/RUNNING/SUMMARIZING；模型并发4。READY不消耗生成容量，start重新检查容量。服务目前单worker，禁止同时用多个应用实例管理同一本地数据库。
+
+## 4A-3 确认、操作查询与恢复
+
+start命令走应用监督器，短BEGIN IMMEDIATE内检查幂等、纯规则should_create_run、revision/READY、容量和完整Snapshot；同时写唯一ACTIVE run、confirmed_at、所有角色IDLE、current_run_id、RUNNING事件、SUCCEEDED操作。run冻结max_turns/max_seconds（20/300），本批只保存额度，不执行调度或终止计时。任何失败整体回滚，已READY阵容保留。
+
+相同key返回原202；同revision不同key返回首个成功start的完整202（相同operation_id/run_id），另保存新key的SUCCEEDED操作记录用于异参冲突检测。不同key不会产生额外run、角色或RUNNING事件。已有run即使已中断也只重放受理响应；实时状态从Snapshot读取，start不是续跑命令。不存在/归属错误的operation均404，查询只公开id/discussion_id/kind/status/error_code。
+
+后台任务注册表以operation_id去重，受理任务单独登记并shield，HTTP请求取消不丢失已受理工作。模型调用受超时/全局Semaphore约束；结果提交校验operation状态、discussion与revision，旧结果不能覆盖新重试或其他讨论。模型异常与写入异常均通过固定安全错误持久化。
+
+lifespan启动时先执行recover_unfinished，再接受请求。关闭时先closing拒绝新受理，取消/收集受理和模型任务，shield并等待在途to_thread数据库调用（线程取消不能取消SQLite），最后恢复残余工作。若提交已开始，允许完整提交为READY；尚未完成的GENERATING变INTERRUPTED/roster，对应operation标INTERRUPTED/SERVICE_INTERRUPTED并写operation.failed。RUNNING变INTERRUPTED/discussion，ACTIVE run结束，角色回IDLE；start操作仍SUCCEEDED，因为建立run的命令已完成。SUMMARIZING遗留也按summary标中断，但总结生成/重试尚未实现。
+
+恢复更新数据/操作/事件在同一事务，重复执行不新增中断事件，DRAFT/READY/终态保留，无自动模型调用。数据库关闭时不可写只记固定标记；下次启动数据库必须可写并完成恢复才能就绪。任意不响应取消的真实适配或无限阻塞磁盘不在当前验证范围；后续适配须遵守取消/超时。
+
+## 复现与证据
+
+- backend/tests/test_lifecycle_api.py：17个创建/查询/初始事务场景。
+- backend/tests/test_roster_tasks.py：17个任务/故障/两讨论/原子阵容场景；test_lifecycle_rules.py共17个纯规则场景。
+- backend/tests/test_start_recovery.py：23个确认/并发/容量/操作归属/回滚/关闭与恢复场景。
+- scripts/smoke_lifecycle.py：独立进程、随机空闲loopback端口、临时SQLite，真实HTTP创建→两场生成→不同key并发确认→强制终止自有进程→重启检查。不会关闭其他服务，临时证据保留work/lifecycle-smoke-*。
+- 全量pytest105通过；原前端浏览器16通过，仍是前端模拟/基础代理验证，不是完整业务E2E。实际结果和边界见progress。

@@ -1,12 +1,12 @@
 # HTTP API 与 SSE 契约 v1
 
-阶段4第一批实现中，2026-10-09；阶段2契约基线保留。基础地址 `http://127.0.0.1:8000`；前端使用同源 `/api` 代理。UUID 标识、UTC 带时区时间、JSON 字符串为 UTF-8。请求结构禁止多余字段。浏览器不携带供应商密钥，不存在读取完整后端配置的接口。
+阶段4第一批已实现并验证，2026-10-09；阶段2契约基线保留。基础地址 `http://127.0.0.1:8000`；前端基础检查使用同源 `/api` 代理，讨论页面仍消费前端模拟。UUID 标识、UTC 带时区时间、JSON 字符串为 UTF-8。请求结构禁止多余字段。浏览器不携带供应商密钥，不存在读取完整后端配置的接口。
 
 ## 实现状态与机器契约
 
-- **已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述这些真实可用端点。
+- **基础接口已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述真实可用端点。
 - **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
-- **4A-1已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`；4A-2已挂载嘉宾生成；启动与操作查询待4A-3，SSE与总结重试留后续批次。未挂载路由返回统一404。
+- **4A已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、GET `/{discussion_id}/operations/{operation_id}`（后三者同/api/discussions前缀）。SSE与总结重试留后续批次。未挂载路由返回统一404。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
 
@@ -16,7 +16,7 @@
 |---|---|---|
 | GET /api/health/live | 200 `{"status":"ok"}` | 只证明进程响应，不检查数据库/模型 |
 | GET /api/health/ready | 200 `{"status":"ready","database":"ready","model_mode":"mock"}` | 503 DATABASE_UNAVAILABLE / MODEL_NOT_CONFIGURED |
-| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.2.0","phase":2,"model_mode":"mock","discussion_engine_available":false}` | 非 mock 配置时 model_mode=unavailable；不返回地址、模型名称、密钥或完整 settings |
+| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.4.0","phase":4,"model_mode":"mock","discussion_engine_available":false}` | 引擎标false因尚无自动发言循环；非mock配置时model_mode=unavailable；不返回供应商地址、模型名称、密钥或完整settings |
 
 所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
 
@@ -38,6 +38,10 @@ active 仅 RUNNING/SUMMARIZING；all 包含草稿、生成、失败、完成等�
 所有命令 Idempotency-Key 格式为 UUID。相同 scope+command+key、相同规范化 body 返回原 HTTP 状态和原响应（即使任务后来失败）；不同 body 为409。显式失败后重试用新键，网络超时重发用原键。规范化 JSON 用已校验模型数据（含默认值、trim文本）、排序字段、UTF-8 进行 SHA-256；创建 scope=global，其余=discussion_id。同议题不同键重复 start、同 revision 已有 run 时返回既有 run，不能再调度。摘要重试已成功时返回原完成操作的响应，无新任务；尚在处理中也仅返回当前操作。
 
 异步操作的 HTTP 202 只代表已受理，后续成功/失败通过 Operation、Snapshot 和 SSE 展现，不能将202当作阵容/总结成功。operation.status 与 discussion.state 分开。异步失败写状态和事件；原已返回202不能改成500。
+
+阶段4A：生成操作异步从ACCEPTED→RUNNING→SUCCEEDED/FAILED/INTERRUPTED；查询Operation或Snapshot轮询（SSE尚未开放）。start在事务内建立run后即操作SUCCEEDED，202保持既定契约；不表示已经产生发言。同revision的新start键记独立幂等操作记录，但返回首个成功start的operation_id和run_id，避免重复启动。即使run中断，重放仍返回原RUNNING受理响应，当前状态应以Snapshot为准。
+
+服务关闭/重启：未完成生成标INTERRUPTED/roster及SERVICE_INTERRUPTED，新key可重试；活动run标INTERRUPTED/discussion并保留阵容和已提交数据，不自动续跑；原start操作保持SUCCEEDED。此阶段没有恢复讨论运行接口。容量为GENERATING/RUNNING/SUMMARIZING合计默认3，READY不占容量；列表active仍只RUNNING/SUMMARIZING。
 
 ### 创建请求与响应
 
@@ -96,11 +100,11 @@ Idempotency-Key: 55555555-5555-4555-8555-555555555555
 | 409 INVALID_STATE / ROSTER_VERSION_CONFLICT | 重取快照后决定，不盲目重试 |
 | 409 IDEMPOTENCY_CONFLICT | 同键异参；明确新动作才生成新键 |
 | 409 CURSOR_INVALID / SNAPSHOT_REQUIRED | 关闭 SSE、刷新快照与游标 |
-| 503 DATABASE_UNAVAILABLE / CAPACITY_EXCEEDED | retryable=true，有界退避；容量忙建议 Retry-After:2（后续实现） |
+| 503 DATABASE_UNAVAILABLE / CAPACITY_EXCEEDED / SERVICE_SHUTTING_DOWN | retryable=true；容量忙已实现Retry-After:2 |
 | 503 MODEL_NOT_CONFIGURED | retryable=false；完成后端服务配置/适配 |
 | 500 INTERNAL_ERROR | 只给通用说明及 request_id；不回传堆栈 |
 
-模型阶段错误码另有 MODEL_TIMEOUT、MODEL_RATE_LIMITED、MODEL_AUTH_FAILED、MODEL_RESULT_INVALID。它们出现在 operation.failed 和 operation.error_code，不透传供应商 HTTP body。错误是否可重试由阶段决定；不会直接暴露 Key、模型原始输出或隐藏推理。
+本批任务错误码：MODEL_TIMEOUT、MODEL_RESULT_INVALID、TASK_FAILED、DATABASE_UNAVAILABLE、SERVICE_INTERRUPTED，出现在operation.failed及operation.error_code；真实适配未来另有MODEL_RATE_LIMITED、MODEL_AUTH_FAILED，不透传供应商HTTP body。错误是否可重试由阶段决定；不会暴露Key、模型原始输出或隐藏推理。
 
 ## SSE 事件契约
 
