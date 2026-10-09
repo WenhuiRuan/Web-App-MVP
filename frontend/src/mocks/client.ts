@@ -42,6 +42,8 @@ class MockDiscussionClient implements DiscussionClient {
     } catch { this.storageAvailable = false; this.seed() }
     for (const id of Object.keys(this.records)) {
       if (this.records[id].snapshot.discussion.state === 'GENERATING') this.failure(id, 'roster', '模拟阵容准备期间页面已重载，请重新生成。')
+      this.records[id].snapshot.insight_status ??= { state: 'IDLE', version: 0, through_turn: 0, error_code: null }
+      this.records[id].snapshot.discussion.failure_code ??= null
       this.schedule(id)
     }
   }
@@ -69,7 +71,7 @@ class MockDiscussionClient implements DiscussionClient {
   private newRecord(id: string, topic: string, count: number): MockRecord {
     const timestamp = now()
     const people = fixture.profiles.slice(0, count + 1).map(p => ({ ...copy(p), id: crypto.randomUUID(), discussion_id: id }))
-    return { snapshot: { discussion: { id, topic, expert_count: count, state: 'DRAFT', version: 0, roster_revision: 0, run_id: null, failure_stage: null, created_at: timestamp, updated_at: timestamp }, participants: [], role_states: [], messages: [], insights: { version: 0, through_turn: 0, items: [] }, summary: null, last_event_seq: 0 }, people, events: [], groups: [], groupIndex: 0, summaryFailure: false }
+    return { snapshot: { discussion: { id, topic, expert_count: count, state: 'DRAFT', version: 0, roster_revision: 0, run_id: null, failure_stage: null, failure_code: null, created_at: timestamp, updated_at: timestamp }, participants: [], role_states: [], messages: [], insights: { version: 0, through_turn: 0, items: [] }, insight_status: { state: 'IDLE', version: 0, through_turn: 0, error_code: null }, summary: null, last_event_seq: 0 }, people, events: [], groups: [], groupIndex: 0, summaryFailure: false }
   }
   private makeGroups(record: MockRecord, runId: string): PanelEvent[][] {
     const roleVersions = new Map<string, number>()

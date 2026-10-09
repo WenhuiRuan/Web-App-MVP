@@ -93,3 +93,9 @@ summary-retry受理在单写事务内校验FAILED/INTERRUPTED/summary、容量�
 SSE路由→短事务event_page→异步stream。持久化events是唯一业务流来源，不通过内存广播代替补发。快照与event_page各自读取一致高水位；从快照seq开始即可覆盖交接窗口，不要求订阅锁住生产者。没有观察者也照常推进，断连不通知引擎停止。每连接独立游标，无写入领取、无长期数据库事务。轮询与心跳阈值是实现默认值，不是题目要求。单进程限制继续有效。
 
 观点状态是独立公开事件，避免靠失败后刷新碰巧发现状态，也避免将旧观点删除。005迁移在一个事务内复制events、替换CHECK并恢复连续/不可变触发器；不改001–004校验和、旧事件或讨论高水位。
+
+## 阶段5前端连接与恢复
+
+统一composition入口transport/client选择默认HttpDiscussionClient，显式mode=mock才动态加载台本及浏览器记录。页面和hooks不导入mock。流使用fetch+可取消reader读取标准SSE，校验帧id/type/讨论/schema及seq，注释心跳只更新40秒连接活性监测，不投影消息。HTTP10秒预算，命令UUID幂等键；创建表单同参数失败重发保持同键，创建成功后即便阵容受理失败也进入已创建讨论以便重试。
+
+useDiscussion先快照后after订阅，重复seq忽略，缺口/旧run/格式异常关闭旧reader，保留内容并以1/2/4/8/10秒退避重新读取快照与续订。generation和alive同时守卫fetch和连接回调；切场组件key及cleanup清理timer/AbortController/订阅。终态保留内容并关闭订阅；总结重试受理后显式重新快照，不重放消息。恢复不会重建同场Transcript，原阅读位置和新内容提示继续生效。观点任务状态与成功观点内容分离，FAILED/INTERRUPTED显示独立提示并保留旧批次。

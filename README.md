@@ -1,6 +1,6 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。当前完成阶段3前端模拟流程及阶段4A/4B/4C后端生命周期、自主调度、实时观点提取、主持人总结和失败恢复。真实FastAPI/SQLite从确认启动自动推进到COMPLETED，使用独立确定性ModelGateway；失败或中断可只重试原run总结。前端仍明确标记模拟模式，播放“四天工作制”台本，尚未接入业务API。真实SSE与真实模型适配待后续。开发工具为Codex，应用运行时模型由后端独立配置。
+本地多专家圆桌讨论应用。阶段5正在接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。运行模型仍为后端独立确定性ModelGateway，不代表真实模型分析。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
 
 ## 环境与安装
 
@@ -44,9 +44,9 @@ Pop-Location
 
 ## 启动
 
-只体验阶段3前端模拟时，安装完成后运行 `scripts/start-frontend.ps1` 即可，无需启动后端。访问5173后可以新建讨论，或进入两场预设圆桌；右上“演示工具”提供播放速度和失败重试场景。模拟内容保存在当前浏览器localStorage，清空工具会删除这些模拟记录。
+独立前端模拟访问 `http://127.0.0.1:5173/?mode=mock`，只需运行 `scripts/start-frontend.ps1`。右上演示工具仅在此模式显示，记录保存在浏览器localStorage；默认业务模式的数据保存在后端SQLite，不读取前端台本。
 
-检查真实基础连接或调用后端生命周期API时，在两个项目根PowerShell窗口分别执行：
+体验真实业务流程时，在两个项目根PowerShell窗口分别执行：
 
 ```powershell
 # 窗口 1：后端，启动时自动检查/应用迁移
@@ -58,7 +58,7 @@ Pop-Location
 .\scripts\start-frontend.ps1
 ```
 
-访问 [本地前端](http://127.0.0.1:5173) 体验模拟流程；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪 · 确定性模拟模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供三个基础接口和七类讨论接口，可直接试用。
+访问 [本地前端](http://127.0.0.1:5173) 新建讨论、确认阵容、观看实时发言及观点并查看总结；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪 · 确定性模拟模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供基础接口和讨论HTTP/SSE接口，可直接试用。
 
 其他系统的等价启动方式（未实机验证）：`python3 -m venv .venv`，用 `.venv/bin/python -m pip install -r backend/requirements.lock` 安装；用 `.venv/bin/python -m backend.app.server` 启动；前端目录执行 `npm ci` 和 `npm run dev`。
 
@@ -70,7 +70,7 @@ Pop-Location
 .\.venv\Scripts\python.exe -m backend.app.database --path work/check.sqlite3
 ```
 
-空库首次输出 `Migrations applied: [1, 2, 3, 4]`，重复输出 `[]`，不会清空数据。迁移有校验和、版本顺序及事务回滚；已应用SQL不修改，新变更加新版本。没有自动降级/删除数据操作。不要把本地数据库或 WAL/SHM 文件放入提交或交付包。
+空库首次输出 `Migrations applied: [1, 2, 3, 4, 5]`，重复输出 `[]`，不会清空数据。迁移有校验和、版本顺序及事务回滚；已应用SQL不修改，新变更加新版本。没有自动降级/删除数据操作。不要把本地数据库或 WAL/SHM 文件放入提交或交付包。
 
 ## 实际可用接口与设计契约
 
@@ -85,9 +85,10 @@ Pop-Location
 | POST /api/discussions/{id}/roster-generation | 后台生成；202受理后通过快照或操作查询等待READY |
 | POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run及后台任务，自动发言/提取/总结至COMPLETED或明确失败 |
 | POST /api/discussions/{id}/summary-retry | 总结失败/中断后重试同run边界；重复及并发不新增有效任务 |
+| GET /api/discussions/{id}/events?after={seq} | 持久化有序SSE补发、15秒心跳、终态关闭；Last-Event-ID优先 |
 | GET /api/discussions/{id}/operations/{operation_id} | 查询本讨论操作的处理状态和安全错误码 |
 
-请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；总结重试已挂载，SSE仍为false。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；POST start提交当前roster_revision，返回202/run_id并自动推进。每2条正式消息更新观点，结束补尾，冻结边界后生成总结。轮询Snapshot可见insights、insight_status、summary与生命周期。所有命令需要UUID幂等键；网络重发原键，显式失败或中断后的重试使用新键。
+请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；所有讨论接口含SSE与总结重试均已挂载。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；POST start提交当前roster_revision，返回202/run_id并自动推进。每2条正式消息更新观点，结束补尾，冻结边界后生成总结。轮询Snapshot可见insights、insight_status、summary与生命周期。所有命令需要UUID幂等键；网络重发原键，显式失败或中断后的重试使用新键。
 
 服务为**单进程、单worker、单数据库所有者**。未完成任务在关闭/重启后标INTERRUPTED；roster阶段可以新键生成，summary阶段通过POST `/api/discussions/{id}/summary-retry`（无body或`{}`）新键重试原run与冻结边界。不会重放发言/生成阵容；同一键返回原202响应，当前状态读Snapshot/Operation。并发重试键合并有效任务。讨论阶段中断不自动续跑。数据库持续不可写时需恢复可写后的下次启动处理。详见[生命周期](docs/backend-lifecycle.md)、[调度](docs/backend-orchestration.md)和[观点/总结](docs/backend-synthesis.md)。
 

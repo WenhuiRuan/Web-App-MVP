@@ -1,3 +1,4 @@
+import { isMockMode } from '../transport/client'
 import { useEffect, useState } from 'react'
 import type { Snapshot } from '../transport/types'
 import { Empty, Icon } from './shared'
@@ -5,7 +6,7 @@ import { Empty, Icon } from './shared'
 export function SummaryText({ snapshot }: { snapshot: Snapshot }) {
   return <div className="summary-text"><div className="summary-author"><span className="summary-mark"><Icon name="spark" size={22} /></span><div><strong>{snapshot.participants.find(p => p.kind === 'HOST')?.name} · 主持人总结</strong><p>基于本场 {snapshot.summary?.through_turn ?? 0} 条正式发言</p></div></div>
     {snapshot.summary?.content.split('\n\n').map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-    <div className="summary-note">这是预设模拟讨论的总结，不代表真实模型分析或事实验证。</div>
+    <div className="summary-note">{isMockMode ? '这是预设模拟讨论的总结，不代表真实模型分析或事实验证。' : '这是后端模型任务生成的总结；当前确定性替身用于工程验证，内容尚未经过真实模型质量验证。'}</div>
   </div>
 }
 
@@ -17,6 +18,8 @@ export function Insights({ snapshot, visible, onSource }: { snapshot: Snapshot; 
     <div className="panel-heading"><div><span className="section-kicker">IDEAS IN MOTION</span><h2>观点与结论</h2></div><span className="live-small">{snapshot.discussion.state === 'COMPLETED' ? '已归档' : '随讨论更新'}</span></div>
     <div className="insight-tabs" role="tablist" aria-label="观点面板"><button role="tab" aria-selected={tab === 'insights'} onClick={() => setTab('insights')}>共识与分歧</button><button role="tab" aria-selected={tab === 'summary'} disabled={!snapshot.summary} onClick={() => setTab('summary')}>主持总结</button></div>
     <div className="insights-scroll" tabIndex={0}>
+      {['FAILED', 'INTERRUPTED'].includes(snapshot.insight_status?.state) && <div className="alert warning" role="status" data-testid="insight-failure">观点提取{snapshot.insight_status.state === 'FAILED' ? '失败' : '中断'}（{snapshot.insight_status.error_code}），已保留最近成功的观点。后续发言边界会再次尝试；已结束时不会重放讨论。</div>}
+      {snapshot.insight_status?.state === 'PENDING' && <p className="insight-note" role="status">正在提炼至第 {snapshot.insight_status.through_turn} 条发言…</p>}
       {tab === 'summary' && snapshot.summary ? <SummaryText snapshot={snapshot} /> : <>
         <p className="insight-note">观点来自已发生的发言。点击依据，可回到讨论现场。</p>
         {categories.map(category => <div className={`insight-section ${category.kind}`} key={category.kind}>

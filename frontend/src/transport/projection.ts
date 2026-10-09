@@ -12,7 +12,7 @@ export function projectEvent(previous: Snapshot, event: PanelEvent): Snapshot {
   switch (event.type) {
     case 'discussion.state_changed':
       if (event.payload.version >= next.discussion.version) {
-        next.discussion = { ...next.discussion, ...event.payload, run_id: event.run_id }
+        next.discussion = { ...next.discussion, ...event.payload, failure_code: event.payload.failure_code ?? null, run_id: event.run_id }
         if (event.payload.state === 'RUNNING' && !next.role_states.length) next.role_states = next.participants.map(p => ({ participant_id: p.id, state: 'IDLE', public_focus: '', version: 0 }))
         if (['COMPLETED', 'FAILED', 'INTERRUPTED'].includes(event.payload.state)) next.role_states = next.role_states.map(s => ({ ...s, state: 'IDLE' }))
       }
@@ -44,6 +44,10 @@ export function projectEvent(previous: Snapshot, event: PanelEvent): Snapshot {
     case 'summary.ready':
       if (event.payload.through_turn !== next.messages.length) throw new ClientError('SNAPSHOT_REQUIRED', '总结边界与发言不一致。')
       next.summary = event.payload
+      break
+    case 'insights.status_changed':
+      if (event.payload.through_turn > next.messages.length) throw new ClientError('SNAPSHOT_REQUIRED', '观点任务消息边界不完整。', true)
+      if (!next.insight_status || event.payload.version >= next.insight_status.version) next.insight_status = event.payload
       break
     case 'operation.failed': break
   }

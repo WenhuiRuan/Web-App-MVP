@@ -7,10 +7,11 @@ export interface Message { id: string; discussion_id: string; run_id: string; pa
 export interface Insight { id: string; kind: 'consensus' | 'disagreement'; content: string; source_message_ids: string[] }
 export interface InsightBatch { version: number; through_turn: number; items: Insight[] }
 export interface Summary { content: string; through_turn: number; created_at: string }
-export interface Discussion { id: string; topic: string; expert_count: number; state: DiscussionState; version: number; roster_revision: number; run_id: string | null; failure_stage: FailureStage | null; created_at: string; updated_at: string }
-export interface Snapshot { discussion: Discussion; participants: Participant[]; role_states: RoleState[]; messages: Message[]; insights: InsightBatch; summary: Summary | null; last_event_seq: number }
+export interface InsightStatus { state: 'IDLE' | 'PENDING' | 'SUCCEEDED' | 'FAILED' | 'INTERRUPTED'; version: number; through_turn: number; error_code: string | null }
+export interface Discussion { id: string; topic: string; expert_count: number; state: DiscussionState; version: number; roster_revision: number; run_id: string | null; failure_stage: FailureStage | null; failure_code: string | null; created_at: string; updated_at: string }
+export interface Snapshot { discussion: Discussion; participants: Participant[]; role_states: RoleState[]; messages: Message[]; insights: InsightBatch; insight_status: InsightStatus; summary: Summary | null; last_event_seq: number }
 export interface Failure { operation_id: string; stage: FailureStage; code: string; message: string; retryable: boolean }
-export interface StatePayload { state: DiscussionState; version: number; failure_stage: FailureStage | null }
+export interface StatePayload { state: DiscussionState; version: number; failure_stage: FailureStage | null; failure_code?: string | null }
 type BaseEvent = { schema_version: 1; discussion_id: string; run_id: string | null; seq: number; occurred_at: string }
 export type PanelEvent = BaseEvent & (
   { type: 'discussion.state_changed'; payload: StatePayload } |
@@ -18,13 +19,14 @@ export type PanelEvent = BaseEvent & (
   { type: 'participant.status_changed'; payload: RoleState } |
   { type: 'turn.committed'; payload: Message } |
   { type: 'insights.updated'; payload: InsightBatch } |
+  { type: 'insights.status_changed'; payload: InsightStatus } |
   { type: 'summary.ready'; payload: Summary } |
   { type: 'operation.failed'; payload: Failure }
 )
 export type ConnectionState = 'connecting' | 'live' | 'offline'
 export interface CreateInput { topic: string; expert_count: number }
 export interface Accepted { operation_id: string; discussion_id: string; state: DiscussionState; run_id: string | null }
-export interface Observer { event: (event: PanelEvent) => void; connection: (state: ConnectionState) => void }
+export interface Observer { event: (event: PanelEvent) => void; connection: (state: ConnectionState) => void; failed?: (error: ClientError) => void }
 export interface DiscussionClient {
   list(status: 'active' | 'all', signal?: AbortSignal): Promise<{ items: Discussion[]; next_cursor: string | null }>
   create(input: CreateInput, key: string): Promise<Snapshot>

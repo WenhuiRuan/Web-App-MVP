@@ -30,7 +30,7 @@ async function shot(page: Page, name: string) { await page.screenshot({ path: pa
 
 test('mock frontend completes creation, roster confirmation and summary with cited insights', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message))
-  await page.goto('/?pace=fast')
+  await page.goto('/?mode=mock&pace=fast')
   await expect(page.getByText('模拟模式', { exact: true })).toBeVisible()
   await page.getByRole('button', { name: '新建讨论', exact: true }).first().click()
   await expect(page.getByLabel('专家人数')).toHaveValue('4')
@@ -54,7 +54,7 @@ test('mock frontend completes creation, roster confirmation and summary with cit
 })
 
 test('mock generation and summary failures preserve content and can be retried', async ({ page }) => {
-  await page.goto('/?pace=fast')
+  await page.goto('/?mode=mock&pace=fast')
   await tool(page, '下次生成阵容失败')
   await create(page)
   await expect(page.getByRole('heading', { name: '生成失败，话题已保留' })).toBeVisible()
@@ -72,7 +72,7 @@ test('mock generation and summary failures preserve content and can be retried',
 })
 
 test('mock reconnect fills missed events once and discussion switch clears old content', async ({ page }) => {
-  await page.goto(`/?pace=fast#/discussion/${firstId}`)
+  await page.goto(`/?mode=mock&pace=fast#/discussion/${firstId}`)
   await expect(page.getByText('模拟连接正常', { exact: true })).toBeVisible()
   await tool(page, '模拟当前连接中断')
   const count = await page.getByTestId('message').count()
@@ -94,7 +94,7 @@ test('mock reconnect fills missed events once and discussion switch clears old c
 
 test('mock history reader keeps position and can follow new messages or insight sources', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
-  await page.goto(`/?pace=fast#/discussion/${firstId}`)
+  await page.goto(`/?mode=mock&pace=fast#/discussion/${firstId}`)
   await expect.poll(() => page.getByTestId('message').count()).toBeGreaterThanOrEqual(8)
   await tool(page, '暂停模拟播放')
   const scroll = page.getByTestId('transcript-scroll')
@@ -112,7 +112,7 @@ test('mock history reader keeps position and can follow new messages or insight 
 })
 
 test('mock home loading, empty, failure and form boundary states are usable', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/?mode=mock')
   await expect(page.getByRole('status', { name: '正在加载讨论列表' })).toBeVisible()
   await tool(page, '清空模拟记录，查看空列表')
   await expect(page.getByRole('heading', { name: '暂时没有进行中的讨论' })).toBeVisible()
@@ -134,7 +134,7 @@ test('mock home loading, empty, failure and form boundary states are usable', as
 })
 
 for (const count of ['2', '6']) test(`mock roster has host plus ${count} experts and valid speaker states`, async ({ page }) => {
-  await page.goto('/?pace=fast')
+  await page.goto('/?mode=mock&pace=fast')
   await create(page, `四天工作制 · ${count} 位专家`, count)
   await expect(page.getByTestId('roster-person')).toHaveCount(Number(count) + 1)
   await start(page)
@@ -151,7 +151,7 @@ for (const [width, height] of [[1366, 768], [1920, 1080], [2560, 1080], [390, 84
   test.setTimeout(45000)
   await page.setViewportSize({ width, height })
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message))
-  await page.goto('/?pace=fast')
+  await page.goto('/?mode=mock&pace=fast')
   await tool(page, '暂停模拟播放')
   await expect(page.getByRole('button', { name: '进入圆桌' })).toHaveCount(2)
   await noPageOverflow(page); await shot(page, `home-${width}`)
@@ -200,7 +200,7 @@ for (const [width, height] of [[1366, 768], [1920, 1080], [2560, 1080], [390, 84
 
 test('mock reload during generation offers retry and long topic stays accessible on narrow screen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto('/')
+  await page.goto('/?mode=mock')
   await tool(page, '暂停模拟播放')
   const topic = '长话题？'.repeat(125)
   await create(page, topic, '2')

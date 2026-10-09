@@ -308,3 +308,9 @@ summary-retry新键在事务内复用原run/边界，创建新领取和规范操
 12关键用例先失败，work/stage5-sse-red.txt（4.55秒）；实现后15新增，相关迁移/观点/恢复/契约/基础服务共74通过（34.57秒），work/stage5-sse-green.txt。仍1条既有Starlette/httpx弃用提示。005升级保留旧事件/高水位/触发器，新增公开insights.status_changed，failure_code进入状态事件；SSE补发/优先级/范围/跨场/多页/心跳/释放事务/终态关闭已验证。测试heartbeat用可调短阈值，浏览器真实断线由5-3验证。
 
 修正受影响历史断言：迁移版本新增5，SSE的x-implemented现为true；不变的仲裁规则/静态布局未重跑。5-2/5-3未完成，真实模型仍后续。提交题名feat: stream durable discussion events with recovery cursors。
+
+## 阶段5：5-2前端业务客户端
+
+新增两项投影测试先失败（状态未投影/旧错误未清除），原两项通过；HTTP客户端测试先因模块缺失不能收集，记录work/stage5-http-red.txt，不伪称三项断言曾执行失败。实现后投影4/客户端3/真实基础浏览器2共9通过（7.7秒）；HTTP parser逐字节UTF-8/CRLF、幂等字段和关闭后旧回调已检查。npm run build退出0（TypeScript+Vite）。独立模拟受影响5条回归通过（51.4秒），未重跑静态四尺寸布局/截图。
+
+默认真实业务客户端、显式mode=mock、模型标识/持久化文案、公开状态投影、提取失败保留旧观点、总结失败/中断重试及快照退避恢复已实现。真实业务完整E2E尚待5-3。5-1提交d827136，5-2题名feat: connect studio pages to durable HTTP and SSE。

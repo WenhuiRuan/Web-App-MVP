@@ -1,3 +1,4 @@
+import { isMockMode } from '../transport/client'
 import { useLayoutEffect, useRef, useState } from 'react'
 import type { Snapshot } from '../transport/types'
 import { Avatar, Empty } from './shared'
@@ -36,6 +37,6 @@ export function Transcript({ snapshot, focusId, visible }: { snapshot: Snapshot;
       })}
     </div>
     {!atBottom.current && count > readThrough && <button className="new-messages" onClick={() => { atBottom.current = true; if (scroll.current) scroll.current.scrollTop = scroll.current.scrollHeight; setReadThrough(count) }}>{count - readThrough} 条新发言 · 回到现场 ↓</button>}
-    <div className="panel-footer"><span className="record-dot" />仅记录正式发言<span className="subtle">预设演示内容</span></div>
+    <div className="panel-footer"><span className="record-dot" />仅记录正式发言<span className="subtle">{isMockMode ? '预设演示内容' : '后端已提交内容'}</span></div>
   </section>
 }

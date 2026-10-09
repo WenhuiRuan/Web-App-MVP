@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { discussionClient } from '../mocks/client'
+import { discussionClient } from '../transport/client'
 import type { Discussion } from '../transport/types'
 
 export function useDiscussionList(refresh: number) {
