@@ -166,3 +166,10 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 已实现每2条正式发言后提取、结束补最后边界。ModelRequest(task=insights)必须给出through_turn与正insight_version，messages必须是从turn1开始的完整前缀；participants属于当前讨论/run阵容。结果items可为空，每项至少引用两位不同专家的正式消息，归属与边界在模型校验、提交重建上下文和数据库复合FK/触发器中检查。
 
 Snapshot新增insight_status={state,version,through_turn,error_code}，默认IDLE/0/0/null；state为PENDING/SUCCEEDED/FAILED/INTERRUPTED。insights仍表示最新成功批次，失败不清空已有观点；失败状态由快照轮询可见，尚无真实SSE。insights.updated只在完整批次事务成功后出现，version是领取序号，失败可能使成功版本跳号，客户端用较大版本整批替换。同边界不重复领取，旧领取不得提交。默认INSIGHT_MAX_SECONDS=10，MODEL_MAX_ATTEMPTS=2；失败后下一新消息边界继续，结束补提取失败仍允许后续总结使用旧成功观点。
+
+
+## 4C-2总结完成契约
+
+SUMMARIZING后先补最后观点边界，随后自动调用ModelRequest(task=summary,actor_id=主持人,through_turn=冻结边界,insights=最新成功批次)。messages为1..through_turn完整前缀；insights.through_turn不超过冻结边界，来源继续验证。结果content必须是1..4000字符自然语言，拒绝原始JSON和代码块；含主要观点、共识不足/已有共识、未解决分歧，语义内容质量留真实模型验收。
+
+summary.ready与run完成/COMPLETED同事务。普通turn停止后不再新增消息。SUMMARY_MAX_SECONDS=60总预算从总结任务开始计，包括Semaphore等待；每次调用还受MODEL_TIMEOUT_SECONDS限制，最多MODEL_MAX_ATTEMPTS次。自动总结失败发布operation.failed(stage=summary,retryable=true)，引用最初start操作，该操作仍SUCCEEDED；Snapshot为FAILED/summary及安全failure_code，消息/观点/边界保留。HTTP summary-retry在4C-3接续。

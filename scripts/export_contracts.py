@@ -52,7 +52,7 @@ def example_data():
     results = [roster]
     requests = [req]
     for task in ('intent', 'utterance', 'host_control', 'insights', 'summary'):
-        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=messages,cycle=1,host_task='linking' if task=='utterance' else None,through_turn=3 if task=='insights' else None,insight_version=1 if task=='insights' else None)
+        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=messages,cycle=1,host_task='linking' if task=='utterance' else None,through_turn=3 if task in ('insights','summary') else None,insight_version=1 if task=='insights' else None,insights=batch if task=='summary' else {})
         results.append(asyncio.run(gateway.generate(context)).model_dump(mode='json'))
         requests.append(context)
     expert_context=ModelRequest(task='utterance',discussion_id=d,run_id=run,topic=req.topic,expert_count=4,actor_id=participants[1]['id'],participants=participants,messages=[message],cycle=2,participation_kind='REBUT',target_message_id=message['id'],public_focus='核对实施成本')

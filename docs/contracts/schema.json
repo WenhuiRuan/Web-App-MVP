@@ -827,6 +827,9 @@
           ],
           "default": null,
           "title": "Insight Version"
+        },
+        "insights": {
+          "$ref": "#/$defs/InsightBatch"
         }
       },
       "required": [

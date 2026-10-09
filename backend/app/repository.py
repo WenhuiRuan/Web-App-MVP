@@ -270,10 +270,11 @@ class DiscussionRepository:
                     conn.execute("UPDATE operations SET status='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE id=? AND discussion_id=?", (op['id'],did))
                     self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':stage,'code':'SERVICE_INTERRUPTED','message':'服务工作已中断，已提交内容保留，请查看当前状态。','retryable':stage in ('roster','summary')},run_id)
                 if run_id:
+                    conn.execute("UPDATE summary_jobs SET status='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE discussion_id=? AND run_id=? AND status='PENDING'",(did,run_id))
                     conn.execute("UPDATE insight_jobs SET state='INTERRUPTED',error_code='SERVICE_INTERRUPTED' WHERE discussion_id=? AND run_id=? AND state='PENDING'",(did,run_id))
                     conn.execute("UPDATE runs SET status='INTERRUPTED',ended_at=? WHERE discussion_id=? AND id=? AND status='ACTIVE'", (timestamp(),did,run_id))
                     self._reset_roles(conn,did,run_id)
-                self._transition(conn,did,'INTERRUPTED',stage)
+                self._transition(conn,did,'INTERRUPTED',stage,'SERVICE_INTERRUPTED')
             return len(rows)
 
     def _role(self, conn, did, rid, actor, state, focus=''):

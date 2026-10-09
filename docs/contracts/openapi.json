@@ -2147,6 +2147,9 @@
             ],
             "default": null,
             "title": "Insight Version"
+          },
+          "insights": {
+            "$ref": "#/components/schemas/InsightBatch"
           }
         },
         "required": [

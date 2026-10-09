@@ -23,9 +23,13 @@ class ControlledGateway(DeterministicModelGateway):
         if not gate: self.release.set()
         self.repository=None
         self.active=0
+        self.summary_release=threading.Event()  # Freeze at SUMMARIZING for 4B-only scheduling assertions.
 
     async def generate(self,request):
         if request.task=='roster': return await super().generate(request)
+        if request.task=='summary':
+            while not self.summary_release.is_set(): await asyncio.sleep(.005)
+            return await super().generate(request)
         self.requests.append(request); self.active+=1
         try:
             if request.task=='utterance' and request.host_task=='opening':
@@ -67,7 +71,7 @@ def engine_setup(tmp_path):
         client.app.state.model_gateway=gateway; gateway.repository=client.app.state.repository
         return client,gateway
     yield build
-    for gateway in gateways: gateway.release.set()
+    for gateway in gateways: gateway.release.set(); gateway.summary_release.set()
     for context in reversed(clients): context.__exit__(None,None,None)
 
 

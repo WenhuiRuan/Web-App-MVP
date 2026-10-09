@@ -261,3 +261,14 @@ RunRepository复用原事务/事件/快照设施，以当前RUNNING+ACTIVE、run
 此小批总结/重试尚未实现；前端/SSE/真实模型保持后续范围。提交题名feat: extract versioned evidence during discussion。
 
 4C-1受影响调度/轮次事务回归34项通过；文档122需求/132验收/15文档检查通过。
+
+
+## 阶段4第三批：4C-2总结完成
+
+17项新测试先全部失败（缺少总结领取/原子完成及自动总结），输出work/stage4c2-red.txt。实现后新增17与4C-1/受影响契约/数据库/产物合计58项通过（22.18秒）。包括主持结束、次数结束、run.started_at过期的时长结束；后一场即使讨论预算已过期仍生成总结。总结非法JSON/数组/代码块/空白/超长拒绝，3个事务写入位置注入失败均不留总结或COMPLETED；超时/非法/异常最多2次尝试后FAILED/summary，消息和观点保留。
+
+新增004迁移：summary_jobs持久化领取与冻结边界/观点版本、每run唯一PENDING索引、总结边界及COMPLETED必须有总结的数据库触发器。SynthesisEngine使用独立SUMMARY_MAX_SECONDS（默认60），主持ModelRequest携带through_turn与InsightBatch；消息完整冻结前缀、观点不越界。总结不是普通Transcript消息。summary.ready在COMPLETED事件前，同事务保存总结/job成功/run完成/状态。旧4B用例增加总结闸门以继续专门验证调度，生产默认自动总结无闸门。失败/中断后的HTTP重试留4C-3。
+
+4C-1提交e76da7b；本小批提交题名feat: complete frozen host summaries atomically。
+
+4C-2受影响调度/轮次事务/启动恢复回归57项通过（28.71秒）；契约/文档检查通过。

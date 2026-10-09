@@ -474,7 +474,12 @@
     "host_task": null,
     "public_focus": "",
     "through_turn": null,
-    "insight_version": null
+    "insight_version": null,
+    "insights": {
+      "version": 0,
+      "through_turn": 0,
+      "items": []
+    }
   },
   "model_requests": [
     {
@@ -493,7 +498,12 @@
       "host_task": null,
       "public_focus": "",
       "through_turn": null,
-      "insight_version": null
+      "insight_version": null,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     },
     {
       "task": "intent",
@@ -593,7 +603,12 @@
       "host_task": null,
       "public_focus": "",
       "through_turn": null,
-      "insight_version": null
+      "insight_version": null,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     },
     {
       "task": "utterance",
@@ -693,7 +708,12 @@
       "host_task": "linking",
       "public_focus": "",
       "through_turn": null,
-      "insight_version": null
+      "insight_version": null,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     },
     {
       "task": "host_control",
@@ -793,7 +813,12 @@
       "host_task": null,
       "public_focus": "",
       "through_turn": null,
-      "insight_version": null
+      "insight_version": null,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     },
     {
       "task": "insights",
@@ -893,7 +918,12 @@
       "host_task": null,
       "public_focus": "",
       "through_turn": 3,
-      "insight_version": 1
+      "insight_version": 1,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     },
     {
       "task": "summary",
@@ -992,8 +1022,32 @@
       "target_message_id": null,
       "host_task": null,
       "public_focus": "",
-      "through_turn": null,
-      "insight_version": null
+      "through_turn": 3,
+      "insight_version": null,
+      "insights": {
+        "version": 1,
+        "through_turn": 3,
+        "items": [
+          {
+            "id": "e818bca0-7422-54a8-a34d-5b9b69ad78ab",
+            "kind": "consensus",
+            "content": "两位专家认可先进行小规模试点。",
+            "source_message_ids": [
+              "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+              "a0586831-6bc6-5ea1-b0ff-1aa124370228"
+            ]
+          },
+          {
+            "id": "1419f119-cfa9-5374-9712-0e31191dc9a6",
+            "kind": "disagreement",
+            "content": "成本上限仍需讨论。",
+            "source_message_ids": [
+              "5dc3b45b-a843-5456-bd37-f09e4db25b90",
+              "a0586831-6bc6-5ea1-b0ff-1aa124370228"
+            ]
+          }
+        ]
+      }
     },
     {
       "task": "utterance",
@@ -1073,7 +1127,12 @@
       "host_task": null,
       "public_focus": "核对实施成本",
       "through_turn": null,
-      "insight_version": null
+      "insight_version": null,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
     }
   ],
   "model_results": [
@@ -1156,7 +1215,7 @@
     },
     {
       "task": "summary",
-      "content": "确定性模拟摘要：目前上下文包含 3 条正式消息。此结果仅用于工程校验。"
+      "content": "主持人总结（确定性模拟）：围绕“是否推行四天工作制？”，已记录3条正式发言。\n主要观点：我认可先小规模试点，成本上限需另行验证。；我同意先试点，但成本上限仍有分歧。\n已有共识：两位专家认可先进行小规模试点。\n未解决分歧：成本上限仍需讨论。\n下一步：核对正式来源与适用条件。本结果仅验证工程流程，不代表真实模型分析。"
     }
   ]
 }

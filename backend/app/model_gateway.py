@@ -99,5 +99,8 @@ class DeterministicModelGateway:
             sources=[m.id for m in list(by_actor.values())[:2]]
             raw = {'task': 'insights', 'items': [] if len(sources)<2 else [{'id':uuid5(request.run_id,f'insight:{request.through_turn}:demo'),'kind':'consensus','content':'两位专家均明确声明其发言是确定性模型的工程演示内容。','source_message_ids':sources}]}
         else:
-            raw = {'task': 'summary', 'content': f'确定性模拟摘要：目前上下文包含 {len(request.messages)} 条正式消息。此结果仅用于工程校验。'}
+            points=[m.content[:120] for m in request.messages if m.kind=='statement'][:3]
+            consensus=[i.content for i in request.insights.items if i.kind=='consensus']
+            differences=[i.content for i in request.insights.items if i.kind=='disagreement']
+            raw = {'task': 'summary', 'content': f'主持人总结（确定性模拟）：围绕“{request.topic}”，已记录{request.through_turn}条正式发言。\n主要观点：'+('；'.join(points) if points else '尚无专家正式发言，证据不足。')+'\n已有共识：'+('；'.join(consensus) if consensus else '目前没有充分来源支持的共同认可观点。')+'\n未解决分歧：'+('；'.join(differences) if differences else '未提取到有充分依据的具体分歧，仍需进一步验证。')+'\n下一步：核对正式来源与适用条件。本结果仅验证工程流程，不代表真实模型分析。'}
         return validate_result(request, raw)

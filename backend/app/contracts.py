@@ -1,5 +1,6 @@
 """Versioned public contracts and provider-independent structured output shapes."""
 import re
+import json
 from typing import Annotated, Literal, Self
 from uuid import UUID
 
@@ -128,8 +129,21 @@ class InsightStatus(Contract):
     error_code: str | None = None
 
 
+def validate_natural_summary(value: str) -> str:
+    if value.startswith('```'):
+        raise ValueError('summary cannot be a code block')
+    try:
+        json.loads(value)
+    except ValueError:
+        return value
+    raise ValueError('summary cannot be raw JSON')
+
+
+NaturalSummary = Annotated[str, StringConstraints(strip_whitespace=True,min_length=1,max_length=4000),AfterValidator(validate_natural_summary)]
+
+
 class Summary(Contract):
-    content: Annotated[str, StringConstraints(min_length=1, max_length=4000)]
+    content: NaturalSummary
     through_turn: Nonnegative
     created_at: AwareDatetime
 
@@ -331,6 +345,7 @@ class ModelRequest(Contract):
 
     through_turn: Nonnegative | None = None
     insight_version: Positive | None = None
+    insights: InsightBatch = Field(default_factory=InsightBatch)
 
     @model_validator(mode='after')
     def context_scope(self) -> Self:
@@ -373,8 +388,18 @@ class ModelRequest(Contract):
                 raise ValueError('insights require boundary and version')
             if [m.turn_no for m in self.messages] != list(range(1,self.through_turn+1)):
                 raise ValueError('insights require full frozen prefix')
+        elif self.task == 'summary':
+            if self.through_turn is None or self.insight_version is not None or actor is None or actor.kind != 'HOST':
+                raise ValueError('summary requires host and boundary')
+            if [m.turn_no for m in self.messages] != list(range(1,self.through_turn+1)):
+                raise ValueError('summary requires full frozen prefix')
+            if self.insights.through_turn>self.through_turn:
+                raise ValueError('summary insights beyond boundary')
+            validate_insight_evidence(self.participants,tuple(m for m in self.messages if m.turn_no<=self.insights.through_turn),self.insights.items)
         elif self.insight_version is not None or self.through_turn is not None:
             raise ValueError('extraction fields belong to insights')
+        if self.task!='summary' and self.insights!=InsightBatch():
+            raise ValueError('summary insights belong only to summary')
         return self
 
 
@@ -414,7 +439,7 @@ class InsightsResult(Contract):
 
 class SummaryResult(Contract):
     task: Literal['summary']
-    content: Annotated[str, StringConstraints(min_length=1, max_length=4000)]
+    content: NaturalSummary
 
 
 ModelResult = Annotated[RosterResult | IntentResult | UtteranceResult | HostControlResult | InsightsResult | SummaryResult, Field(discriminator='task')]

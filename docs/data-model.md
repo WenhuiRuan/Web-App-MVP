@@ -90,3 +90,16 @@ erDiagram
     insights ||--|{ insight_sources : cites
     messages ||--o{ insight_sources : evidence
 ```
+
+
+## 004总结领取与完成约束（4C-2）
+
+summary_jobs(id PK,discussion_id,run_id,attempt,through_turn,insight_version,operation_id nullable,status,error_code)；attempt按run递增，PENDING部分唯一索引确保同run最多一个有效领取。run与operation均复合归属FK；自动总结operation_id为空，后续手动重试关联summary-retry操作。状态PENDING/SUCCEEDED/FAILED/INTERRUPTED；领取冻结观点版本用于重建模型上下文。summaries插入必须匹配runs.summary_through_turn；COMPLETED状态写入必须已有对应总结。总结/job成功/运行COMPLETED/summary.ready/讨论COMPLETED同事务。
+
+```mermaid
+erDiagram
+    runs ||--o{ summary_jobs : attempts
+    operations o|--o{ summary_jobs : retry_command
+    runs ||--o| summaries : frozen_result
+    insight_batches o|--o{ summary_jobs : captured_version
+```

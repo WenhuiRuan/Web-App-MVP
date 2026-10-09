@@ -2,9 +2,10 @@
 from dataclasses import dataclass
 from uuid import UUID, uuid4
 
-from .contracts import InsightBatch, ModelRequest
+from .contracts import InsightBatch, ModelRequest, Summary
 from .model_gateway import validate_result
 from .run_repository import RunRepository
+from .repository import timestamp
 
 
 @dataclass(frozen=True)
@@ -68,4 +69,72 @@ class SynthesisRepository(RunRepository):
         with self.transaction() as conn:
             if self._insight_guard(conn,claim) is None: return False
             conn.execute("UPDATE insight_jobs SET state='FAILED',error_code=? WHERE id=?",(code,str(claim.id)))
+            return True
+
+    def _summary_request(self,conn,job):
+        snapshot=self._snapshot(conn,job['discussion_id']); d=snapshot.discussion
+        batch=InsightBatch()
+        if job['insight_version']:
+            row=conn.execute('SELECT * FROM insight_batches WHERE discussion_id=? AND run_id=? AND version=?',(job['discussion_id'],job['run_id'],job['insight_version'])).fetchone()
+            items=[]
+            for item in conn.execute('SELECT id,kind,content FROM insights WHERE discussion_id=? AND run_id=? AND batch_version=? ORDER BY id',(job['discussion_id'],job['run_id'],job['insight_version'])):
+                sources=[r['message_id'] for r in conn.execute('SELECT message_id FROM insight_sources WHERE discussion_id=? AND run_id=? AND batch_version=? AND insight_id=? ORDER BY message_id',(job['discussion_id'],job['run_id'],job['insight_version'],item['id']))]
+                items.append(dict(item)|{'source_message_ids':sources})
+            batch=InsightBatch(version=row['version'],through_turn=row['through_turn'],items=items)
+        return ModelRequest(task='summary',discussion_id=d.id,run_id=d.run_id,topic=d.topic,expert_count=d.expert_count,roster_revision=d.roster_revision,
+                            actor_id=next(p.id for p in snapshot.participants if p.kind=='HOST'),participants=snapshot.participants,
+                            messages=tuple(m for m in snapshot.messages if m.turn_no<=job['through_turn']),through_turn=job['through_turn'],insights=batch)
+
+    def _new_summary_job(self,conn,did,rid,operation_id=None):
+        row=self._discussion(conn,did)
+        run=conn.execute('SELECT * FROM runs WHERE discussion_id=? AND id=?',(str(did),str(rid))).fetchone()
+        snapshot=self._snapshot(conn,did)
+        if row['state']!='SUMMARIZING' or run is None or row['current_run_id']!=str(rid) or run['status']!='ACTIVE' or run['summary_through_turn'] is None: return None
+        if conn.execute("SELECT 1 FROM summary_jobs WHERE discussion_id=? AND run_id=? AND status='PENDING'",(str(did),str(rid))).fetchone(): return None
+        attempt=(conn.execute('SELECT max(attempt) FROM summary_jobs WHERE discussion_id=? AND run_id=?',(str(did),str(rid))).fetchone()[0] or 0)+1
+        jid=uuid4()
+        conn.execute('INSERT INTO summary_jobs(id,discussion_id,run_id,attempt,through_turn,insight_version,operation_id) VALUES (?,?,?,?,?,?,?)',
+                     (str(jid),str(did),str(rid),attempt,run['summary_through_turn'],snapshot.insights.version,str(operation_id) if operation_id else None))
+        job=conn.execute('SELECT * FROM summary_jobs WHERE id=?',(str(jid),)).fetchone()
+        return SynthesisClaim(jid,self._summary_request(conn,job))
+
+    def claim_summary(self,did,rid):
+        with self.transaction() as conn:
+            if conn.execute('SELECT 1 FROM summary_jobs WHERE discussion_id=? AND run_id=?',(str(did),str(rid))).fetchone(): return None
+            return self._new_summary_job(conn,did,rid)
+
+    def _summary_guard(self,conn,claim):
+        req=claim.request
+        job=conn.execute("SELECT j.* FROM summary_jobs j JOIN runs r ON r.discussion_id=j.discussion_id AND r.id=j.run_id JOIN discussions d ON d.id=j.discussion_id AND d.current_run_id=j.run_id WHERE j.id=? AND j.discussion_id=? AND j.run_id=? AND j.status='PENDING' AND d.state='SUMMARIZING' AND r.status='ACTIVE' AND j.through_turn=r.summary_through_turn",(str(claim.id),str(req.discussion_id),str(req.run_id))).fetchone()
+        return job if job is not None and job['through_turn']==req.through_turn else None
+
+    def complete_summary(self,claim,raw):
+        with self.transaction() as conn:
+            job=self._summary_guard(conn,claim)
+            if job is None: return False
+            result=validate_result(self._summary_request(conn,job),raw)
+            summary=Summary(content=result.content,through_turn=job['through_turn'],created_at=timestamp())
+            did,rid=job['discussion_id'],job['run_id']
+            conn.execute('INSERT INTO summaries(discussion_id,run_id,content,through_turn,created_at) VALUES (?,?,?,?,?)',(did,rid,summary.content,summary.through_turn,summary.created_at.isoformat()))
+            self._event(conn,did,'summary.ready',summary.model_dump(mode='json'),rid)
+            conn.execute("UPDATE summary_jobs SET status='SUCCEEDED' WHERE id=?",(str(claim.id),))
+            if job['operation_id']: conn.execute("UPDATE operations SET status='SUCCEEDED',error_code=NULL WHERE discussion_id=? AND id=?",(did,job['operation_id']))
+            conn.execute("UPDATE runs SET status='COMPLETED',error_code=NULL,ended_at=? WHERE discussion_id=? AND id=?",(timestamp(),did,rid))
+            self._transition(conn,did,'COMPLETED')
+            self._snapshot(conn,did)
+            return True
+
+    def fail_summary(self,claim,code):
+        if code not in ('MODEL_TIMEOUT','MODEL_RESULT_INVALID','TASK_FAILED','DATABASE_UNAVAILABLE'): raise ValueError('invalid summary failure code')
+        with self.transaction() as conn:
+            job=self._summary_guard(conn,claim)
+            if job is None: return False
+            did,rid=job['discussion_id'],job['run_id']
+            conn.execute("UPDATE summary_jobs SET status='FAILED',error_code=? WHERE id=?",(code,str(claim.id)))
+            conn.execute("UPDATE runs SET status='FAILED',error_code=?,ended_at=? WHERE discussion_id=? AND id=?",(code,timestamp(),did,rid))
+            op=job['operation_id']
+            if op: conn.execute("UPDATE operations SET status='FAILED',error_code=? WHERE discussion_id=? AND id=?",(code,did,op))
+            else: op=conn.execute("SELECT id FROM operations WHERE discussion_id=? AND kind='start' AND json_extract(response_json,'$.run_id')=? ORDER BY rowid LIMIT 1",(did,rid)).fetchone()['id']
+            self._event(conn,did,'operation.failed',{'operation_id':op,'stage':'summary','code':code,'message':'总结生成失败，消息和观点已保留，可以重试总结。','retryable':True},rid)
+            self._transition(conn,did,'FAILED','summary',code)
             return True

@@ -49,6 +49,7 @@ class TaskSupervisor:
             await DiscussionEngine(self).run(did,rid)
             from .synthesis import SynthesisEngine
             await SynthesisEngine(self).extract(did,rid)
+            await SynthesisEngine(self).summarize(did,rid)
             return
         except asyncio.CancelledError:
             raise
@@ -57,6 +58,7 @@ class TaskSupervisor:
                 await self._db_call(self.repository.finish_run,did,rid,'time_limit')
                 from .synthesis import SynthesisEngine
                 await SynthesisEngine(self).extract(did,rid)
+                await SynthesisEngine(self).summarize(did,rid)
                 return
             except RepositoryUnavailable:
                 code='DATABASE_UNAVAILABLE'

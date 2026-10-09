@@ -60,7 +60,7 @@ def test_all_mock_tasks_validate_and_do_not_share_context():
     request = ModelRequest(task='roster', discussion_id=uuid4(), topic='测试')
     roster = asyncio.run(gateway.generate(request))
     for task in ('intent', 'utterance', 'host_control', 'insights', 'summary'):
-        req = ModelRequest(task=task, discussion_id=request.discussion_id, topic='测试', run_id=uuid4(), participants=roster.participants, actor_id=roster.participants[1 if task == 'intent' else 0].id,cycle=1,host_task='opening' if task=='utterance' else None,through_turn=0 if task=='insights' else None,insight_version=1 if task=='insights' else None)
+        req = ModelRequest(task=task, discussion_id=request.discussion_id, topic='测试', run_id=uuid4(), participants=roster.participants, actor_id=roster.participants[1 if task == 'intent' else 0].id,cycle=1,host_task='opening' if task=='utterance' else None,through_turn=0 if task in ('insights','summary') else None,insight_version=1 if task=='insights' else None)
         output = asyncio.run(gateway.generate(req))
         assert output.task == task
     with pytest.raises(ValidationError):

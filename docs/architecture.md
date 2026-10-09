@@ -78,3 +78,8 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 ## 4C-1运行中观点更新
 
 SynthesisRepository继承RunRepository，新增领取/归属/最新版本守卫和观点事务；SynthesisEngine复用已验证的有限模型调用机制，使用独立INSIGHT_MAX_SECONDS。DiscussionEngine在每2条正式消息提交后调用提取，TaskSupervisor在正常结束/时长结束后补最后边界。当前采用串行有限提取以保持公开事件顺序；提取等待计入讨论实际运行时长，失败后继续推进。模型IO全在事务外，失败仅影响最新提取状态，已有观点保留。总结/恢复在4C后两个小批接续，详见backend-synthesis。
+
+
+## 4C-2主持人总结
+
+TaskSupervisor在讨论循环正常/预算结束后执行最终提取和总结；SynthesisEngine每次任务独立计时，不继承DiscussionEngine的到期deadline。持久化summary_jobs领取与状态守卫阻止重复/中断结果提交，SynthesisRepository从冻结边界和捕获观点版本重建请求后校验，完成事务保证总结及状态一致。失败仅进入FAILED/summary，保留已提交消息和观点，手动恢复接口在4C-3实现。
