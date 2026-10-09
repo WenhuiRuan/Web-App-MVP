@@ -370,7 +370,12 @@
     "roster_revision": 1,
     "actor_id": null,
     "participants": [],
-    "messages": []
+    "messages": [],
+    "cycle": 0,
+    "participation_kind": null,
+    "target_message_id": null,
+    "host_task": null,
+    "public_focus": ""
   },
   "model_results": [
     {

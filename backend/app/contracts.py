@@ -300,6 +300,11 @@ class ModelRequest(Contract):
     actor_id: UUID | None = None
     participants: tuple[Participant, ...] = ()
     messages: tuple[Message, ...] = ()
+    cycle: Nonnegative = 0
+    participation_kind: Literal['REQUEST','INTERRUPT','SUPPLEMENT','REBUT'] | None = None
+    target_message_id: UUID | None = None
+    host_task: Literal['opening','followup','linking'] | None = None
+    public_focus: Annotated[str, StringConstraints(max_length=140)] = ''
 
     @model_validator(mode='after')
     def context_scope(self) -> Self:
@@ -315,6 +320,20 @@ class ModelRequest(Contract):
         if self.task in ('intent', 'utterance', 'host_control') and self.actor_id not in ids:
             raise ValueError('actor required in roster')
         actor = next((p for p in self.participants if p.id == self.actor_id), None)
+        if self.task in ('intent','utterance','host_control') and self.cycle < 1:
+            raise ValueError('positive cycle required')
+        if self.task == 'utterance':
+            if actor.kind == 'HOST':
+                if self.host_task is None or self.participation_kind or self.target_message_id:
+                    raise ValueError('host utterance requires only host task')
+            elif self.participation_kind is None or self.host_task:
+                raise ValueError('expert utterance requires participation type')
+            if self.participation_kind in ('SUPPLEMENT','REBUT') and self.target_message_id is None:
+                raise ValueError('response target required')
+            if self.target_message_id and not any(m.id == self.target_message_id and m.participant_id != self.actor_id for m in self.messages):
+                raise ValueError('invalid response target')
+        elif self.host_task or self.participation_kind or self.target_message_id or self.public_focus:
+            raise ValueError('utterance context belongs only to utterance')
         if self.task == 'intent' and (actor is None or actor.kind != 'EXPERT'):
             raise ValueError('only experts submit intents')
         if self.task == 'host_control' and (actor is None or actor.kind != 'HOST'):

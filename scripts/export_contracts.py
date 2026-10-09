@@ -44,7 +44,7 @@ def example_data():
     failure['discussion_id'] = '44444444-4444-4444-8444-444444444444'
     results = [roster]
     for task in ('intent', 'utterance', 'host_control', 'insights', 'summary'):
-        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=[message])
+        context = ModelRequest(task=task, discussion_id=d, run_id=run, topic=req.topic, actor_id=participants[1 if task == 'intent' else 0]['id'], participants=participants, messages=[message],cycle=1,host_task='linking' if task=='utterance' else None)
         results.append(asyncio.run(gateway.generate(context)).model_dump(mode='json'))
     return ContractExamples.model_validate({
         'create': {'topic': req.topic, 'expert_count': 4}, 'start': {'roster_revision': 1},

@@ -37,6 +37,10 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
                 raise ValueError('foreign target')
             if result.kind in ('SUPPLEMENT', 'REBUT') and result.target_message_id is None:
                 raise ValueError('missing target')
+            if result.kind=='PASS' and result.target_message_id:
+                raise ValueError('pass cannot respond')
+            if result.target_message_id and any(m.id==result.target_message_id and m.participant_id==request.actor_id for m in request.messages):
+                raise ValueError('self response')
         if result.task == 'insights':
             if len({i.id for i in result.items}) != len(result.items):
                 raise ValueError('duplicate insight')

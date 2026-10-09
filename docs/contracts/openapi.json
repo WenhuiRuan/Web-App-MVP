@@ -2002,6 +2002,66 @@
             },
             "title": "Messages",
             "type": "array"
+          },
+          "cycle": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Cycle",
+            "type": "integer"
+          },
+          "participation_kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "REQUEST",
+                  "INTERRUPT",
+                  "SUPPLEMENT",
+                  "REBUT"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Participation Kind"
+          },
+          "target_message_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Target Message Id"
+          },
+          "host_task": {
+            "anyOf": [
+              {
+                "enum": [
+                  "opening",
+                  "followup",
+                  "linking"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Host Task"
+          },
+          "public_focus": {
+            "default": "",
+            "maxLength": 140,
+            "title": "Public Focus",
+            "type": "string"
           }
         },
         "required": [
