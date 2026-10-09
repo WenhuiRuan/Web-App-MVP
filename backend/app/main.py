@@ -17,6 +17,7 @@ from .model_gateway import DeterministicModelGateway
 from .repository import DiscussionRepository
 from .lifecycle import LifecycleError, RepositoryUnavailable
 from .discussion_api import router
+from .tasks import TaskSupervisor
 
 logger = logging.getLogger('panel')
 
@@ -59,7 +60,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.database = database
         app.state.repository = DiscussionRepository(database)
         app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else None
-        yield
+        app.state.tasks = TaskSupervisor(app.state.repository, config, lambda: app.state.model_gateway)
+        try:
+            yield
+        finally:
+            await app.state.tasks.close()
 
     app = FastAPI(title='AI Panel Studio — foundation API', version='0.2.0', lifespan=lifespan,
                   responses={422: {'model': ErrorResponse}, 500: {'model': ErrorResponse}})
@@ -90,8 +95,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.exception_handler(LifecycleError)
     async def lifecycle_error(request, exc):
-        status = 404 if exc.code in ('DISCUSSION_NOT_FOUND', 'OPERATION_NOT_FOUND') else 422 if exc.code == 'VALIDATION_ERROR' else 409
-        return error_response(request, status, exc.code, exc.message)
+        status = 404 if exc.code in ('DISCUSSION_NOT_FOUND', 'OPERATION_NOT_FOUND') else 422 if exc.code == 'VALIDATION_ERROR' else 503 if exc.code in ('CAPACITY_EXCEEDED','MODEL_NOT_CONFIGURED','SERVICE_SHUTTING_DOWN') else 409
+        response = error_response(request, status, exc.code, exc.message, exc.code in ('CAPACITY_EXCEEDED','SERVICE_SHUTTING_DOWN'))
+        if exc.code == 'CAPACITY_EXCEEDED':
+            response.headers['Retry-After'] = '2'
+        return response
 
     @app.exception_handler(RepositoryUnavailable)
     async def repository_error(request, _exc):

@@ -148,3 +148,13 @@
 对应实现：repository的短写事务和一致性读快照；lifecycle错误与HTTP映射分离；discussion_api传输层严格契约校验。网络/模型调用不会进入写事务。目标OpenAPI导出现在保留真实挂载端点并标x-implemented=true，未来路由继续false。没有修改前端布局或读取前端台本。
 
 4A-1收尾：全量pytest 48通过（含17个新增），机器契约重新导出后检查通过，文档93条需求/103条验收/13份文档检查通过。提交 `feat: persist discussion creation and scoped queries`，暂存范围仅后端代码/测试、契约产物与本批文档；后续4A-2/3尚未实现。原有Starlette关于httpx测试客户端的弃用提示继续保留，未新增依赖。
+
+## 阶段4第一批：4A-2 嘉宾任务与阵容原子提交
+
+先新增10个生命周期/容量规则测试，首次运行因generation_revision未实现产生导入错误；单独运行17个后台接口场景，17失败（生成路由404）。随后实现纯生命周期判定、受监管TaskSupervisor、全局模型Semaphore、生成受理/领取/成功/失败事务和结果二次校验，27个新增场景与4A-1共44通过。
+
+后台请求立即返回202，operation先ACCEPTED，领取后RUNNING；同键重放冻结受理响应且注册表不重复排队，不同键在GENERATING/READY下409。模型调用在事务外，用配置超时；无真实模型适配时503且不变更DRAFT。正常完整阵容与roster.ready/READY及operation成功同事务；部分角色插入失败、成功事件写失败均回滚完整阵容，另一个事务记录可重试失败。任务异常只保存固定脱敏错误，不传播模型原文或日志秘密。
+
+新测试覆盖9类非法模型输出（缺必要字段、缺主持、人数、讨论归属、revision、重复ID/姓名/色标、错task），超时/未知异常、新键重试/旧失败键重放、角色/成功事件写失败回滚，2/6专家双讨论并发不串场，模型并发1时的排队和活动容量边界。后台模型来自独立DeterministicModelGateway，不读取前端台本。
+
+普通默认值进一步明确：容量统计GENERATING/RUNNING/SUMMARIZING中的工作讨论（默认3），列表active仍只RUNNING/SUMMARIZING；模型并发默认4。就绪阵容释放生成容量，确认启动时再检查运行容量。TaskSupervisor目前负责生成任务取消/收集，关闭后的持久化中断与重启恢复在4A-3先测试后实现，尚不宣称已完成。

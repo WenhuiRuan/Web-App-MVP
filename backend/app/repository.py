@@ -136,3 +136,80 @@ class DiscussionRepository:
                 last = selected[-1]
                 next_cursor = base64.urlsafe_b64encode(encoded([last['created_at'], last['id']]).encode()).decode().rstrip('=')
             return DiscussionList(items=[self._public_discussion(row) for row in selected], next_cursor=next_cursor)
+
+    def _transition(self, conn, discussion_id, state, failure_stage=None):
+        row = self._discussion(conn, discussion_id)
+        version = row['version'] + 1
+        conn.execute('UPDATE discussions SET state=?,failure_stage=?,version=?,updated_at=? WHERE id=?', (state, failure_stage, version, timestamp(), str(discussion_id)))
+        self._event(conn, discussion_id, 'discussion.state_changed', {'state':state,'version':version,'failure_stage':failure_stage}, row['current_run_id'])
+
+    def _capacity(self, conn, max_active):
+        from .lifecycle import require_capacity
+        count = conn.execute("SELECT count(*) FROM discussions WHERE state IN ('GENERATING','RUNNING','SUMMARIZING')").fetchone()[0]
+        require_capacity(count, max_active)
+
+    def admit_generation(self, discussion_id, key, max_active, gateway_available):
+        from .lifecycle import generation_revision
+        did = str(discussion_id)
+        with self.transaction() as conn:
+            cached, digest = self._replay(conn, did, 'roster-generation', key, {})
+            if cached:
+                op = conn.execute('SELECT status FROM operations WHERE id=? AND discussion_id=?', (cached.body['operation_id'], did)).fetchone()
+                return cached, op['status'] == 'ACCEPTED'
+            row = self._discussion(conn, did)
+            generation_revision(row['state'], row['failure_stage'], row['roster_revision'])
+            if not gateway_available:
+                raise LifecycleError('MODEL_NOT_CONFIGURED', '真实模型适配尚未实现，请使用 mock 模式。')
+            self._capacity(conn, max_active)
+            op_id = uuid4()
+            self._transition(conn, did, 'GENERATING')
+            response = StoredResponse(202, {'operation_id':str(op_id),'discussion_id':did,'state':'GENERATING','run_id':None})
+            self._save_operation(conn, op_id, did, did, 'roster-generation', key, digest, 'ACCEPTED', response)
+            return response, True
+
+    def claim_generation(self, operation_id):
+        from .contracts import ModelRequest
+        with self.transaction() as conn:
+            op = conn.execute("SELECT * FROM operations WHERE id=? AND kind='roster-generation' AND status='ACCEPTED'", (str(operation_id),)).fetchone()
+            if not op:
+                return None
+            row = self._discussion(conn, op['discussion_id'])
+            if row['state'] != 'GENERATING':
+                return None
+            conn.execute("UPDATE operations SET status='RUNNING' WHERE id=? AND discussion_id=? AND status='ACCEPTED'", (str(operation_id), row['id']))
+            return ModelRequest(task='roster', discussion_id=row['id'], topic=row['topic'], expert_count=row['expert_count'], roster_revision=row['roster_revision']+1)
+
+    def complete_generation(self, operation_id, request, result):
+        from .model_gateway import validate_result
+        result = validate_result(request, result)
+        with self.transaction() as conn:
+            op = conn.execute("SELECT * FROM operations WHERE id=? AND discussion_id=? AND kind='roster-generation' AND status='RUNNING'", (str(operation_id), str(request.discussion_id))).fetchone()
+            if not op:
+                return False
+            row = self._discussion(conn, request.discussion_id)
+            if row['state'] != 'GENERATING' or row['roster_revision']+1 != request.roster_revision:
+                return False
+            did, revision = row['id'], request.roster_revision
+            conn.execute('INSERT INTO rosters(discussion_id,revision) VALUES (?,?)', (did, revision))
+            for person in result.participants:
+                conn.execute('INSERT INTO participants(id,discussion_id,roster_revision,kind,name,title,stance,color) VALUES (?,?,?,?,?,?,?,?)',
+                             (str(person.id),str(person.discussion_id),person.roster_revision,person.kind,person.name,person.title,person.stance,person.color))
+            conn.execute('UPDATE discussions SET roster_revision=? WHERE id=?', (revision,did))
+            self._event(conn, did, 'roster.ready', {'roster_revision':revision,'participants':[p.model_dump(mode='json') for p in result.participants]})
+            self._transition(conn, did, 'READY')
+            conn.execute("UPDATE operations SET status='SUCCEEDED',error_code=NULL WHERE id=? AND discussion_id=?", (str(operation_id),did))
+            self._snapshot(conn,did)  # Validate the entire public projection before commit.
+            return True
+
+    def fail_generation(self, operation_id, code, message):
+        with self.transaction() as conn:
+            op = conn.execute("SELECT * FROM operations WHERE id=? AND kind='roster-generation' AND status IN ('ACCEPTED','RUNNING')", (str(operation_id),)).fetchone()
+            if not op:
+                return False
+            row = self._discussion(conn, op['discussion_id'])
+            if row['state'] != 'GENERATING':
+                return False
+            conn.execute("UPDATE operations SET status='FAILED',error_code=? WHERE id=? AND discussion_id=?", (code,str(operation_id),row['id']))
+            self._event(conn,row['id'],'operation.failed',{'operation_id':str(operation_id),'stage':'roster','code':code,'message':message,'retryable':True})
+            self._transition(conn,row['id'],'FAILED','roster')
+            return True

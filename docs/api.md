@@ -6,7 +6,7 @@
 
 - **已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述这些真实可用端点。
 - **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
-- **4A-1已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`；其余业务操作仍待本批后续，SSE与总结重试留后续批次。未挂载路由返回统一404。
+- **4A-1已挂载**：POST/GET `/api/discussions`、GET `/api/discussions/{discussion_id}`；4A-2已挂载嘉宾生成；启动与操作查询待4A-3，SSE与总结重试留后续批次。未挂载路由返回统一404。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
 
