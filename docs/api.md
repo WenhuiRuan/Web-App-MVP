@@ -244,3 +244,7 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 
 
 阶段6A收尾：模型模式由后端MODEL_THINKING_MODE/REASONING_EFFORT/THINKING_MAX_TOKENS控制，六任务保持原结构化结果契约。上游reasoning_content不消费、不保存、不下发；公开HTTP/SSE字段不增加隐藏推理。真实服务徽标仍区分DeepSeek与模拟模式；模式就绪不证明内容正确。
+
+验收收尾补丁：迁移006允许观点/总结任务表保存全部安全供应商错误码，修复402等失败写入回滚后页面滞留PENDING的问题。观点失败发布insights.status_changed并保留最新成功批次；总结失败发布原失败事件与FAILED/failure_stage=summary/failure_code，用户使用原summary-retry接口和新幂等键重试同run及冻结边界。不可重试指统一调用层不自动重试，余额/配置修复后的用户显式重试仍允许；并发领取及迟到结果守卫不变。
+
+HTTP/SSE字段与导出schema不变。多步观点/总结按每HTTP超时和统一有限总预算分别限制，普通任务规则不变；具体参数见model-provider.md。ready仍不检查余额，不能由ready成功推断真实调用可用。

@@ -113,3 +113,11 @@ erDiagram
 ## 阶段5兼容迁移005
 
 events.type追加insights.status_changed；实体/关联不变，原ER图继续有效。已有insight_jobs状态与新事件在同事务中保存；快照InsightStatus与成功InsightBatch分离。005复制后替换events表并恢复原连续/不可变触发器，不重置seq，不重写历史payload。重复迁移为无操作，旧迁移校验和继续检查。
+
+## 阶段6A兼容迁移006
+
+旧003/004的insight_jobs.error_code与summary_jobs.error_code只允许原五种错误，真实402使失败事务回滚。006在同一迁移事务中重建这两个子表，保留全部行、列顺序、归属外键、版本/边界/attempt唯一约束及one_pending_summary索引，不改001–005或历史校验和。ER关系不变。
+
+允许原MODEL_TIMEOUT、MODEL_RESULT_INVALID、TASK_FAILED、DATABASE_UNAVAILABLE、SERVICE_INTERRUPTED，并追加MODEL_REQUEST_INVALID、MODEL_AUTH_FAILED、MODEL_BALANCE_EXHAUSTED、MODEL_NOT_FOUND、MODEL_RATE_LIMITED、MODEL_SERVICE_UNAVAILABLE、MODEL_CONNECTION_FAILED。业务失败状态和对应事件继续原子提交。全新初始化应用1–6，v5升级仅应用6，重复执行为空；旧PENDING行保留，由原启动恢复规则转INTERRUPTED，不自动调用模型。
+
+七类供应商失败、同run冻结边界重试、已有消息/观点保留及v5升级测试通过；失败真实库的SQLite备份已通过真实FastAPI启动恢复，无模型调用。备份验证不改写原场，不作为真实总结成功证据。

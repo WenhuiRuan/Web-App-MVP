@@ -17,7 +17,7 @@ def seed(db):
 
 def test_migration_repeat_keeps_data_and_constraints(tmp_path):
     db = Database(tmp_path / 'test.sqlite3')
-    assert db.migrate() == [1,2,3,4,5]
+    assert db.migrate() == [1,2,3,4,5,6]
     seed(db)
     assert db.migrate() == []
     with db.connect() as conn:
@@ -111,7 +111,7 @@ def test_second_migration_upgrades_existing_runs_without_editing_first_history(t
     assert db.migrate()==[1]
     seed(db)
     upgraded=Database(db.path)
-    assert upgraded.migrate()==[2,3,4,5] and upgraded.migrate()==[]
+    assert upgraded.migrate()==[2,3,4,5,6] and upgraded.migrate()==[]
     with upgraded.connect() as conn:
         assert conn.execute('SELECT count(*) FROM runs').fetchone()[0]==2
         assert conn.execute('SELECT cycle FROM runs').fetchone()[0]==0
