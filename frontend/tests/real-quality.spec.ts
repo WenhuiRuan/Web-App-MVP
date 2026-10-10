@@ -22,7 +22,7 @@ test('corrected real model flows from creation through live evidence to final su
   await expect(page.getByRole('heading', { name: '现场 Transcript' })).toBeVisible()
   const observations: unknown[] = []; const versions: unknown[] = []
   let snapshot: Snapshot | undefined; let version = 0; let savedWaiting = false; let savedLive = false
-  for (let attempt = 0; attempt < 330; attempt++) {
+  for (let attempt = 0; attempt < Number(process.env.PANEL_REAL_WAIT_SECONDS || 330); attempt++) {
     snapshot = await (await page.request.get(`/api/discussions/${id}`)).json() as Snapshot
     observations.push({ elapsed_ms: Date.now() - started, state: snapshot.discussion.state,
       messages: snapshot.messages.length, insight_status: snapshot.insight_status,

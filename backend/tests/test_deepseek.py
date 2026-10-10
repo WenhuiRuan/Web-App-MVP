@@ -40,7 +40,8 @@ def summary_review(introduction='主持人总结：仅认可有限试点，细�
 
 
 @pytest.mark.parametrize('task', ['roster','intent','utterance','host_control','insights','summary'])
-def test_six_tasks_send_json_non_thinking_and_bind_identity(task):
+@pytest.mark.parametrize('mode', ['disabled','enabled'])
+def test_six_tasks_send_json_configured_thinking_and_bind_identity(task, mode):
     from backend.app.deepseek_gateway import DeepSeekGateway
     req=request(task); seen=[]
     outputs={'roster':{'participants':[{'kind':'HOST' if i==0 else 'EXPERT','name':f'嘉宾{i}','title':f'专业{i}','stance':f'观点{i}'} for i in range(5)]},'intent':{'kind':'REBUT','target_turn':1,'relevance':85,'public_focus':'课堂纪律'},'utterance':{'sentences':['需要核对执行成本。']},'host_control':{'action':'followup','public_focus':'请比较边界'},'insights':{'items':[{'kind':'consensus','content':'两位专家认可有限试点。','source_turns':[2,3],'evidence':[{'turn':2,'quote':'我认可有限试点'},{'turn':3,'quote':'我认可有限试点'}]}]},'summary':{'content':'主持人总结：认可有限试点，执行成本仍需验证。'}}
@@ -52,12 +53,15 @@ def test_six_tasks_send_json_non_thinking_and_bind_identity(task):
             output={'reviews':[{'index':i,'checks':checks(),'content':point['content'],'source_turns':point['source_turns']} for i,point in enumerate(context['candidate']['items'])]} if task=='insights' and 'candidate' in context else summary_review() if task=='summary' and 'candidate' in context else outputs[task]
             return httpx.Response(200,json=answer(output))
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
-            gateway=DeepSeekGateway(config(),client=client)
+            gateway=DeepSeekGateway(config(model_thinking_mode=mode,model_reasoning_effort='high',model_thinking_max_tokens=8192),client=client)
             result=await gateway.generate(req)
             assert result.task==task
             assert 'NEVER-SAVE-THIS' not in repr(gateway.metrics)
             assert gateway.metrics[-1]['usage']['total_tokens']==120
-            assert seen[0]['thinking']=={'type':'disabled'} and seen[0]['response_format']=={'type':'json_object'}
+            assert all(body['thinking']=={'type':mode} and body['response_format']=={'type':'json_object'} for body in seen)
+            if mode=='enabled':
+                assert all(body['reasoning_effort']=='high' and body['max_tokens']==8192 for body in seen)
+            else: assert all('reasoning_effort' not in body for body in seen)
             assert seen[0]['stream'] is False and 'json' in seen[0]['messages'][0]['content'].lower()
             assert req.topic in seen[0]['messages'][1]['content']
             if task=='roster': assert all(p.discussion_id==req.discussion_id and p.roster_revision==1 for p in result.participants)

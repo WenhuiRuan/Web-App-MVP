@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     model_name: str = Field(default='', repr=False, exclude=True)
     model_api_key: SecretStr = Field(default=SecretStr(''), repr=False, exclude=True)
     model_timeout_seconds: int = Field(default=30, ge=1, le=120)
+    model_thinking_mode: Literal['enabled', 'disabled'] = 'enabled'
+    model_reasoning_effort: Literal['low', 'high', 'max'] = 'high'
+    model_thinking_max_tokens: int = Field(default=8192, ge=1024, le=32768)
     model_max_concurrency: int = Field(default=4, ge=1, le=16)
     model_max_attempts: int = Field(default=2, ge=1, le=3)
     discussion_max_active: int = Field(default=3, ge=1, le=10)

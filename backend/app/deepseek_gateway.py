@@ -111,6 +111,15 @@ class SummaryReview(Contract):
     pending: tuple[SummaryPending, ...] = Field(max_length=2)
 
 
+def distinct_evidence(items):
+    """One rendering per identical kind/source excerpt set; not semantic equivalence."""
+    distinct={}
+    for item in items:
+        key=(item['kind'],tuple(sorted((q['turn'],q['quote'].strip('。！？!? ')) for q in item['evidence'])))
+        distinct.setdefault(key,item)
+    return list(distinct.values())
+
+
 def reviewed_summary(request, content):
     try:
         reviewed = SummaryReview.model_validate(json.loads(content))
@@ -149,10 +158,10 @@ def reviewed_summary(request, content):
             person=next(p for p in request.participants if p.id==messages[item.turn].participant_id)
             pending.append(f'{labels[item.issue]}（{person.name}第{item.turn}条）：“{item.quote}”')
             excerpts.add(item.quote)
-        body = '\n'.join([reviewed.introduction, '主要观点：\n' + ('\n'.join(positions) or '尚无专家明确提出方案。'),
+        body = '\n'.join([reviewed.introduction, *(['主要观点：\n' + '\n'.join(positions)] if positions else []),
             '已有共识：' + (consensus or '尚无充分共识。'),
             '未解决分歧：' + (disagreement or '尚无充分证据表明已发生明确分歧。'),
-            '待澄清：\n' + ('\n'.join(pending) or '暂无进一步明确的待澄清问题。')])
+            *(['待澄清：\n' + '\n'.join(pending)] if pending else [])])
         return json.dumps({'content': body}, ensure_ascii=False)
     except InvalidModelResult:
         raise
@@ -182,18 +191,25 @@ def reviewed_points(request, candidate, content):
                 raise invalid('review_actor_expansion')
             evidence = [q.model_dump() for q in review.evidence] if review.evidence is not None else [q for q in original['evidence'] if q['turn'] in review.source_turns]
             kind=review.kind or original['kind']
+            if kind=='disagreement' and not any(re.search(r'反对|反驳|不同意|不赞成|不支持|不接受|不认同|不再认可|不再支持|撤回',q['quote']) for q in evidence):
+                continue  # Conservative explicit-opposition gate; implicit alternatives may be omitted.
             if kind == 'consensus':
+                joined=r'同时|并记|一并|并行'
+                if re.search(joined,review.content) and any(re.search(r'还是|或',q['quote']) and not re.search(joined,q['quote']) for q in evidence):
+                    continue  # A choice expression alone cannot prove joint adoption.
                 # Conservative lexical provenance, not a semantic agreement detector.
                 quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人|次)', review.content)
                 if any(quantity not in quote['quote'] for quantity in quantities for quote in evidence):
                     continue  # Exclude this unsupported claim without discarding other candidates.
-            items.append(dict(original, kind=kind, content=review.content, source_turns=list(review.source_turns),
+            names=[p.name for p in request.participants if p.id in actors]
+            text=review.content if all(name in review.content for name in names) else '与'.join(names)+'：'+review.content
+            items.append(dict(original, kind=kind, content=text, source_turns=list(review.source_turns),
                 evidence=evidence))
         unique={}
         for item in items:
             key=(item['kind'],item['content'],tuple(sorted(item['source_turns'])))
             unique.setdefault(key,item)
-        return json.dumps({'items': list(unique.values())}, ensure_ascii=False)
+        return json.dumps({'items': distinct_evidence(list(unique.values()))}, ensure_ascii=False)
     except InvalidModelResult:
         raise
     except (ValidationError, ValueError, TypeError):
@@ -346,7 +362,7 @@ class DeepSeekGateway:
                 unique={}
                 for item in reviewed:
                     unique.setdefault((item['kind'],item['content'],tuple(sorted(item['source_turns']))),item)
-                return bind_result(request,json.dumps({'items':list(unique.values())},ensure_ascii=False))
+                return bind_result(request,json.dumps({'items':distinct_evidence(list(unique.values()))},ensure_ascii=False))
             result, _ = await self._complete(request, dict(context, candidate=candidate), 'review')
         return result
 
@@ -355,12 +371,15 @@ class DeepSeekGateway:
         metric = dict(task=request.task, discussion_id=str(request.discussion_id),
             run_id=str(request.run_id) if request.run_id else None, stage=stage, status='pending', usage=None)
         if 'review_origin_index' in context: metric['review_index']=context['review_origin_index']
-        body = dict(model=self.settings.model_name, thinking={'type': 'disabled'},
+        body = dict(model=self.settings.model_name, thinking={'type': self.settings.model_thinking_mode},
             response_format={'type': 'json_object'}, stream=False,
             max_tokens=2200 if request.task in ('roster', 'summary', 'insights') else 700,
             messages=[{'role': 'system', 'content': prompt('common') + '\n' +
                        prompt(request.task + '_review' if stage == 'review' else request.task)},
                       {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}])
+        if self.settings.model_thinking_mode == 'enabled':
+            body.update(reasoning_effort=self.settings.model_reasoning_effort,
+                max_tokens=self.settings.model_thinking_max_tokens)
         try:
             response = await self.client.post(self.settings.model_base_url.rstrip('/') + '/chat/completions',
                 headers={'Authorization': 'Bearer ' + self.settings.model_api_key.get_secret_value()}, json=body)

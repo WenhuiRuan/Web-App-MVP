@@ -113,3 +113,8 @@ DeepSeekGateway以stateless HTTP实现ModelGateway，任务Prompt在backend/prom
 最终摘要将原文精选、已有观点选择及有限待核对标签组装为可读正文，阻止自由改写备选条件或再生成另一套共识分歧；不引入领域任务/数据库迁移。模型生成的public_focus是未核实提示，回应target_message与作者由后端绑定。真实浏览器保留原场，不自动改写已提交内容；修正只在定向复测中验证，保守漏提等限制见[质量修正验收](quality-revision.md)。
 
 验收收尾：SynthesisRepository领取时注入上一成功批次；DeepSeek的review候选为已校验新草稿+前批候选，并检查全新前缀，允许重新选择原来源引文来收窄最小共同主张，not_superseded检查撤回/条件变化。程序不机械union最终结果；事务仍提交完整新批次，个别无依据候选被剔除。摘要条数/长度、疑问标记和重复片段约束在适配边界，不在前端改写。默认提取预算15秒；旧.env值优先需显式配置，原失败证据不变。
+
+
+### 阶段6A验收收尾的上游模式
+
+DeepSeek六任务允许后端配置thinking.type=enabled，统一预算仍覆盖排队、每次草稿/逐项复核及有限重试；关闭/取消守卫不变。只消费content，HTTP层不处理reasoning_content。观点旧批次是逐来源重新核对的候选；同一逐字证据集合去重，后续撤回可以删除，不机械累积。词形来源守卫仅保守过滤，语义证明来自真实输出人工复核。外部HTTP/SSE及SQLite schema没有迁移。

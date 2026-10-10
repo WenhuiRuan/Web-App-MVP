@@ -115,6 +115,9 @@ async def review(output_path, selected, live_snapshot=None, summaries_from=None,
                     raise
                 finally: save()
             try:
+                if base.get('task')=='utterance':
+                    await call(ModelRequest(**base))
+                    continue
                 if name=='live-host':
                     full=json.loads(Path(live_snapshot).read_text(encoding='utf-8'))['snapshot']
                     await call(ModelRequest(**base,task='utterance',actor_id=next(p.id for p in base['participants'] if p.kind=='HOST'),cycle=10,

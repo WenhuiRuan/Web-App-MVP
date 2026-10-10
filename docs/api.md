@@ -241,3 +241,6 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 续批最终摘要约束：positions按speaker_slot和source_turns绑定实际作者，content必须是该作者来源消息的连续原文；pending按turn/quote及有限issue标签绑定待核对片段。共识/分歧仍选已捕获批次index，正文为自然语言而非原JSON。该约束不认证原发言的事实，也不保证概述/选择/标签语义；真实检查与整场未重跑的边界见[质量修正验收](quality-revision.md)。
 
 本次验收收尾仅扩展内部ModelRequest：insights任务可带上一成功InsightBatch，要求较旧版本、同讨论/运行且来源在前批边界内，供全前缀重新审核。HTTP/SSE仍发布最新完整批次（非追加差量），不向浏览器暴露candidate/checks/草稿。旧观点经过本次复核才保留，撤回/条件变化更新或删除；个别非法来源或数量候选不连带丢失其他有效观点。上游协议详见model-provider，现有客户端投影和SQLite结构不变。
+
+
+阶段6A收尾：模型模式由后端MODEL_THINKING_MODE/REASONING_EFFORT/THINKING_MAX_TOKENS控制，六任务保持原结构化结果契约。上游reasoning_content不消费、不保存、不下发；公开HTTP/SSE字段不增加隐藏推理。真实服务徽标仍区分DeepSeek与模拟模式；模式就绪不证明内容正确。

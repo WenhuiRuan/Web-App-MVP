@@ -99,6 +99,16 @@ def test_plain_proposal_cannot_be_classified_as_an_unanswered_question():
     with pytest.raises(InvalidModelResult): reviewed_summary(req,json.dumps(reviewed,ensure_ascii=False))
 
 
+def test_omitted_redundant_positions_do_not_claim_no_proposal_was_made():
+    req=library().model_copy(update={'task':'summary','insight_version':None})
+    point=bind_result(library(),json.dumps({'items':[library_point(req)]},ensure_ascii=False)).items
+    req=req.model_copy(update={'insights':InsightBatch(version=7,through_turn=11,items=point)})
+    body=json.loads(reviewed_summary(req,json.dumps(summary_review(consensus_indices=[0]),ensure_ascii=False)))['content']
+    assert '尚无专家明确提出方案' not in body
+    assert '待澄清：' not in body
+    assert point[0].content in body
+
+
 def test_summary_does_not_repeat_a_proposal_as_pending_or_duplicate_positions():
     req=request('summary'); text=req.messages[1].content
     position={'speaker_slot':1,'source_turns':[2],'content':text}
@@ -197,3 +207,27 @@ def test_summary_cannot_silently_claim_empty_when_latest_insight_is_omitted():
     req=req.model_copy(update={'task':'summary','insight_version':None,
         'actor_id':req.participants[0].id,'insights':InsightBatch(version=7,through_turn=11,items=points.items)})
     with pytest.raises(InvalidModelResult): reviewed_summary(req,json.dumps(summary_review(),ensure_ascii=False))
+
+
+def test_supplement_without_explicit_opposition_is_not_published_as_disagreement():
+    req=library()
+    point=dict(kind='disagreement',content='周敏行与郑书言对巡检是否由志愿者承担存在互斥立场。',source_turns=[3,6],
+        evidence=[dict(turn=t,quote=req.messages[t-1].content) for t in (3,6)])
+    output={'reviews':[dict(index=0,source_turns=[3,6],content=point['content'],checks=checks(not_superseded=True))]}
+    assert bind_result(req,reviewed_points(req,{'items':[point]},json.dumps(output,ensure_ascii=False))).items==()
+
+
+def test_selection_question_does_not_support_a_joint_recording_consensus():
+    req=library()
+    point=dict(kind='consensus',content='高远舟与沈知微共同建议同时记录门禁告警次数与盘点差额。',source_turns=[8,9],
+        evidence=[dict(turn=t,quote=req.messages[t-1].content) for t in (8,9)])
+    output={'reviews':[dict(index=0,source_turns=[8,9],content=point['content'],checks=checks(not_superseded=True))]}
+    assert bind_result(req,reviewed_points(req,{'items':[point]},json.dumps(output,ensure_ascii=False))).items==()
+
+
+def test_same_exact_evidence_does_not_repeat_rephrased_claim():
+    req=library(); p=library_point(req)
+    output={'reviews':[dict(index=i,source_turns=[4,6],evidence=p['evidence'],
+        content=p['content'] if i==0 else '双方共同建议统计这两项指标，用来判断是否调整时段。',checks=checks(not_superseded=True)) for i in (0,1)]}
+    result=bind_result(req,reviewed_points(req,{'items':[p,p]},json.dumps(output,ensure_ascii=False)))
+    assert len(result.items)==1

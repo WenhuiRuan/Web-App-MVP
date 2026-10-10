@@ -76,3 +76,12 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 总结必须覆盖捕获批次的全部观点index，避免现场有有效共识而正文说没有。若总结再次认为候选不可靠而遗漏，触发summary_insight_omission及原有限失败/重试，不发布不一致正文；需人工核对提取结果，不强制模型确认无依据观点。该约束会使错误或过时提取造成总结失败，属于拒绝不一致而非语义认证。
 
 草稿按候选校验引文与身份，个别非法来源项剔除，其他有效项仍进入复核；全部非法且没有前批候选时任务失败。复核可以从同一来源重选连续引文以收窄最小交集；最终仍经原ModelResult/Snapshot跨字段验证，空结果允许。来源扩展/格式异常仍有限失败，不落未经校验的数据。任务预算默认15秒（原10秒在双调用+重试时耗尽），排队/两段IO/退避计入预算。真实.env不改写，原配置10秒者需在后端进程设置INSIGHT_MAX_SECONDS=15再启动，环境值优先；最终验证显式使用15秒，不宣称旧配置已自动变更。
+
+
+## 思考模式（用户追加授权）
+
+本次用户允许全部任务思考。后端MODEL_THINKING_MODE=enabled/disabled（默认enabled），MODEL_REASONING_EFFORT=low/high/max（默认high），MODEL_THINKING_MAX_TOKENS默认8192，允许1024–32768。enabled时显式发送thinking.type、reasoning_effort及该输出上限，disabled保持原输出额度且不传effort。模拟网关不使用这些配置，前端仍准确标为真实DeepSeek服务，未声称展示思考。
+
+参数依据[官方思考模式](https://api-docs.deepseek.com/guides/thinking_mode/)及[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)（2026-10-10核对）。不使用工具调用、不回传历史推理，仅从message.content选择最终回答；不会保存reasoning_content。JSON格式及业务校验、独立上下文、统一有限重试保持。
+
+追加保守守卫：分歧证据须含明确反对/撤回等标记；含“或/还是”的选择证据不能直接支撑“同时/并行”采用。相同kind及逐字证据集合只保留一项，支持者姓名由实际来源补齐。这些通用词形约束可能漏掉隐含反对或同一段支持的多个命题，不是语义保证；最终仍须实际输出复核。

@@ -21,7 +21,8 @@ from backend.app.main import create_app
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final'])
+    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking'])
+    parser.add_argument('--capture-final-answers',action='store_true',help='Opt-in public validation evidence, never headers or reasoning')
     args=parser.parse_args()
     settings=load_settings()
     missing=missing_configuration(settings)
@@ -37,6 +38,8 @@ def main():
     async def lifespan(application):
         async with original(application):
             info={'database':str(database.resolve()),'port':18082,
+                'budgets':{k:getattr(settings,k) for k in ('model_timeout_seconds','insight_max_seconds','summary_max_seconds','discussion_max_seconds')},
+                'thinking_mode':settings.model_thinking_mode,'reasoning_effort':settings.model_reasoning_effort,
                 'code_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
                 'dirty':bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),
                 'prompt_sha256_utf8_normalized':{p.name:hashlib.sha256(p.read_text(encoding='utf-8').encode()).hexdigest()
@@ -48,6 +51,17 @@ def main():
                 with journal.open('a',encoding='utf-8') as file:
                     file.write(json.dumps(metric,ensure_ascii=False)+'\n')
             application.state.model_gateway.metrics_sink=export
+            if args.capture_final_answers:
+                async def capture(response):
+                    await response.aread()
+                    if response.status_code!=200: return
+                    body=json.loads(response.request.content)
+                    payload=response.json()
+                    value={'request':{key:body[key] for key in ('model','thinking','response_format','messages')},
+                        'final_answers':[choice['message'].get('content') for choice in payload.get('choices',[])]}
+                    with (directory/f'{database.stem}-public.jsonl').open('a',encoding='utf-8') as file:
+                        file.write(json.dumps(value,ensure_ascii=False)+'\n')
+                application.state.model_gateway.client.event_hooks['response'].append(capture)
             try: yield
             finally:
                 gateway=application.state.model_gateway
