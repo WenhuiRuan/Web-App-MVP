@@ -355,16 +355,22 @@ class DeepSeekGateway:
                     unique.setdefault(key,item)
                 candidate['items']=list(unique.values())
             if request.task=='insights' and candidate['items']:
-                reviewed=[]
+                reviewed=[]; valid_reviews=0; failure=None
                 for index,item in enumerate(candidate['items']):
                     sources=set(item['source_turns'])
                     actors={m.participant_id for m in request.messages if m.turn_no in sources}
                     boundary=max(sources)
                     focused=[m for m in context['messages'] if m['turn'] in sources or
                         (m['turn']>boundary and request.participants[m['speaker_slot']].id in actors)]
-                    _, final_point=await self._complete(request,dict(context,messages=focused,insights=[],
-                        candidate={'items':[item]},review_origin_index=index),'review')
+                    try:
+                        _, final_point=await self._complete(request,dict(context,messages=focused,insights=[],
+                            candidate={'items':[item]},review_origin_index=index),'review')
+                    except InvalidModelResult as exc:
+                        failure=exc
+                        continue  # Never publish this candidate; other independent reviews remain valid.
+                    valid_reviews+=1
                     reviewed.extend(json.loads(final_point)['items'])
+                if failure is not None and not valid_reviews: raise failure
                 unique={}
                 for item in reviewed:
                     unique.setdefault((item['kind'],item['content'],tuple(sorted(item['source_turns']))),item)

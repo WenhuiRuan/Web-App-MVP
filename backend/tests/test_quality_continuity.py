@@ -34,6 +34,7 @@ def test_thinking_insight_budget_is_finite_and_can_cover_multiple_reviews():
 
 def test_default_thinking_output_budget_has_room_for_final_json():
     assert Settings(_env_file=None).model_thinking_max_tokens==16384
+    assert Settings(_env_file=None).model_reasoning_effort=='low'
 
 
 def library_point(req):
@@ -111,6 +112,25 @@ def test_supporter_count_is_checked_against_authors_not_execution_conditions():
             'checks':checks(),'evidence':point['evidence']}]}
         result=bind_result(req,reviewed_points(req,{'items':[point]},json.dumps(review,ensure_ascii=False)))
         assert len(result.items)==expected
+
+
+def test_one_invalid_review_cannot_discard_an_independently_valid_point():
+    req=library();point=library_point(req)
+    async def run():
+        for all_invalid in (False,True):
+            def upstream(http_request):
+                ctx=json.loads(json.loads(http_request.content)['messages'][1]['content'])
+                if 'candidate' not in ctx:return httpx.Response(200,json=answer({'items':[point,dict(point,content=point['content']+'这是共同提案。')]}))
+                reviewed=ctx['candidate']['items'][0]
+                quotes=[dict(q,quote='未曾说过的引用') for q in reviewed['evidence']] if all_invalid or ctx['review_origin_index']==1 else reviewed['evidence']
+                return httpx.Response(200,json=answer({'reviews':[{'index':0,'source_turns':[4,6],'content':point['content'],'evidence':quotes,'checks':checks()}]}))
+            async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+                gateway=DeepSeekGateway(config(),client=client)
+                if all_invalid:
+                    with pytest.raises(InvalidModelResult):await gateway.generate(req)
+                else:
+                    result=await gateway.generate(req);assert len(result.items)==1
+    asyncio.run(run())
 
 
 def test_plain_proposal_cannot_be_classified_as_an_unanswered_question():

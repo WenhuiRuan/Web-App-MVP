@@ -21,7 +21,8 @@ from backend.app.main import create_app
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking','stage6a-accepted'])
+    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking','stage6a-accepted','stage6a-accepted-final'])
+    parser.add_argument('--max-turns',type=int,choices=[8,12],default=12,help='Bounded validation discussion, not a production default')
     parser.add_argument('--capture-final-answers',action='store_true',help='Opt-in public validation evidence, never headers or reasoning')
     args=parser.parse_args()
     settings=load_settings()
@@ -31,7 +32,7 @@ def main():
     directory=Path('work');directory.mkdir(exist_ok=True)
     database=directory/f'{args.label}-{uuid4().hex}.sqlite3'
     # Validate a bounded first run, preserving the application's normal time/IO budgets.
-    settings=settings.model_copy(update={'database_path':database,'backend_port':18082,'discussion_max_turns':12})
+    settings=settings.model_copy(update={'database_path':database,'backend_port':18082,'discussion_max_turns':args.max_turns})
     app=create_app(settings)
     original=app.router.lifespan_context
     @asynccontextmanager
