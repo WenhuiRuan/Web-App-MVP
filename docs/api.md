@@ -239,3 +239,5 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 阶段6A续批：业务HTTP/SSE/ModelResult及SQLite不变。DeepSeek任务内新增公开来源review协议，观点只保留有证据的候选（源集合不能扩大），总结以现有观点index选择并绑定实际发言作者，后端组装自然语言content。客户端仍接收原insights.updated/summary.ready，不接收草稿、checks或模型review JSON。失败沿用insight_status/summary failure_code与原重试规则；详细上游字段见[模型边界](model-provider.md)。
 
 续批最终摘要约束：positions按speaker_slot和source_turns绑定实际作者，content必须是该作者来源消息的连续原文；pending按turn/quote及有限issue标签绑定待核对片段。共识/分歧仍选已捕获批次index，正文为自然语言而非原JSON。该约束不认证原发言的事实，也不保证概述/选择/标签语义；真实检查与整场未重跑的边界见[质量修正验收](quality-revision.md)。
+
+本次验收收尾仅扩展内部ModelRequest：insights任务可带上一成功InsightBatch，要求较旧版本、同讨论/运行且来源在前批边界内，供全前缀重新审核。HTTP/SSE仍发布最新完整批次（非追加差量），不向浏览器暴露candidate/checks/草稿。旧观点经过本次复核才保留，撤回/条件变化更新或删除；个别非法来源或数量候选不连带丢失其他有效观点。上游协议详见model-provider，现有客户端投影和SQLite结构不变。

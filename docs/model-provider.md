@@ -59,10 +59,20 @@ test_deepseek.py 使用HTTP MockTransport检查请求/解析/错误/有限重试
 
 insights/summary/host_control上下文不传人设stance。insights上游messages只含专家正式发言（保留原turn，不重新编号）；内部ModelRequest仍校验冻结完整前缀，summary/主持保留主持消息。summary候选带index、原来源完整消息、作者与semantic_status，不把结构通过当作语义认证。
 
-普通六任务和业务契约不变，只有DeepSeek观点/总结内部增加独立、无共享历史的review；Prompt为insights_review.md、summary_review.md，review不混用draft格式示例。草稿不落业务库、不发布事件，review失败不退回草稿。全部IO在事务外，同一任务预算包括两段调用及统一重试；最多两次尝试/四个HTTP请求。
+普通六任务和业务契约不变，只有DeepSeek观点/总结内部增加独立、无共享历史的review；Prompt为insights_review.md、summary_review.md，review不混用draft格式示例。草稿不落业务库、不发布事件，review失败不退回草稿。全部IO在事务外，统一最多两次完整尝试，排队/退避/所有子调用计入同一任务预算。总结每次draft+review共2 HTTP；观点每次draft+逐候选review（空候选仍一次空review），请求数随有限候选集合变化，不再称固定四次上限。仍只占监督器同一任务和并发槽，子调用顺序执行，不能绕过取消/总预算。
 
-观点review逐候选返回index、source_turns、content和六个公开来源checks（作者、对象、范围、条件、明确立场、提案属性）。任一false删除；这六项是模型判断，不能当作确定性语义证明。程序检查完整唯一index、来源只能缩小不新增、引文逐字存在、专家及run/边界；引用作者外的已知角色姓名不允许写入保留观点。常见带单位数字/中文数量必须在共识的每段保留quote中逐字出现，否则拒绝，不默认把指标认同扩展成阈值认同。该保守词面检查不换算两周/2周、不解决否定或隐含指代，会有假阴性；宁可失败/下一边界再提取，不保证全面数值语义。
+观点review逐候选返回index、source_turns、content、可重选的evidence和七个公开checks（作者、对象、范围、条件、明确立场、提案属性、not_superseded）。任一false删除；这些是模型判断，不能当作确定性语义证明。程序检查完整唯一index、来源只能缩小不新增、引文逐字存在、专家及run/边界；引用作者外的已知角色姓名不允许写入保留观点。常见带单位数量须在共识每段保留quote中出现，否则排除该项，不能让它连带丢失其他有效项；不默认将指标认同扩大为阈值认同。不换算两周/2周、不证明否定/指代，仍有假阴性。
 
 总结review返回introduction、positions(speaker_slot/source_turns/content)、consensus_indices、disagreement_indices、pending。作者由后端绑定且来源必须都是该专家的消息；共识/分歧只能选择捕获InsightBatch中相应kind的index，后端原样组装已有观点，不能由总结另造共识。输出业务Summary仍是自然语言content，非原JSON，无数据库迁移/API schema变更。其他段落的语义仍需人工复核，选择器不能证明概述和待澄清段绝无错误。
 
-最终补充协议：主要观点positions.content必须是其source_turns中某条实际作者消息的原文连续片段，后端以姓名+“提出”呈现精选，不认证原发言事实。pending为最多3项(turn/quote/issue)，逐字校验本场来源；issue仅UNANSWERED_QUESTION/UNVERIFIED_PROPOSAL/SCOPE_UNCLEAR/UNIT_OR_DIRECTION_UNCLEAR，后端呈现有限“待核对”标签与真实作者/turn。不能在自由待澄清段另造共识/分歧。introduction与选择哪些原句仍由模型生成/判断，不保证语义完整、标签准确或原发言事实正确。该取舍提高忠实度，正文采用简短概述+观点原文精选+已有观点+问题来源；不追求完全自由改写。没有新增数据库迁移、前端字段或业务JSON正文。
+最终协议：introduction至多180字，positions至多3项且content至多160字，必须是其实际作者来源消息的原文连续片段，后端以“姓名建议／观点”呈现。pending至多2项(turn/quote/issue)，逐字来源校验；issue仅UNANSWERED_QUESTION/UNVERIFIED_PROPOSAL/SCOPE_UNCLEAR/UNIT_OR_DIRECTION_UNCLEAR。问句必须有问号或明确疑问标记（是否、如何、由谁、哪张、还是等），普通陈述不能标追问；标记不证明问题仍未解决，仍需模型及人工核对。位置/待澄清相同或包含的引文去重。候选与review中的完全相同观点按kind/content/来源集合去重。概述、片段选择和分类仍有语义局限，不认证原话事实。无数据库迁移、前端字段或业务JSON正文变更。
+
+## 验收收尾：前批复核而非机械保留
+
+内部ModelRequest.insights现在亦可供insights任务使用：必须是较旧版本，来源属于同discussion/run且不超过前批和当前边界。领取任务时从SQLite注入最新成功批次；public_context给出previous_through_turn与原来源。复核候选合并本次草稿和前批，旧项未被重提也会被审核，但只能经本次全前缀not_superseded/明确支持等检查后提交。后续撤回、条件变化可删除或由新候选更新；不是旧结果并集。
+
+观点最终采用逐项聚焦review：每次候选index=0，messages包含原来源及其作者在来源边界后的发言；其他作者的反对由全前缀草稿生成独立分歧候选，不能将第三方反对误作原支持者撤回。后续消息只核查变化，不得扩充source_turns。kind可在原来源上纠正consensus/disagreement误分类，依据不足仍删除。review_origin_index仅安全指标定位。最后统一重新绑定ID/来源，跨项去重；原始草稿或未审核旧项不提交。
+
+总结必须覆盖捕获批次的全部观点index，避免现场有有效共识而正文说没有。若总结再次认为候选不可靠而遗漏，触发summary_insight_omission及原有限失败/重试，不发布不一致正文；需人工核对提取结果，不强制模型确认无依据观点。该约束会使错误或过时提取造成总结失败，属于拒绝不一致而非语义认证。
+
+草稿按候选校验引文与身份，个别非法来源项剔除，其他有效项仍进入复核；全部非法且没有前批候选时任务失败。复核可以从同一来源重选连续引文以收窄最小交集；最终仍经原ModelResult/Snapshot跨字段验证，空结果允许。来源扩展/格式异常仍有限失败，不落未经校验的数据。任务预算默认15秒（原10秒在双调用+重试时耗尽），排队/两段IO/退避计入预算。真实.env不改写，原配置10秒者需在后端进程设置INSIGHT_MAX_SECONDS=15再启动，环境值优先；最终验证显式使用15秒，不宣称旧配置已自动变更。

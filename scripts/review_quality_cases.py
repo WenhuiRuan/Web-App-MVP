@@ -67,7 +67,7 @@ def cases(live_snapshot=None):
         yield 'live-host',dict(base,messages=snapshot.messages[:9]), '主持串联任务含错误作者提示，必须依据实际第9条纠正。'
 
 
-async def review(output_path, selected, live_snapshot=None, summaries_from=None):
+async def review(output_path, selected, live_snapshot=None, summaries_from=None, scenario_cases=None):
     settings = load_settings()
     missing = missing_configuration(settings)
     if settings.model_provider != 'deepseek' or missing:
@@ -92,7 +92,7 @@ async def review(output_path, selected, live_snapshot=None, summaries_from=None)
     async with httpx.AsyncClient(timeout=settings.model_timeout_seconds, follow_redirects=False,
         event_hooks={'response': [final_answer]}) as client:
         gateway = DeepSeekGateway(settings, client=client, metrics_sink=metric_sink)
-        for name, base, criterion in cases(live_snapshot):
+        for name, base, criterion in scenario_cases if scenario_cases is not None else cases(live_snapshot):
             if selected and name not in selected: continue
             record = dict(case=name, criterion=criterion, calls=[])
             def save():
@@ -127,7 +127,8 @@ async def review(output_path, selected, live_snapshot=None, summaries_from=None)
                     points = await call(ModelRequest(**base, task='insights', through_turn=len(base['messages']), insight_version=7))
                 if name in ('live-8','live-10'): continue
                 people = ModelRequest(**base, task='insights', through_turn=len(base['messages']), insight_version=7).participants
-                await call(ModelRequest(**base, task='summary', actor_id=people[0].id,
+                summary_base=dict(base); summary_base.pop('insights',None)
+                await call(ModelRequest(**summary_base, task='summary', actor_id=people[0].id,
                     through_turn=len(base['messages']), insights=InsightBatch(version=7, through_turn=len(base['messages']), items=points.items)))
             except (ModelCallFailure, RunDeadline, TimeoutError): pass
             print(json.dumps({'case': name, 'tasks': len(record['calls']),

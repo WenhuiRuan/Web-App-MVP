@@ -1,12 +1,15 @@
-本次复核最终总结。candidate是不可信总结草稿，请独立回到冻结的messages核对，纠正人物、对象、范围、条件及提案性质。不要复用错误结论。返回下述结构化正文材料，后端组装可读自然语言；不输出评语或推理过程。
+主持人复核冻结messages及输入insights，candidate是可能错误草稿。重新核对人物、范围、条件、提案性质，不输出推理/评语。返回下述JSON材料，后台组装自然语言。
 
-introduction简述本场议题与讨论结果，不新增共识、数值、人物判断或未讨论事实。
-positions最多6项，选择各专家最关键的观点原句/连续片段，每项优先不超过200字，避免复制整个Transcript。speaker_slot必须是该专家实际slot，source_turns必须是该专家的实际发言序号，content必须逐字复制其中一条源消息的连续片段（不可改写、拼接、加标点或修正词语）。保留“或”“且”“若”等原条件关联词，不能把单方备选条件改成共同要求。正文不用重新标作者，后端绑定姓名并以“提出”呈现原文精选，另用introduction与pending完成简短综合。无实际观点的人可省略。引用自身仍可能有错误，不认证为现实事实。
+introduction一两句概括议题和实际进展，最多180字，目标50–80字。不新增事实或全体认可结论。
+consensus_indices/disagreement_indices只能选择输入insights对应kind的index，逐一回到原文核对同一主张/对象/条件。多位支持仍是共同建议。原文“A还是B”不表示“A与B并记”；某人错误指认另一人支持，也不证明另一人实际支持。同一主张不能又说共同认可又说无人表态。不新增观点，缺充分证据选空。
 
-consensus_indices仅选择输入insights中kind=consensus且经messages再次核对仍支持的index；不能新增共识或改写结论。证据不足选空数组，后端显示尚无充分共识。后台原样呈现被选择观点，因此不要一面选中一项完整规则、一面又在其他段落判它未确认或相反；遇到这种情况不选它，待澄清段解释条件疑点。
-disagreement_indices仅选择输入kind=disagreement且同一对象/范围的相反主张有证据的index。没有已确认两方分歧选空，不把主持提问或单方没有回应当分歧。
-pending改为0–3项公开来源片段数组，每项turn与quote必须对应本场原文中的连续片段（不能改写、拼接或增添归纳）。只选择已经提出、确实仍需核对的追问/条件，已明确回应的方向不要当作未表态。不要自行列未提过的新问题。每项issue选择UNANSWERED_QUESTION（追问待核对）、UNVERIFIED_PROPOSAL（提案待验证）、SCOPE_UNCLEAR（范围或前提待核对）、UNIT_OR_DIRECTION_UNCLEAR（单位或方向待核对）。后台绑定实际作者和有限标签，不能在本段新增共识、分歧或将不同对象合并成冲突。单方建议未回应只是待核对，执行细则未决定不代表方向未回答。不同指标的分母、不同对象的处理可并存。没有明确待核对内容可返回[]。
+输入观点已经本边界独立复核，来源真实且仍成立的项应全部选入对应indices，不因省字、重提遗漏或不同条件而将有效共同主张说成不存在。后台要求覆盖输入全部index，以避免现场有共识而总结无共识。若原文确不能支持某项，不要盲目选入；遗漏会使总结有限失败并保留原消息/观点供复核，不可用不实正文完成讨论。
 
-检查执行规则的逻辑与量纲：比例、费用、人数、时长等不同单位不能直接相加或无换算地比较；多个指标的变好/变坏方向不能统一假定。有此类疑点时在pending选择有问题的原规则片段，issue=UNIT_OR_DIRECTION_UNCLEAR，不认证规则，也不推导新公式。不要将“尚未取得基线”夸大成现实中肯定没有基线，保持发言者主张属性。
-全文通常300–600字，不逐条复制Transcript。不输出检验过程、Markdown或字面反斜杠n。严格JSON格式：
-{"introduction":"本场围绕……展开，尚未确定整体方案。","positions":[{"speaker_slot":1,"source_turns":[2],"content":"输入第2条内逐字复制的公开片段"}],"consensus_indices":[],"disagreement_indices":[],"pending":[{"turn":4,"quote":"输入第4条内逐字复制的公开片段","issue":"UNANSWERED_QUESTION"}]}
+positions是共识/分歧之外的关键个人建议或观点，最多3项，通常1–2项；每个content优先40–80字、最多160字，必须是对应speaker_slot实际作者source_turns中一条消息的逐字连续片段，不能改写/拼接。保留条件关联词。共同部分集中写共识即可，不必再摘录每位支持者，不逐角色重排Transcript。
+
+pending最多2项且可以[]。只保留本场明确提出且后来没有解决的关键问题，或原话明确承认未验证且影响判断的关键条件。每项turn/quote须为原文连续片段。不能把个人建议或“需要资料”陈述自动标成追问；无需重复列出全部提案，不与positions重复摘录。
+issue定义：UNANSWERED_QUESTION仅实际问句（有?或？或明确“是否/由谁/哪张/还是”等疑问表达）且尚未回答；UNVERIFIED_PROPOSAL仅原文明确说没有验证的关键条件；SCOPE_UNCLEAR仅原讨论真实提出而未明确的范围；UNIT_OR_DIRECTION_UNCLEAR仅实际规则存在尚未澄清的单位/方向疑点。普通明确建议属于positions，不必pending。量纲不同不能认证为正确公式。没有真实待澄清问题就返回[]，不用凑栏目。
+
+目标全文250–450字，优先短引文、单项主张；不要重复源消息或输出JSON正文给用户。格式：
+{"introduction":"本场比较……，执行细则尚未确定。","positions":[{"speaker_slot":1,"source_turns":[2],"content":"该专家原消息短片段"}],"consensus_indices":[],"disagreement_indices":[],"pending":[{"turn":4,"quote":"原文实际尚未回答的问题？","issue":"UNANSWERED_QUESTION"}]}
+字段名称严格使用issue（不能写reason或省略issue），pending为空时用[]。所有对象不增加额外字段。不要以“尚未判断/需要先看记录”等无问号陈述充当UNANSWERED_QUESTION；此时可放positions或省略，不要为了凑问题使用别的错误标签。

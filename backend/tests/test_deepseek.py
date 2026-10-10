@@ -32,7 +32,7 @@ def answer(raw, **extra):
 
 def checks(**overrides):
     return dict(authors_correct=True, same_object=True, compatible_scope=True,
-                every_condition_supported=True, explicit_positions=True, proposal_preserved=True) | overrides
+                every_condition_supported=True, explicit_positions=True, proposal_preserved=True, not_superseded=True) | overrides
 
 
 def summary_review(introduction='主持人总结：仅认可有限试点，细则尚未确认。', **overrides):
@@ -466,8 +466,7 @@ def test_consensus_quantified_condition_must_be_explicit_in_each_retained_quote(
             gateway=DeepSeekGateway(config(),client=client)
             if both_support: assert len((await gateway.generate(req)).items)==1
             else:
-                with pytest.raises(InvalidModelResult) as exc: await gateway.generate(req)
-                assert exc.value.validation_issue == 'consensus_quantity_unsupported'
+                assert (await gateway.generate(req)).items == ()
     asyncio.run(run())
 
 
@@ -521,5 +520,5 @@ def test_summary_pending_binds_a_public_source_and_a_limited_issue_label():
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
             result=await DeepSeekGateway(config(),client=client).generate(req)
             assert req.participants[1].name in result.content and req.messages[1].content in result.content
-            assert '提案待验证' in result.content
+            assert '明确未验证的条件' in result.content
     asyncio.run(run())

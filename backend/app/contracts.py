@@ -394,6 +394,9 @@ class ModelRequest(Contract):
                 raise ValueError('insights require boundary and version')
             if [m.turn_no for m in self.messages] != list(range(1,self.through_turn+1)):
                 raise ValueError('insights require full frozen prefix')
+            if self.insights.version >= self.insight_version or self.insights.through_turn > self.through_turn:
+                raise ValueError('previous insights require older version and scoped boundary')
+            validate_insight_evidence(self.participants,tuple(m for m in self.messages if m.turn_no<=self.insights.through_turn),self.insights.items)
         elif self.task == 'summary':
             if self.through_turn is None or self.insight_version is not None or actor is None or actor.kind != 'HOST':
                 raise ValueError('summary requires host and boundary')
@@ -404,8 +407,8 @@ class ModelRequest(Contract):
             validate_insight_evidence(self.participants,tuple(m for m in self.messages if m.turn_no<=self.insights.through_turn),self.insights.items)
         elif self.insight_version is not None or self.through_turn is not None:
             raise ValueError('extraction fields belong to insights')
-        if self.task!='summary' and self.insights!=InsightBatch():
-            raise ValueError('summary insights belong only to summary')
+        if self.task not in ('summary','insights') and self.insights!=InsightBatch():
+            raise ValueError('insights belong only to synthesis tasks')
         return self
 
 

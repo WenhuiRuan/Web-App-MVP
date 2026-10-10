@@ -4,11 +4,11 @@ import type { Snapshot } from '../src/transport/types'
 
 test.skip(!process.env.PANEL_REAL_VALIDATION, 'Explicit opt-in for paid real model validation')
 test('corrected real model flows from creation through live evidence to final summary', async ({ page }) => {
-  const output = '../work/stage6a-corrected'
+  const output = process.env.PANEL_REAL_OUTPUT || '../work/stage6a-corrected'
   if (existsSync(`${output}/discussion.json`)) throw new Error('Retain prior evidence; do not overwrite a completed run')
   mkdirSync(output, { recursive: true })
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message))
-  const topic = '社区图书馆是否应试点周日自助借还服务？请比较阅读可及性、图书遗失风险、设备成本与志愿者负担，并区分个人建议与共同认可的条件。'
+  const topic = process.env.PANEL_REAL_TOPIC || '社区图书馆是否应试点周日自助借还服务？请比较阅读可及性、图书遗失风险、设备成本与志愿者负担，并区分个人建议与共同认可的条件。'
   const started = Date.now()
   await page.goto('/#/new')
   await expect(page.locator('.mock-badge')).toHaveText('DeepSeek · deepseek-flash（真实服务）')

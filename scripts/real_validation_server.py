@@ -6,6 +6,8 @@ Outputs safe call metrics to ignored work/, never prompts or reasoning_content.
 """
 import argparse
 import json
+import hashlib
+import subprocess
 from contextlib import asynccontextmanager
 from pathlib import Path
 from uuid import uuid4
@@ -19,7 +21,7 @@ from backend.app.main import create_app
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected'])
+    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final'])
     args=parser.parse_args()
     settings=load_settings()
     missing=missing_configuration(settings)
@@ -34,7 +36,11 @@ def main():
     @asynccontextmanager
     async def lifespan(application):
         async with original(application):
-            info={'database':str(database.resolve()),'port':18082}
+            info={'database':str(database.resolve()),'port':18082,
+                'code_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+                'dirty':bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),
+                'prompt_sha256_utf8_normalized':{p.name:hashlib.sha256(p.read_text(encoding='utf-8').encode()).hexdigest()
+                    for p in sorted(Path('backend/prompts').glob('*.md'))}}
             (directory/f'{args.label}-last.json').write_text(json.dumps(info,indent=2),encoding='utf-8')
             journal=directory/f'{database.stem}-calls.jsonl'
             def export(metric):

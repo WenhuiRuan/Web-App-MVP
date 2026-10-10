@@ -29,7 +29,7 @@ class SynthesisRepository(RunRepository):
         snapshot = self._snapshot(conn,job['discussion_id'])
         d = snapshot.discussion
         return ModelRequest(task='insights', discussion_id=d.id, run_id=d.run_id, topic=d.topic, expert_count=d.expert_count, roster_revision=d.roster_revision,
-                            participants=snapshot.participants, messages=tuple(m for m in snapshot.messages if m.turn_no<=job['through_turn']), through_turn=job['through_turn'], insight_version=job['version'])
+                            participants=snapshot.participants, messages=tuple(m for m in snapshot.messages if m.turn_no<=job['through_turn']), through_turn=job['through_turn'], insight_version=job['version'], insights=snapshot.insights)
 
     def claim_insights(self, did, rid):
         with self.transaction() as conn:

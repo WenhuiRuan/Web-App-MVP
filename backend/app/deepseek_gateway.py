@@ -77,13 +77,16 @@ class EvidenceChecks(Contract):
     every_condition_supported: StrictBool
     explicit_positions: StrictBool
     proposal_preserved: StrictBool
+    not_superseded: StrictBool
 
 
 class PointReview(Contract):
     index: StrictInt
     checks: EvidenceChecks
-    content: str = Field(min_length=1, max_length=500)
+    content: str = Field(max_length=500)
     source_turns: tuple[StrictInt, ...]
+    evidence: tuple[Quote, ...] | None = None
+    kind: Literal['consensus','disagreement'] | None = None
 
 
 class PointsReview(Contract):
@@ -93,7 +96,7 @@ class PointsReview(Contract):
 class SummaryPosition(Contract):
     speaker_slot: StrictInt
     source_turns: tuple[StrictInt, ...] = Field(min_length=1)
-    content: str = Field(min_length=1, max_length=400)
+    content: str = Field(min_length=1, max_length=160)
 
 
 class SummaryPending(Quote):
@@ -101,11 +104,11 @@ class SummaryPending(Quote):
 
 
 class SummaryReview(Contract):
-    introduction: str = Field(min_length=1, max_length=500)
-    positions: tuple[SummaryPosition, ...] = Field(max_length=6)
+    introduction: str = Field(min_length=1, max_length=180)
+    positions: tuple[SummaryPosition, ...] = Field(max_length=3)
     consensus_indices: tuple[StrictInt, ...]
     disagreement_indices: tuple[StrictInt, ...]
-    pending: tuple[SummaryPending, ...] = Field(max_length=3)
+    pending: tuple[SummaryPending, ...] = Field(max_length=2)
 
 
 def reviewed_summary(request, content):
@@ -113,6 +116,7 @@ def reviewed_summary(request, content):
         reviewed = SummaryReview.model_validate(json.loads(content))
         messages = {m.turn_no: m for m in request.messages}
         positions = []
+        excerpts = set()
         for position in reviewed.positions:
             if not 0 <= position.speaker_slot < len(request.participants): raise invalid('summary_author')
             person = request.participants[position.speaker_slot]
@@ -121,7 +125,9 @@ def reviewed_summary(request, content):
                 raise invalid('summary_author')
             if not any(position.content in messages[turn].content for turn in position.source_turns):
                 raise invalid('summary_position_quote')
-            positions.append(person.name + '提出：“' + position.content + '”')
+            if position.content not in excerpts:
+                positions.append(person.name + '建议／观点：“' + position.content + '”')
+                excerpts.add(position.content)
         def selected(indices, kind):
             if len(set(indices)) != len(indices): raise invalid('summary_insight_reference')
             if any(index < 0 or index >= len(request.insights.items) or request.insights.items[index].kind != kind for index in indices):
@@ -129,14 +135,20 @@ def reviewed_summary(request, content):
             return '；'.join(request.insights.items[index].content for index in indices)
         consensus = selected(reviewed.consensus_indices, 'consensus')
         disagreement = selected(reviewed.disagreement_indices, 'disagreement')
-        labels = dict(UNANSWERED_QUESTION='追问待核对',UNVERIFIED_PROPOSAL='提案待验证',
+        if set(reviewed.consensus_indices)|set(reviewed.disagreement_indices)!=set(range(len(request.insights.items))):
+            raise invalid('summary_insight_omission')
+        labels = dict(UNANSWERED_QUESTION='尚未回答的问题',UNVERIFIED_PROPOSAL='明确未验证的条件',
             SCOPE_UNCLEAR='范围或前提待核对',UNIT_OR_DIRECTION_UNCLEAR='单位或方向待核对')
         pending=[]
         for item in reviewed.pending:
             if item.turn not in messages or item.quote not in messages[item.turn].content:
                 raise invalid('summary_pending_quote')
+            if item.issue == 'UNANSWERED_QUESTION' and not re.search(r'[?？]|是否|为何|如何|由谁|哪[个项张类些]|还是|多少|能否|为什么|何时',item.quote):
+                raise invalid('summary_question_evidence')
+            if any(item.quote in excerpt for excerpt in excerpts): continue
             person=next(p for p in request.participants if p.id==messages[item.turn].participant_id)
             pending.append(f'{labels[item.issue]}（{person.name}第{item.turn}条）：“{item.quote}”')
+            excerpts.add(item.quote)
         body = '\n'.join([reviewed.introduction, '主要观点：\n' + ('\n'.join(positions) or '尚无专家明确提出方案。'),
             '已有共识：' + (consensus or '尚无充分共识。'),
             '未解决分歧：' + (disagreement or '尚无充分证据表明已发生明确分歧。'),
@@ -168,15 +180,20 @@ def reviewed_points(request, candidate, content):
             actors = {messages[t].participant_id for t in review.source_turns}
             if any(p.id not in actors and p.name in review.content for p in request.participants):
                 raise invalid('review_actor_expansion')
-            evidence = [q for q in original['evidence'] if q['turn'] in review.source_turns]
-            if original['kind'] == 'consensus':
+            evidence = [q.model_dump() for q in review.evidence] if review.evidence is not None else [q for q in original['evidence'] if q['turn'] in review.source_turns]
+            kind=review.kind or original['kind']
+            if kind == 'consensus':
                 # Conservative lexical provenance, not a semantic agreement detector.
-                quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人)', review.content)
+                quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人|次)', review.content)
                 if any(quantity not in quote['quote'] for quantity in quantities for quote in evidence):
-                    raise invalid('consensus_quantity_unsupported')
-            items.append(dict(original, content=review.content, source_turns=list(review.source_turns),
+                    continue  # Exclude this unsupported claim without discarding other candidates.
+            items.append(dict(original, kind=kind, content=review.content, source_turns=list(review.source_turns),
                 evidence=evidence))
-        return json.dumps({'items': items}, ensure_ascii=False)
+        unique={}
+        for item in items:
+            key=(item['kind'],item['content'],tuple(sorted(item['source_turns'])))
+            unique.setdefault(key,item)
+        return json.dumps({'items': list(unique.values())}, ensure_ascii=False)
     except InvalidModelResult:
         raise
     except (ValidationError, ValueError, TypeError):
@@ -237,6 +254,7 @@ def public_context(request):
         'target_turn': turns.get(request.target_message_id), 'host_task': request.host_task,
         'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task == 'utterance',
         'public_focus': request.public_focus, 'through_turn': request.through_turn,
+        'previous_through_turn': request.insights.through_turn if request.task=='insights' else None,
         'messages': [m for m in messages.values() if request.task != 'insights' or m['speaker_kind'] == 'EXPERT'],
         'insights': [dict(index=index, kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids],
             semantic_status='candidate_requires_transcript_review',
@@ -300,13 +318,43 @@ class DeepSeekGateway:
         if synthesis:
             # A new stateless request sees the original evidence and an explicitly untrusted
             # candidate, never a shared chat or hidden reasoning. Only reviewed output leaves.
-            result, _ = await self._complete(request, dict(context, candidate=json.loads(final)), 'review')
+            candidate = json.loads(final)
+            if request.task == 'insights':
+                # Prior points are review candidates, never silently unioned into output.
+                # Recheck the whole current prefix for withdrawal/changed conditions.
+                messages={m.turn_no:m for m in request.messages}
+                for previous in context['insights']:
+                    turns=previous['source_turns']
+                    candidate['items'].append(dict(kind=previous['kind'],content=previous['content'],source_turns=turns,
+                        evidence=[dict(turn=t,quote=messages[t].content[:400]) for t in turns]))
+                unique={}
+                for item in candidate['items']:
+                    key=(item['kind'],item['content'],tuple(sorted(item['source_turns'])))
+                    unique.setdefault(key,item)
+                candidate['items']=list(unique.values())
+            if request.task=='insights' and candidate['items']:
+                reviewed=[]
+                for index,item in enumerate(candidate['items']):
+                    sources=set(item['source_turns'])
+                    actors={m.participant_id for m in request.messages if m.turn_no in sources}
+                    boundary=max(sources)
+                    focused=[m for m in context['messages'] if m['turn'] in sources or
+                        (m['turn']>boundary and request.participants[m['speaker_slot']].id in actors)]
+                    _, final_point=await self._complete(request,dict(context,messages=focused,insights=[],
+                        candidate={'items':[item]},review_origin_index=index),'review')
+                    reviewed.extend(json.loads(final_point)['items'])
+                unique={}
+                for item in reviewed:
+                    unique.setdefault((item['kind'],item['content'],tuple(sorted(item['source_turns']))),item)
+                return bind_result(request,json.dumps({'items':list(unique.values())},ensure_ascii=False))
+            result, _ = await self._complete(request, dict(context, candidate=candidate), 'review')
         return result
 
     async def _complete(self, request, context, stage):
         started = time.monotonic()
         metric = dict(task=request.task, discussion_id=str(request.discussion_id),
             run_id=str(request.run_id) if request.run_id else None, stage=stage, status='pending', usage=None)
+        if 'review_origin_index' in context: metric['review_index']=context['review_origin_index']
         body = dict(model=self.settings.model_name, thinking={'type': 'disabled'},
             response_format={'type': 'json_object'}, stream=False,
             max_tokens=2200 if request.task in ('roster', 'summary', 'insights') else 700,
@@ -343,6 +391,23 @@ class DeepSeekGateway:
                 raise InvalidModelResult() from None
             if stage == 'review':
                 content = reviewed_points(request, context['candidate'], content) if request.task == 'insights' else reviewed_summary(request, content)
+            if stage=='draft' and request.task=='insights':
+                try:
+                    parsed=Points.model_validate(json.loads(content))
+                except ValidationError:
+                    raise invalid('wire_schema') from None
+                except (ValueError,TypeError):
+                    raise invalid('structure') from None
+                safe=[]; failure=None
+                for item in parsed.items:
+                    try:
+                        bind_result(request,json.dumps({'items':[item.model_dump()]},ensure_ascii=False))
+                        safe.append(item.model_dump())
+                    except InvalidModelResult as exc:
+                        failure=exc
+                metric['discarded_candidates']=len(parsed.items)-len(safe)
+                if failure is not None and not safe and not request.insights.items: raise failure
+                content=json.dumps({'items':safe},ensure_ascii=False)
             result = bind_result(request, content)
             metric['status'] = 'succeeded'
             return result, content
