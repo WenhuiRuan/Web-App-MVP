@@ -1,0 +1,192 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=playwright.final.config.ts"
+    ],
+    "configFile": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\playwright.final.config.ts",
+    "rootDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/work/stage6a-accepted-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "real-quality.spec.ts"
+        ],
+        "timeout": 900000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "snapshotDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "testIgnore": [],
+        "testMatch": "real-quality.spec.ts",
+        "timeout": 900000,
+        "use": {
+          "baseURL": "http://127.0.0.1:15175",
+          "channel": "msedge",
+          "viewport": {
+            "width": 1366,
+            "height": 768
+          },
+          "screenshot": "only-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../work/stage6a-accepted-browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm exec vite -- --host 127.0.0.1 --port 15175 --strictPort",
+      "url": "http://127.0.0.1:15175",
+      "reuseExistingServer": false,
+      "env": {
+        "PANEL_BACKEND_ORIGIN": "http://127.0.0.1:18082"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "real-quality.spec.ts",
+      "file": "real-quality.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrected real model flows from creation through live evidence to final summary",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 900000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 848059,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\u001b[22m\n\n    at C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts:52:130",
+                    "location": {
+                      "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                      "column": 130,
+                      "line": 52
+                    },
+                    "snippet": "  50 |   expect(await page.getByTestId('message').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-message-id'))))\n  51 |     .toEqual(snapshot!.messages.map(m => m.id))\n> 52 |   for (const insight of snapshot!.insights.items) await expect(page.getByTestId('insight').filter({ hasText: insight.content })).toBeVisible()\n     |                                                                                                                                  ^\n  53 |   await page.getByRole('button', { name: '查看主持人总结' }).click()\n  54 |   await expect(page.getByRole('dialog')).toContainText(snapshot!.summary!.content.split('\\n')[0])\n  55 |   expect(await page.getByRole('dialog').innerText()).not.toContain('{\"')"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                        "column": 130,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('insight').filter({ hasText: '周敏行与李承荫共同建议：试点评估采用晚间借还增量和到馆读者构成作为对照指标，仍属提案。' })\u001b[22m\n\n\n  50 |   expect(await page.getByTestId('message').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-message-id'))))\n  51 |     .toEqual(snapshot!.messages.map(m => m.id))\n> 52 |   for (const insight of snapshot!.insights.items) await expect(page.getByTestId('insight').filter({ hasText: insight.content })).toBeVisible()\n     |                                                                                                                                  ^\n  53 |   await page.getByRole('button', { name: '查看主持人总结' }).click()\n  54 |   await expect(page.getByRole('dialog')).toContainText(snapshot!.summary!.content.split('\\n')[0])\n  55 |   expect(await page.getByRole('dialog').innerText()).not.toContain('{\"')\n    at C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts:52:130"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T15:21:18.092Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-browser-results\\real-quality-corrected-rea-0336f-e-evidence-to-final-summary\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-browser-results\\real-quality-corrected-rea-0336f-e-evidence-to-final-summary\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                    "column": 130,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4ff7f91f6d698812567b-b1ca666d1c1cc16b7182",
+          "file": "real-quality.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T15:21:15.477Z",
+    "duration": 851541.677,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

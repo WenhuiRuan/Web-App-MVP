@@ -49,10 +49,26 @@ test('corrected real model flows from creation through live evidence to final su
   await expect(page.getByTestId('message')).toHaveCount(snapshot!.messages.length)
   expect(await page.getByTestId('message').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-message-id'))))
     .toEqual(snapshot!.messages.map(m => m.id))
+  await page.getByRole('tab', { name: '共识与分歧', exact: true }).click()
   for (const insight of snapshot!.insights.items) await expect(page.getByTestId('insight').filter({ hasText: insight.content })).toBeVisible()
   await page.getByRole('button', { name: '查看主持人总结' }).click()
   await expect(page.getByRole('dialog')).toContainText(snapshot!.summary!.content.split('\n')[0])
   expect(await page.getByRole('dialog').innerText()).not.toContain('{"')
   await page.screenshot({ path: `${output}/summary.png` })
   expect(errors).toEqual([])
+})
+
+test('existing completed discussion keeps insights and summary accessible', async ({ page }) => {
+  test.skip(!process.env.PANEL_OBSERVE_ID, 'Read-only verification of a saved real run')
+  const id = process.env.PANEL_OBSERVE_ID!
+  const snapshot = await (await page.request.get(`/api/discussions/${id}`)).json() as Snapshot
+  expect(snapshot.discussion.state).toBe('COMPLETED')
+  await page.goto(`/#/discussion/${id}`)
+  await page.getByRole('tab', { name: '共识与分歧', exact: true }).click()
+  await expect(page.getByTestId('insight')).toHaveCount(snapshot.insights.items.length)
+  for (const insight of snapshot.insights.items) await expect(page.getByTestId('insight').filter({ hasText: insight.content })).toBeVisible()
+  await page.getByRole('button', { name: '查看主持人总结' }).click()
+  await expect(page.getByRole('dialog')).toContainText(snapshot.summary!.content.split('\n')[0])
+  expect(await page.getByRole('dialog').innerText()).not.toContain('{"')
+  await page.screenshot({ path: `${process.env.PANEL_REAL_OUTPUT}/existing-summary.png` })
 })
