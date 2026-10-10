@@ -20,7 +20,8 @@ test('corrected real model flows from creation through live evidence to final su
   const id = page.url().split('/discussion/')[1]
   await page.getByRole('button', { name: '确认阵容，进入演播厅' }).click()
   await expect(page.getByRole('heading', { name: '现场 Transcript' })).toBeVisible()
-  const observations: unknown[] = []; const versions: unknown[] = []
+  const observations: unknown[] = []
+  const versions: { state: Snapshot['discussion']['state']; message_count: number; insights: Snapshot['insights'] }[] = []
   let snapshot: Snapshot | undefined; let version = 0; let savedWaiting = false; let savedLive = false
   for (let attempt = 0; attempt < Number(process.env.PANEL_REAL_WAIT_SECONDS || 330); attempt++) {
     snapshot = await (await page.request.get(`/api/discussions/${id}`)).json() as Snapshot
@@ -46,6 +47,7 @@ test('corrected real model flows from creation through live evidence to final su
   expect(snapshot?.discussion.state, JSON.stringify(snapshot?.discussion)).toBe('COMPLETED')
   expect(savedWaiting).toBeTruthy(); expect(savedLive).toBeTruthy()
   expect(versions.length).toBeGreaterThanOrEqual(2)
+  expect(versions.filter(v => v.state === 'RUNNING' && v.insights.items.length > 0).length).toBeGreaterThanOrEqual(2)
   await expect(page.getByTestId('message')).toHaveCount(snapshot!.messages.length)
   expect(await page.getByTestId('message').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-message-id'))))
     .toEqual(snapshot!.messages.map(m => m.id))

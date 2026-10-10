@@ -1,0 +1,194 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=playwright.final.config.ts",
+      "--grep",
+      "corrected real model"
+    ],
+    "configFile": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\playwright.final.config.ts",
+    "rootDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/work/stage6a-accepted-final-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "real-quality.spec.ts"
+        ],
+        "timeout": 900000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-final-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "snapshotDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "testIgnore": [],
+        "testMatch": "real-quality.spec.ts",
+        "timeout": 900000,
+        "use": {
+          "baseURL": "http://127.0.0.1:15175",
+          "channel": "msedge",
+          "viewport": {
+            "width": 1366,
+            "height": 768
+          },
+          "screenshot": "only-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../work/stage6a-accepted-final-browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm exec vite -- --host 127.0.0.1 --port 15175 --strictPort",
+      "url": "http://127.0.0.1:15175",
+      "reuseExistingServer": false,
+      "env": {
+        "PANEL_BACKEND_ORIGIN": "http://127.0.0.1:18082"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "real-quality.spec.ts",
+      "file": "real-quality.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrected real model flows from creation through live evidence to final summary",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 900000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 874826,
+                  "error": {
+                    "message": "Error: {\"id\":\"bb8c2628-f108-4417-9f73-8e220710a54c\",\"topic\":\"社区图书馆是否应试点延长晚间自助借还时段？请比较阅读可及性、老年读者使用、遗失风险与志愿者负担，并区分共同建议、个人提案和已验证事实。\",\"expert_count\":4,\"state\":\"SUMMARIZING\",\"version\":4,\"roster_revision\":1,\"run_id\":\"deb2168f-0314-405c-b5b4-1e90414fc639\",\"failure_stage\":null,\"failure_code\":null,\"created_at\":\"2026-10-10T15:38:51.936619Z\",\"updated_at\":\"2026-10-10T15:46:46.206460Z\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"COMPLETED\"\u001b[39m\nReceived: \u001b[31m\"SUMMARIZING\"\u001b[39m",
+                    "stack": "Error: {\"id\":\"bb8c2628-f108-4417-9f73-8e220710a54c\",\"topic\":\"社区图书馆是否应试点延长晚间自助借还时段？请比较阅读可及性、老年读者使用、遗失风险与志愿者负担，并区分共同建议、个人提案和已验证事实。\",\"expert_count\":4,\"state\":\"SUMMARIZING\",\"version\":4,\"roster_revision\":1,\"run_id\":\"deb2168f-0314-405c-b5b4-1e90414fc639\",\"failure_stage\":null,\"failure_code\":null,\"created_at\":\"2026-10-10T15:38:51.936619Z\",\"updated_at\":\"2026-10-10T15:46:46.206460Z\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"COMPLETED\"\u001b[39m\nReceived: \u001b[31m\"SUMMARIZING\"\u001b[39m\n    at C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts:46:76",
+                    "location": {
+                      "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                      "column": 76,
+                      "line": 46
+                    },
+                    "snippet": "  44 |   writeFileSync(`${output}/discussion.json`, JSON.stringify({ snapshot, observations, versions, errors,\n  45 |     elapsed_ms: Date.now() - started }, null, 2))\n> 46 |   expect(snapshot?.discussion.state, JSON.stringify(snapshot?.discussion)).toBe('COMPLETED')\n     |                                                                            ^\n  47 |   expect(savedWaiting).toBeTruthy(); expect(savedLive).toBeTruthy()\n  48 |   expect(versions.length).toBeGreaterThanOrEqual(2)\n  49 |   await expect(page.getByTestId('message')).toHaveCount(snapshot!.messages.length)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                        "column": 76,
+                        "line": 46
+                      },
+                      "message": "Error: {\"id\":\"bb8c2628-f108-4417-9f73-8e220710a54c\",\"topic\":\"社区图书馆是否应试点延长晚间自助借还时段？请比较阅读可及性、老年读者使用、遗失风险与志愿者负担，并区分共同建议、个人提案和已验证事实。\",\"expert_count\":4,\"state\":\"SUMMARIZING\",\"version\":4,\"roster_revision\":1,\"run_id\":\"deb2168f-0314-405c-b5b4-1e90414fc639\",\"failure_stage\":null,\"failure_code\":null,\"created_at\":\"2026-10-10T15:38:51.936619Z\",\"updated_at\":\"2026-10-10T15:46:46.206460Z\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"COMPLETED\"\u001b[39m\nReceived: \u001b[31m\"SUMMARIZING\"\u001b[39m\n\n  44 |   writeFileSync(`${output}/discussion.json`, JSON.stringify({ snapshot, observations, versions, errors,\n  45 |     elapsed_ms: Date.now() - started }, null, 2))\n> 46 |   expect(snapshot?.discussion.state, JSON.stringify(snapshot?.discussion)).toBe('COMPLETED')\n     |                                                                            ^\n  47 |   expect(savedWaiting).toBeTruthy(); expect(savedLive).toBeTruthy()\n  48 |   expect(versions.length).toBeGreaterThanOrEqual(2)\n  49 |   await expect(page.getByTestId('message')).toHaveCount(snapshot!.messages.length)\n    at C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts:46:76"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T15:38:50.675Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-final-browser-results\\real-quality-corrected-rea-0336f-e-evidence-to-final-summary\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-accepted-final-browser-results\\real-quality-corrected-rea-0336f-e-evidence-to-final-summary\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests\\real-quality.spec.ts",
+                    "column": 76,
+                    "line": 46
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4ff7f91f6d698812567b-b1ca666d1c1cc16b7182",
+          "file": "real-quality.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T15:38:48.075Z",
+    "duration": 878171.819,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

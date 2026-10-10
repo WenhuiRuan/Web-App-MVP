@@ -2,7 +2,8 @@
 
 Run from the project root: python -m scripts.real_validation_server.
 The existing .env supplies the model; inherit PANEL_API_KEY before launching.
-Outputs safe call metrics to ignored work/, never prompts or reasoning_content.
+Outputs safe call metrics to ignored work/; optional public inputs/final answers,
+never headers, credentials or reasoning_content.
 """
 import argparse
 import json
@@ -21,7 +22,7 @@ from backend.app.main import create_app
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking','stage6a-accepted','stage6a-accepted-final'])
+    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking','stage6a-accepted','stage6a-accepted-final','stage6a-budget-final'])
     parser.add_argument('--max-turns',type=int,choices=[8,12],default=12,help='Bounded validation discussion, not a production default')
     parser.add_argument('--capture-final-answers',action='store_true',help='Opt-in public validation evidence, never headers or reasoning')
     args=parser.parse_args()

@@ -125,7 +125,7 @@ smoke_lifecycle/smoke_synthesis是阶段4真实TCP验证脚本，历史结果沿
 - 未完成：最终版本完整讨论的内容质量复核、五份最终质量样例、工作流说明与交付包。已有完整真实流程技术通过，原场语义问题保留；定向修正不等于全场语义验收通过。费用账单及真实并发/p95未知。
 - 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
 - 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：本批先由用户复核；下一批应先以最新版本复核完整内容，再选至少五份高质量样例、编写工作流与打包。本批不自动开始下一批或远程交付。
+- 下一步：本批先在余额恢复后补完最新修正版的完整真实验收；通过并经用户复核后，下一批再选至少五份高质量样例、编写工作流与打包。本批不自动开始下一批或远程交付。
 
 生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认业务模式须同时运行后端；独立前端演示添加?mode=mock。Ctrl+C停止，服务5秒宽限后取消开放流并清理任务。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 
@@ -149,3 +149,26 @@ if (-not $env:PANEL_API_KEY) {
 本次续批见[质量修正与验收](docs/quality-revision.md)：69项适配/实际HTTP检查、68项受影响回归、类型/构建及1个真实完整浏览器用例通过；原场11条正式消息、6次观点更新，实际结束为host_end。人工发现的误判按原边界另行修正，没有覆盖旧记录。最终摘要采用自然语言概述和实际作者的原文精选，提案与条件不自由改写；严格提取仍可能漏掉有效交集。
 
 仅在明确要重新进行付费验证时，后端专用终端运行 `python -m scripts.real_validation_server --label stage6a-corrected`（新临时SQLite，端口18082）；另一个不含密钥的前端终端设置PANEL_REAL_VALIDATION=1、PLAYWRIGHT_CHANNEL=msedge，在frontend运行 `npm exec playwright test -- --config=playwright.corrected.config.ts`。已有报告存在时测试拒绝覆盖，先保留或另存旧证据。定向任务脚本 `python -m scripts.review_quality_cases --help` 可查看选项，它也调用真实服务。日常使用仍按启动脚本运行；应用Prompt缓存需重启后端才能更新。
+
+## 本次验收收尾状态（2026-10-11）
+
+详情见[共识连续性、总结分类及验收证据](docs/quality-acceptance.md)。用户已允许全部任务思考，当前后端默认enabled/low/16384；仍只读取最终content。前批观点重新复核、共同支持人数守卫、建议分类和撤回/条件变化已经定向验证；不以格式成功证明语义正确。
+
+最新真实场8条发言、turn_limit结束，运行中有观点更新，但后续提取及总结返回HTTP402。随后修复多步总预算和供应商错误码持久化，当前工程检查通过，最终修正版没有新完整真实流程通过证据。本批未完成验收，不能选这场为最终样例。原场及失败报告保留；对其SQLite备份的启动恢复验证没有调用模型或覆盖原记录。
+
+后端启动自动应用006迁移，保留001–005校验和、任务行及归属/唯一约束，重复初始化无操作。旧遗留PENDING按既有恢复规则标INTERRUPTED，不重播讨论。正常余额错误现在可保存失败状态；补充余额后总结可用页面原重试操作继续同run与冻结消息边界。ready仅配置检查，不证明余额充足。
+
+真实思考的有限覆盖配置可仅在后端PowerShell设置，再运行启动脚本（不修改用户.env）：
+
+```powershell
+$env:MODEL_THINKING_MODE = 'enabled'
+$env:MODEL_REASONING_EFFORT = 'low'
+$env:MODEL_THINKING_MAX_TOKENS = '16384'
+$env:MODEL_TIMEOUT_SECONDS = '120'
+$env:INSIGHT_MAX_SECONDS = '240'
+$env:SUMMARY_MAX_SECONDS = '180'
+$env:DISCUSSION_MAX_SECONDS = '600'
+.\scripts\start-backend.ps1
+```
+
+每HTTP有独立httpx超时，观点/总结的全部子调用和重试共享有限任务截止时间。这些参数通过可控上游和引擎检查，尚未通过最终修正版的整场真实质量验收；默认短预算适合替身，不保证真实思考耗时。运行时模型和Codex开发模型完全独立。常规pytest不发起真实付费调用。

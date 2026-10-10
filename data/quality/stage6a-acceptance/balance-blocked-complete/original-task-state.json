@@ -1,0 +1,85 @@
+{
+  "insight_jobs": [
+    {
+      "id": "c4118c89-9d6b-44d8-ba37-e6839419a58c",
+      "discussion_id": "bb8c2628-f108-4417-9f73-8e220710a54c",
+      "run_id": "deb2168f-0314-405c-b5b4-1e90414fc639",
+      "version": 1,
+      "through_turn": 2,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "d72f8b98-9a6d-4888-81e9-d069794177eb",
+      "discussion_id": "bb8c2628-f108-4417-9f73-8e220710a54c",
+      "run_id": "deb2168f-0314-405c-b5b4-1e90414fc639",
+      "version": 2,
+      "through_turn": 4,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "2c68577a-a428-45fe-a0b9-2a4c2602435d",
+      "discussion_id": "bb8c2628-f108-4417-9f73-8e220710a54c",
+      "run_id": "deb2168f-0314-405c-b5b4-1e90414fc639",
+      "version": 3,
+      "through_turn": 6,
+      "state": "FAILED",
+      "error_code": "MODEL_TIMEOUT"
+    },
+    {
+      "id": "7f5eeab1-2706-4fe8-bbd3-5ea49e178398",
+      "discussion_id": "bb8c2628-f108-4417-9f73-8e220710a54c",
+      "run_id": "deb2168f-0314-405c-b5b4-1e90414fc639",
+      "version": 4,
+      "through_turn": 8,
+      "state": "PENDING",
+      "error_code": null
+    }
+  ],
+  "summary_jobs": [
+    {
+      "id": "2d069864-2079-4302-b3cd-4d85d4e557b8",
+      "discussion_id": "bb8c2628-f108-4417-9f73-8e220710a54c",
+      "run_id": "deb2168f-0314-405c-b5b4-1e90414fc639",
+      "attempt": 1,
+      "through_turn": 8,
+      "insight_version": 2,
+      "operation_id": null,
+      "status": "PENDING",
+      "error_code": null
+    }
+  ],
+  "schema_migrations": [
+    {
+      "version": 1,
+      "name": "001_initial.sql",
+      "checksum": "0f35d53cfcb4f5bcd3cc63f808f42a835d1f784fba414de92833e0bac6180ebc",
+      "applied_at": "2026-10-10T15:38:36.919Z"
+    },
+    {
+      "version": 2,
+      "name": "002_discussion_turns.sql",
+      "checksum": "be887b1bc9ca1a93ad9ad247a327f224b61528685427446b6020ca0924632938",
+      "applied_at": "2026-10-10T15:38:36.921Z"
+    },
+    {
+      "version": 3,
+      "name": "003_insight_jobs.sql",
+      "checksum": "28f42dbc1b90ad17d20c4f9b09d9e13ba8cea10abb4c110c2504bfce3b8aa2b5",
+      "applied_at": "2026-10-10T15:38:36.922Z"
+    },
+    {
+      "version": 4,
+      "name": "004_summary_jobs.sql",
+      "checksum": "1b6d478c4f19cb60e72e4445185ea6f6a0ad8ebc299685ca001534a72375917b",
+      "applied_at": "2026-10-10T15:38:36.922Z"
+    },
+    {
+      "version": 5,
+      "name": "005_insight_status_events.sql",
+      "checksum": "b91a2b80fd0a8acdd2a5bc9dc19dbfd95b11c881c6d4f558bfcc948da541439e",
+      "applied_at": "2026-10-10T15:38:36.924Z"
+    }
+  ]
+}
