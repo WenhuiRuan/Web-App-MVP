@@ -248,3 +248,5 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 验收收尾补丁：迁移006允许观点/总结任务表保存全部安全供应商错误码，修复402等失败写入回滚后页面滞留PENDING的问题。观点失败发布insights.status_changed并保留最新成功批次；总结失败发布原失败事件与FAILED/failure_stage=summary/failure_code，用户使用原summary-retry接口和新幂等键重试同run及冻结边界。不可重试指统一调用层不自动重试，余额/配置修复后的用户显式重试仍允许；并发领取及迟到结果守卫不变。
 
 HTTP/SSE字段与导出schema不变。多步观点/总结按每HTTP超时和统一有限总预算分别限制，普通任务规则不变；具体参数见model-provider.md。ready仍不检查余额，不能由ready成功推断真实调用可用。
+
+最终0465f68真实浏览器走原创建/生成/确认/SSE/快照/总结接口成功，8消息/4观点批次（RUNNING时两次非空）/113连续事件；内容逐条内容复核与空分歧依据见quality-acceptance.md。终态为COMPLETED且冻结8，实际turn_limit。未新增接口字段或重写旧场数据；本场无总结重试，重试行为由已有E2E及新增供应商错误持久化测试证明。

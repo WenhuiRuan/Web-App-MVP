@@ -2,9 +2,9 @@
 
 采用已锁定 httpx 0.28.1 调用 Chat Completions，不增加 SDK。应用模型由后端独立配置，与 Codex 开发模型无关。mock 保留确定性替身；deepseek 配置齐全才建立真实网关。六任务沿用原引擎逐任务调用，不预生成整场台本。
 
-当前配置（验收收尾）：六任务默认 thinking=enabled、reasoning_effort=low、max_tokens=16384；用户已允许全部任务思考。下文high/8192和短预算为历史验证配置。最终修正后的整场验收尚未完成，最新真实请求返回402，详见[本批质量记录](quality-acceptance.md)。
+当前配置（验收收尾）：六任务默认 thinking=enabled、reasoning_effort=low、max_tokens=16384；用户已允许全部任务思考。下文high/8192和短预算为历史验证配置。最终修正后的整场浏览器和本批核心内容复核通过；此前402失败独立保留，详见[本批质量记录](quality-acceptance.md)。
 
-多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖建议为120/240/180/600秒（HTTP/观点/总结/讨论）；已通过可控上游及引擎检查，尚未以这一预算修正版完成新的真实整场。用户.env保持不变。
+多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖为120/240/180/600秒（HTTP/观点/总结/讨论）；可控上游、引擎及一次新完整真实场通过，最后一批135.734秒仍成功。不是p95/并发保证，用户.env保持不变。
 
 ## 官方接口依据（2026-10-10核对）
 
@@ -84,7 +84,7 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 
 ## 思考模式（用户追加授权）
 
-本次用户允许全部任务思考。后端MODEL_THINKING_MODE=enabled/disabled（默认enabled），MODEL_REASONING_EFFORT=low/high/max（默认high），MODEL_THINKING_MAX_TOKENS默认8192，允许1024–32768。enabled时显式发送thinking.type、reasoning_effort及该输出上限，disabled保持原输出额度且不传effort。模拟网关不使用这些配置，前端仍准确标为真实DeepSeek服务，未声称展示思考。
+本次用户允许全部任务思考。后端MODEL_THINKING_MODE=enabled/disabled（默认enabled），MODEL_REASONING_EFFORT=low/high/max（当前默认low，初始high），MODEL_THINKING_MAX_TOKENS当前默认16384（初始8192），允许1024–32768。enabled时显式发送thinking.type、reasoning_effort及该输出上限，disabled保持原输出额度且不传effort。模拟网关不使用这些配置，前端仍准确标为真实DeepSeek服务，未声称展示思考。
 
 参数依据[官方思考模式](https://api-docs.deepseek.com/guides/thinking_mode/)及[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)（2026-10-10核对）。不使用工具调用、不回传历史推理，仅从message.content选择最终回答；不会保存reasoning_content。JSON格式及业务校验、独立上下文、统一有限重试保持。
 
@@ -96,9 +96,11 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 
 新定位到通用漏提根因：真实draft/review均确认4/6共同指标，但“这是两人的共同建议”被数量守卫误认为执行人数，因原引文不含“两人”而删除。先1失败，再将明确共同支持人数与绑定作者数核对，其他执行人数/数值仍须各来源支持；96检查通过（4.42秒）。
 
-真实thinking返回多次completion约8193且finish_reason非stop，输出额度被耗尽；先默认额度1失败，再16384配置实现，97检查通过（4.43秒）。f9141e2中间完整浏览器人为停止以应用新守卫，保留快照/截图/journal，不称业务失败或通过。最终完整场将在新clean revision运行，仍为enabled/low；此前high/60秒耗尽记录保留。
+真实thinking返回多次completion约8193且信封校验失败（原finish_reason值未保留），可能耗尽输出额度；先默认额度1失败，再16384配置实现，97检查通过（4.43秒）。f9141e2中间完整浏览器人为停止以应用新守卫，保留快照/截图/journal，不称业务失败或通过。最终完整场将在新clean revision运行，仍为enabled/low；此前high/60秒耗尽记录保留。
 
 
 长前缀实测提示MODEL_TIMEOUT_SECONDS实际约束整个generate尝试（含草稿/逐项复核），不仅是单个HTTP IO；90秒可截断多候选。新的验证采用120/240/180/600秒（尝试/提取/总结/讨论），所有仍有限；不修改用户.env。enabled默认effort改low、输出16384，先默认断言失败后通过。
 
 独立复核坏引文使整批成功候选重试/消失：先1失败，再逐项InvalidModelResult剔除，全部非法仍失败，服务/取消/总超时仍整体失败。98检查通过（4.49秒）。真实撤回复核曾截出未重新认可的旧子主张；Prompt要求整体撤回删除，仅最新明确认可子主张可收窄。原输出保留，定向补验及最终clean版本8条有限讨论待验证。8仅验证入口参数，生产默认20不变；实际结束原因将据数据库记录。
+
+以上为开发中的历史结果；最终0465f68清洁版本已完整验证，8条/turn_limit、四批提取、412字总结，62真实HTTP/reported200543 tokens，逐条内容复核核心要求通过。实际观察418.333秒，最后提取135.734秒/每HTTP最大54.640秒，预算修正版成功。非穷举召回、原文精选表达和压力/真实并发未验收范围不变，证据见quality-acceptance.md；本批不继续样例或交付包。

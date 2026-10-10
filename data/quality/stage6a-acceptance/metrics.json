@@ -1,16 +1,16 @@
 {
   "scope": "Only this acceptance turn, excludes previous stage6a and stage6a-revision metrics.",
   "interrupted_process_limitation": "interrupted-intermediate may omit unflushed in-flight attempts; cumulative actual attempts and tokens therefore unknown. Completed final run count is complete.",
-  "recorded_attempts": 583,
+  "recorded_attempts": 645,
   "reported_usage": {
-    "prompt_tokens": 1247227,
-    "completion_tokens": 700843,
-    "total_tokens": 1948070,
-    "prompt_cache_hit_tokens": 834937,
-    "prompt_cache_miss_tokens": 412290
+    "prompt_tokens": 1341677,
+    "completion_tokens": 806936,
+    "total_tokens": 2148613,
+    "prompt_cache_hit_tokens": 900217,
+    "prompt_cache_miss_tokens": 441460
   },
   "missing_usage_attempts": 16,
-  "cumulative_io_ms": 3802598.0,
+  "cumulative_io_ms": 4317380.0,
   "groups": {
     "balance-blocked-complete": {
       "recorded_attempts": 64,
@@ -63,6 +63,30 @@
       "missing_usage_attempts": 4,
       "cumulative_io_ms": 974765.0,
       "max_io_ms": 47406.0
+    },
+    "complete-final": {
+      "recorded_attempts": 62,
+      "statuses": {
+        "succeeded": 62
+      },
+      "tasks": {
+        "roster": 1,
+        "utterance": 8,
+        "host_control": 7,
+        "intent": 28,
+        "insights": 16,
+        "summary": 2
+      },
+      "reported_usage": {
+        "prompt_tokens": 94450,
+        "completion_tokens": 106093,
+        "total_tokens": 200543,
+        "prompt_cache_hit_tokens": 65280,
+        "prompt_cache_miss_tokens": 29170
+      },
+      "missing_usage_attempts": 0,
+      "cumulative_io_ms": 514782.0,
+      "max_io_ms": 54640.0
     },
     "failed-complete": {
       "recorded_attempts": 48,

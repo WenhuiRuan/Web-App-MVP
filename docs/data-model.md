@@ -121,3 +121,5 @@ events.type追加insights.status_changed；实体/关联不变，原ER图继续�
 允许原MODEL_TIMEOUT、MODEL_RESULT_INVALID、TASK_FAILED、DATABASE_UNAVAILABLE、SERVICE_INTERRUPTED，并追加MODEL_REQUEST_INVALID、MODEL_AUTH_FAILED、MODEL_BALANCE_EXHAUSTED、MODEL_NOT_FOUND、MODEL_RATE_LIMITED、MODEL_SERVICE_UNAVAILABLE、MODEL_CONNECTION_FAILED。业务失败状态和对应事件继续原子提交。全新初始化应用1–6，v5升级仅应用6，重复执行为空；旧PENDING行保留，由原启动恢复规则转INTERRUPTED，不自动调用模型。
 
 七类供应商失败、同run冻结边界重试、已有消息/观点保留及v5升级测试通过；失败真实库的SQLite备份已通过真实FastAPI启动恢复，无模型调用。备份验证不改写原场，不作为真实总结成功证据。
+
+最终真实场在schema1–6下完成，四个insight_jobs与一个summary_jobs均SUCCEEDED，run COMPLETED/turn_limit/summary_through_turn=8；113事件连续，消息ID/turn唯一，外键无异常、integrity=ok。原库和运行参数见data/quality/stage6a-acceptance/complete-final的安全文本导出，不提交实际数据库或密钥。

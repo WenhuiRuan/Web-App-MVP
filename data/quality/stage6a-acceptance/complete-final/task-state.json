@@ -1,0 +1,271 @@
+{
+  "insight_jobs": [
+    {
+      "id": "f90fcbea-641f-4a7f-823a-c914f4044392",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "version": 1,
+      "through_turn": 2,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "8fd794f5-6ba8-4248-a47d-7987ea550718",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "version": 2,
+      "through_turn": 4,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "15212125-7c95-4f93-9ac3-a60357db8b69",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "version": 3,
+      "through_turn": 6,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "b1f78200-3483-43ff-ac68-b22db69e944f",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "version": 4,
+      "through_turn": 8,
+      "state": "SUCCEEDED",
+      "error_code": null
+    }
+  ],
+  "summary_jobs": [
+    {
+      "id": "f10f8dcf-97cf-4bda-9991-2fc248839953",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "attempt": 1,
+      "through_turn": 8,
+      "insight_version": 4,
+      "operation_id": null,
+      "status": "SUCCEEDED",
+      "error_code": null
+    }
+  ],
+  "schema_migrations": [
+    {
+      "version": 1,
+      "name": "001_initial.sql",
+      "checksum": "0f35d53cfcb4f5bcd3cc63f808f42a835d1f784fba414de92833e0bac6180ebc",
+      "applied_at": "2026-10-10T16:18:18.198Z"
+    },
+    {
+      "version": 2,
+      "name": "002_discussion_turns.sql",
+      "checksum": "be887b1bc9ca1a93ad9ad247a327f224b61528685427446b6020ca0924632938",
+      "applied_at": "2026-10-10T16:18:18.201Z"
+    },
+    {
+      "version": 3,
+      "name": "003_insight_jobs.sql",
+      "checksum": "28f42dbc1b90ad17d20c4f9b09d9e13ba8cea10abb4c110c2504bfce3b8aa2b5",
+      "applied_at": "2026-10-10T16:18:18.201Z"
+    },
+    {
+      "version": 4,
+      "name": "004_summary_jobs.sql",
+      "checksum": "1b6d478c4f19cb60e72e4445185ea6f6a0ad8ebc299685ca001534a72375917b",
+      "applied_at": "2026-10-10T16:18:18.202Z"
+    },
+    {
+      "version": 5,
+      "name": "005_insight_status_events.sql",
+      "checksum": "b91a2b80fd0a8acdd2a5bc9dc19dbfd95b11c881c6d4f558bfcc948da541439e",
+      "applied_at": "2026-10-10T16:18:18.205Z"
+    },
+    {
+      "version": 6,
+      "name": "006_provider_failure_codes.sql",
+      "checksum": "b732688ff500472021e9fbd0e1f8d4f12ad146127c29fa46480ce5337e0336af",
+      "applied_at": "2026-10-10T16:18:18.211Z"
+    }
+  ],
+  "insights": [
+    {
+      "id": "148a228d-0874-5893-9bc9-2f935dc86c8f",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "王磊与赵敏：双方共同建议：延长晚间自助借还时段试点，应以风险可控为前置条件。"
+    },
+    {
+      "id": "cbf3204e-ac7a-5683-bccf-84875de957aa",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "赵敏与李静均建议，延长晚间自助借还试点应纳入紧急呼叫和设备培训。"
+    },
+    {
+      "id": "97568ec8-e494-526b-84d7-2a92ac142961",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "赵敏与李静共同建议，晚间自助借还试点应纳入紧急呼叫和培训，仍属提案。"
+    },
+    {
+      "id": "5b88e3eb-7b73-58a4-8e26-9f31b854f9a6",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "林禾与王磊共同建议，试点应逐日记录借还次数与故障次数。"
+    },
+    {
+      "id": "c02a2ac8-5bed-5c87-8558-31a325e6b2e4",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "王磊、赵敏共同建议：延长晚间自助借还时段试点，应以风险可控为前置条件。"
+    },
+    {
+      "id": "9c7f13d1-664d-58fb-891b-39b58666dbad",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "林禾与王磊共同建议，小范围试点应逐日记录借还次数与故障次数；该要求仍是试点提案。"
+    },
+    {
+      "id": "61a73cb6-19ee-52f9-9a5a-739e39d2972a",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "赵敏与李静共同建议，晚间自助借还试点应纳入紧急呼叫与培训；该要求仍属提案。"
+    },
+    {
+      "id": "b2fa3ee4-6e9d-567b-9e01-01a067aa00ff",
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "王磊、赵敏共同建议：晚间自助借还试点应以风险可控为前置条件，仍属提案。"
+    }
+  ],
+  "insight_sources": [
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "insight_id": "148a228d-0874-5893-9bc9-2f935dc86c8f",
+      "message_id": "2628a93b-2f26-401c-bb9b-bce7261c7fc5"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "insight_id": "148a228d-0874-5893-9bc9-2f935dc86c8f",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "insight_id": "cbf3204e-ac7a-5683-bccf-84875de957aa",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 2,
+      "insight_id": "cbf3204e-ac7a-5683-bccf-84875de957aa",
+      "message_id": "d8d3499f-072c-4b1e-baaf-17c3c691e5c3"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "97568ec8-e494-526b-84d7-2a92ac142961",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "97568ec8-e494-526b-84d7-2a92ac142961",
+      "message_id": "d8d3499f-072c-4b1e-baaf-17c3c691e5c3"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "5b88e3eb-7b73-58a4-8e26-9f31b854f9a6",
+      "message_id": "1471d943-4e54-4030-9816-b00dfa9c2db9"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "5b88e3eb-7b73-58a4-8e26-9f31b854f9a6",
+      "message_id": "980c1a63-4d69-415a-85f1-3da417175db6"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "c02a2ac8-5bed-5c87-8558-31a325e6b2e4",
+      "message_id": "2628a93b-2f26-401c-bb9b-bce7261c7fc5"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 3,
+      "insight_id": "c02a2ac8-5bed-5c87-8558-31a325e6b2e4",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "9c7f13d1-664d-58fb-891b-39b58666dbad",
+      "message_id": "1471d943-4e54-4030-9816-b00dfa9c2db9"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "9c7f13d1-664d-58fb-891b-39b58666dbad",
+      "message_id": "980c1a63-4d69-415a-85f1-3da417175db6"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "61a73cb6-19ee-52f9-9a5a-739e39d2972a",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "61a73cb6-19ee-52f9-9a5a-739e39d2972a",
+      "message_id": "d8d3499f-072c-4b1e-baaf-17c3c691e5c3"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "b2fa3ee4-6e9d-567b-9e01-01a067aa00ff",
+      "message_id": "2628a93b-2f26-401c-bb9b-bce7261c7fc5"
+    },
+    {
+      "discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+      "run_id": "c1ef2c45-84e2-4ea5-9701-a522cf31fc5b",
+      "batch_version": 4,
+      "insight_id": "b2fa3ee4-6e9d-567b-9e01-01a067aa00ff",
+      "message_id": "8bb66e74-3f44-444b-8b16-324bdf47dd64"
+    }
+  ]
+}

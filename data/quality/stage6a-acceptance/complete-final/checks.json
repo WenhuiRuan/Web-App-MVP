@@ -1,0 +1,25 @@
+{
+  "scope": "Structural evidence checks only; semantic review recorded separately.",
+  "code_revision": "0465f687eb8096765c676d049e81668298081943",
+  "clean_start": true,
+  "prompt_versions_match": true,
+  "elapsed_ms": 418333,
+  "state": "COMPLETED",
+  "stop_reason": "turn_limit",
+  "message_count": 8,
+  "summary_characters": 412,
+  "running_nonempty_updates": 2,
+  "insight_task_seconds": {
+    "1": 1.431026,
+    "2": 38.228566,
+    "3": 88.858793,
+    "4": 135.733606
+  },
+  "event_count": 113,
+  "continuous_events": true,
+  "foreign_key_check": [],
+  "integrity_check": [
+    "ok"
+  ],
+  "page_errors": []
+}

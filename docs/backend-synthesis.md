@@ -31,3 +31,17 @@ DiscussionEngine提交每条正式消息后，在偶数边界同步等待Synthes
 14项观点、19项总结、14项恢复共47新增均已通过。先运行新增及受影响回归168项（当时45新增），收尾两项格式负例先失败再修复后，相关55项回归通过。独立TCP报告work/synthesis-smoke-8xiz3ce0/report.json：两场各8条消息，非空观点在RUNNING的turn4/6/8更新；A总结两次非法失败，B正常完成，A并发重试合并一个任务；中断重启后新键总结成功且原消息/观点/边界不变。基础smoke_lifecycle也验证完成数据强制重启保留。
 
 证据约束验证归属、边界与至少两位专家，并不能证明模型语义正确；默认Gateway仅生成工程模拟内容。自然语言校验拒绝JSON/代码块/空白/超长，不能自动证明总结忠实度。单进程/worker/database owner、持续不可写需下次可写启动恢复；前端仍模拟，SSE/真实服务/真实内容质量/五份样例/完整浏览器业务E2E未完成。
+# 阶段6A验收收尾新增检查
+
+以下仅新增及受影响的验证，已有SSE、静态布局与完整替身E2E沿用，不重复。常规pytest只用可控网关/HTTP，不调用付费模型；真实检查由用户授权后显式启用。
+
+| 文件／范围 | 本批实际结果 | 证明边界 |
+|---|---|---|
+| test_quality_continuity.py | 23项含旧4/6、前批复核、污染候选收窄、撤回/条件、分类、去重与守卫 | 程序逻辑和模拟协议；语义由真实输出另核读 |
+| test_synthesis_call_budget.py＋适配/连续性/实际HTTP | 101 passed，10.17秒；多步预算先1失败/1通过 | 单HTTP超时、有限任务截止及取消/重试；慢HTTP为真实loopback服务 |
+| 引擎/观点/总结/恢复 | 65 passed，60.11秒 | 预算变化受影响的回归；不与重叠检查相加 |
+| test_provider_failure_persistence.py＋数据库/基础/契约/制品 | 46 passed，7.85秒；15新测试先失败 | 七类供应商错误原子保存、保留已有观点、同run冻结边界重试、v5→6升级和约束 |
+| 迁移后观点/总结/恢复 | 47 passed，39.92秒 | 事务写入故障回滚和恢复，其他旧规则不重复 |
+| real-quality.spec.ts，真实DeepSeek | 1 passed约7分钟，418.333秒流程观察 | 实际前后端/新SQLite/HTTP/SSE、两次RUNNING非空观点及总结；不是所有语义保证 |
+
+复现程序小批可在根目录运行 `.venv/Scripts/python.exe -m pytest backend/tests/test_provider_failure_persistence.py backend/tests/test_database.py -q`；模型适配预算组为test_deepseek.py、test_deepseek_http.py、test_quality_continuity.py、test_synthesis_call_budget.py。完整真实脚本会付费，入口/环境/预算见README，不在普通测试中隐式开启。真实证据、逐条来源判断、代码/Prompt版本与覆盖限制见[验收收尾记录](quality-acceptance.md)。
