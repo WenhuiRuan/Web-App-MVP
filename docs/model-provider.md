@@ -85,3 +85,6 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 参数依据[官方思考模式](https://api-docs.deepseek.com/guides/thinking_mode/)及[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)（2026-10-10核对）。不使用工具调用、不回传历史推理，仅从message.content选择最终回答；不会保存reasoning_content。JSON格式及业务校验、独立上下文、统一有限重试保持。
 
 追加保守守卫：分歧证据须含明确反对/撤回等标记；含“或/还是”的选择证据不能直接支撑“同时/并行”采用。相同kind及逐字证据集合只保留一项，支持者姓名由实际来源补齐。这些通用词形约束可能漏掉隐含反对或同一段支持的多个命题，不是语义保证；最终仍须实际输出复核。
+
+
+思考high实测长前缀草稿已正确提取4/6共同主张，但多段IO耗尽60秒；先1失败测试，再允许有限提取预算1–300秒，95相关检查通过（4.55秒）。真实后端进程使用IO90/提取180/总结120；对照low努力级别仍为enabled思考，用实际输出决定适用预算，不重复认证已通过的SSE/布局。用户.env保持原样。

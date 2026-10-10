@@ -9,6 +9,7 @@ import pytest
 from pydantic import ValidationError
 
 from backend.app.contracts import InsightBatch, ModelRequest, Snapshot
+from backend.app.config import Settings
 from backend.app.deepseek_gateway import DeepSeekGateway, bind_result, reviewed_points, reviewed_summary
 from backend.app.model_gateway import InvalidModelResult
 from backend.tests.test_deepseek import request, config, answer, checks, summary_review
@@ -23,6 +24,12 @@ def library():
     return ModelRequest(task='insights', discussion_id=d.id, run_id=d.run_id, topic=d.topic,
         expert_count=d.expert_count, participants=snap.participants, messages=snap.messages,
         through_turn=len(snap.messages), insight_version=7)
+
+
+def test_thinking_insight_budget_is_finite_and_can_cover_multiple_reviews():
+    assert Settings(_env_file=None,insight_max_seconds=180).insight_max_seconds==180
+    for seconds in (0,301):
+        with pytest.raises(ValidationError): Settings(_env_file=None,insight_max_seconds=seconds)
 
 
 def library_point(req):

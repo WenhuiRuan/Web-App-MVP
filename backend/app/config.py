@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     discussion_max_turns: int = Field(default=20, ge=1, le=100)
     discussion_max_seconds: int = Field(default=300, ge=10, le=3600)
     summary_max_seconds: int = Field(default=60, ge=1, le=180)
-    insight_max_seconds: int = Field(default=15, ge=1, le=60)
+    insight_max_seconds: int = Field(default=15, ge=1, le=300)
 
     @field_validator('database_path')
     @classmethod
