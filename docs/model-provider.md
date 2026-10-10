@@ -6,6 +6,10 @@
 
 多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖为120/240/180/600秒（HTTP/观点/总结/讨论）；可控上游、引擎及一次新完整真实场通过，最后一批135.734秒仍成功。不是p95/并发保证，用户.env保持不变。
 
+## 当前启动配置（2026-10-11）
+
+最终默认与示例统一 thinking=enabled、effort=low、输出16384、HTTP120秒、提取240秒、总结180秒、讨论600秒、日常20条。项目.env的非敏感配置已同步，密钥引用保持原样；启动步骤以根README为准。最终代码0465f68完整真实流程及内容复核通过（418.333秒/62 HTTP/200543 tokens），验证单独设8条，实际turn_limit。原raw质量记录与失败保留，下面各阶段预算说明是历史决策，不作为当前启动指南。
+
 ## 官方接口依据（2026-10-10核对）
 
 - [Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)：POST {MODEL_BASE_URL}/chat/completions，OpenAI兼容消息。

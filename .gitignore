@@ -56,3 +56,6 @@ local-data/
 # Task scratch files and local delivery archives.
 work/
 *.zip
+
+# Local delivery manifests, reports and archives.
+outputs/

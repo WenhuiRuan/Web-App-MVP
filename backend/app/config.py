@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     model_base_url: str = Field(default='', repr=False, exclude=True)
     model_name: str = Field(default='', repr=False, exclude=True)
     model_api_key: SecretStr = Field(default=SecretStr(''), repr=False, exclude=True)
-    model_timeout_seconds: int = Field(default=30, ge=1, le=120)
+    model_timeout_seconds: int = Field(default=120, ge=1, le=120)
     model_thinking_mode: Literal['enabled', 'disabled'] = 'enabled'
     model_reasoning_effort: Literal['low', 'high', 'max'] = 'low'
     model_thinking_max_tokens: int = Field(default=16384, ge=1024, le=32768)
@@ -26,9 +26,9 @@ class Settings(BaseSettings):
     model_max_attempts: int = Field(default=2, ge=1, le=3)
     discussion_max_active: int = Field(default=3, ge=1, le=10)
     discussion_max_turns: int = Field(default=20, ge=1, le=100)
-    discussion_max_seconds: int = Field(default=300, ge=10, le=3600)
-    summary_max_seconds: int = Field(default=60, ge=1, le=180)
-    insight_max_seconds: int = Field(default=15, ge=1, le=300)
+    discussion_max_seconds: int = Field(default=600, ge=10, le=3600)
+    summary_max_seconds: int = Field(default=180, ge=1, le=180)
+    insight_max_seconds: int = Field(default=240, ge=1, le=300)
 
     @field_validator('database_path')
     @classmethod

@@ -1,6 +1,6 @@
 # SDD 架构基线
 
-SDD基线：阶段2，2026-10-08；更新于2026-10-10。4A生命周期、4B自主调度、4C观点提取/自然语言总结/恢复均完成对应后端验证。确定性模式自动到COMPLETED；阶段5已接通SSE与前端业务并完成替身下真实服务E2E；真实模型留阶段6。模块细节见backend-lifecycle、backend-orchestration和backend-synthesis。
+更新：2026-10-11。最终架构已实现生命周期、自主调度、观点/总结/恢复、持久化SSE、真实前端与DeepSeek六任务。当前预算和模式见README；下文保留模块/事务设计及阶段演进。
 
 ## 模块与依赖
 
@@ -20,8 +20,8 @@ flowchart TD
   API --> APP[TaskSupervisor / DiscussionEngine / SynthesisEngine]
   APP --> DOMAIN[纯领域规则与契约]
   APP --> PORT[ModelGateway 协议]
-  PORT --> MOCK[确定性模拟: 本阶段可调用]
-  PORT -.-> REAL[真实供应商适配: 后续]
+  PORT --> MOCK[确定性模拟: 工程替身]
+  PORT --> REAL[DeepSeek Chat Completions: 六任务已实现]
   APP --> DB[SQLite Repository 与事务]
   DB --> EV[持久化事件表]
   EV -->|SSE| UI
@@ -47,7 +47,7 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 
 启动幂等：命令需要 UUID Idempotency-Key。创建作用域 global，其他命令为 discussion_id+命令名；规范化请求摘要相同则返回原 HTTP 状态/响应，不再次排队；摘要不同返回 409 IDEMPOTENCY_CONFLICT。BEGIN IMMEDIATE 内检查状态/revision、写 run/operation/state/event 后提交，提交后受监管任务领取操作。不同键的重复 start 在该 revision 已有 run 时返回该 run，不新增任务（不论原 run 是否已终止）；旧 revision 返回 409 ROSTER_VERSION_CONFLICT。数据库唯一索引进一步阻止双 active run。
 
-默认专家4（2–6，不含主持人），议题trim后1–500码点；默认最多20条正式消息、运行300秒，主持可提前结束，无候选时追问。每2条正式消息提取一次，提取总预算10秒；总结独立60秒。模型每次超时30秒，全局并发4、最多2次尝试（含首次），总预算优先；没有额外“连续无人申请自动结束”规则。真实429/鉴权/费用策略待适配接入，不把设计建议写成现行行为。
+默认专家4（2–6，不含主持人），议题trim后1–500码点；默认最多20条正式消息、运行600秒，主持可提前结束，无候选时追问。每2条正式消息提取一次，提取总预算240秒；总结独立180秒。模型每个HTTP超时120秒，全局并发4、最多2次尝试（含首次），总预算优先；没有额外“连续无人申请自动结束”规则。真实供应商错误按统一有限重试分类，详见model-provider；配置就绪不证明上游连通。
 
 发言以 1–2 个句子数组生成，每句 1–200 码点；句界为 。！？!? 与非数字间的英文句点，连续终止标点算一个句界，句末标点可省略。缩写含句点易误判，模拟/提示词使用完整词；最终正式消息拼接后 ≤400 码点。总结独立自然语言字段（≤4000 码点），不作为 1–2 句短发言。语义质量仍需人工检查。
 
@@ -70,7 +70,7 @@ Python包backend/app：contracts定义公开/模型格式，model_gateway定义�
 
 当前运行路由包括三个基础接口及创建、列表、快照、嘉宾生成、启动、总结重试和操作查询；包括SSE持久化事件订阅。前端默认通过统一HTTP/SSE客户端，独立台本仅在mode=mock；全部业务请求通过Vite同源代理访问后端，不读取根.env。后端默认loopback，无身份系统，不对公网发布。
 
-日志白名单仅含生成的 request_id、HTTP 方法、匹配的路由模板、状态和耗时；不记录请求 body/query/header、模型上下文/输出、环境值和异常原文。关闭 Uvicorn access log；统一错误不回显 Pydantic input/ctx 或原始异常；未匹配路径记录固定 `<unmatched>`。配置中密钥用 SecretStr，禁止 dump 配置。真实适配器尚未实现，非 mock 模式 readiness 返回 503。
+日志白名单仅含生成的 request_id、HTTP 方法、匹配的路由模板、状态和耗时；不记录请求 body/query/header、模型上下文/输出、环境值和异常原文。关闭 Uvicorn access log；统一错误不回显 Pydantic input/ctx 或原始异常；未匹配路径记录固定 `<unmatched>`。配置中密钥用 SecretStr，禁止 dump 配置。mock与已配置DeepSeek可ready；缺配置或不支持provider返回503，仅报告安全变量名。
 
 迁移、模型边界、任务隔离、调度/提取/总结及恢复均有后端检查；阶段5另有真实SSE、前端业务投影与完整浏览器E2E；真实模型留阶段6。
 
@@ -112,7 +112,7 @@ DeepSeekGateway以stateless HTTP实现ModelGateway，任务Prompt在backend/prom
 
 最终摘要将原文精选、已有观点选择及有限待核对标签组装为可读正文，阻止自由改写备选条件或再生成另一套共识分歧；不引入领域任务/数据库迁移。模型生成的public_focus是未核实提示，回应target_message与作者由后端绑定。真实浏览器保留原场，不自动改写已提交内容；修正只在定向复测中验证，保守漏提等限制见[质量修正验收](quality-revision.md)。
 
-验收收尾：SynthesisRepository领取时注入上一成功批次；DeepSeek的review候选为已校验新草稿+前批候选，并检查全新前缀，允许重新选择原来源引文来收窄最小共同主张，not_superseded检查撤回/条件变化。程序不机械union最终结果；事务仍提交完整新批次，个别无依据候选被剔除。摘要条数/长度、疑问标记和重复片段约束在适配边界，不在前端改写。默认提取预算15秒；旧.env值优先需显式配置，原失败证据不变。
+验收收尾：SynthesisRepository领取时注入上一成功批次；DeepSeek的review候选为已校验新草稿+前批候选，并检查全新前缀，允许重新选择原来源引文来收窄最小共同主张，not_superseded检查撤回/条件变化。程序不机械union最终结果；事务仍提交完整新批次，个别无依据候选被剔除。摘要条数/长度、疑问标记和重复片段约束在适配边界，不在前端改写。当时默认15秒（历史）；阶段6B已统一为240秒并同步本地非敏感配置，原失败证据不变。
 
 
 ### 阶段6A验收收尾的上游模式
@@ -122,3 +122,7 @@ DeepSeek六任务允许后端配置thinking.type=enabled，统一预算仍覆盖
 预算修正：多请求适配器可以声明multi_step_synthesis能力。引擎对观点/总结使用有限总任务截止时间，适配器对每个HTTP显式设置MODEL_TIMEOUT_SECONDS；避免把多段合法请求累计时间误认为单次HTTP超时。排队、退避与有限重试均不延长总预算，取消仍拒绝迟到结果。普通任务和未声明能力的网关继续原单次超时规则，不改变自主调度。
 
 随后真实402暴露SQLite错误码约束缺口，006迁移扩展两个任务表允许值，保留归属/唯一约束和既有数据。正常失败继续原事务发布状态/事件；已遗留PENDING经原启动恢复标INTERRUPTED，不自动重播。迁移和失败恢复已通过真实FastAPI/SQLite检查。用户充值后最终0465f68完整真实流程与本批核心内容复核通过，4批观点/8消息/总结与113事件正常；原失败证据不覆盖，召回不穷举，详见quality-acceptance.md。
+
+## 最终配置与本地交付边界
+
+Settings与.env.example统一enabled/low/16384、HTTP120、提取240、总结180、讨论600秒，日常20条。启动脚本configured遵循进程优先，mock/deepseek可显式覆盖provider；前端只读取本地代理目标。离线样例工具不加载.env、不调用模型，READY阵容与三个初始事件同事务，冲突不覆盖。只运行单owner，所有后端任务及供应商语义边界沿用原实现。

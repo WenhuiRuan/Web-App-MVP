@@ -1,0 +1,346 @@
+{
+  "format": "ai-panel-studio-rosters-v1",
+  "samples": [
+    {
+      "id": "01-workweek",
+      "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+      "create": {
+        "topic": "知识服务团队是否应试点四天工作制，如何评估产出、客户响应与员工恢复？",
+        "expert_count": 4
+      },
+      "participants": [
+        {
+          "id": "6ec8b0dd-cd3f-53b6-a821-697f57a4345f",
+          "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "许澄",
+          "title": "组织发展圆桌主持人",
+          "stance": "明确试点边界，区分缩短工时与压缩工作日，核对不同岗位的影响",
+          "color": "#64748B"
+        },
+        {
+          "id": "2dbfb62c-867b-5205-9437-c9e1c3bbee3f",
+          "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "周衡",
+          "title": "服务运营负责人",
+          "stance": "支持小范围试点，但需保证客户响应窗口并比较交付质量与排班成本",
+          "color": "#2563EB"
+        },
+        {
+          "id": "2690a5da-1583-5f43-8f82-cbcbbae498ab",
+          "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林悦",
+          "title": "职业健康研究员",
+          "stance": "关注恢复时间与加班转移，反对用四天内延长工时掩盖工作负荷",
+          "color": "#D97706"
+        },
+        {
+          "id": "e292b338-5ec3-5368-a14e-929bb571bd92",
+          "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "陈安",
+          "title": "客户成功经理",
+          "stance": "关注跨时区客户与应急响应，主张轮班覆盖而非全员同日休息",
+          "color": "#059669"
+        },
+        {
+          "id": "84f27d21-70de-534a-99fb-31f02c2b032d",
+          "discussion_id": "4c9c5895-b36d-5468-bd99-912e5816b319",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "赵宁",
+          "title": "劳动关系顾问",
+          "stance": "关注不同合同、岗位参与公平及试点退出机制，避免默认全体收益一致",
+          "color": "#9333EA"
+        }
+      ],
+      "source": {
+        "kind": "curated_design",
+        "author": "Codex 开发代理",
+        "date": "2026-10-11",
+        "method": "按议题逐项编写并人工式内容复核；未调用真实模型，无虚构真实人物背书"
+      },
+      "quality": "职业对应实际利益与执行边界；四位专家关注点不同，立场附带适用条件。仅作为预设阵容，不代表已完成讨论或真实模型效果。"
+    },
+    {
+      "id": "02-classroom",
+      "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+      "create": {
+        "topic": "高中写作课堂应如何允许学生使用生成式 AI，同时保留独立写作与公平评价？",
+        "expert_count": 4
+      },
+      "participants": [
+        {
+          "id": "80b1a9b7-7253-555e-93c4-315099e8ecc7",
+          "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "叶知",
+          "title": "教育议题主持人",
+          "stance": "区分构思、修改与代写，要求各方说明教学目标及可执行的评价方式",
+          "color": "#64748B"
+        },
+        {
+          "id": "1ebe553c-ba8e-576e-987a-38f2f12f7be6",
+          "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "吴雅",
+          "title": "高中语文教师",
+          "stance": "允许辅助反馈，要求保留写作草稿和修改说明，评价学生自己的论证",
+          "color": "#2563EB"
+        },
+        {
+          "id": "47ffa109-0cc6-5a6c-b0ef-449b65b984a5",
+          "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "杜明",
+          "title": "学习科学研究员",
+          "stance": "关注认知负荷与能力迁移，主张用独立任务核对工具使用后的学习效果",
+          "color": "#D97706"
+        },
+        {
+          "id": "43615b20-5601-5587-b4cd-7ad08e50d248",
+          "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "苏琳",
+          "title": "学生代表",
+          "stance": "关注资源公平与规则清晰，反对将不可靠的检测分数直接当作作弊证据",
+          "color": "#059669"
+        },
+        {
+          "id": "ad50bd0e-eb61-51ef-b1c3-495cd8504b8d",
+          "discussion_id": "88180037-4d1f-5a5e-b401-081639174437",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "沈川",
+          "title": "校园数据保护负责人",
+          "stance": "关注未成年人的作品和个人信息外传，建议采用最少数据的工具流程",
+          "color": "#9333EA"
+        }
+      ],
+      "source": {
+        "kind": "curated_design",
+        "author": "Codex 开发代理",
+        "date": "2026-10-11",
+        "method": "按议题逐项编写并人工式内容复核；未调用真实模型，无虚构真实人物背书"
+      },
+      "quality": "职业对应实际利益与执行边界；四位专家关注点不同，立场附带适用条件。仅作为预设阵容，不代表已完成讨论或真实模型效果。"
+    },
+    {
+      "id": "03-transport",
+      "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+      "create": {
+        "topic": "城市社区是否应减少道路停车位以建设连续自行车道，如何平衡通勤、安全与商户装卸？",
+        "expert_count": 4
+      },
+      "participants": [
+        {
+          "id": "7d8dc42b-2fb1-551f-971d-b33f0acec520",
+          "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陆序",
+          "title": "城市议题主持人",
+          "stance": "区分主干道与支路，梳理通勤、安全、无障碍和装卸需求的实际冲突",
+          "color": "#64748B"
+        },
+        {
+          "id": "4c7e4219-9610-5c2c-b1e1-b6c1f6d98038",
+          "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "韩远",
+          "title": "交通规划师",
+          "stance": "倾向连续安全骑行网络，要求结合路口风险、客流与道路条件评估",
+          "color": "#2563EB"
+        },
+        {
+          "id": "e81ed0f8-b25a-5822-b7c4-d606b0c3ba57",
+          "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高晴",
+          "title": "沿街商户代表",
+          "stance": "关注短时装卸与到店客流，要求先明确替代装卸区和实施时段",
+          "color": "#D97706"
+        },
+        {
+          "id": "335e6a3f-69b7-5054-ae8c-a79b3ad2e50e",
+          "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "程信",
+          "title": "无障碍出行顾问",
+          "stance": "关注步行通道、残障上下客与老人过街，反对把所有停车需求一概删除",
+          "color": "#059669"
+        },
+        {
+          "id": "f63a2e0f-3637-519f-a905-a368122a7c4a",
+          "discussion_id": "2765fb2e-0939-5b1e-bab8-8c242f3eed02",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "唐悦",
+          "title": "骑行通勤者代表",
+          "stance": "关注断点与机动车混行风险，主张先解决高风险节点并公开观察结果",
+          "color": "#9333EA"
+        }
+      ],
+      "source": {
+        "kind": "curated_design",
+        "author": "Codex 开发代理",
+        "date": "2026-10-11",
+        "method": "按议题逐项编写并人工式内容复核；未调用真实模型，无虚构真实人物背书"
+      },
+      "quality": "职业对应实际利益与执行边界；四位专家关注点不同，立场附带适用条件。仅作为预设阵容，不代表已完成讨论或真实模型效果。"
+    },
+    {
+      "id": "04-privacy",
+      "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+      "create": {
+        "topic": "本地办公助手是否应默认保存员工的 AI 对话记录，如何兼顾审计、隐私与故障诊断？",
+        "expert_count": 4
+      },
+      "participants": [
+        {
+          "id": "c3faac5d-b180-573d-bc60-7dda378a1434",
+          "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "顾言",
+          "title": "产品治理主持人",
+          "stance": "区分内容、操作元数据和诊断日志，核对保存目的、权限与删除边界",
+          "color": "#64748B"
+        },
+        {
+          "id": "bc37badd-6d83-53b0-90a5-938069fa6e76",
+          "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "杨越",
+          "title": "信息安全负责人",
+          "stance": "关注事件溯源和最小审计记录，主张按风险分级而非无限保存全文",
+          "color": "#2563EB"
+        },
+        {
+          "id": "1d31f887-3240-57ac-90d1-4cbd278f52e1",
+          "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "秦舒",
+          "title": "员工权益代表",
+          "stance": "关注私人或敏感信息混入与二次使用，要求知情、可见和明确删除期限",
+          "color": "#D97706"
+        },
+        {
+          "id": "85175812-5ef5-5c84-b21a-612c71b66897",
+          "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "罗成",
+          "title": "可靠性工程师",
+          "stance": "需要定位失败，但倾向脱敏指标和按需采样，避免诊断变成常态内容监控",
+          "color": "#059669"
+        },
+        {
+          "id": "b7511a47-eac1-55ec-9c21-c221a3d2869d",
+          "discussion_id": "9df7abb4-4fd4-5c8e-8813-ed9328536b7f",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "孟可",
+          "title": "企业知识管理负责人",
+          "stance": "关注知识复用与版本追溯，主张经批准的成果库与个人对话分开管理",
+          "color": "#9333EA"
+        }
+      ],
+      "source": {
+        "kind": "curated_design",
+        "author": "Codex 开发代理",
+        "date": "2026-10-11",
+        "method": "按议题逐项编写并人工式内容复核；未调用真实模型，无虚构真实人物背书"
+      },
+      "quality": "职业对应实际利益与执行边界；四位专家关注点不同，立场附带适用条件。仅作为预设阵容，不代表已完成讨论或真实模型效果。"
+    },
+    {
+      "id": "05-library",
+      "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+      "create": {
+        "topic": "社区图书馆是否应试点延长晚间自助借还时段？请比较阅读可及性、老年读者使用、遗失风险与志愿者负担，并区分共同建议、个人提案和已验证事实。",
+        "expert_count": 4
+      },
+      "participants": [
+        {
+          "id": "2f66f1bc-e061-5322-8a25-89099146e7f7",
+          "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清问题与证据，引导区分共同建议、个人提案与已验证事实。",
+          "color": "#64748B"
+        },
+        {
+          "id": "8a73ede6-edd8-503b-9603-402249b2a883",
+          "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "王磊",
+          "title": "公共安全管理顾问",
+          "stance": "关注夜间遗失与破坏风险上升，认为需配套监控、智能门禁与保险；若风险可控，可支持试点，但须明确责任归属。",
+          "color": "#059669"
+        },
+        {
+          "id": "9e2b1805-b277-52d2-b87d-6945a7bc9828",
+          "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林禾",
+          "title": "社区图书馆馆长",
+          "stance": "支持试点，但担忧夜间自助设备维护成本与志愿者排班压力；建议先小范围测试，记录使用数据再决定是否推广。",
+          "color": "#2563EB"
+        },
+        {
+          "id": "349b365f-4285-50c5-bd57-4b9e18264078",
+          "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "李静",
+          "title": "阅读可及性研究员",
+          "stance": "认为延长晚间时段能提升阅读可及性，尤其服务白天忙碌的上班族；但需评估无障碍设施与宣传成本，确保公平受益。",
+          "color": "#9333EA"
+        },
+        {
+          "id": "e8db4100-fbb2-55bb-8428-64beeab682af",
+          "discussion_id": "482f9f95-5d55-5149-b4ff-efd8891a01ba",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "赵敏",
+          "title": "老年读者协会代表",
+          "stance": "担忧老年读者不熟悉自助设备，夜间无人工协助可能加剧数字鸿沟；建议保留白天人工窗口并开展培训，夜间可设紧急呼叫。",
+          "color": "#D97706"
+        }
+      ],
+      "source": {
+        "kind": "reviewed_real_roster",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "thinking": "enabled/low/16384",
+        "original_path": "data/quality/stage6a-acceptance/complete-final/discussion.json",
+        "original_discussion_id": "055c9ad4-8e06-4cf2-8068-01fb94f572e9",
+        "original_sha256": "c0968cd0ada8646b90140a955d04210a88da366fbb7f7ee099779fc80b4ac738",
+        "execution_revision": "0465f687eb8096765c676d049e81668298081943",
+        "date": "2026-10-11",
+        "method": "复用通过复核的真实阵容；仅重绑定导入身份，不改姓名、职业、立场与颜色"
+      },
+      "quality": "馆长、安全顾问、阅读可及性研究员及老年读者代表切中服务、风险与可达性。原场8发言、4观点批次及总结通过复核，导入只建立READY阵容，不伪造该场消息。"
+    }
+  ]
+}

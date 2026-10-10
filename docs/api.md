@@ -5,7 +5,7 @@
 ## 实现状态与机器契约
 
 - **基础接口已挂载**：GET `/api/health/live`、`/api/health/ready`、`/api/system`，以及 `/docs`、`/openapi.json`。运行时 OpenAPI 只描述真实可用端点。
-- **阶段3前端**：通过独立mock客户端消费相同Snapshot/事件类型，未向业务HTTP/SSE路由发送请求；浏览器内的模拟重连不证明真实SSE已实现。
+- **当前前端**：默认真实HTTP/SSE；?mode=mock保留独立台本测试，不能证明模型能力。
 - **讨论接口已挂载**：POST/GET `/api/discussions`、GET `/{discussion_id}`、POST `/{discussion_id}/roster-generation`、POST `/{discussion_id}/start`、POST `/{discussion_id}/summary-retry`、GET `/{discussion_id}/operations/{operation_id}`（均/api/discussions前缀）。以及GET `/{discussion_id}/events`。
 - `docs/contracts/openapi.json` 是完整目标 HTTP 契约，`x-implemented` 区分状态；`docs/contracts/schema.json` 是公开数据、事件与模型边界 JSON Schema。
 - `data/samples/contracts.json` 包含可运行检查的完整请求/响应/事件/模型结果示例。文件中的片段展示不同时间点/独立分支，不是一个真实运行记录。通过 `python -m scripts.export_contracts --check` 检测契约与产物漂移。
@@ -16,9 +16,9 @@
 |---|---|---|
 | GET /api/health/live | 200 `{"status":"ok"}` | 只证明进程响应，不检查数据库/模型 |
 | GET /api/health/ready | 200 `{"status":"ready","database":"ready","model_mode":"mock"}` | 503 DATABASE_UNAVAILABLE / MODEL_NOT_CONFIGURED |
-| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.5.0","phase":5,"model_mode":"mock","discussion_engine_available":true}` | true表示确定性后端完整讨论/总结流程可运行，不代表真实模型服务或内容质量已验证；未实现provider为unavailable/false |
+| GET /api/system | 200 `{"name":"AI Panel Studio","version":"0.6.0","phase":6,"model_mode":"mock","discussion_engine_available":true}` | true表示当前已配置适配的讨论引擎可用；不代表此请求验证了上游连通或内容质量；未实现provider为unavailable/false |
 
-所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。当前未实现的真实适配即使提供 Key 也不会触发外部调用。
+所有响应携带服务生成的 `X-Request-ID`；不信任或反射用户传来的 ID。ready 不调用真实模型；mock ready 不能证明模型服务接通。ready不进行真实调用；已配置DeepSeek在业务模型任务执行时才调用外部服务。
 
 ## 讨论接口（契约冻结，逐批挂载；状态见上节及x-implemented）
 
@@ -250,3 +250,7 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 HTTP/SSE字段与导出schema不变。多步观点/总结按每HTTP超时和统一有限总预算分别限制，普通任务规则不变；具体参数见model-provider.md。ready仍不检查余额，不能由ready成功推断真实调用可用。
 
 最终0465f68真实浏览器走原创建/生成/确认/SSE/快照/总结接口成功，8消息/4观点批次（RUNNING时两次非空）/113连续事件；内容逐条内容复核与空分歧依据见quality-acceptance.md。终态为COMPLETED且冻结8，实际turn_limit。未新增接口字段或重写旧场数据；本场无总结重试，重试行为由已有E2E及新增供应商错误持久化测试证明。
+
+## 最终运行参数与样例入口
+
+API v1和事件格式未因交付改变，系统版本0.6.0/phase6。默认日常run显式20条/600秒；验证8条不是产品要求。DeepSeek enabled/low/16384；HTTP120秒、观点240秒、总结180秒。公开端点不返回密钥/完整配置；离线样例导入不是新HTTP接口，见根README。

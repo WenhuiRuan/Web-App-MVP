@@ -1,6 +1,6 @@
 # 数据模型与 SQLite 约束
 
-2026-10-09，阶段4C。生命周期、发言、观点与总结事务已实现。存储来源为db/migrations/001_initial.sql及不可改历史前向002/003/004迁移；公开/模型边界backend/app/contracts.py，机器Schema见contracts/schema.json。
+更新：2026-10-11。当前SQLite迁移001–006，生命周期/发言/观点/总结及供应商失败持久化已实现。历史迁移不改；Schema和Pydantic绑定在backend/app/contracts.py。
 
 ## ER 图
 
@@ -25,6 +25,9 @@ erDiagram
     insights ||--|{ insight_sources : cites
     messages ||--o{ insight_sources : supports
     runs ||--o| summaries : concludes
+    runs ||--o{ insight_jobs : extracts
+    runs ||--o{ summary_jobs : summarizes
+    insight_batches o|--o{ summary_jobs : captures
     discussions ||--o{ operations : commands
     discussions ||--o{ events : streams
     runs o|--o{ events : attributes
@@ -38,7 +41,7 @@ erDiagram
 - SQLite STRICT 表约束存储类型，外键在每条连接开启；版本/轮次/序号使用 INTEGER。REST/事件/模型对象均 extra=forbid，不接受任意额外字段；所有应用字符串 trim，关键文本非空。
 - 所有子表保留 discussion_id；复合外键把 run、阵容、角色、消息引用限定在同一讨论。角色的同一阵容下 ID、name、color 唯一；颜色为 `#RRGGBB` 大写十六进制。
 - 正式消息只能是开场/陈述/追问/串联，不保存举手为 transcript；参与意图单独表。公开 focus 与隐藏推理无关，不建立 reasoning/chain_of_thought 字段。
-- 数据库 schema 本身不驱动状态转换、不调用模型、不自动恢复任务；这些是未来应用事务的责任。
+- 数据库 schema 本身不驱动状态转换、不调用模型、不自动恢复任务；这些由已实现的应用事务和任务监督器负责。
 
 ## 字段字典
 
@@ -123,3 +126,7 @@ events.type追加insights.status_changed；实体/关联不变，原ER图继续�
 七类供应商失败、同run冻结边界重试、已有消息/观点保留及v5升级测试通过；失败真实库的SQLite备份已通过真实FastAPI启动恢复，无模型调用。备份验证不改写原场，不作为真实总结成功证据。
 
 最终真实场在schema1–6下完成，四个insight_jobs与一个summary_jobs均SUCCEEDED，run COMPLETED/turn_limit/summary_through_turn=8；113事件连续，消息ID/turn唯一，外键无异常、integrity=ok。原库和运行参数见data/quality/stage6a-acceptance/complete-final的安全文本导出，不提交实际数据库或密钥。
+
+## 最终样例数据
+
+五份JSON复用CreateDiscussion/Participant契约，归属、阵容基数、身份及颜色唯一性在离线加载时校验。导入同事务写discussions/rosters/participants与三条events，状态READY、revision1，无run/消息/总结；固定ID重复导入跳过，已有内容冲突整体回滚，不覆盖原真实演示。001中run的300秒历史SQL默认不修改，应用启动显式传入当前Settings的600秒；配置变化无需新迁移。

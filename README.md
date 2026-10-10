@@ -1,20 +1,20 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。阶段5已接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。阶段6A已接入后端独立DeepSeek ModelGateway，MODEL_PROVIDER=mock保留工程替身；真实内容首轮验证另行记录。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
+本地多专家实时圆桌 Web 应用：输入议题 → 生成主持人与专家 → 确认阵容 → 观看自主讨论及实时共识/分歧 → 查看主持人自然语言总结。默认前端使用真实 HTTP/SSE 和 SQLite；运行模型由后端配置，与 Codex 开发工具独立。
 
-## 环境与安装
+## 环境与首次安装
 
-本机验证：Windows、Python 3.12.10（SQLite 3.49.1）、Node.js 24.18.0、npm 10.5.0、Microsoft Edge。Node 至少22.12，建议24；Python建议3.12，SQLite至少3.37（STRICT表）。Linux/macOS 尚未实机检查。
+已验证 Windows、Python 3.12.10 / SQLite 3.49.1、Node 24.18.0 / npm 10.5.0、Edge。要求 Python 3.12、SQLite ≥3.37（STRICT 表），Node ≥22.12，建议 Node 24。Linux/macOS 命令可等价执行，尚未实机验证。
 
-依赖锁：前端 package.json 使用精确版本，package-lock.json 锁定传递依赖；后端 requirements.in 记录直接依赖，requirements.lock 锁定已验证的完整版本。不要在常规安装时重新升级这些文件。安装需要网络；npm 包下载地址记录在锁文件中，当前使用本机可访问的 npmmirror，后端安装源沿用本机 pip 配置。
-
-在本 README 所在的**项目根目录**打开 PowerShell：
+在本文件所在的项目根目录打开 PowerShell：
 
 ```powershell
 .\scripts\setup.ps1
 ```
 
-脚本只在不存在时建立 `.venv`，按锁安装依赖，再执行幂等数据库迁移。npm 缓存使用前端 `.cache/npm`，不改全局设置。若系统禁止运行脚本，可按下面等价命令逐条操作，不必改变系统执行策略：
+脚本建立 `.venv`，按 `backend/requirements.lock` 安装完整锁定版本、在 frontend 执行 `npm ci`，再初始化数据库；不自动创建或覆盖 `.env`。前端传递版本锁定于 `frontend/package-lock.json`，不要常规安装时升级。安装需要网络；当前 npm 锁的下载源为 npmmirror，pip 源沿用本机配置。
+
+若执行策略限制脚本，可逐条运行等价命令，不必修改全局策略：
 
 ```powershell
 python -m venv .venv
@@ -25,150 +25,126 @@ Pop-Location
 .\.venv\Scripts\python.exe -m backend.app.database
 ```
 
-## 配置
+## 两种运行模型模式
 
-默认值已能运行，无需 Key。需要修改时可将 `.env.example` 复制为项目根 `.env`（若已有文件先审阅，不覆盖）；真实 `.env` 不提交。后端进程环境变量优先于 .env。前端不会读取根 .env，不提供完整配置或密钥查询接口。
+首次解压没有 `.env`，默认为后端确定性模拟，**不调用付费 API**。可按需复制 `.env.example` 为 `.env`；已有文件请保留。后端进程环境变量优先于项目 `.env`，修改后需重启后端；已保存讨论不自动重写。
 
-| 变量 | 默认值 / 范围 | 作用 |
-|---|---|---|
-| BACKEND_HOST / BACKEND_PORT | 127.0.0.1 / 8000；端口1024–65535 | 本地服务地址，host限定loopback |
-| DATABASE_PATH | local-data/panel.sqlite3 | 相对路径以项目根解析 |
-| LOG_LEVEL | INFO；DEBUG/INFO/WARNING/ERROR | 日志级别；不打印请求体或密钥 |
-| MODEL_PROVIDER | mock | mock或deepseek；配置缺失/不支持时ready返回503 |
-| MODEL_BASE_URL / MODEL_NAME / MODEL_API_KEY | 空 | DeepSeek由后端独立配置；Key仅后端读取，不进入响应/日志/数据库 |
-| MODEL_TIMEOUT_SECONDS / MODEL_MAX_CONCURRENCY / MODEL_MAX_ATTEMPTS | 30 / 4 / 2 | 全部模型任务超时、全局并发和最多尝试次数（含首次，1–3）；run剩余时长优先 |
-| DISCUSSION_MAX_ACTIVE / DISCUSSION_MAX_TURNS / DISCUSSION_MAX_SECONDS | 3 / 20 / 300 | 活动容量已执行：GENERATING/RUNNING/SUMMARIZING合计；发言/时长额度已执行；到期冻结实际消息边界并进入SUMMARIZING |
-| SUMMARY_MAX_SECONDS / INSIGHT_MAX_SECONDS | 60 / 10 | 总结与每次提取的独立有限总预算，包含队列等待；均最多MODEL_MAX_ATTEMPTS次尝试 |
-
-若修改后端端口，启动前端前设置进程变量 `$env:PANEL_BACKEND_ORIGIN='http://127.0.0.1:新端口'`；它只是 Vite 服务端代理目标，不是模型配置。不要把密钥放入任何 `PANEL_PUBLIC_*` 或 `VITE_*` 变量。
-
-## 启动
-
-独立前端模拟访问 `http://127.0.0.1:5173/?mode=mock`，只需运行 `scripts/start-frontend.ps1`。右上演示工具仅在此模式显示，记录保存在浏览器localStorage；默认业务模式的数据保存在后端SQLite，不读取前端台本。
-
-体验真实业务流程时，在两个项目根PowerShell窗口分别执行：
+**后端模拟模式**（完整真实前后端、SQLite、SSE，模型是替身）：
 
 ```powershell
-# 窗口 1：后端，启动时自动检查/应用迁移
-.\scripts\start-backend.ps1
+# 窗口 1，项目根目录；明确覆盖已有 .env 的 provider
+.\scripts\start-backend.ps1 -ModelMode mock
 ```
 
 ```powershell
-# 窗口 2：前端
+# 窗口 2，项目根目录
 .\scripts\start-frontend.ps1
 ```
 
-访问 [本地前端](http://127.0.0.1:5173) 新建讨论、确认阵容、观看实时发言及观点并查看总结；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪及当前实际模型模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供基础接口和讨论HTTP/SSE接口，可直接试用。
+访问 http://127.0.0.1:5173；页面标识当前后端模拟模型。独立前端台本仅用于演示/页面测试：`http://127.0.0.1:5173/?mode=mock`，无需后端，不代表自主模型讨论，不写 SQLite。
 
-其他系统的等价启动方式（未实机验证）：`python3 -m venv .venv`，用 `.venv/bin/python -m pip install -r backend/requirements.lock` 安装；用 `.venv/bin/python -m backend.app.server` 启动；前端目录执行 `npm ci` 和 `npm run dev`。
+**DeepSeek 真实模式**：在后端 `.env` 配置下列项目，密钥由后端启动终端继承的 `PANEL_API_KEY` 提供，不要写入源码或前端环境。已设置系统环境但老终端尚未继承时，新开后端终端即可；不要输出密钥。
 
-## 数据库初始化
+```dotenv
+MODEL_PROVIDER=deepseek
+MODEL_BASE_URL=https://api.deepseek.com
+MODEL_NAME=deepseek-flash
+MODEL_API_KEY=${PANEL_API_KEY}
+MODEL_THINKING_MODE=enabled
+MODEL_REASONING_EFFORT=low
+MODEL_THINKING_MAX_TOKENS=16384
+```
+
+运行 `.\scripts\start-backend.ps1`（configured，遵循已有配置）或显式 `-ModelMode deepseek`，另一个终端启动前端。页面显示“DeepSeek · deepseek-flash（真实服务）”。官方 OpenAI 兼容 Chat Completions；六任务均启用 enabled/low，仅使用最终回答，不保存/展示 reasoning_content。模型名称对应关系以供应商为准。
+
+就绪检查只检查配置和数据库，**不调用模型、不证明上游连通**；点击生成阵容后开始真实付费调用。缺少配置会报告变量名，认证/余额/限流/超时有明确失败。不要把任何密钥放入 PANEL_PUBLIC_* / VITE_*，也不要在截图或日志中输出环境变量。
+
+## 预算与端口
+
+Settings、`.env.example` 和日常真实配置采用同一套已验证有限预算；模拟模型迅速返回，不会等待耗尽预算。
+
+| 配置 | 默认值 | 含义 |
+|---|---|---|
+| MODEL_TIMEOUT_SECONDS | 120 秒 | 每个模型 HTTP 请求上限；多步提取/总结共用下方任务预算 |
+| INSIGHT_MAX_SECONDS | 240 秒 | 每批观点总预算，包含排队、草稿、逐项复核、有限重试 |
+| SUMMARY_MAX_SECONDS | 180 秒 | 总结独立预算，讨论时长用尽后仍可生成 |
+| DISCUSSION_MAX_SECONDS | 600 秒 | 运行上限；启动时冻结到 run，旧 run 不变 |
+| DISCUSSION_MAX_TURNS | 20 | 日常最多正式发言数，含主持人；主持可提前结束 |
+| MODEL_MAX_ATTEMPTS / MODEL_MAX_CONCURRENCY | 2 / 4 | 含首次的有限尝试数 / 全局模型并发 |
+| DISCUSSION_MAX_ACTIVE | 3 | GENERATING、RUNNING、SUMMARIZING 的活动容量 |
+| BACKEND_HOST / BACKEND_PORT | 127.0.0.1 / 8000 | 单进程本地服务，禁止多 worker 共管同一数据库 |
+| DATABASE_PATH / LOG_LEVEL | local-data/panel.sqlite3 / INFO | 相对根目录的 SQLite 路径 / 安全基础日志 |
+
+最终真实质量验收**另设 8 条上限**以控制验证费用，实际因 turn_limit 结束；不是产品要求或日常默认值。该场观察耗时 418.333 秒、62 次 HTTP、返回用量 200543 tokens；最后提取 135.734 秒。并发 IO 耗时不能累加当整场时长，费用和 p95 未知。这套预算有一次完整成功证据，不是延迟 SLA。细节见[真实质量验收](docs/quality-acceptance.md)。
+
+修改端口时，后端终端设 `$env:BACKEND_PORT='18100'`；前端终端设 `$env:PANEL_BACKEND_ORIGIN='http://127.0.0.1:18100'` 并执行 `.\scripts\start-frontend.ps1 -Port 15180`。代理目标只是本地 API 地址，不是模型配置。端口被占明确失败；Ctrl+C 停止本人启动的服务。
+
+生产预览：`npm --prefix frontend run build`，然后 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173；默认业务模式仍需同时运行后端。基础连接页 `/?view=system`，后端 Swagger http://127.0.0.1:8000/docs。
+
+## 数据库与样例
 
 ```powershell
 .\.venv\Scripts\python.exe -m backend.app.database
-# 独立实验数据库，避免影响正常数据
-.\.venv\Scripts\python.exe -m backend.app.database --path work/check.sqlite3
+# 独立试用库：不要让两个服务管理同一数据库
+.\.venv\Scripts\python.exe -m backend.app.database --path work/examples.sqlite3
 ```
 
-空库首次输出 `Migrations applied: [1, 2, 3, 4, 5]`，重复输出 `[]`，不会清空数据。迁移有校验和、版本顺序及事务回滚；已应用SQL不修改，新变更加新版本。没有自动降级/删除数据操作。不要把本地数据库或 WAL/SHM 文件放入提交或交付包。
+首次迁移 `[1, 2, 3, 4, 5, 6]`，重复 `[]`，不清空内容。SQL 历史带校验和，新变化追加迁移；无自动降级。001 中的历史 SQL 默认值保留，应用创建 run 时显式写入当前 Settings 上限。
 
-## 实际可用接口与设计契约
+至少五份预设议题与阵容见[样例索引](data/samples/final/README.md)，可以直接阅读姓名、职业、立场和颜色，来源/质量说明分开记录。其中四份为编写复核的预设阵容，一份复用合格真实阵容；不冒充五场真实完整讨论。
 
-| 接口 | 当前用途 |
+```powershell
+# 无模型调用，仅检查当前契约与归属
+.\.venv\Scripts\python.exe -m scripts.final_samples
+# 服务停止时离线导入独立库；再次执行 imported=0, skipped=5
+.\.venv\Scripts\python.exe -m scripts.final_samples --database work/examples.sqlite3
+# 启动此库，首页“全部”可进入 READY 阵容，确认后才讨论
+$env:DATABASE_PATH='work/examples.sqlite3'
+.\scripts\start-backend.ps1 -ModelMode mock
+```
+
+导入事务涵盖全部五份阵容及对应事件，发生冲突或写入失败全部回滚，不覆盖用户数据。固定身份使重复导入跳过，已启动的样例也不重放。离线导入无需密钥、不读取 `.env`。附加完整真实演示保持原快照及版本，见样例索引；失败证据仅作质量资料。
+
+## 主要 API 与行为
+
+| API | 用途 |
 |---|---|
-| GET /api/health/live | 进程存活 |
-| GET /api/health/ready | 迁移状态及当前模型适配是否可用 |
-| GET /api/system | 安全的应用版本/阶段/模型模式标识 |
-| POST /api/discussions | 创建DRAFT，默认4名专家；必填UUID格式Idempotency-Key |
-| GET /api/discussions | active/all过滤、稳定排序与游标分页 |
-| GET /api/discussions/{id} | 一致性快照及事件高水位 |
-| POST /api/discussions/{id}/roster-generation | 后台生成；202受理后通过快照或操作查询等待READY |
-| POST /api/discussions/{id}/start | 带roster_revision确认；幂等建立唯一run及后台任务，自动发言/提取/总结至COMPLETED或明确失败 |
-| POST /api/discussions/{id}/summary-retry | 总结失败/中断后重试同run边界；重复及并发不新增有效任务 |
-| GET /api/discussions/{id}/events?after={seq} | 持久化有序SSE补发、15秒心跳、终态关闭；Last-Event-ID优先 |
-| GET /api/discussions/{id}/operations/{operation_id} | 查询本讨论操作的处理状态和安全错误码 |
+| GET /api/health/live、/api/health/ready、/api/system | 存活、配置/数据库就绪、安全模型模式 |
+| POST /api/discussions | 创建，默认 4 专家，允许 2–6 |
+| GET /api/discussions、/api/discussions/{id} | active/all 列表、快照及事件高水位 |
+| POST /api/discussions/{id}/roster-generation | 后台生成阵容，失败/中断可新键重试 |
+| POST /api/discussions/{id}/start | 确认当前 roster_revision，唯一 run，自动调度 |
+| POST /api/discussions/{id}/summary-retry | 原 run 与冻结消息边界的总结重试 |
+| GET /api/discussions/{id}/operations/{operation_id} | 安全操作状态/错误码 |
+| GET /api/discussions/{id}/events?after={seq} | 顺序持久化 SSE，Last-Event-ID 优先，15 秒心跳 |
 
-请求、响应与错误示例见[API契约](docs/api.md)。[目标OpenAPI](docs/contracts/openapi.json)用x-implemented区分可用接口；所有讨论接口含SSE与总结重试均已挂载。创建返回201 Snapshot，生成返回202 OperationAccepted，成功后Snapshot为READY；POST start提交当前roster_revision，返回202/run_id并自动推进。每2条正式消息更新观点，结束补尾，冻结边界后生成总结。轮询Snapshot可见insights、insight_status、summary与生命周期。所有命令需要UUID幂等键；网络重发原键，显式失败或中断后的重试使用新键。
+所有命令要求 UUID 格式 Idempotency-Key；网络重发保留原键，失败后的显式重试用新键。快照读取后从高水位订阅，缺口/断线重新取快照恢复，不重放业务。每两条已提交发言触发观点，结束补尾；只引用本 run 已提交消息，共识需至少两专家的明确共同主张，证据不足允许为空。总结失败可重试，不重新生成阵容或讨论。
 
-服务为**单进程、单worker、单数据库所有者**。未完成任务在关闭/重启后标INTERRUPTED；roster阶段可以新键生成，summary阶段通过POST `/api/discussions/{id}/summary-retry`（无body或`{}`）新键重试原run与冻结边界。不会重放发言/生成阵容；同一键返回原202响应，当前状态读Snapshot/Operation。并发重试键合并有效任务。讨论阶段中断不自动续跑。数据库持续不可写时需恢复可写后的下次启动处理。详见[生命周期](docs/backend-lifecycle.md)、[调度](docs/backend-orchestration.md)和[观点/总结](docs/backend-synthesis.md)。
+服务关闭/重启时遗留活动任务标为 INTERRUPTED；阵容与总结可按阶段重试，讨论运行中断不能自动续播。模型 IO 不持有数据库事务，事件与业务数据原子提交。完整示例及错误见[API](docs/api.md)。
 
-## 验证命令
+## 测试与已验证范围
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m scripts.export_contracts --check
 .\.venv\Scripts\python.exe -m scripts.check_docs
-.\.venv\Scripts\python.exe -m scripts.smoke_lifecycle
-.\.venv\Scripts\python.exe -m scripts.smoke_synthesis
-.\.venv\Scripts\python.exe -m pip check
-Push-Location frontend
-npm run build
-# Windows 若已安装 Edge，可免下载浏览器：
+.\.venv\Scripts\python.exe -m scripts.final_samples
+npm --prefix frontend run build
+# 已安装 Edge 时；测试自动使用独立库和可控后端替身
 $env:PLAYWRIGHT_CHANNEL='msedge'
-npm run test:smoke
-# 真实业务：自动启动临时库、可控后端替身和Vite，HTTP/SSE实际走服务
-npm run test:live
-Pop-Location
+npm --prefix frontend run test:live
 ```
 
-无Edge时可在frontend执行 `npm exec playwright install chromium`，移除PLAYWRIGHT_CHANNEL（其他浏览器尚未实机验收）。默认test:smoke在18080/15173运行基础/独立前端mock/投影与客户端检查；新test:live在18081/15174运行真实业务E2E，临时数据库每次新建work/stage5-e2e-*，不接触正常数据。端口被占时明确失败，不终止用户进程。test:live使用backend/tests/e2e_server中的可控ModelGateway，测试故障接口仅此专用服务拥有，禁止把测试服务当作日常服务。服务由Playwright统一启动和关闭。
+普通 pytest 与浏览器 test:live 不调用付费模型。test:live 使用 18081/15174，test:smoke 使用 18080/15173；若没有 Edge，在 frontend 运行 `npm exec playwright install chromium` 并去掉 PLAYWRIGHT_CHANNEL。测试故障入口只在专用 e2e_server，不用于日常运行。
 
-实际业务E2E包含创建/阵容/确认/两次运行中观点/总结、首页加入/刷新、断网继续推进/恢复、gap/重复帧/提前关闭、总结重试、观点失败保留、双场隔离、三个尺寸增长滚动及密钥哨兵。截图work/stage5-screenshots，机器报告work/stage5-e2e-report.json，临时库信息work/stage5-e2e-last.json。静态1920等既有布局结果沿用阶段3。独立台本格式检查仍可运行 `python -m scripts.validate_frontend_capture`。
+业务 TDD、持久化/隔离、SSE 恢复、真实服务替身 E2E（13 项）、四尺寸布局及最终 DeepSeek 完整质量验收已有证据。本次只补配置、样例导入和独立安装/启动检查，不重复付费讨论。分批实际结果见[测试说明](docs/testing.md)，不能把不同批次计数相加当单次全量运行。
 
-数据契约修改后运行 `python -m scripts.export_contracts` 再执行检查。JSON Schema验证形状，Pydantic另外验证跨字段归属、阵容基数/身份、句数、来源等；单独JSON Schema通过不代表全部业务规则成立。
+## 完成功能、限制及后续
 
-smoke_lifecycle/smoke_synthesis是阶段4真实TCP验证脚本，历史结果沿用。阶段5SSE新增及受影响检查74 passed，另外生命周期/任务/发言/总结/模拟样例受影响回归111 passed；开放SSE关闭真实TCP补测1 passed。以上是分别运行结果，不宣称单次全量。前端类型检查/生产构建通过，真实业务E2E13 passed；前端回归最后结果见progress。既有纯仲裁/生命周期规则与静态布局未重复运行。
+已完成创建、生成/确认、专家自主参与与回应、主持控制、公开角色状态、正式短句、实时有来源观点、自然语言总结、失败恢复、持久化有序 SSE 和浏览器业务闭环。使用 React + TypeScript + Vite、FastAPI、SQLite、SSE、pytest、Playwright，模块说明见[架构](docs/architecture.md)。
 
-## 已完成、限制与后续
+本地单 worker、无登录/公网权限、多进程/大量并发尚未验证。真实模型语义不能仅凭结构保证；保守复核可能漏掉共识或隐含分歧，后续发言仍需用户辨别。费用、跨平台、真实并发及 p95 未知。运行中断不能自动继续；无视频录制或时间轴回放播放器。已保存内容可重新查看。
 
-- 已完成：前述后端规则与恢复、持久化SSE、默认前端业务闭环、替身下真实HTTP/SSE浏览器E2E；DeepSeek六任务适配、真实浏览器讨论与针对来源/条件/总结的质量修正和定向复核。
-- 未完成：五份最终质量样例、工作流说明与交付包。阶段6A最终修正版完整讨论及本批核心内容复核已完成；原场失败/语义问题仍保留，定向修正不重写原场。费用账单及真实并发/p95未知。
-- 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
-- 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：本批到此停止，待用户复核后，下一批再选至少五份高质量样例、编写工作流与打包；不自动开始下一批或远程交付。
+本地交付包含源码、锁、迁移、五份阵容样例、开发文档、六段核心 Prompt、一页工作流和必要质量证据；原始过程与 Git 历史保留。下一步由用户准备姓名、发布 GitHub/Gitee、核对 72 小时起算与发送邮件，不自动发布或发送。见[交付核对](docs/delivery.md)。
 
-生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认业务模式须同时运行后端；独立前端演示添加?mode=mock。Ctrl+C停止，服务5秒宽限后取消开放流并清理任务。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
-
-设计索引：[需求](docs/requirements.md)、[架构](docs/architecture.md)、[数据模型](docs/data-model.md)、[API](docs/api.md)、[验收](docs/acceptance.md)、[决策](docs/decisions.md)、[进展](docs/progress.md)、[Prompt](docs/prompt-log.md)。
-
-## DeepSeek真实模式（阶段6A）
-
-已有.env请保留。设MODEL_PROVIDER=deepseek、MODEL_BASE_URL=https://api.deepseek.com、MODEL_NAME=deepseek-flash、MODEL_API_KEY=${PANEL_API_KEY}；后端进程需继承PANEL_API_KEY，进程环境优先于.env。机器级变量已设置但老终端未继承时，可新开终端；必要时仅在启动后端的PowerShell中执行：
-
-```powershell
-if (-not $env:PANEL_API_KEY) {
-  $env:PANEL_API_KEY = [Environment]::GetEnvironmentVariable('PANEL_API_KEY', 'Machine')
-}
-.\scripts\start-backend.ps1
-```
-
-不要输出该变量，也不要在前端窗口复制它。顶部显示“DeepSeek · deepseek-flash（真实服务）”；ready仅配置检查，首次创建阵容才会真实付费调用。六任务Prompt、官方文档、重试及安全边界见[模型适配](docs/model-provider.md)。内容质量与样例交付分开：本批1–2真实议题复核，下一批至少五份最终样例和交付包。
-
-首轮两个真实议题、具体来源、修正与限制见[内容质量记录](docs/quality-first-round.md)，文本证据在data/quality/stage6a。来源与作者归属改进已定向复核，但不承诺所有共识都语义正确。修改Prompt后需重启后端；已保存讨论不会被自动重写。真实检查脚本是主动付费入口，常规pytest/Playwright不调用真实模型。检查结果与无法取得的整场用量分别记录。
-
-本次续批见[质量修正与验收](docs/quality-revision.md)：69项适配/实际HTTP检查、68项受影响回归、类型/构建及1个真实完整浏览器用例通过；原场11条正式消息、6次观点更新，实际结束为host_end。人工发现的误判按原边界另行修正，没有覆盖旧记录。最终摘要采用自然语言概述和实际作者的原文精选，提案与条件不自由改写；严格提取仍可能漏掉有效交集。
-
-仅在明确要重新进行付费验证时，后端专用终端运行 `python -m scripts.real_validation_server --label stage6a-corrected`（新临时SQLite，端口18082）；另一个不含密钥的前端终端设置PANEL_REAL_VALIDATION=1、PLAYWRIGHT_CHANNEL=msedge，在frontend运行 `npm exec playwright test -- --config=playwright.corrected.config.ts`。已有报告存在时测试拒绝覆盖，先保留或另存旧证据。定向任务脚本 `python -m scripts.review_quality_cases --help` 可查看选项，它也调用真实服务。日常使用仍按启动脚本运行；应用Prompt缓存需重启后端才能更新。
-
-## 本次验收收尾状态（2026-10-11）
-
-详情见[共识连续性、总结分类及验收证据](docs/quality-acceptance.md)。用户已允许全部任务思考，当前后端默认enabled/low/16384；仍只读取最终content。前批观点重新复核、共同支持人数守卫、建议分类和撤回/条件变化已经定向验证；不以格式成功证明语义正确。
-
-此前8条场在turn_limit后返回HTTP402，原场及FAILED报告保留；随后修复多步总预算和供应商错误码持久化，对SQLite备份的恢复检查没有覆盖原场。用户充值后，0465f68新完整真实浏览器1 passed，418.333秒、8正式消息、两次运行中非空观点更新，最终3项共识/空分歧和412字自然语言总结。62实际HTTP/reported200543 tokens，无模型失败；113连续事件、FK正常、页面异常0。逐条核对作者、条件和建议分类一致，本批核心验收完成；不把此一次验证推成所有内容正确或直接计入五份样例。
-
-后端启动自动应用006迁移，保留001–005校验和、任务行及归属/唯一约束，重复初始化无操作。旧遗留PENDING按既有恢复规则标INTERRUPTED，不重播讨论。正常余额错误现在可保存失败状态；补充余额后总结可用页面原重试操作继续同run与冻结消息边界。ready仅配置检查，不证明余额充足。
-
-真实思考的有限覆盖配置可仅在后端PowerShell设置，再运行启动脚本（不修改用户.env）：
-
-```powershell
-$env:MODEL_THINKING_MODE = 'enabled'
-$env:MODEL_REASONING_EFFORT = 'low'
-$env:MODEL_THINKING_MAX_TOKENS = '16384'
-$env:MODEL_TIMEOUT_SECONDS = '120'
-$env:INSIGHT_MAX_SECONDS = '240'
-$env:SUMMARY_MAX_SECONDS = '180'
-$env:DISCUSSION_MAX_SECONDS = '600'
-.\scripts\start-backend.ps1
-```
-
-每HTTP有独立httpx超时，观点/总结的全部子调用和重试共享有限任务截止时间。最后一批实际提取135.734秒（超过旧整批120秒）成功，新有限整场通过；默认短预算适合替身，不保证真实思考耗时或并发压力。运行时模型和Codex开发模型完全独立。常规pytest不发起真实付费调用。候选不穷举，隐含分歧可能漏提，实际来源与限制详见质量报告。
+文档：[需求](docs/requirements.md) · [ER/数据模型](docs/data-model.md) · [验收](docs/acceptance.md) · [核心开发 Prompt](docs/core-prompts.md) · [工作流](docs/workflow.md) · [进展](docs/progress.md) · [原始 Prompt 记录](docs/prompt-log.md)。
