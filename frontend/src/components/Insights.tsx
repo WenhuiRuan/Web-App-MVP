@@ -6,7 +6,7 @@ import { Empty, Icon } from './shared'
 export function SummaryText({ snapshot }: { snapshot: Snapshot }) {
   return <div className="summary-text"><div className="summary-author"><span className="summary-mark"><Icon name="spark" size={22} /></span><div><strong>{snapshot.participants.find(p => p.kind === 'HOST')?.name} · 主持人总结</strong><p>基于本场 {snapshot.summary?.through_turn ?? 0} 条正式发言</p></div></div>
     {snapshot.summary?.content.split(/\n+/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-    <div className="summary-note">{isMockMode ? '这是预设模拟讨论的总结，不代表真实模型分析或事实验证。' : '这是后端模型任务生成的总结；当前确定性替身用于工程验证，内容尚未经过真实模型质量验证。'}</div>
+    <div className="summary-note">{isMockMode ? '这是预设模拟讨论的总结，不代表真实模型分析或事实验证。' : '这是后端模型任务生成的总结，模型模式见顶部；内容基于本场公开发言，不等同于事实核验。'}</div>
   </div>
 }
 

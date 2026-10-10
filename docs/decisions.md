@@ -183,3 +183,11 @@ FAILED/INTERRUPTED/summary的新键只重试原run及冻结边界，manual PENDI
 ## 阶段5实现决策
 
 SSE选择持久化轮询（250ms/100条一页/15秒心跳）以覆盖无人在线和重连。观点失败采用新增持久化状态事件而非仅轮询快照。前端默认真实业务客户端，通过显式mode=mock保留独立台本；后端仍MODEL_PROVIDER=mock，真实供应商适配留下一阶段。不新增依赖，系统版本0.5.0/phase5。
+
+## ADR-37：DeepSeek兼容HTTP与公开任务Prompt（已采用）
+
+使用既有httpx直接POST Chat Completions，显式非思考JSON模式，不引入SDK二次重试。供应商只供内容及本场turn编号，identity/归属/颜色由后端生成或绑定。六任务独立Prompt，模型没有跨请求共享历史；角色立场与回应目标保留，隐藏推理不消费。结构校验不替代语义人工复核。
+
+## ADR-38：统一调用预算及配置就绪（已采用）
+
+roster纳入统一调用层，与run/insights/summary使用同一错误分类及有限重试。不可重试错误直接失败，Retry-After最多5秒，排队和退避计入总预算。默认预算暂沿用，依据首轮真实耗时复核。ready只检查配置和数据库，system公开provider/modelname与real标识，不查询或显示密钥。Windows机器变量需要启动进程继承，应用不自动读注册表。

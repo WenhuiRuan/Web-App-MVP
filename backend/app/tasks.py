@@ -1,6 +1,7 @@
 """Application-owned roster task registry, bounded model IO and safe failures."""
 import asyncio
 import logging
+import time
 
 from pydantic import ValidationError
 
@@ -139,20 +140,25 @@ class TaskSupervisor:
             logger.error('roster_task_unhandled_failure')
 
     async def _run_roster(self, op_id):
+        from .engine import DiscussionEngine,ModelCallFailure,RunDeadline
         try:
-            async with self.semaphore:
-                request = await self._db_call(self.repository.claim_generation, op_id)
-                if request is None:
-                    return
-                raw = await asyncio.wait_for(self.gateway_getter().generate(request), timeout=self.settings.model_timeout_seconds)
-                result = validate_result(request, raw)
-                await self._db_call(self.repository.complete_generation, op_id, request, result)
+            request = await self._db_call(self.repository.claim_generation, op_id)
+            if request is None: return
+            engine=DiscussionEngine(self)
+            engine.deadline=time.monotonic()+self.settings.model_timeout_seconds*self.settings.model_max_attempts+5*(self.settings.model_max_attempts-1)
+            result=await engine.call_model(request)
+            if self.closing or asyncio.current_task().cancelling(): raise asyncio.CancelledError()
+            await self._db_call(self.repository.complete_generation, op_id, request, result)
         except asyncio.CancelledError:
             raise
         except (InvalidModelResult, ValidationError):
             await self._failure(op_id, 'MODEL_RESULT_INVALID', '嘉宾结果不符合契约，话题已保留，可以重试。')
         except TimeoutError:
             await self._failure(op_id, 'MODEL_TIMEOUT', '嘉宾生成超时，话题已保留，可以重试。')
+        except RunDeadline:
+            await self._failure(op_id, 'MODEL_TIMEOUT', '嘉宾生成预算耗尽，话题已保留，可以重试。')
+        except ModelCallFailure as exc:
+            await self._failure(op_id, exc.code, '模型任务未完成，请检查配置或稍后重试；话题已保留。')
         except RepositoryUnavailable:
             await self._failure(op_id, 'DATABASE_UNAVAILABLE', '阵容保存失败，已回滚，可以重试。')
         except Exception:

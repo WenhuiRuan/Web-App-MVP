@@ -13,6 +13,21 @@ class InvalidModelResult(ValueError):
         super().__init__('MODEL_RESULT_INVALID')
 
 
+MODEL_FAILURE_CODES = frozenset({'MODEL_TIMEOUT', 'MODEL_RESULT_INVALID', 'TASK_FAILED',
+    'DATABASE_UNAVAILABLE', 'MODEL_REQUEST_INVALID', 'MODEL_AUTH_FAILED',
+    'MODEL_BALANCE_EXHAUSTED', 'MODEL_NOT_FOUND', 'MODEL_RATE_LIMITED',
+    'MODEL_SERVICE_UNAVAILABLE', 'MODEL_CONNECTION_FAILED'})
+
+
+class ModelServiceError(Exception):
+    """Safe provider-independent failure: never include response bodies or credentials."""
+    def __init__(self, code, retryable=False, retry_after=0):
+        self.code = code if code in MODEL_FAILURE_CODES else 'TASK_FAILED'
+        self.retryable = retryable
+        self.retry_after = min(5.0, max(0.0, float(retry_after)))
+        super().__init__(self.code)
+
+
 class ModelGateway(Protocol):
     async def generate(self, request: ModelRequest) -> ModelResult: ...
 

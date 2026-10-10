@@ -171,7 +171,7 @@ class DiscussionRepository:
             row = self._discussion(conn, did)
             generation_revision(row['state'], row['failure_stage'], row['roster_revision'])
             if not gateway_available:
-                raise LifecycleError('MODEL_NOT_CONFIGURED', '真实模型适配尚未实现，请使用 mock 模式。')
+                raise LifecycleError('MODEL_NOT_CONFIGURED', '模型尚未配置，请检查后端 MODEL_PROVIDER、MODEL_BASE_URL、MODEL_NAME 和 MODEL_API_KEY。')
             self._capacity(conn, max_active)
             op_id = uuid4()
             self._transition(conn, did, 'GENERATING')

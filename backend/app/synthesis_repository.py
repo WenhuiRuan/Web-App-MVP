@@ -1,4 +1,5 @@
 """Scoped synthesis claims and atomic projections, with no provider IO."""
+from .model_gateway import MODEL_FAILURE_CODES
 from dataclasses import dataclass
 from uuid import UUID, uuid4
 
@@ -73,7 +74,7 @@ class SynthesisRepository(RunRepository):
             return True
 
     def fail_insights(self, claim, code):
-        if code not in ('MODEL_TIMEOUT','MODEL_RESULT_INVALID','TASK_FAILED','DATABASE_UNAVAILABLE'): raise ValueError('invalid insight failure code')
+        if code not in MODEL_FAILURE_CODES: raise ValueError('invalid insight failure code')
         with self.transaction() as conn:
             if self._insight_guard(conn,claim) is None: return False
             conn.execute("UPDATE insight_jobs SET state='FAILED',error_code=? WHERE id=?",(code,str(claim.id)))
@@ -134,7 +135,7 @@ class SynthesisRepository(RunRepository):
             return True
 
     def fail_summary(self,claim,code):
-        if code not in ('MODEL_TIMEOUT','MODEL_RESULT_INVALID','TASK_FAILED','DATABASE_UNAVAILABLE'): raise ValueError('invalid summary failure code')
+        if code not in MODEL_FAILURE_CODES: raise ValueError('invalid summary failure code')
         with self.transaction() as conn:
             job=self._summary_guard(conn,claim)
             if job is None: return False
@@ -168,7 +169,7 @@ class SynthesisRepository(RunRepository):
             run=conn.execute('SELECT * FROM runs WHERE discussion_id=? AND id=?',(did,rid)).fetchone()
             if run is None or run['summary_through_turn'] is None or pending is not None:
                 raise LifecycleError('INVALID_STATE','总结消息边界或任务状态不完整。')
-            if not gateway_available: raise LifecycleError('MODEL_NOT_CONFIGURED','真实模型适配尚未实现，请使用 mock 模式。')
+            if not gateway_available: raise LifecycleError('MODEL_NOT_CONFIGURED','模型尚未配置，请检查后端 MODEL_PROVIDER、MODEL_BASE_URL、MODEL_NAME 和 MODEL_API_KEY。')
             self._capacity(conn,settings.discussion_max_active)
             conn.execute("UPDATE runs SET status='ACTIVE',error_code=NULL,ended_at=NULL WHERE discussion_id=? AND id=?",(did,rid))
             self._transition(conn,did,'SUMMARIZING')

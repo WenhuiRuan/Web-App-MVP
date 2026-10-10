@@ -1,4 +1,5 @@
 """Transactional run progression. All provider IO belongs outside this module."""
+from .model_gateway import MODEL_FAILURE_CODES
 from dataclasses import dataclass
 from datetime import datetime,timezone
 from uuid import UUID,uuid4
@@ -132,7 +133,7 @@ class RunRepository(DiscussionRepository):
             return True
 
     def fail_run(self,did,rid,code):
-        if code not in ('MODEL_TIMEOUT','MODEL_RESULT_INVALID','TASK_FAILED','DATABASE_UNAVAILABLE'): raise ValueError('invalid failure code')
+        if code not in MODEL_FAILURE_CODES: raise ValueError('invalid failure code')
         with self.transaction() as conn:
             row=self._active(conn,did,rid)
             if row is None: return False

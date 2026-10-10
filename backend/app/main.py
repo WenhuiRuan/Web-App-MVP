@@ -15,6 +15,7 @@ from .config import Settings, load_settings
 from .contracts import Contract, ErrorResponse
 from .database import Database
 from .model_gateway import DeterministicModelGateway
+from .deepseek_gateway import DeepSeekGateway, missing_configuration
 from .synthesis_repository import SynthesisRepository
 from .lifecycle import LifecycleError, RepositoryUnavailable
 from .discussion_api import router
@@ -30,14 +31,16 @@ class LiveResponse(Contract):
 class ReadyResponse(Contract):
     status: Literal['ready'] = 'ready'
     database: Literal['ready'] = 'ready'
-    model_mode: Literal['mock'] = 'mock'
+    model_mode: Literal['mock', 'real'] = 'mock'
 
 
 class SystemInfo(Contract):
     name: Literal['AI Panel Studio'] = 'AI Panel Studio'
-    version: Literal['0.5.0'] = '0.5.0'
-    phase: Literal[5] = 5
-    model_mode: Literal['mock', 'unavailable']
+    version: Literal['0.6.0'] = '0.6.0'
+    phase: Literal[6] = 6
+    model_mode: Literal['mock', 'real', 'unavailable']
+    model_provider: str
+    model_name: str
     discussion_engine_available: bool
 
 
@@ -61,14 +64,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.database = database
         app.state.repository = SynthesisRepository(database)
         await asyncio.to_thread(app.state.repository.recover_unfinished)
-        app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else None
+        app.state.model_gateway = DeterministicModelGateway() if config.model_provider == 'mock' else DeepSeekGateway(config) if not missing_configuration(config) else None
         app.state.tasks = TaskSupervisor(app.state.repository, config, lambda: app.state.model_gateway)
         try:
             yield
         finally:
             await app.state.tasks.close()
+            gateway=app.state.model_gateway
+            if isinstance(gateway, DeepSeekGateway): await gateway.aclose()
 
-    app = FastAPI(title='AI Panel Studio — lifecycle API', version='0.5.0', lifespan=lifespan,
+    app = FastAPI(title='AI Panel Studio — lifecycle API', version='0.6.0', lifespan=lifespan,
                   responses={422: {'model': ErrorResponse}, 500: {'model': ErrorResponse}})
 
     @app.middleware('http')
@@ -124,12 +129,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if not request.app.state.database.ready():
             raise ApplicationError(503, 'DATABASE_UNAVAILABLE', '数据库尚未就绪。', True)
         if request.app.state.model_gateway is None:
-            raise ApplicationError(503, 'MODEL_NOT_CONFIGURED', '真实模型适配尚未实现，请使用 mock 模式。')
-        return ReadyResponse()
+            raise ApplicationError(503, 'MODEL_NOT_CONFIGURED', '模型配置缺失或无效：' + ', '.join(missing_configuration(config)))
+        return ReadyResponse(model_mode='mock' if config.model_provider=='mock' else 'real')
 
     @app.get('/api/system', response_model=SystemInfo)
-    def system_info():
-        return SystemInfo(model_mode='mock' if config.model_provider == 'mock' else 'unavailable',discussion_engine_available=config.model_provider=='mock')
+    def system_info(request: Request):
+        available=request.app.state.model_gateway is not None
+        return SystemInfo(model_mode='mock' if config.model_provider == 'mock' else 'real' if available else 'unavailable',
+            model_provider=config.model_provider,model_name=config.model_name if available and config.model_provider!='mock' else '',discussion_engine_available=available)
 
     app.include_router(router)
     return app

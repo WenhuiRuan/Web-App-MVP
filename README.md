@@ -1,6 +1,6 @@
 # AI Panel Studio
 
-本地多专家圆桌讨论应用。阶段5已接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。运行模型仍为后端独立确定性ModelGateway，不代表真实模型分析。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
+本地多专家圆桌讨论应用。阶段5已接通真实HTTP/SSE及浏览器E2E；默认页面使用FastAPI/SQLite持久化，从创建、生成阵容和确认启动自动推进到观点更新、总结或明确失败。阶段6A已接入后端独立DeepSeek ModelGateway，MODEL_PROVIDER=mock保留工程替身；真实内容首轮验证另行记录。独立前端台本保留在`?mode=mock`。开发工具Codex与应用运行模型分开配置。
 
 ## 环境与安装
 
@@ -34,8 +34,8 @@ Pop-Location
 | BACKEND_HOST / BACKEND_PORT | 127.0.0.1 / 8000；端口1024–65535 | 本地服务地址，host限定loopback |
 | DATABASE_PATH | local-data/panel.sqlite3 | 相对路径以项目根解析 |
 | LOG_LEVEL | INFO；DEBUG/INFO/WARNING/ERROR | 日志级别；不打印请求体或密钥 |
-| MODEL_PROVIDER | mock | 当前仅mock适配可用；其他值ready返回503 |
-| MODEL_BASE_URL / MODEL_NAME / MODEL_API_KEY | 空 | 真实服务后续配置；Key仅后端读取，不进入响应/日志/数据库 |
+| MODEL_PROVIDER | mock | mock或deepseek；配置缺失/不支持时ready返回503 |
+| MODEL_BASE_URL / MODEL_NAME / MODEL_API_KEY | 空 | DeepSeek由后端独立配置；Key仅后端读取，不进入响应/日志/数据库 |
 | MODEL_TIMEOUT_SECONDS / MODEL_MAX_CONCURRENCY / MODEL_MAX_ATTEMPTS | 30 / 4 / 2 | 全部模型任务超时、全局并发和最多尝试次数（含首次，1–3）；run剩余时长优先 |
 | DISCUSSION_MAX_ACTIVE / DISCUSSION_MAX_TURNS / DISCUSSION_MAX_SECONDS | 3 / 20 / 300 | 活动容量已执行：GENERATING/RUNNING/SUMMARIZING合计；发言/时长额度已执行；到期冻结实际消息边界并进入SUMMARIZING |
 | SUMMARY_MAX_SECONDS / INSIGHT_MAX_SECONDS | 60 / 10 | 总结与每次提取的独立有限总预算，包含队列等待；均最多MODEL_MAX_ATTEMPTS次尝试 |
@@ -58,7 +58,7 @@ Pop-Location
 .\scripts\start-frontend.ps1
 ```
 
-访问 [本地前端](http://127.0.0.1:5173) 新建讨论、确认阵容、观看实时发言及观点并查看总结；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪 · 确定性模拟模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供基础接口和讨论HTTP/SSE接口，可直接试用。
+访问 [本地前端](http://127.0.0.1:5173) 新建讨论、确认阵容、观看实时发言及观点并查看总结；访问 [基础连接检查](http://127.0.0.1:5173/?view=system)。检查页显示“基础服务已连接 / 数据库已就绪及当前实际模型模式”代表前端通过代理访问了真实后端。按Ctrl+C停止对应进程；端口占用时明确失败，不偷偷切端口。后端[Swagger UI](http://127.0.0.1:8000/docs)提供基础接口和讨论HTTP/SSE接口，可直接试用。
 
 其他系统的等价启动方式（未实机验证）：`python3 -m venv .venv`，用 `.venv/bin/python -m pip install -r backend/requirements.lock` 安装；用 `.venv/bin/python -m backend.app.server` 启动；前端目录执行 `npm ci` 和 `npm run dev`。
 
@@ -130,3 +130,16 @@ smoke_lifecycle/smoke_synthesis是阶段4真实TCP验证脚本，历史结果沿
 生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认业务模式须同时运行后端；独立前端演示添加?mode=mock。Ctrl+C停止，服务5秒宽限后取消开放流并清理任务。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 
 设计索引：[需求](docs/requirements.md)、[架构](docs/architecture.md)、[数据模型](docs/data-model.md)、[API](docs/api.md)、[验收](docs/acceptance.md)、[决策](docs/decisions.md)、[进展](docs/progress.md)、[Prompt](docs/prompt-log.md)。
+
+## DeepSeek真实模式（阶段6A）
+
+已有.env请保留。设MODEL_PROVIDER=deepseek、MODEL_BASE_URL=https://api.deepseek.com、MODEL_NAME=deepseek-flash、MODEL_API_KEY=${PANEL_API_KEY}；后端进程需继承PANEL_API_KEY，进程环境优先于.env。机器级变量已设置但老终端未继承时，可新开终端；必要时仅在启动后端的PowerShell中执行：
+
+```powershell
+if (-not $env:PANEL_API_KEY) {
+  $env:PANEL_API_KEY = [Environment]::GetEnvironmentVariable('PANEL_API_KEY', 'Machine')
+}
+.\scripts\start-backend.ps1
+```
+
+不要输出该变量，也不要在前端窗口复制它。顶部显示“DeepSeek · deepseek-flash（真实服务）”；ready仅配置检查，首次创建阵容才会真实付费调用。六任务Prompt、官方文档、重试及安全边界见[模型适配](docs/model-provider.md)。内容质量与样例交付分开：本批1–2真实议题复核，下一批至少五份最终样例和交付包。

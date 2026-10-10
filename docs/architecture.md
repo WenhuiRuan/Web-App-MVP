@@ -101,3 +101,7 @@ SSE路由→短事务event_page→异步stream。持久化events是唯一业务�
 useDiscussion先快照后after订阅，重复seq忽略，缺口/旧run/格式异常关闭旧reader，保留内容并以1/2/4/8/10秒退避重新读取快照与续订。generation和alive同时守卫fetch和连接回调；切场组件key及cleanup清理timer/AbortController/订阅。终态保留内容并关闭订阅；总结重试受理后显式重新快照，不重放消息。恢复不会重建同场Transcript，原阅读位置和新内容提示继续生效。观点任务状态与成功观点内容分离，FAILED/INTERRUPTED显示独立提示并保留旧批次。
 
 服务关闭：生产Uvicorn宽限5秒，开放的SSE不会无限阻止lifespan清理；宽限后取消观察者流，再由TaskSupervisor取消/收集后台任务并持久化中断。仅断开观察者不触发此服务关闭过程。真实TCP补测保留未关闭reader，证明进程能退出并保存INTERRUPTED/discussion。流网络离线主动abort、在线立即快照恢复。SSE流故障注入仅位于backend/tests/e2e_server.py，生产create_app没有_test接口。
+
+## 阶段6A：真实模型边界
+
+DeepSeekGateway以stateless HTTP实现ModelGateway，任务Prompt在backend/prompts，public_context只映射本场角色及正式消息。所有六类任务经DiscussionEngine.call_model的唯一超时/重试控制；阵容不再另写一次性调用策略。DB仍只接收经契约验证的绑定结果，模型IO在事务外，关闭先收集任务后关闭共享HTTP client。生产没有验证故障路由或指标查询接口。安全system公开mock/real/unavailable而非凭provider名称猜测，ready不付费探测。[详细规则](model-provider.md)。

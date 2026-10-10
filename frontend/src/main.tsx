@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     if (isMockMode) return
     const controller = new AbortController()
-    fetch('/api/system', { signal: controller.signal }).then(async response => { if (!response.ok) throw new Error(); return response.json() }).then(info => setModelLabel(info.model_mode === 'mock' ? '后端确定性模拟' : '模型服务未配置')).catch(() => { if (!controller.signal.aborted) setModelLabel('后端未连接') })
+    fetch('/api/system', { signal: controller.signal }).then(async response => { if (!response.ok) throw new Error(); return response.json() }).then(info => setModelLabel(info.model_mode === 'mock' ? '后端确定性模拟' : info.model_mode === 'real' ? `DeepSeek · ${info.model_name}（真实服务）` : '模型服务未配置')).catch(() => { if (!controller.signal.aborted) setModelLabel('后端未连接') })
     return () => controller.abort()
   }, [])
   const selected = path.startsWith('/discussion/') ? path.split('/')[2] : undefined

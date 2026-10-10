@@ -344,3 +344,11 @@ summary-retry新键在事务内复用原run/边界，创建新领取和规范操
 **提交**：d827136 SSE、bbf7b4a前端接入；5-3题名test: verify real studio lifecycle and stream recovery，最终哈希以Git日志为准。
 
 最终补充核对：E2E机器报告duration=107285.573ms，expected=13/unexpected=0/skipped=0/flaky=0。该次临时库13 COMPLETED、1 FAILED（隔离故障场），PRAGMA foreign_key_check为空，每讨论events的count=max(seq)，无事件缺口。最终契约导出检查与文档137需求/147验收/15文档检查退出0。
+
+## 阶段6A-1：DeepSeek适配（2026-10-10）
+
+用户U9独立配置已安全读取。当前Codex进程未继承PANEL_API_KEY；指定机器变量导入后端子进程后密钥可读，不输出或改写.env。官方接口非思考JSON、六任务Prompt、后端身份/turn映射、safe错误/指标、统一重试和模式就绪完成。
+
+TDD证据：test_deepseek首轮22 failed（模块不存在/缺项就绪）；适配后21 passed/1 failed；重试测试新增后4 failed/23 passed（就绪及401/429/503错误/尝试次数）；实现后28适配+真实loopback HTTP测试通过（5.25秒）。与阵容回归合并45 passed（10.21秒），初回归两项旧断言因统一两次尝试失败，改为检查2次失败尝试/新键成功第3次。受影响基础/契约/引擎/启动/轮次/提取/总结/恢复129 passed（79.14秒）；未重新执行SSE与静态布局。构建和类型检查通过。
+
+最小官方调用已成功：1次阵容请求、1.984秒、prompt471/completion192/total663、cache hit0/miss471。两场真实页面各12消息/6观点更新已完成，浏览器检查通过约2.3分钟；尚需逐项内容复核、指标整理与定向修正。不可将首轮发现的语义问题标为质量全通过。后续五份样例/工作流/交付包未完成。

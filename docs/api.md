@@ -1,6 +1,6 @@
 # HTTP API 与 SSE 契约 v1
 
-更新于2026-10-10，阶段5已接通持久化SSE及默认前端业务客户端，后端继续使用确定性替身。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
+更新于2026-10-10，阶段5已接通持久化SSE及默认前端业务客户端，阶段6A增加DeepSeek真实适配，保留确定性替身。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
 
 ## 实现状态与机器契约
 
@@ -219,3 +219,17 @@ data: {"schema_version":1,"discussion_id":"11111111-1111-4111-8111-111111111111"
 新增insights.status_changed：InsightStatus作为payload，PENDING/SUCCEEDED/FAILED/INTERRUPTED随任务事务提交，版本表示提取任务版本，独立于最后成功InsightBatch；失败保留已成功批次。SUCCEEDED紧随insights.updated。discussion.state_changed增加可空failure_code（旧事件缺省null），重试清空错误。旧存量消息和事件不重写，schema_version仍1，此为兼容字段/类型扩展；旧客户端收到未知类型需刷新快照，部署时前后端共同升级。
 
 流开始后的数据库/传输异常通过关闭连接表示，不能在SSE中返回JSON错误；客户端恢复快照。观察者取消只取消本订阅，运行任务归TaskSupervisor管理。
+
+## 阶段6A：安全模型状态与上游边界
+
+GET /api/system 示例（只列安全信息）：
+
+```json
+{"name":"AI Panel Studio","version":"0.6.0","phase":6,"model_mode":"real","model_provider":"deepseek","model_name":"deepseek-flash","discussion_engine_available":true}
+```
+
+GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"real"}；仅配置/数据库检查，不是网络或认证验证。缺少配置时503/MODEL_NOT_CONFIGURED，message仅列缺失的MODEL变量名。上游JSON格式与内部ModelResult不同：角色内容无identity，target_turn/source_turns映射到本run已有消息；原HTTP讨论与SSE契约保持不变。
+
+模型失败持久化到operation/failure_code/insight_status.error_code：认证MODEL_AUTH_FAILED、余额MODEL_BALANCE_EXHAUSTED、参数MODEL_REQUEST_INVALID、模型MODEL_NOT_FOUND，均不自动重试；限流MODEL_RATE_LIMITED、服务MODEL_SERVICE_UNAVAILABLE、网络MODEL_CONNECTION_FAILED、超时MODEL_TIMEOUT可有限重试，非法输出MODEL_RESULT_INVALID亦受原有限策略约束。响应不包含上游原始正文或密钥；配置修复后的显式重试仍使用新幂等键，讨论失败不自动续跑，总结失败只重试冻结边界。
+
+完整配置、六任务传输示例与官方依据见[模型适配](model-provider.md)。

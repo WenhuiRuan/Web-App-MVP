@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "AI Panel Studio — target HTTP and SSE contract",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "description": "x-implemented marks mounted routes; false routes remain future design contracts."
   },
   "paths": {
@@ -1557,7 +1557,10 @@
           },
           "model_mode": {
             "type": "string",
-            "const": "mock",
+            "enum": [
+              "mock",
+              "real"
+            ],
             "title": "Model Mode",
             "default": "mock"
           }
@@ -1716,23 +1719,32 @@
           },
           "version": {
             "type": "string",
-            "const": "0.5.0",
+            "const": "0.6.0",
             "title": "Version",
-            "default": "0.5.0"
+            "default": "0.6.0"
           },
           "phase": {
             "type": "integer",
-            "const": 5,
+            "const": 6,
             "title": "Phase",
-            "default": 5
+            "default": 6
           },
           "model_mode": {
             "type": "string",
             "enum": [
               "mock",
+              "real",
               "unavailable"
             ],
             "title": "Model Mode"
+          },
+          "model_provider": {
+            "type": "string",
+            "title": "Model Provider"
+          },
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
           },
           "discussion_engine_available": {
             "type": "boolean",
@@ -1743,6 +1755,8 @@
         "type": "object",
         "required": [
           "model_mode",
+          "model_provider",
+          "model_name",
           "discussion_engine_available"
         ],
         "title": "SystemInfo"

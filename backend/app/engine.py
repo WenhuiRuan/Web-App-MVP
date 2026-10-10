@@ -6,7 +6,7 @@ from functools import partial
 from pydantic import ValidationError
 
 from .contracts import ModelRequest
-from .model_gateway import InvalidModelResult,validate_result
+from .model_gateway import InvalidModelResult,ModelServiceError,validate_result
 from .scheduling import choose_speaker
 
 
@@ -29,6 +29,7 @@ class DiscussionEngine:
 
     async def call_model(self,request):
         for attempt in range(self.supervisor.settings.model_max_attempts):
+            retry_delay=0
             remaining=self.deadline-time.monotonic()
             if remaining<=0: raise RunDeadline()
             budget_timeout=asyncio.timeout(remaining)
@@ -59,13 +60,19 @@ class DiscussionEngine:
                 code='MODEL_TIMEOUT'
             except ModelCallFailure as exc:
                 code=exc.code
+            except ModelServiceError as exc:
+                code=exc.code
+                if not exc.retryable: raise ModelCallFailure(code) from None
+                retry_delay=exc.retry_after
             except (InvalidModelResult,ValidationError):
                 code='MODEL_RESULT_INVALID'
             except Exception:
                 code='TASK_FAILED'
             if attempt+1==self.supervisor.settings.model_max_attempts:
                 raise ModelCallFailure(code) from None
-            await asyncio.sleep(0)  # Yield; retry budget is finite and cannot extend the run deadline.
+            remaining=self.deadline-time.monotonic()
+            if remaining<=retry_delay: raise RunDeadline()
+            await asyncio.sleep(retry_delay)  # One retry owner; delay cannot extend the task budget.
 
     def context_request(self,context,task,actor):
         snapshot=context.snapshot; d=snapshot.discussion

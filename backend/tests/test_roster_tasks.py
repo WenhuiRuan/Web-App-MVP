@@ -163,11 +163,11 @@ def test_model_failure_is_sanitized_and_retry_uses_a_new_key(setup, caplog, mode
     assert operation_row(client, accepted['operation_id'])['error_code'] == code
     assert 'private-provider-secret-sentinel' not in caplog.text + json.dumps(failed) + json.dumps(events(client, did))
     assert generate(client, did, key) == accepted
-    assert len(gateway.requests) == 1
+    assert len(gateway.requests) == 2  # Central retry policy: at most two attempts.
     gateway.mode = 'valid'
     retry = generate(client, did)
     ready = wait_for(client, did, 'READY')
-    assert len(ready['participants']) == 5 and len(gateway.requests) == 2
+    assert len(ready['participants']) == 5 and len(gateway.requests) == 3
     assert retry['operation_id'] != accepted['operation_id']
     assert operation_row(client, accepted['operation_id'])['status'] == 'FAILED'
 
