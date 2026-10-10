@@ -2,6 +2,7 @@
 import asyncio
 import json
 import time
+import logging
 from collections import deque
 from functools import lru_cache
 from pathlib import Path
@@ -49,6 +50,15 @@ class Point(Contract):
     kind: Literal['consensus', 'disagreement']
     content: str
     source_turns: tuple[StrictInt, ...]
+    evidence: tuple['Quote', ...]
+
+
+class Quote(Contract):
+    turn: StrictInt
+    quote: str = Field(min_length=1, max_length=400)
+
+
+Point.model_rebuild()
 
 
 class Points(Contract):
@@ -63,6 +73,12 @@ SCHEMAS = dict(roster=Roster, intent=Intent, utterance=Utterance,
                host_control=Control, insights=Points, summary=Summary)
 
 
+def invalid(issue):
+    error=InvalidModelResult()
+    error.validation_issue=issue  # Fixed internal code only; never the provider value.
+    return error
+
+
 def missing_configuration(settings):
     if settings.model_provider == 'mock': return []
     if settings.model_provider != 'deepseek': return ['MODEL_PROVIDER']
@@ -71,7 +87,12 @@ def missing_configuration(settings):
         ('MODEL_API_KEY', settings.model_api_key.get_secret_value()))
         if not value.strip() or '${' in value]
     if settings.model_base_url:
-        parsed = urlsplit(settings.model_base_url)
+        try:
+            parsed = urlsplit(settings.model_base_url)
+            parsed.port  # Validate a malformed or out-of-range port without printing the URL.
+        except ValueError:
+            if 'MODEL_BASE_URL' not in missing: missing.append('MODEL_BASE_URL')
+            return missing
         # HTTP is limited to loopback for controlled upstream tests. Never forward keys on redirects.
         if not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment or (
             parsed.scheme != 'https' and not (parsed.scheme == 'http' and parsed.hostname in ('127.0.0.1', 'localhost', '::1'))):
@@ -86,13 +107,16 @@ def prompt(name):
 
 def public_context(request):
     slots = {p.id: index for index, p in enumerate(request.participants)}
+    people = {p.id:p for p in request.participants}
     turns = {m.id: m.turn_no for m in request.messages}
     return {'topic': request.topic, 'expert_count': request.expert_count,
         'participants': [dict(slot=slots[p.id], kind=p.kind, name=p.name, title=p.title, stance=p.stance) for p in request.participants],
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,
         'target_turn': turns.get(request.target_message_id), 'host_task': request.host_task,
         'public_focus': request.public_focus, 'through_turn': request.through_turn,
-        'messages': [dict(turn=m.turn_no, speaker_slot=slots[m.participant_id], content=m.content, kind=m.kind) for m in request.messages],
+        'messages': [dict(turn=m.turn_no, speaker_slot=slots[m.participant_id], speaker_name=people[m.participant_id].name,
+            speaker_title=people[m.participant_id].title, speaker_kind=people[m.participant_id].kind,
+            content=m.content, kind=m.kind) for m in request.messages],
         'insights': [dict(kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids]) for i in request.insights.items]}
 
 
@@ -112,20 +136,36 @@ def bind_result(request, content):
             target = raw.pop('target_turn')
             raw['target_message_id'] = None if target is None else turns[target]
         elif request.task == 'insights':
+            messages={m.turn_no:m for m in request.messages}
+            experts={p.id for p in request.participants if p.kind=='EXPERT'}
+            for item in parsed.items:
+                if len(item.evidence)!=len(item.source_turns) or {q.turn for q in item.evidence}!=set(item.source_turns):
+                    raise invalid('evidence_coverage')
+                for quote in item.evidence:
+                    message=messages[quote.turn]
+                    if message.participant_id not in experts or not quote.quote.strip() or quote.quote not in message.content:
+                        raise invalid('quote_or_actor_mismatch')
             raw['items'] = [dict(id=uuid5(request.run_id, f'insight:{request.insight_version}:{index}'),
                 kind=i.kind, content=i.content, source_message_ids=[turns[t] for t in i.source_turns])
                 for index, i in enumerate(parsed.items)]
         return validate_result(request, raw)
-    except (ValueError, TypeError, KeyError, IndexError, ValidationError):
-        raise InvalidModelResult() from None
+    except InvalidModelResult:
+        raise
+    except ValidationError:
+        raise invalid('wire_schema') from None
+    except (KeyError, IndexError):
+        raise invalid('reference') from None
+    except (ValueError, TypeError):
+        raise invalid('structure') from None
 
 
 class DeepSeekGateway:
-    def __init__(self, settings, client=None):
+    def __init__(self, settings, client=None, metrics_sink=None):
         self.settings = settings
         self.owned_client = client is None
         self.client = client or httpx.AsyncClient(timeout=settings.model_timeout_seconds, follow_redirects=False)
         self.metrics = deque(maxlen=2000)  # Safe, bounded observability; never includes prompts, outputs or headers.
+        self.metrics_sink = metrics_sink
 
     async def aclose(self):
         if self.owned_client: await self.client.aclose()
@@ -155,15 +195,17 @@ class DeepSeekGateway:
                 raise ModelServiceError(code, retryable, delay)
             try:
                 payload = response.json()
-                usage = payload.get('usage', {})
-                metric['usage'] = {k: v for k, v in usage.items() if k in ('prompt_tokens', 'completion_tokens', 'total_tokens', 'prompt_cache_hit_tokens', 'prompt_cache_miss_tokens') and type(v) is int and v >= 0}
-                metric['reported_model'] = str(payload.get('model', 'unknown'))[:80]
+                usage = payload.get('usage')
+                if usage is not None and not isinstance(usage,dict): raise InvalidModelResult()
+                metric['usage'] = ({k: v for k, v in usage.items() if k in ('prompt_tokens', 'completion_tokens', 'total_tokens', 'prompt_cache_hit_tokens', 'prompt_cache_miss_tokens') and type(v) is int and v >= 0} or None) if usage else None
+                reported=payload.get('model')
+                metric['reported_model'] = reported if reported==self.settings.model_name else 'unknown'
                 choice = payload['choices'][0]
                 if choice['finish_reason'] != 'stop': raise InvalidModelResult()
                 # Deliberately never read reasoning_content, including on errors.
                 content = choice['message']['content']
                 if not isinstance(content, str) or not content.strip(): raise InvalidModelResult()
-            except (KeyError, IndexError, TypeError, ValueError):
+            except (KeyError, IndexError, TypeError, ValueError, AttributeError):
                 raise InvalidModelResult() from None
             result = bind_result(request, content)
             metric['status'] = 'succeeded'
@@ -179,7 +221,11 @@ class DeepSeekGateway:
             raise ModelServiceError('MODEL_CONNECTION_FAILED', True, .5) from None
         except (ModelServiceError, InvalidModelResult) as exc:
             metric['status'] = str(exc)
+            if isinstance(exc, InvalidModelResult): metric['validation_issue']=getattr(exc,'validation_issue','envelope_or_contract')
             raise
         finally:
             metric['duration_ms'] = round((time.monotonic() - started) * 1000, 2)
             self.metrics.append(metric)
+            if self.metrics_sink is not None:
+                try: self.metrics_sink(dict(metric))
+                except Exception: logging.getLogger('panel').warning('model_metrics_export_failed')

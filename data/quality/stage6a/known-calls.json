@@ -1,0 +1,331 @@
+{
+  "known_call_count": 19,
+  "groups": {
+    "connectivity": [
+      {
+        "task": "roster",
+        "discussion_id": "46abd8c8-705a-4f40-9ab4-aebf103843ea",
+        "run_id": null,
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 471,
+          "completion_tokens": 192,
+          "total_tokens": 663,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 471
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 1984.0
+      }
+    ],
+    "targeted-1": [
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2484,
+          "completion_tokens": 364,
+          "total_tokens": 2848,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2484
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 2344.0
+      },
+      {
+        "task": "summary",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2747,
+          "completion_tokens": 592,
+          "total_tokens": 3339,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2747
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3344.0
+      },
+      {
+        "task": "utterance",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 1164,
+          "completion_tokens": 71,
+          "total_tokens": 1235,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1164
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 937.0
+      },
+      {
+        "task": "host_control",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2279,
+          "completion_tokens": 62,
+          "total_tokens": 2341,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2279
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 906.0
+      },
+      {
+        "task": "insights",
+        "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2495,
+          "completion_tokens": 337,
+          "total_tokens": 2832,
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2111
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 2078.0
+      },
+      {
+        "task": "summary",
+        "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2723,
+          "completion_tokens": 600,
+          "total_tokens": 3323,
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 2467
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3500.0
+      }
+    ],
+    "targeted-v2": [
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "MODEL_RESULT_INVALID",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 134,
+          "total_tokens": 2735,
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 2345
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 1250.0
+      }
+    ],
+    "targeted-v3": [
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "MODEL_RESULT_INVALID",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 526,
+          "total_tokens": 3127,
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 169
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 2641.0
+      },
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "MODEL_RESULT_INVALID",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 437,
+          "total_tokens": 3038,
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 169
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 1890.0
+      }
+    ],
+    "quote-diagnostic": [
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 214,
+          "total_tokens": 2815,
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 169
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 1625.0
+      }
+    ],
+    "targeted-v4": [
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "MODEL_RESULT_INVALID",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 548,
+          "total_tokens": 3149,
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 169
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "validation_issue": "envelope_or_contract",
+        "duration_ms": 3235.0
+      },
+      {
+        "task": "insights",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2601,
+          "completion_tokens": 390,
+          "total_tokens": 2991,
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 169
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 2093.0
+      },
+      {
+        "task": "summary",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2583,
+          "completion_tokens": 582,
+          "total_tokens": 3165,
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 407
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3610.0
+      },
+      {
+        "task": "insights",
+        "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2612,
+          "completion_tokens": 127,
+          "total_tokens": 2739,
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 2100
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 891.0
+      },
+      {
+        "task": "summary",
+        "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2419,
+          "completion_tokens": 587,
+          "total_tokens": 3006,
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 243
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3468.0
+      }
+    ],
+    "final-summaries": [
+      {
+        "task": "summary",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 3085,
+          "completion_tokens": 429,
+          "total_tokens": 3514,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3085
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 2797.0
+      },
+      {
+        "task": "summary",
+        "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 2935,
+          "completion_tokens": 567,
+          "total_tokens": 3502,
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2551
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3391.0
+      }
+    ],
+    "final-topic1-summary": [
+      {
+        "task": "summary",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 3171,
+          "completion_tokens": 540,
+          "total_tokens": 3711,
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 3043
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3375.0
+      }
+    ]
+  },
+  "unknown": [
+    "first two complete discussions HTTP attempt count and usage",
+    "exact server-side weight revision",
+    "billing amount"
+  ]
+}

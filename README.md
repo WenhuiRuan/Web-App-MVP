@@ -27,7 +27,7 @@ Pop-Location
 
 ## 配置
 
-默认值已能运行，无需 Key。需要修改时可将 `.env.example` 复制为项目根 `.env`（若已有文件先审阅，不覆盖）；真实 `.env` 不提交。后端进程环境变量优先于 .env。前端不会读取根 .env，不提供配置查询接口。
+默认值已能运行，无需 Key。需要修改时可将 `.env.example` 复制为项目根 `.env`（若已有文件先审阅，不覆盖）；真实 `.env` 不提交。后端进程环境变量优先于 .env。前端不会读取根 .env，不提供完整配置或密钥查询接口。
 
 | 变量 | 默认值 / 范围 | 作用 |
 |---|---|---|
@@ -78,7 +78,7 @@ Pop-Location
 |---|---|
 | GET /api/health/live | 进程存活 |
 | GET /api/health/ready | 迁移状态及当前模型适配是否可用 |
-| GET /api/system | 安全的应用版本/阶段/模拟模式标识 |
+| GET /api/system | 安全的应用版本/阶段/模型模式标识 |
 | POST /api/discussions | 创建DRAFT，默认4名专家；必填UUID格式Idempotency-Key |
 | GET /api/discussions | active/all过滤、稳定排序与游标分页 |
 | GET /api/discussions/{id} | 一致性快照及事件高水位 |
@@ -143,3 +143,5 @@ if (-not $env:PANEL_API_KEY) {
 ```
 
 不要输出该变量，也不要在前端窗口复制它。顶部显示“DeepSeek · deepseek-flash（真实服务）”；ready仅配置检查，首次创建阵容才会真实付费调用。六任务Prompt、官方文档、重试及安全边界见[模型适配](docs/model-provider.md)。内容质量与样例交付分开：本批1–2真实议题复核，下一批至少五份最终样例和交付包。
+
+首轮两个真实议题、具体来源、修正与限制见[内容质量记录](docs/quality-first-round.md)，文本证据在data/quality/stage6a。来源与作者归属改进已定向复核，但不承诺所有共识都语义正确。修改Prompt后需重启后端；已保存讨论不会被自动重写。真实检查脚本是主动付费入口，常规pytest/Playwright不调用真实模型。检查结果与无法取得的整场用量分别记录。

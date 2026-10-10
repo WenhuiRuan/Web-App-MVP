@@ -67,3 +67,7 @@ ai-panel-studio/
 若时间紧，削减范围外体验，不删附件硬要求，不跳过关键测试，也不把静态样例宣传为动态生成。每次收缩范围同步 requirements、acceptance、decisions。
 
 阶段3模拟设计见frontend-design；阶段4A见backend-lifecycle，4B见backend-orchestration，4C三个TDD小批见backend-synthesis与progress。阶段5先为持久化SSE游标/补发/去重/终止/跨场拒绝写失败检查，再实现HTTP客户端/SSE，更新前端公开投影以容纳insight_status，完成双场完整浏览器E2E。真实模型质量/费用及最终五份样例、远程材料在阶段6；阶段5已按SSE/前端接入/E2E三小批实施，记录见progress；下一阶段不自行配置或调用真实供应商。
+
+## 阶段6A实际完成与下一批
+
+2026-10-10完成DeepSeek适配、六任务Prompt、可控上游/错误/取消/有限重试检查和两议题真实浏览器闭环。按适配与内容复核两个小批提交；语义限制及未知指标见quality-first-round.md，不把工程通过当质量全面通过。下一批先复核共识/分歧及总结证据、主持收束与数值方向，再准备至少五份最终样例、工作流说明和交付包。保持未授权远程仓库/发布/邮件边界。

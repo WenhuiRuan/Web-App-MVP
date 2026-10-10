@@ -32,6 +32,12 @@ def main():
         async with original(application):
             info={'database':str(database.resolve()),'port':18082}
             (directory/'stage6a-real-last.json').write_text(json.dumps(info,indent=2),encoding='utf-8')
+            journal=directory/f'{database.stem}-calls.jsonl'
+            def export(metric):
+                # Flush every completed attempt; a forced process stop cannot erase prior usage.
+                with journal.open('a',encoding='utf-8') as file:
+                    file.write(json.dumps(metric,ensure_ascii=False)+'\n')
+            application.state.model_gateway.metrics_sink=export
             try: yield
             finally:
                 gateway=application.state.model_gateway

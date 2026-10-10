@@ -34,7 +34,7 @@ def answer(raw, **extra):
 def test_six_tasks_send_json_non_thinking_and_bind_identity(task):
     from backend.app.deepseek_gateway import DeepSeekGateway
     req=request(task); seen=[]
-    outputs={'roster':{'participants':[{'kind':'HOST' if i==0 else 'EXPERT','name':f'嘉宾{i}','title':f'专业{i}','stance':f'观点{i}'} for i in range(5)]},'intent':{'kind':'REBUT','target_turn':1,'relevance':85,'public_focus':'课堂纪律'},'utterance':{'sentences':['需要核对执行成本。']},'host_control':{'action':'followup','public_focus':'请比较边界'},'insights':{'items':[{'kind':'consensus','content':'两位专家认可有限试点。','source_turns':[2,3]}]},'summary':{'content':'主持人总结：认可有限试点，执行成本仍需验证。'}}
+    outputs={'roster':{'participants':[{'kind':'HOST' if i==0 else 'EXPERT','name':f'嘉宾{i}','title':f'专业{i}','stance':f'观点{i}'} for i in range(5)]},'intent':{'kind':'REBUT','target_turn':1,'relevance':85,'public_focus':'课堂纪律'},'utterance':{'sentences':['需要核对执行成本。']},'host_control':{'action':'followup','public_focus':'请比较边界'},'insights':{'items':[{'kind':'consensus','content':'两位专家认可有限试点。','source_turns':[2,3],'evidence':[{'turn':2,'quote':'我认可有限试点'},{'turn':3,'quote':'我认可有限试点'}]}]},'summary':{'content':'主持人总结：认可有限试点，执行成本仍需验证。'}}
     async def run():
         def upstream(http_request):
             seen.append(json.loads(http_request.content)); assert http_request.url.path=='/chat/completions'
@@ -150,4 +150,69 @@ def test_gateway_timeout_is_safe_and_context_is_not_shared():
             with pytest.raises(ModelServiceError) as error: await gateway.generate(first)
             assert error.value.code=='MODEL_TIMEOUT' and error.value.retryable
             assert 'private' not in str(error.value)
+    asyncio.run(run())
+
+
+def test_opt_in_metrics_sink_retains_each_call_and_drops_untrusted_model_text():
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    saved=[]
+    async def run():
+        payload=answer({'action':'end','public_focus':'收束'},model='private-test-key reflected model')
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda _:httpx.Response(200,json=payload))) as client:
+            gateway=DeepSeekGateway(config(),client=client,metrics_sink=saved.append)
+            await gateway.generate(req)
+            assert len(saved)==1 and saved[0]['usage']['total_tokens']==120
+            assert 'private-test-key' not in repr(saved) and 'NEVER-SAVE-THIS' not in repr(saved)
+    req=request('host_control');asyncio.run(run())
+
+
+@pytest.mark.parametrize('field,value',[('usage',[]),('choices',[]),('choices',[{'message':None,'finish_reason':'stop'}])])
+def test_malformed_envelopes_are_invalid_not_internal_errors(field,value):
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda _:httpx.Response(200,json=answer({},**{field:value})))) as client:
+            with pytest.raises(InvalidModelResult): await DeepSeekGateway(config(),client=client).generate(request())
+    asyncio.run(run())
+
+
+@pytest.mark.parametrize('case',['missing','forged','host','duplicate','mismatch'])
+def test_insights_require_exact_public_quotes_for_every_expert_source(case):
+    from backend.app.deepseek_gateway import bind_result
+    req=request('insights')
+    point={'kind':'consensus','content':'两位专家认可有限试点。','source_turns':[2,3],
+        'evidence':[{'turn':2,'quote':'我认可有限试点'},{'turn':3,'quote':'我认可有限试点'}]}
+    if case=='missing': del point['evidence']
+    if case=='forged': point['evidence'][1]['quote']='全体一致同意三天答复'
+    if case=='host': point['source_turns']=[1,2,3];point['evidence'].append({'turn':1,'quote':'我认可有限试点'})
+    if case=='duplicate': point['evidence'].append(point['evidence'][0])
+    if case=='mismatch': point['evidence'].pop()
+    with pytest.raises(InvalidModelResult): bind_result(req,json.dumps({'items':[point]},ensure_ascii=False))
+
+
+def test_public_messages_carry_their_bound_author_without_shared_history():
+    from backend.app.deepseek_gateway import public_context
+    req=request('summary');context=public_context(req)
+    for original,public in zip(req.messages,context['messages']):
+        person=next(p for p in req.participants if p.id==original.participant_id)
+        assert (public['speaker_name'],public['speaker_title'],public['speaker_kind'])==(person.name,person.title,person.kind)
+        assert public['turn']==original.turn_no and public['content']==original.content
+
+
+@pytest.mark.parametrize('url',['http://[','https://api.deepseek.com:bad','https://u:secret@api.deepseek.com','https://api.deepseek.com?key=secret'])
+def test_invalid_base_urls_report_variable_name_without_constructing_http_client(url):
+    from backend.app.deepseek_gateway import missing_configuration
+    assert missing_configuration(config().model_copy(update={'model_base_url':url}))==['MODEL_BASE_URL']
+
+
+@pytest.mark.parametrize('usage',['absent',None])
+def test_missing_usage_is_unknown_and_does_not_discard_a_valid_answer(usage):
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    req=request('host_control');payload=answer({'action':'end','public_focus':'收束'})
+    if usage=='absent':payload.pop('usage')
+    else:payload['usage']=None
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda _:httpx.Response(200,json=payload))) as client:
+            gateway=DeepSeekGateway(config(),client=client)
+            assert (await gateway.generate(req)).action=='end'
+            assert gateway.metrics[0]['usage'] is None
     asyncio.run(run())

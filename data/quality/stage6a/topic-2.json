@@ -1,0 +1,1476 @@
+{
+  "kind": "first-round-quality-evidence-not-final-sample",
+  "model_provider": "deepseek",
+  "requested_model": "deepseek-flash",
+  "thinking": "disabled",
+  "date": "2026-10-10",
+  "original_browser_run": {
+    "snapshot": {
+      "discussion": {
+        "id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+        "topic": "一家30人的软件公司是否应试点每周四天、32小时且不降薪的工作制？请比较交付、客户服务和员工负担。",
+        "expert_count": 4,
+        "state": "COMPLETED",
+        "version": 5,
+        "roster_revision": 1,
+        "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+        "failure_stage": null,
+        "failure_code": null,
+        "created_at": "2026-10-10T07:11:07.284636Z",
+        "updated_at": "2026-10-10T07:12:07.352722Z"
+      },
+      "participants": [
+        {
+          "id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清试点目标、试点周期、衡量交付、客户服务和员工负担的指标，确保各方在同一事实基础上讨论，不预设立场。",
+          "color": "#64748B"
+        },
+        {
+          "id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林亦舟",
+          "title": "软件公司工程交付负责人",
+          "stance": "支持在交付流程成熟、需求可拆分的团队试点：压缩会议、限制并行任务，用四周看部署频率和缺陷逃逸率。若关键路径依赖外部验收或紧急救火频繁，四天制会牺牲可预测性。",
+          "color": "#2563EB"
+        },
+        {
+          "id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "苏婉宁",
+          "title": "客户服务与SLA运营经理",
+          "stance": "担忧不降薪32小时会降低服务覆盖。支持的前提是错峰排班、明确响应分级和值班轮换，并把电话与工单积压量作为硬指标；否则客户等待时间上升，满意度先受损。",
+          "color": "#D97706"
+        },
+        {
+          "id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高柏川",
+          "title": "组织心理学家与员工福祉顾问",
+          "stance": "认为负担需分认知负荷、情绪劳动和恢复时间评估。四天制可能降低倦怠、提升专注，但若只是把五天工作量压进四天，会加剧隐性加班。建议先测睡眠、请假和离职意向再扩大。",
+          "color": "#059669"
+        },
+        {
+          "id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "程云开",
+          "title": "中小企业财务与人力成本顾问",
+          "stance": "关注不降薪下的成本结构：若产出持平，四天制可省招聘与流失成本；若需增聘或加班补偿，人力成本上升。建议限定三个月试点，核算毛利、加班费和客户续约率，再决定是否推广。",
+          "color": "#9333EA"
+        }
+      ],
+      "role_states": [
+        {
+          "participant_id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 26
+        },
+        {
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 32
+        },
+        {
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 10
+        },
+        {
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 32
+        },
+        {
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 29
+        }
+      ],
+      "messages": [
+        {
+          "id": "366dc328-497b-4a1b-958e-be3ed792eeeb",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本次讨论的核心矛盾是：30人软件公司在不降薪、每周32小时的前提下，交付可预测性、客户服务覆盖与员工真实负担能否同时成立。请各位围绕试点周期、衡量指标和暂停条件给出可操作方案，尤其说明什么条件下四天制可行、什么条件下不可行。",
+          "created_at": "2026-10-10T07:11:11.841428Z"
+        },
+        {
+          "id": "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "主持人问的是客户服务侧的可操作性，我的回答是：32小时守住SLA的唯一路径是错峰排班、响应分级和值班轮换，把工作日覆盖拉成至少五天可响应。电话接通率、工单积压量和首次响应时长应作为硬暂停指标，任何一项连续两周低于当前基线就应暂停试点。",
+          "created_at": "2026-10-10T07:11:14.871249Z"
+        },
+        {
+          "id": "af8368fa-06fd-4c82-830d-88e1ffdf85a6",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "回应第二条的服务硬指标：我同意电话接通率、工单积压量和首次响应时长作为硬暂停线，同时交付侧建议把四周部署频率与缺陷逃逸率并列观察，因为客服暂停阈值能反映救火负担，但覆盖交付可预测性。不过要补充一个前提，如果关键路径依赖外部验收，四个自然周可能只够跑完一轮验收，必须把验收节点前置、需求拆分到可独立发布，否则指标波动无法区分是试点失败还是外部排队造成。",
+          "created_at": "2026-10-10T07:11:18.776952Z"
+        },
+        {
+          "id": "b3a6cd9e-06ef-483f-851f-dbc6fb2606da",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "回应第三条：你要求把验收节点前置、需求拆分到可独立发布，我补充福祉侧的并行指标，即除部署频率和缺陷逃逸率外，每周实际工时、睡眠时长、请假率和离职意向应同表记录。只有在32小时没有把五天工作量压进四天时，这些指标才会显示恢复改善；否则实际工时上升而睡眠下降，就说明负担只是被隐藏了。",
+          "created_at": "2026-10-10T07:11:22.138470Z"
+        },
+        {
+          "id": "207d3936-294e-4d14-b4f2-73a7246c6886",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "按第三条与第四条已确立的四周观察周期，我提出财务闭环：每四周结算一次，除毛利、加班费和客户续约率外，增加人均产出比与流失替代成本对照，后者含招聘和上岗培训支出。若累计人力成本上升超过5%或毛利下滑即暂停试点；只有人均产出比与流失替代成本合计不恶化，才进入下一结算周期。",
+          "created_at": "2026-10-10T07:11:27.181585Z"
+        },
+        {
+          "id": "102287af-0923-4868-9383-95fafe870e31",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应第五条的财务闭环：客服错峰覆盖所需的值班津贴、跨班交接耗时和加班补偿应计入人力成本口径，否则三成服务人力在四天排班下的额外支出会被漏算。工单积压量还须与首次响应时长同时结算，若只按四周毛利和续约率判断，可能漏掉服务侧隐性支出，使成本上升超过5%的暂停条件被低估。",
+          "created_at": "2026-10-10T07:11:30.657331Z"
+        },
+        {
+          "id": "c39e6d16-44a2-473f-9c4d-ca6e814ec39c",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "第五条和第六条都指向同一件事，即5%暂停线必须建立在包含值班津贴、跨班交接和加班补偿的完整成本口径上，我请交付和福祉那边也回答：部署频率、缺陷逃逸率、睡眠和离职意向是否要设同等量级的暂停条件，还是只作为观察项。如果两边都只盯自己的硬指标而不对齐口径，试点结束后很可能出现财务说成本超了5%、服务说积压没超标、交付说缺陷正常，那时没人能判断该停还是该扩。",
+          "created_at": "2026-10-10T07:11:36.063315Z"
+        },
+        {
+          "id": "0558e31f-cb88-470f-9873-fe3c21603804",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "回应第七条：我主张睡眠时长和离职意向不能只作观察项，应与财务5%同级设为暂停线；具体口径为试点基线前两周每周睡眠均值下降超过一成，或离职意向问询中明确考虑离职者达到团队两成，任一触发即暂停。若这两项只观察不设暂停线，第四条提出的实际工时与恢复改善就无法与财务口径同时冻结，第五条的成本结算与第六条的服务支出会各自达标，却掩盖五天内工作量被压进四天的隐性负担。",
+          "created_at": "2026-10-10T07:11:39.923350Z"
+        },
+        {
+          "id": "cc991c8e-071a-411d-ad64-0e589e71cc7f",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应第八条：财务暂停线可把离职意向触发后的替换成本并入5%成本阈值，但睡眠与离职意向只统计试点直接相关团队，否则30人公司里两成阈值会被个别人波动误触发。",
+          "created_at": "2026-10-10T07:11:46.596069Z"
+        },
+        {
+          "id": "f60c1fbe-7eb3-42e0-b752-fe1d92069b3e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应第九条：客服侧在计算替换成本与5%阈值时，应按实际易受排班变动影响的服务岗位人数来算，不能把30人全员或非客服人员一并纳入，否则两成阈值会被稀释。哪些岗位纳入口径要按实际服务覆盖岗认定，否则错峰津贴和跨班交接耗时会因分母过大而被低估。",
+          "created_at": "2026-10-10T07:11:50.791937Z"
+        },
+        {
+          "id": "01d4146f-b64d-4eb3-b94b-2100febd8da0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 11,
+          "kind": "statement",
+          "content": "我回应第九条和第十条：只限定试点直接相关团队或服务岗位，会漏掉与试点团队每日协作超过一定比例的岗位，例如交付依赖的产品和测试岗，其隐性负担同样会出现睡眠下降或离职意向上升。建议把与试点团队每日协作时间占比超过两成的岗位纳入统计，两成阈值按纳入人数计算而非按30人全员计算，这样既不因分母过大漏判协作岗的隐性负担，也不因个别波动误触发暂停。",
+          "created_at": "2026-10-10T07:11:56.951715Z"
+        },
+        {
+          "id": "0950b83b-047b-4d68-9789-8cc152d6fa78",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 12,
+          "kind": "linking",
+          "content": "请第四条、第五条与第八条明确：财务的5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向，是各自独立触发即暂停，还是须同时满足才暂停。并请第十一条回应：与试点团队每日协作超两成的岗位若纳入统计，其协作时间和隐性负担由谁记录、按哪张表结算，以免只扩大分母而不改变暂停条件。",
+          "created_at": "2026-10-10T07:11:59.845888Z"
+        }
+      ],
+      "insights": {
+        "version": 6,
+        "through_turn": 12,
+        "items": [
+          {
+            "id": "128b6765-0f25-5404-be9d-2b6ebbbe8877",
+            "kind": "disagreement",
+            "content": "财务5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向是各自独立触发即暂停，还是须同时满足才暂停，尚未形成一致结论。",
+            "source_message_ids": [
+              "0558e31f-cb88-470f-9873-fe3c21603804",
+              "0950b83b-047b-4d68-9789-8cc152d6fa78",
+              "c39e6d16-44a2-473f-9c4d-ca6e814ec39c",
+              "cc991c8e-071a-411d-ad64-0e589e71cc7f"
+            ]
+          },
+          {
+            "id": "4cee04c5-5c22-55ec-9a1b-0d12cf96a619",
+            "kind": "consensus",
+            "content": "5%成本暂停线必须建立在完整成本口径上，涵盖值班津贴、跨班交接耗时和加班补偿，不能只按四周毛利与续约率判断。",
+            "source_message_ids": [
+              "102287af-0923-4868-9383-95fafe870e31",
+              "207d3936-294e-4d14-b4f2-73a7246c6886"
+            ]
+          },
+          {
+            "id": "7ebc32af-4982-5426-8f3c-74caf1565bd3",
+            "kind": "consensus",
+            "content": "电话接通率、工单积压量和首次响应时长应作为客服侧硬暂停指标，任何一项连续两周低于当前基线即暂停试点；交付侧同意这一服务暂停阈值并建议把四周部署频率与缺陷逃逸率并列观察。",
+            "source_message_ids": [
+              "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+              "af8368fa-06fd-4c82-830d-88e1ffdf85a6"
+            ]
+          },
+          {
+            "id": "926238f5-aeee-552d-9a66-9157d371618f",
+            "kind": "consensus",
+            "content": "睡眠时长与离职意向不能只作观察项，应设暂停线：睡眠均值下降超过一成或明确考虑离职者达到团队两成即触发暂停；财务侧同意把离职意向触发后的替换成本并入5%成本阈值。",
+            "source_message_ids": [
+              "0558e31f-cb88-470f-9873-fe3c21603804",
+              "cc991c8e-071a-411d-ad64-0e589e71cc7f"
+            ]
+          },
+          {
+            "id": "a7dadb67-a326-57c0-bc72-52db03dc4e6c",
+            "kind": "consensus",
+            "content": "统计暂停阈值时分母不能按30人全员计算：客服限实际易受排班影响的服务岗位，福祉限试点直接相关团队，避免阈值被稀释或误触发。",
+            "source_message_ids": [
+              "cc991c8e-071a-411d-ad64-0e589e71cc7f",
+              "f60c1fbe-7eb3-42e0-b752-fe1d92069b3e"
+            ]
+          },
+          {
+            "id": "ebce54e9-5ab6-594f-94e7-78448dc323fe",
+            "kind": "disagreement",
+            "content": "统计范围是否应扩大到与试点团队每日协作超两成的产品、测试等岗位：福祉主张纳入以避免漏判协作岗隐性负担，但客服与财务主张只限实际受排班影响或试点直接相关岗位，防止分母过大或误触发；协作时间和隐性负担由谁记录、按哪张表结算仍未解决。",
+            "source_message_ids": [
+              "01d4146f-b64d-4eb3-b94b-2100febd8da0",
+              "0950b83b-047b-4d68-9789-8cc152d6fa78",
+              "cc991c8e-071a-411d-ad64-0e589e71cc7f",
+              "f60c1fbe-7eb3-42e0-b752-fe1d92069b3e"
+            ]
+          }
+        ]
+      },
+      "insight_status": {
+        "state": "SUCCEEDED",
+        "version": 6,
+        "through_turn": 12,
+        "error_code": null
+      },
+      "summary": {
+        "content": "主持人总结：本次讨论围绕一家30人软件公司是否试点每周四天、32小时不降薪的工作制，重点比较交付、客户服务与员工负担三方面是否同时能够成立。讨论未预设四天制本身可行或不可行，而是把焦点放在试点周期、衡量指标、暂停条件和统计口径上。\n\n主要观点与共同认可的条件：第一，客服侧将电话接通率、工单积压量和首次响应时长作为硬暂停指标，任何一项连续两周低于当前基线即应暂停；交付侧同意这一服务暂停阈值，并建议把四周部署频率与缺陷逃逸率并列观察。第二，参与者普遍认可5%成本暂停线不能只看毛利与续约率，必须纳入值班津贴、跨班交接耗时和加班补偿等完整成本口径，否则服务侧隐性支出会被漏算。第三，福祉侧认为睡眠时长和离职意向不能只作观察项，应设暂停线：试点前两周基线后，睡眠均值下降超过一成，或明确考虑离职者达到团队两成即触发暂停；财务侧同意把离职意向触发后的替换成本并入5%成本阈值。第四，统计暂停阈值时分母不能按30人全员计算：客服限实际易受排班影响的服务岗位，福祉限试点直接相关团队，以避免阈值被稀释或误触发。\n\n尚未解决的分歧有两项。其一，财务5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向，究竟是各自独立触发即暂停，还是须同时满足才暂停，讨论中没有形成一致结论。这直接影响试点监督机制是宽还是严。其二，统计范围是否应扩大到与试点团队每日协作超过两成的产品、测试等岗位：福祉主张纳入，以避免漏判协作岗的隐性负担；客服与财务则主张只限实际受排班影响或与试点直接相关的岗位，防止分母过大或个别波动误触发暂停。与此相关，协作时间和隐性负担应由谁记录、按哪张表结算，也尚无明确安排。\n\n以上条件与分歧属于讨论中已被提出的操作方案，不代表试点已经实施或指标已经测出。本场对独立触发与同时满足的选择、协作岗纳入范围及记录责任尚无充分共识，需要各方在试点启动前继续对齐口径。",
+        "through_turn": 12,
+        "created_at": "2026-10-10T07:12:07.352722Z"
+      },
+      "last_event_seq": 167
+    },
+    "observations": [
+      {
+        "elapsed_ms": 3796,
+        "state": "RUNNING",
+        "message_count": 0,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 4885,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 5905,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 6943,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 7966,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 8988,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 10015,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 11039,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 12056,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 13078,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 14102,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 15131,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 16217,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 17230,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 18243,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 19269,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING"
+        ]
+      },
+      {
+        "elapsed_ms": 20286,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 21305,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 22330,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 23347,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 24363,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 25383,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 26408,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 27428,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 28439,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 29458,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 30479,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 31512,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 32530,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 33546,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 34561,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 35580,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 36592,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 37606,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 38623,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING"
+        ]
+      },
+      {
+        "elapsed_ms": 39641,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 40668,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 41686,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 42706,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 43720,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 44733,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 45743,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 46761,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 47777,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 48790,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 49807,
+        "state": "RUNNING",
+        "message_count": 11,
+        "insight_version": 5,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 50820,
+        "state": "RUNNING",
+        "message_count": 11,
+        "insight_version": 5,
+        "role_states": [
+          "PREPARING",
+          "PREPARING",
+          "IDLE",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 51837,
+        "state": "RUNNING",
+        "message_count": 11,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 52859,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 53877,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 54900,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 55928,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 56942,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 57959,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 58979,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 60002,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 61012,
+        "state": "COMPLETED",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      }
+    ]
+  },
+  "targeted_insight_review": {
+    "request": {
+      "task": "insights",
+      "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+      "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+      "topic": "一家30人的软件公司是否应试点每周四天、32小时且不降薪的工作制？请比较交付、客户服务和员工负担。",
+      "expert_count": 4,
+      "roster_revision": 1,
+      "actor_id": null,
+      "participants": [
+        {
+          "id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清试点目标、试点周期、衡量交付、客户服务和员工负担的指标，确保各方在同一事实基础上讨论，不预设立场。",
+          "color": "#64748B"
+        },
+        {
+          "id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林亦舟",
+          "title": "软件公司工程交付负责人",
+          "stance": "支持在交付流程成熟、需求可拆分的团队试点：压缩会议、限制并行任务，用四周看部署频率和缺陷逃逸率。若关键路径依赖外部验收或紧急救火频繁，四天制会牺牲可预测性。",
+          "color": "#2563EB"
+        },
+        {
+          "id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "苏婉宁",
+          "title": "客户服务与SLA运营经理",
+          "stance": "担忧不降薪32小时会降低服务覆盖。支持的前提是错峰排班、明确响应分级和值班轮换，并把电话与工单积压量作为硬指标；否则客户等待时间上升，满意度先受损。",
+          "color": "#D97706"
+        },
+        {
+          "id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高柏川",
+          "title": "组织心理学家与员工福祉顾问",
+          "stance": "认为负担需分认知负荷、情绪劳动和恢复时间评估。四天制可能降低倦怠、提升专注，但若只是把五天工作量压进四天，会加剧隐性加班。建议先测睡眠、请假和离职意向再扩大。",
+          "color": "#059669"
+        },
+        {
+          "id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "程云开",
+          "title": "中小企业财务与人力成本顾问",
+          "stance": "关注不降薪下的成本结构：若产出持平，四天制可省招聘与流失成本；若需增聘或加班补偿，人力成本上升。建议限定三个月试点，核算毛利、加班费和客户续约率，再决定是否推广。",
+          "color": "#9333EA"
+        }
+      ],
+      "messages": [
+        {
+          "id": "366dc328-497b-4a1b-958e-be3ed792eeeb",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本次讨论的核心矛盾是：30人软件公司在不降薪、每周32小时的前提下，交付可预测性、客户服务覆盖与员工真实负担能否同时成立。请各位围绕试点周期、衡量指标和暂停条件给出可操作方案，尤其说明什么条件下四天制可行、什么条件下不可行。",
+          "created_at": "2026-10-10T07:11:11.841428Z"
+        },
+        {
+          "id": "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "主持人问的是客户服务侧的可操作性，我的回答是：32小时守住SLA的唯一路径是错峰排班、响应分级和值班轮换，把工作日覆盖拉成至少五天可响应。电话接通率、工单积压量和首次响应时长应作为硬暂停指标，任何一项连续两周低于当前基线就应暂停试点。",
+          "created_at": "2026-10-10T07:11:14.871249Z"
+        },
+        {
+          "id": "af8368fa-06fd-4c82-830d-88e1ffdf85a6",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "回应第二条的服务硬指标：我同意电话接通率、工单积压量和首次响应时长作为硬暂停线，同时交付侧建议把四周部署频率与缺陷逃逸率并列观察，因为客服暂停阈值能反映救火负担，但覆盖交付可预测性。不过要补充一个前提，如果关键路径依赖外部验收，四个自然周可能只够跑完一轮验收，必须把验收节点前置、需求拆分到可独立发布，否则指标波动无法区分是试点失败还是外部排队造成。",
+          "created_at": "2026-10-10T07:11:18.776952Z"
+        },
+        {
+          "id": "b3a6cd9e-06ef-483f-851f-dbc6fb2606da",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "回应第三条：你要求把验收节点前置、需求拆分到可独立发布，我补充福祉侧的并行指标，即除部署频率和缺陷逃逸率外，每周实际工时、睡眠时长、请假率和离职意向应同表记录。只有在32小时没有把五天工作量压进四天时，这些指标才会显示恢复改善；否则实际工时上升而睡眠下降，就说明负担只是被隐藏了。",
+          "created_at": "2026-10-10T07:11:22.138470Z"
+        },
+        {
+          "id": "207d3936-294e-4d14-b4f2-73a7246c6886",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "按第三条与第四条已确立的四周观察周期，我提出财务闭环：每四周结算一次，除毛利、加班费和客户续约率外，增加人均产出比与流失替代成本对照，后者含招聘和上岗培训支出。若累计人力成本上升超过5%或毛利下滑即暂停试点；只有人均产出比与流失替代成本合计不恶化，才进入下一结算周期。",
+          "created_at": "2026-10-10T07:11:27.181585Z"
+        },
+        {
+          "id": "102287af-0923-4868-9383-95fafe870e31",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应第五条的财务闭环：客服错峰覆盖所需的值班津贴、跨班交接耗时和加班补偿应计入人力成本口径，否则三成服务人力在四天排班下的额外支出会被漏算。工单积压量还须与首次响应时长同时结算，若只按四周毛利和续约率判断，可能漏掉服务侧隐性支出，使成本上升超过5%的暂停条件被低估。",
+          "created_at": "2026-10-10T07:11:30.657331Z"
+        },
+        {
+          "id": "c39e6d16-44a2-473f-9c4d-ca6e814ec39c",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "第五条和第六条都指向同一件事，即5%暂停线必须建立在包含值班津贴、跨班交接和加班补偿的完整成本口径上，我请交付和福祉那边也回答：部署频率、缺陷逃逸率、睡眠和离职意向是否要设同等量级的暂停条件，还是只作为观察项。如果两边都只盯自己的硬指标而不对齐口径，试点结束后很可能出现财务说成本超了5%、服务说积压没超标、交付说缺陷正常，那时没人能判断该停还是该扩。",
+          "created_at": "2026-10-10T07:11:36.063315Z"
+        },
+        {
+          "id": "0558e31f-cb88-470f-9873-fe3c21603804",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "回应第七条：我主张睡眠时长和离职意向不能只作观察项，应与财务5%同级设为暂停线；具体口径为试点基线前两周每周睡眠均值下降超过一成，或离职意向问询中明确考虑离职者达到团队两成，任一触发即暂停。若这两项只观察不设暂停线，第四条提出的实际工时与恢复改善就无法与财务口径同时冻结，第五条的成本结算与第六条的服务支出会各自达标，却掩盖五天内工作量被压进四天的隐性负担。",
+          "created_at": "2026-10-10T07:11:39.923350Z"
+        },
+        {
+          "id": "cc991c8e-071a-411d-ad64-0e589e71cc7f",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应第八条：财务暂停线可把离职意向触发后的替换成本并入5%成本阈值，但睡眠与离职意向只统计试点直接相关团队，否则30人公司里两成阈值会被个别人波动误触发。",
+          "created_at": "2026-10-10T07:11:46.596069Z"
+        },
+        {
+          "id": "f60c1fbe-7eb3-42e0-b752-fe1d92069b3e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应第九条：客服侧在计算替换成本与5%阈值时，应按实际易受排班变动影响的服务岗位人数来算，不能把30人全员或非客服人员一并纳入，否则两成阈值会被稀释。哪些岗位纳入口径要按实际服务覆盖岗认定，否则错峰津贴和跨班交接耗时会因分母过大而被低估。",
+          "created_at": "2026-10-10T07:11:50.791937Z"
+        },
+        {
+          "id": "01d4146f-b64d-4eb3-b94b-2100febd8da0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 11,
+          "kind": "statement",
+          "content": "我回应第九条和第十条：只限定试点直接相关团队或服务岗位，会漏掉与试点团队每日协作超过一定比例的岗位，例如交付依赖的产品和测试岗，其隐性负担同样会出现睡眠下降或离职意向上升。建议把与试点团队每日协作时间占比超过两成的岗位纳入统计，两成阈值按纳入人数计算而非按30人全员计算，这样既不因分母过大漏判协作岗的隐性负担，也不因个别波动误触发暂停。",
+          "created_at": "2026-10-10T07:11:56.951715Z"
+        },
+        {
+          "id": "0950b83b-047b-4d68-9789-8cc152d6fa78",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 12,
+          "kind": "linking",
+          "content": "请第四条、第五条与第八条明确：财务的5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向，是各自独立触发即暂停，还是须同时满足才暂停。并请第十一条回应：与试点团队每日协作超两成的岗位若纳入统计，其协作时间和隐性负担由谁记录、按哪张表结算，以免只扩大分母而不改变暂停条件。",
+          "created_at": "2026-10-10T07:11:59.845888Z"
+        }
+      ],
+      "cycle": 0,
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": null,
+      "public_focus": "",
+      "through_turn": 12,
+      "insight_version": 7,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
+    },
+    "result": {
+      "task": "insights",
+      "items": [
+        {
+          "id": "6c0bb7aa-0b11-5bdc-a953-4f16894b9e75",
+          "kind": "consensus",
+          "content": "苏婉宁与林亦舟都明确同意把电话接通率、工单积压量和首次响应时长作为硬暂停指标，任何一项连续两周低于当前基线就暂停试点。",
+          "source_message_ids": [
+            "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+            "af8368fa-06fd-4c82-830d-88e1ffdf85a6"
+          ]
+        }
+      ]
+    }
+  },
+  "latest_targeted_summary": {
+    "request": {
+      "task": "summary",
+      "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+      "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+      "topic": "一家30人的软件公司是否应试点每周四天、32小时且不降薪的工作制？请比较交付、客户服务和员工负担。",
+      "expert_count": 4,
+      "roster_revision": 1,
+      "actor_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+      "participants": [
+        {
+          "id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清试点目标、试点周期、衡量交付、客户服务和员工负担的指标，确保各方在同一事实基础上讨论，不预设立场。",
+          "color": "#64748B"
+        },
+        {
+          "id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林亦舟",
+          "title": "软件公司工程交付负责人",
+          "stance": "支持在交付流程成熟、需求可拆分的团队试点：压缩会议、限制并行任务，用四周看部署频率和缺陷逃逸率。若关键路径依赖外部验收或紧急救火频繁，四天制会牺牲可预测性。",
+          "color": "#2563EB"
+        },
+        {
+          "id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "苏婉宁",
+          "title": "客户服务与SLA运营经理",
+          "stance": "担忧不降薪32小时会降低服务覆盖。支持的前提是错峰排班、明确响应分级和值班轮换，并把电话与工单积压量作为硬指标；否则客户等待时间上升，满意度先受损。",
+          "color": "#D97706"
+        },
+        {
+          "id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高柏川",
+          "title": "组织心理学家与员工福祉顾问",
+          "stance": "认为负担需分认知负荷、情绪劳动和恢复时间评估。四天制可能降低倦怠、提升专注，但若只是把五天工作量压进四天，会加剧隐性加班。建议先测睡眠、请假和离职意向再扩大。",
+          "color": "#059669"
+        },
+        {
+          "id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "程云开",
+          "title": "中小企业财务与人力成本顾问",
+          "stance": "关注不降薪下的成本结构：若产出持平，四天制可省招聘与流失成本；若需增聘或加班补偿，人力成本上升。建议限定三个月试点，核算毛利、加班费和客户续约率，再决定是否推广。",
+          "color": "#9333EA"
+        }
+      ],
+      "messages": [
+        {
+          "id": "366dc328-497b-4a1b-958e-be3ed792eeeb",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本次讨论的核心矛盾是：30人软件公司在不降薪、每周32小时的前提下，交付可预测性、客户服务覆盖与员工真实负担能否同时成立。请各位围绕试点周期、衡量指标和暂停条件给出可操作方案，尤其说明什么条件下四天制可行、什么条件下不可行。",
+          "created_at": "2026-10-10T07:11:11.841428Z"
+        },
+        {
+          "id": "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "主持人问的是客户服务侧的可操作性，我的回答是：32小时守住SLA的唯一路径是错峰排班、响应分级和值班轮换，把工作日覆盖拉成至少五天可响应。电话接通率、工单积压量和首次响应时长应作为硬暂停指标，任何一项连续两周低于当前基线就应暂停试点。",
+          "created_at": "2026-10-10T07:11:14.871249Z"
+        },
+        {
+          "id": "af8368fa-06fd-4c82-830d-88e1ffdf85a6",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "2c526fe6-dfbb-548c-8771-bde50d6ecb5e",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "回应第二条的服务硬指标：我同意电话接通率、工单积压量和首次响应时长作为硬暂停线，同时交付侧建议把四周部署频率与缺陷逃逸率并列观察，因为客服暂停阈值能反映救火负担，但覆盖交付可预测性。不过要补充一个前提，如果关键路径依赖外部验收，四个自然周可能只够跑完一轮验收，必须把验收节点前置、需求拆分到可独立发布，否则指标波动无法区分是试点失败还是外部排队造成。",
+          "created_at": "2026-10-10T07:11:18.776952Z"
+        },
+        {
+          "id": "b3a6cd9e-06ef-483f-851f-dbc6fb2606da",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "回应第三条：你要求把验收节点前置、需求拆分到可独立发布，我补充福祉侧的并行指标，即除部署频率和缺陷逃逸率外，每周实际工时、睡眠时长、请假率和离职意向应同表记录。只有在32小时没有把五天工作量压进四天时，这些指标才会显示恢复改善；否则实际工时上升而睡眠下降，就说明负担只是被隐藏了。",
+          "created_at": "2026-10-10T07:11:22.138470Z"
+        },
+        {
+          "id": "207d3936-294e-4d14-b4f2-73a7246c6886",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "按第三条与第四条已确立的四周观察周期，我提出财务闭环：每四周结算一次，除毛利、加班费和客户续约率外，增加人均产出比与流失替代成本对照，后者含招聘和上岗培训支出。若累计人力成本上升超过5%或毛利下滑即暂停试点；只有人均产出比与流失替代成本合计不恶化，才进入下一结算周期。",
+          "created_at": "2026-10-10T07:11:27.181585Z"
+        },
+        {
+          "id": "102287af-0923-4868-9383-95fafe870e31",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应第五条的财务闭环：客服错峰覆盖所需的值班津贴、跨班交接耗时和加班补偿应计入人力成本口径，否则三成服务人力在四天排班下的额外支出会被漏算。工单积压量还须与首次响应时长同时结算，若只按四周毛利和续约率判断，可能漏掉服务侧隐性支出，使成本上升超过5%的暂停条件被低估。",
+          "created_at": "2026-10-10T07:11:30.657331Z"
+        },
+        {
+          "id": "c39e6d16-44a2-473f-9c4d-ca6e814ec39c",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "第五条和第六条都指向同一件事，即5%暂停线必须建立在包含值班津贴、跨班交接和加班补偿的完整成本口径上，我请交付和福祉那边也回答：部署频率、缺陷逃逸率、睡眠和离职意向是否要设同等量级的暂停条件，还是只作为观察项。如果两边都只盯自己的硬指标而不对齐口径，试点结束后很可能出现财务说成本超了5%、服务说积压没超标、交付说缺陷正常，那时没人能判断该停还是该扩。",
+          "created_at": "2026-10-10T07:11:36.063315Z"
+        },
+        {
+          "id": "0558e31f-cb88-470f-9873-fe3c21603804",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "回应第七条：我主张睡眠时长和离职意向不能只作观察项，应与财务5%同级设为暂停线；具体口径为试点基线前两周每周睡眠均值下降超过一成，或离职意向问询中明确考虑离职者达到团队两成，任一触发即暂停。若这两项只观察不设暂停线，第四条提出的实际工时与恢复改善就无法与财务口径同时冻结，第五条的成本结算与第六条的服务支出会各自达标，却掩盖五天内工作量被压进四天的隐性负担。",
+          "created_at": "2026-10-10T07:11:39.923350Z"
+        },
+        {
+          "id": "cc991c8e-071a-411d-ad64-0e589e71cc7f",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "f0750a9b-122c-5b1f-86b7-8b62344fba58",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应第八条：财务暂停线可把离职意向触发后的替换成本并入5%成本阈值，但睡眠与离职意向只统计试点直接相关团队，否则30人公司里两成阈值会被个别人波动误触发。",
+          "created_at": "2026-10-10T07:11:46.596069Z"
+        },
+        {
+          "id": "f60c1fbe-7eb3-42e0-b752-fe1d92069b3e",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "46a771e3-7652-52f7-8827-19f0be0de9f0",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应第九条：客服侧在计算替换成本与5%阈值时，应按实际易受排班变动影响的服务岗位人数来算，不能把30人全员或非客服人员一并纳入，否则两成阈值会被稀释。哪些岗位纳入口径要按实际服务覆盖岗认定，否则错峰津贴和跨班交接耗时会因分母过大而被低估。",
+          "created_at": "2026-10-10T07:11:50.791937Z"
+        },
+        {
+          "id": "01d4146f-b64d-4eb3-b94b-2100febd8da0",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "a999f95c-4041-5ef5-aa1e-2bea17d67e50",
+          "turn_no": 11,
+          "kind": "statement",
+          "content": "我回应第九条和第十条：只限定试点直接相关团队或服务岗位，会漏掉与试点团队每日协作超过一定比例的岗位，例如交付依赖的产品和测试岗，其隐性负担同样会出现睡眠下降或离职意向上升。建议把与试点团队每日协作时间占比超过两成的岗位纳入统计，两成阈值按纳入人数计算而非按30人全员计算，这样既不因分母过大漏判协作岗的隐性负担，也不因个别波动误触发暂停。",
+          "created_at": "2026-10-10T07:11:56.951715Z"
+        },
+        {
+          "id": "0950b83b-047b-4d68-9789-8cc152d6fa78",
+          "discussion_id": "268206f5-bc72-4d1f-b6e1-45082f7c6aa3",
+          "run_id": "52132e93-0f9c-4041-85aa-53ea43af52d5",
+          "participant_id": "7b9dfd0f-4731-5b7c-9c94-7c51cc67ec46",
+          "turn_no": 12,
+          "kind": "linking",
+          "content": "请第四条、第五条与第八条明确：财务的5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向，是各自独立触发即暂停，还是须同时满足才暂停。并请第十一条回应：与试点团队每日协作超两成的岗位若纳入统计，其协作时间和隐性负担由谁记录、按哪张表结算，以免只扩大分母而不改变暂停条件。",
+          "created_at": "2026-10-10T07:11:59.845888Z"
+        }
+      ],
+      "cycle": 0,
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": null,
+      "public_focus": "",
+      "through_turn": 12,
+      "insight_version": null,
+      "insights": {
+        "version": 7,
+        "through_turn": 12,
+        "items": [
+          {
+            "id": "6c0bb7aa-0b11-5bdc-a953-4f16894b9e75",
+            "kind": "consensus",
+            "content": "苏婉宁与林亦舟都明确同意把电话接通率、工单积压量和首次响应时长作为硬暂停指标，任何一项连续两周低于当前基线就暂停试点。",
+            "source_message_ids": [
+              "6b52ce37-6b4f-4e16-8a70-8ec893413e6e",
+              "af8368fa-06fd-4c82-830d-88e1ffdf85a6"
+            ]
+          }
+        ]
+      }
+    },
+    "result": {
+      "task": "summary",
+      "content": "主持人总结：本场讨论围绕30人软件公司是否试点每周四天、32小时且不降薪，集中比较交付、客户服务和员工负担。截至第12条，讨论形成了若干可操作主张，但尚未出现对整体试点的最终表决，也未确认任何一方已同意统一执行某个具体阈值。\n\n主要观点分四侧展开。客户服务侧，苏婉宁主张32小时守住SLA的前提是错峰排班、响应分级和值班轮换，把工作日覆盖拉成至少五天可响应，并将电话接通率、工单积压量和首次响应时长作为硬暂停指标；其中她要求工单积压量与首次响应时长同时结算，并警告只按四周毛利和续约率判断可能漏算服务侧隐性支出。这里“接通率”越大越好、“积压量”越小越好，两个方向不能混用；若作为暂停线，应明确各自基线方向，现有发言未给出统一数值口径。\n\n交付侧，林亦舟同意将上述三项客服指标作为硬暂停线，同时建议把四周部署频率与缺陷逃逸率并列观察，并强调关键路径若依赖外部验收，须先前置验收节点、把需求拆分到可独立发布，否则无法区分是试点失败还是外部排队。福祉侧，高柏川提出除部署频率和缺陷逃逸率外，应同表记录每周实际工时、睡眠时长、请假率和离职意向，主张睡眠与离职意向不应只作观察项，而应与财务5%暂停线同级；他还建议把与试点团队每日协作时间占比超过两成的岗位纳入统计。财务侧，程云开提出每四周结算一次，核算毛利、加班费、客户续约率、人均产出比与流失替代成本，并设累计人力成本上升超过5%或毛利下滑即暂停。\n\n已有共识：苏婉宁与林亦舟明确同意把电话接通率、工单积压量和首次响应时长作为硬暂停指标，任何一项连续两周低于当前基线就应暂停试点；苏婉宁还要求值班津贴、跨班交接耗时和加班补偿计入人力成本口径。\n\n未解决分歧：财务5%暂停线、交付的部署频率与缺陷逃逸率、福祉的睡眠与离职意向，究竟是各自独立触发即暂停，还是须同时满足才暂停，主持人已追问但截至第12条无人回答；协作岗位的纳入分母、由谁记录协作时间和隐性负担、按哪张表结算，同样尚待讨论。睡眠下降一成、离职意向两成、人力成本5%等数值均为相关专家提出的建议阈值，尚未被全体确认为统一规则。"
+    }
+  },
+  "notes": [
+    "Initial snapshot is preserved; targeted results were not written back to the discussion database.",
+    "These are fictional model-generated personas and unverified discussion claims.",
+    "Semantic limitations remain; this does not count toward the five final quality samples."
+  ]
+}

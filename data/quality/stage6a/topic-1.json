@@ -1,0 +1,1620 @@
+{
+  "kind": "first-round-quality-evidence-not-final-sample",
+  "model_provider": "deepseek",
+  "requested_model": "deepseek-flash",
+  "thinking": "disabled",
+  "date": "2026-10-10",
+  "original_browser_run": {
+    "snapshot": {
+      "discussion": {
+        "id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "topic": "大学课堂是否应全面禁止学生使用手机，还是按教学场景有条件允许？",
+        "expert_count": 4,
+        "state": "COMPLETED",
+        "version": 5,
+        "roster_revision": 1,
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "failure_stage": null,
+        "failure_code": null,
+        "created_at": "2026-10-10T07:09:58.908705Z",
+        "updated_at": "2026-10-10T07:11:06.587036Z"
+      },
+      "participants": [
+        {
+          "id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清争议焦点：全面禁止与有条件允许各自要解决什么课堂问题，并以可核验的教学效果和校规可执行性为标准串联讨论。",
+          "color": "#64748B"
+        },
+        {
+          "id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高知行",
+          "title": "教育心理学副教授",
+          "stance": "反对简单全面禁止，主张按认知负荷设计管理。理由：手机干扰主要来自通知与多任务切换，而非设备本身；在需要深度听讲时物理隔离或关闭通知更有效，在需要查证与反馈时允许有限使用，关键条件是用课堂任务与即时反馈替代单纯禁止。",
+          "color": "#059669"
+        },
+        {
+          "id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "周砚青",
+          "title": "高校学生事务管理者",
+          "stance": "倾向全面禁止课堂使用手机。担忧：统一禁令更容易执行，能减少课堂分心、录像侵权与作弊争议；若按场景允许，教师需频繁判定，规则成本与申诉成本过高。条件是可设置教学必需设备的报备或豁免通道。",
+          "color": "#D97706"
+        },
+        {
+          "id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "韩若谷",
+          "title": "数字教育产品与课堂技术顾问",
+          "stance": "支持有条件允许，但强调技术配套。理由：课堂互动平台能匿名提问、实时测评并照顾大班学生；若全面禁止，会损失这些数据反馈和参与机会。条件是需要低成本设备管理方案，并明确数据隐私、网络公平和替代参与方式。",
+          "color": "#9333EA"
+        },
+        {
+          "id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林明远",
+          "title": "高校教学发展中心研究员",
+          "stance": "支持按教学场景有条件允许。理由：手机可用于即时检索、投票与协作，但教师有义务在课程大纲中写明使用边界；在讲授密集、考试与实验操作等场景则限制或禁止，条件是不能让使用边界模糊到无法执行。",
+          "color": "#2563EB"
+        }
+      ],
+      "role_states": [
+        {
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 10
+        },
+        {
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 29
+        },
+        {
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 32
+        },
+        {
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 32
+        },
+        {
+          "participant_id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "state": "IDLE",
+          "public_focus": "",
+          "version": 26
+        }
+      ],
+      "messages": [
+        {
+          "id": "649c6e0f-0e0e-4007-b61b-d340168d083a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本场讨论聚焦一个具体矛盾：全面禁止能否以更低规则成本换来课堂专注，有条件允许又如何在教学必需场景中避免滥用。请高知行、周砚青、韩若谷、林明远分别从认知负荷、学生事务执行、技术配套和教学大纲边界四个角度说明各自方案针对的课堂问题与可核验标准。",
+          "created_at": "2026-10-10T07:10:04.035160Z"
+        },
+        {
+          "id": "4daf73d1-73c1-4c40-91cd-432bad1b146c",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我补充有条件允许的技术落地条件：用低频扫码签到和匿名提问替代全员手机在线，能直接降低周砚青第二条担心的判定与申诉成本。同时应把设备管理、数据隐私和网络公平写成可核验的课程规则，例如课前公布适用场景清单、签到与提问仅在指定时段开放、为无智能设备学生保留纸质或口头参与通道。",
+          "created_at": "2026-10-10T07:10:07.056387Z"
+        },
+        {
+          "id": "0c08a044-dc35-49d5-b0c5-059d48651301",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我回应韩若谷关于扫码签到和匿名提问降低判定成本的说法：技术只压缩课堂内的判定环节，报备与申诉仍会转到学生事务端，若无统一申诉窗口、处理时限和匿名统计，成本只是从教师转移到我们这里。所以我坚持技术方案须配套这三项制度，否则全面禁止并设报备豁免通道仍是规则成本更可控的选择。",
+          "created_at": "2026-10-10T07:10:12.535239Z"
+        },
+        {
+          "id": "7a70ac04-f2cf-4b80-976a-9617044719a1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "我补充周砚青的申诉制度成本：认知负荷研究表明干扰主要来自通知与多任务切换，而非设备，因此课堂内只需统一关闭通知或物理隔离，即可减少教师即时判定。若把报备与申诉限定在课外统一窗口，并配限时处理和匿名统计，学生事务端的负担也能降下来，因此不必以全面禁止作为默认方案。",
+          "created_at": "2026-10-10T07:10:15.905891Z"
+        },
+        {
+          "id": "e338b348-650d-449b-9f54-de4baa36eb03",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "我补充高知行提到的关闭通知与课外申诉窗口如何写进课程大纲：每门课在学期初列出允许使用场景清单和限制场景清单，比如是否允许查证、投票、协作，以及在讲授密集、考试和实验操作中如何限制。两张清单固定后，教师课堂判定和学生预期都有依据，周砚青担心的申诉也可对照清单处理，不必等到争议发生再临时认定。",
+          "created_at": "2026-10-10T07:10:20.559968Z"
+        },
+        {
+          "id": "6805f3d7-fd83-4246-af41-f7eae33664d1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应周砚青第3条，我同意申诉不能只靠技术外推，可核验做法是统一申诉窗口由教学发展中心设线上入口、三个工作日内答复。匿名统计按课程汇总每学期公布次数与结果类型，同时确保低频扫码和匿名提问的数据只在校内平台留存，技术方案与这三项制度同步部署而不是先后分开。",
+          "created_at": "2026-10-10T07:10:25.613635Z"
+        },
+        {
+          "id": "13b6724c-fd86-4508-9289-6d01188b7dfb",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "周砚青第3条要求统一申诉窗口，高知行第4条主张限时课外窗口，韩若谷第6条给出三个工作日入口，分歧在窗口归属、处理时限与公布口径；我请三位明确：申诉统一设在教学发展中心和或学生事务端，统计按课程还是按院系，以及教师当场裁定是否仍需保留。这些选择会直接影响林明远第5条两张清单的可执行性，请先回应时限与归属，再谈是否需要全面禁止作为兜底。",
+          "created_at": "2026-10-10T07:10:31.533563Z"
+        },
+        {
+          "id": "e6cc325a-3d54-4836-ae4a-b40cfa8f3457",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "我补充高知行第4条的课外限时申诉窗口：若设在学生事务端，需明确首问受理、三个工作日答复，按院系汇总公布，并保留教师当场裁定作为紧急处理，避免与韩若谷第6条教学发展中心入口重复。只有把首问受理主体、答复时限和公布口径一次写清，学生事务端才接得住这套申诉，否则仍会回到第3条所说的成本转移。",
+          "created_at": "2026-10-10T07:10:34.695035Z"
+        },
+        {
+          "id": "ec8d9f5f-83ef-41ee-81be-e5bffb83978f",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应周砚青第8条，我补充衔接：课外限时窗口不适用于正在进行的课堂，教师当场裁定只应限于维持教学秩序的低风险处置，比如要求学生立即关闭通知或收起设备。这类当场处置的事后申诉复核仍走统一窗口，按院系汇总公布，既能保住课堂秩序又不把人力和成本转回学生事务端。",
+          "created_at": "2026-10-10T07:10:42.039545Z"
+        },
+        {
+          "id": "bbdc5d9c-7cd9-47c6-8562-57d6269793ec",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应高知行第9条的事后复核衔接：我补充当场裁定所需的数据留痕，匿名提问与扫码数据按课程汇总、不绑定个人，学号仅在申诉窗口期内可查询。教师当场处置记录自动进入院系汇总，复核时只调取该课程统计而非逐条人工核对。",
+          "created_at": "2026-10-10T07:10:45.194579Z"
+        },
+        {
+          "id": "459e84ef-0ba9-44f7-95b2-98769b4cda83",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 11,
+          "kind": "linking",
+          "content": "我串联第8条与第10条的分工差异：周砚青要求首问受理在学生事务端、按院系汇总并保留教师当场裁定，韩若谷则把线上入口放在教学发展中心、数据按课程汇总且当场记录自动进院系汇总，两者在首问主体和汇总口径上并未对齐。请周砚青与韩若谷明确：首问受理只能二选一还是按场景分工、院系汇总与课程汇总是否并存；这直接决定林明远第5条两张清单的争议该找谁对照处理，若两套入口并行，清单执行会被重复受理拖慢。",
+          "created_at": "2026-10-10T07:10:54.725134Z"
+        },
+        {
+          "id": "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 12,
+          "kind": "statement",
+          "content": "回应第10条：课程按课程统计、当场处置记录按院系汇总会造成两级口径并存，学生无法判断复核依据哪套数据。因此首问受理须二选一：学生事务端做总入口、教学发展中心只负责课程规则口径，否则第5条两张清单会引来重复受理。",
+          "created_at": "2026-10-10T07:10:57.288127Z"
+        }
+      ],
+      "insights": {
+        "version": 6,
+        "through_turn": 12,
+        "items": [
+          {
+            "id": "29e72b12-73ac-51a7-bb8c-c856e7e3a0a6",
+            "kind": "consensus",
+            "content": "高知行、周砚青、韩若谷、林明远均支持在课堂外设置限时申诉复核窗口，处理时限明确为三个工作日，并保留教师当场裁定/处置。高知行第4条提出报备与申诉限定在课外统一窗口并配限时处理；韩若谷第6条给出统一线上入口、三个工作日内答复；周砚青第8条要求首问受理、三个工作日答复并保留教师当场裁定；林明远第5条认为两张清单固定后申诉可对照清单处理。",
+            "source_message_ids": [
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "7a70ac04-f2cf-4b80-976a-9617044719a1",
+              "e338b348-650d-449b-9f54-de4baa36eb03",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          },
+          {
+            "id": "42e41ac7-c6b5-5723-a692-25ccb42c133e",
+            "kind": "consensus",
+            "content": "高知行、韩若谷、周砚青均同意当场裁定只针对正在进行的课堂、属于低风险处置（如关闭通知或收起设备），且事后复核仍走统一窗口。周砚青第8条主张保留教师当场裁定作为紧急处理；高知行第9条明确当场裁定只限于维持教学秩序的低风险处置、事后申诉复核仍走统一窗口；韩若谷第10条补充当场处置记录自动进入院系汇总、复核时调取课程统计。",
+            "source_message_ids": [
+              "bbdc5d9c-7cd9-47c6-8562-57d6269793ec",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457",
+              "ec8d9f5f-83ef-41ee-81be-e5bffb83978f"
+            ]
+          },
+          {
+            "id": "687c026a-47e5-5100-ae92-1b7287e20c43",
+            "kind": "disagreement",
+            "content": "申诉数据汇总口径是否按课程统计还是按院系汇总、两者能否并存尚未解决。韩若谷第6条主张按课程汇总每学期公布次数与结果类型，第10条明确匿名提问与扫码数据按课程汇总、当场处置记录自动进院系汇总；周砚青第8条和第12条则要求按院系汇总公布，并指出课程统计与院系汇总两级并存会造成学生无法判断复核依据哪套数据。",
+            "source_message_ids": [
+              "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "bbdc5d9c-7cd9-47c6-8562-57d6269793ec",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          },
+          {
+            "id": "86a28e06-fdd9-5337-8556-e87f90b827c7",
+            "kind": "consensus",
+            "content": "高知行、周砚青、林明远均支持用课前固定规则清单（允许与限制场景）来界定手机使用边界并作为申诉对照依据。高知行第4条提出课堂统一关闭通知或物理隔离并由课外窗口处理申诉；周砚青第5条转述林明远方案未反对且第8、12条要求把受理主体、时限、公布口径写清；林明远第5条明确每门课学期初列出允许与限制两张清单，使教师判定与学生预期有依据。",
+            "source_message_ids": [
+              "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+              "e338b348-650d-449b-9f54-de4baa36eb03",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          },
+          {
+            "id": "b32dff36-1476-57d0-94ff-607fefd56ca7",
+            "kind": "disagreement",
+            "content": "首问受理主体是否二选一存在冲突：周砚青第12条明确要求首问受理二选一，由学生事务端做总入口、教学发展中心只负责课程规则口径，否则两张清单会引来重复受理；韩若谷第6条则把统一线上入口设在教学发展中心，第10条还要求当场处置记录自动进院系汇总，与周砚青的总入口方案在主体上未对齐。",
+            "source_message_ids": [
+              "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "bbdc5d9c-7cd9-47c6-8562-57d6269793ec"
+            ]
+          }
+        ]
+      },
+      "insight_status": {
+        "state": "SUCCEEDED",
+        "version": 6,
+        "through_turn": 12,
+        "error_code": null
+      },
+      "summary": {
+        "content": "主持人总结：本场讨论把争议从“是否全面禁止手机”收窄到两个可执行问题：课堂内如何控制干扰与判定成本，课堂外如何统一受理和复核争议。\n\n主要观点：高知行从认知负荷出发，认为干扰来自通知与多任务切换而非设备，主张深度听讲时统一关闭通知或物理隔离，允许有限查证与反馈；周砚青从学生事务执行出发，担忧按场景允许会带来频繁判定、申诉与成本转移，倾向全面禁止但保留报备豁免；韩若谷强调技术配套，主张扫码签到、匿名提问和实时测评需与设备管理、数据隐私、网络公平及无设备替代参与同步；林明远主张在课程大纲中固定“允许使用场景清单”与“限制场景清单”，覆盖讲授密集、考试与实验操作。\n\n已有共识：四位均支持在课堂外设置限时申诉复核窗口，处理时限明确为三个工作日，并保留教师当场裁定；当场裁定只针对正在进行的课堂，限于关闭通知、收起设备等低风险处置，事后复核仍走统一窗口；课前固定允许与限制两张清单，可作为教师判定与学生预期的对照依据。\n\n未解决分歧：第一，申诉数据汇总口径是按课程统计还是按院系汇总、两者能否并存。韩若谷主张按课程汇总并自动进院系汇总，周砚青指出两级并存会让学生无法判断复核依据哪套数据。第二，首问受理主体是否二选一。周砚青要求学生事务端做总入口、教学发展中心只负责课程规则口径；韩若谷则把线上入口设在教学发展中心。这两项尚未对齐，直接决定两张清单的争议由谁受理。\n\n关于是否全面禁止，目前尚无充分共识，也没有形成统一兜底方案；可确认的是有条件允许与全面禁止均以控制干扰和降低规则成本为目标，分歧集中在受理主体与数据口径。",
+        "through_turn": 12,
+        "created_at": "2026-10-10T07:11:06.587036Z"
+      },
+      "last_event_seq": 167
+    },
+    "observations": [
+      {
+        "elapsed_ms": 6372,
+        "state": "RUNNING",
+        "message_count": 0,
+        "insight_version": 0,
+        "role_states": [
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 7451,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 8474,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 9489,
+        "state": "RUNNING",
+        "message_count": 1,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 10521,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 0,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 11543,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 12562,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 13577,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 14604,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 15632,
+        "state": "RUNNING",
+        "message_count": 2,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 16653,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 17680,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 18698,
+        "state": "RUNNING",
+        "message_count": 3,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 19725,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 1,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 20887,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 21904,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 22933,
+        "state": "RUNNING",
+        "message_count": 4,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING"
+        ]
+      },
+      {
+        "elapsed_ms": 23950,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 24974,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 25997,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 27015,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 28043,
+        "state": "RUNNING",
+        "message_count": 5,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 29059,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 30077,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 2,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 31099,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 32113,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 33135,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 34149,
+        "state": "RUNNING",
+        "message_count": 6,
+        "insight_version": 3,
+        "role_states": [
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 35167,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 36190,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 37213,
+        "state": "RUNNING",
+        "message_count": 7,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 38230,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 39246,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 40267,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 3,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 41284,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 42303,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 43346,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 44369,
+        "state": "RUNNING",
+        "message_count": 8,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 45393,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 46409,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 47491,
+        "state": "RUNNING",
+        "message_count": 9,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 48518,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 49538,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 50561,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 51600,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 52620,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 53648,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 4,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 54668,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 55689,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 56714,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 57748,
+        "state": "RUNNING",
+        "message_count": 10,
+        "insight_version": 5,
+        "role_states": [
+          "SPEAKING",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 58765,
+        "state": "RUNNING",
+        "message_count": 11,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING",
+          "PREPARING"
+        ]
+      },
+      {
+        "elapsed_ms": 59787,
+        "state": "RUNNING",
+        "message_count": 11,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "SPEAKING",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 60802,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 61840,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 62861,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 5,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 63893,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 64910,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 65929,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 66953,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 67977,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 69030,
+        "state": "SUMMARIZING",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      },
+      {
+        "elapsed_ms": 70062,
+        "state": "COMPLETED",
+        "message_count": 12,
+        "insight_version": 6,
+        "role_states": [
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE",
+          "IDLE"
+        ]
+      }
+    ]
+  },
+  "targeted_insight_review": {
+    "request": {
+      "task": "insights",
+      "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+      "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+      "topic": "大学课堂是否应全面禁止学生使用手机，还是按教学场景有条件允许？",
+      "expert_count": 4,
+      "roster_revision": 1,
+      "actor_id": null,
+      "participants": [
+        {
+          "id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清争议焦点：全面禁止与有条件允许各自要解决什么课堂问题，并以可核验的教学效果和校规可执行性为标准串联讨论。",
+          "color": "#64748B"
+        },
+        {
+          "id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高知行",
+          "title": "教育心理学副教授",
+          "stance": "反对简单全面禁止，主张按认知负荷设计管理。理由：手机干扰主要来自通知与多任务切换，而非设备本身；在需要深度听讲时物理隔离或关闭通知更有效，在需要查证与反馈时允许有限使用，关键条件是用课堂任务与即时反馈替代单纯禁止。",
+          "color": "#059669"
+        },
+        {
+          "id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "周砚青",
+          "title": "高校学生事务管理者",
+          "stance": "倾向全面禁止课堂使用手机。担忧：统一禁令更容易执行，能减少课堂分心、录像侵权与作弊争议；若按场景允许，教师需频繁判定，规则成本与申诉成本过高。条件是可设置教学必需设备的报备或豁免通道。",
+          "color": "#D97706"
+        },
+        {
+          "id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "韩若谷",
+          "title": "数字教育产品与课堂技术顾问",
+          "stance": "支持有条件允许，但强调技术配套。理由：课堂互动平台能匿名提问、实时测评并照顾大班学生；若全面禁止，会损失这些数据反馈和参与机会。条件是需要低成本设备管理方案，并明确数据隐私、网络公平和替代参与方式。",
+          "color": "#9333EA"
+        },
+        {
+          "id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林明远",
+          "title": "高校教学发展中心研究员",
+          "stance": "支持按教学场景有条件允许。理由：手机可用于即时检索、投票与协作，但教师有义务在课程大纲中写明使用边界；在讲授密集、考试与实验操作等场景则限制或禁止，条件是不能让使用边界模糊到无法执行。",
+          "color": "#2563EB"
+        }
+      ],
+      "messages": [
+        {
+          "id": "649c6e0f-0e0e-4007-b61b-d340168d083a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本场讨论聚焦一个具体矛盾：全面禁止能否以更低规则成本换来课堂专注，有条件允许又如何在教学必需场景中避免滥用。请高知行、周砚青、韩若谷、林明远分别从认知负荷、学生事务执行、技术配套和教学大纲边界四个角度说明各自方案针对的课堂问题与可核验标准。",
+          "created_at": "2026-10-10T07:10:04.035160Z"
+        },
+        {
+          "id": "4daf73d1-73c1-4c40-91cd-432bad1b146c",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我补充有条件允许的技术落地条件：用低频扫码签到和匿名提问替代全员手机在线，能直接降低周砚青第二条担心的判定与申诉成本。同时应把设备管理、数据隐私和网络公平写成可核验的课程规则，例如课前公布适用场景清单、签到与提问仅在指定时段开放、为无智能设备学生保留纸质或口头参与通道。",
+          "created_at": "2026-10-10T07:10:07.056387Z"
+        },
+        {
+          "id": "0c08a044-dc35-49d5-b0c5-059d48651301",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我回应韩若谷关于扫码签到和匿名提问降低判定成本的说法：技术只压缩课堂内的判定环节，报备与申诉仍会转到学生事务端，若无统一申诉窗口、处理时限和匿名统计，成本只是从教师转移到我们这里。所以我坚持技术方案须配套这三项制度，否则全面禁止并设报备豁免通道仍是规则成本更可控的选择。",
+          "created_at": "2026-10-10T07:10:12.535239Z"
+        },
+        {
+          "id": "7a70ac04-f2cf-4b80-976a-9617044719a1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "我补充周砚青的申诉制度成本：认知负荷研究表明干扰主要来自通知与多任务切换，而非设备，因此课堂内只需统一关闭通知或物理隔离，即可减少教师即时判定。若把报备与申诉限定在课外统一窗口，并配限时处理和匿名统计，学生事务端的负担也能降下来，因此不必以全面禁止作为默认方案。",
+          "created_at": "2026-10-10T07:10:15.905891Z"
+        },
+        {
+          "id": "e338b348-650d-449b-9f54-de4baa36eb03",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "我补充高知行提到的关闭通知与课外申诉窗口如何写进课程大纲：每门课在学期初列出允许使用场景清单和限制场景清单，比如是否允许查证、投票、协作，以及在讲授密集、考试和实验操作中如何限制。两张清单固定后，教师课堂判定和学生预期都有依据，周砚青担心的申诉也可对照清单处理，不必等到争议发生再临时认定。",
+          "created_at": "2026-10-10T07:10:20.559968Z"
+        },
+        {
+          "id": "6805f3d7-fd83-4246-af41-f7eae33664d1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应周砚青第3条，我同意申诉不能只靠技术外推，可核验做法是统一申诉窗口由教学发展中心设线上入口、三个工作日内答复。匿名统计按课程汇总每学期公布次数与结果类型，同时确保低频扫码和匿名提问的数据只在校内平台留存，技术方案与这三项制度同步部署而不是先后分开。",
+          "created_at": "2026-10-10T07:10:25.613635Z"
+        },
+        {
+          "id": "13b6724c-fd86-4508-9289-6d01188b7dfb",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "周砚青第3条要求统一申诉窗口，高知行第4条主张限时课外窗口，韩若谷第6条给出三个工作日入口，分歧在窗口归属、处理时限与公布口径；我请三位明确：申诉统一设在教学发展中心和或学生事务端，统计按课程还是按院系，以及教师当场裁定是否仍需保留。这些选择会直接影响林明远第5条两张清单的可执行性，请先回应时限与归属，再谈是否需要全面禁止作为兜底。",
+          "created_at": "2026-10-10T07:10:31.533563Z"
+        },
+        {
+          "id": "e6cc325a-3d54-4836-ae4a-b40cfa8f3457",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "我补充高知行第4条的课外限时申诉窗口：若设在学生事务端，需明确首问受理、三个工作日答复，按院系汇总公布，并保留教师当场裁定作为紧急处理，避免与韩若谷第6条教学发展中心入口重复。只有把首问受理主体、答复时限和公布口径一次写清，学生事务端才接得住这套申诉，否则仍会回到第3条所说的成本转移。",
+          "created_at": "2026-10-10T07:10:34.695035Z"
+        },
+        {
+          "id": "ec8d9f5f-83ef-41ee-81be-e5bffb83978f",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应周砚青第8条，我补充衔接：课外限时窗口不适用于正在进行的课堂，教师当场裁定只应限于维持教学秩序的低风险处置，比如要求学生立即关闭通知或收起设备。这类当场处置的事后申诉复核仍走统一窗口，按院系汇总公布，既能保住课堂秩序又不把人力和成本转回学生事务端。",
+          "created_at": "2026-10-10T07:10:42.039545Z"
+        },
+        {
+          "id": "bbdc5d9c-7cd9-47c6-8562-57d6269793ec",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应高知行第9条的事后复核衔接：我补充当场裁定所需的数据留痕，匿名提问与扫码数据按课程汇总、不绑定个人，学号仅在申诉窗口期内可查询。教师当场处置记录自动进入院系汇总，复核时只调取该课程统计而非逐条人工核对。",
+          "created_at": "2026-10-10T07:10:45.194579Z"
+        },
+        {
+          "id": "459e84ef-0ba9-44f7-95b2-98769b4cda83",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 11,
+          "kind": "linking",
+          "content": "我串联第8条与第10条的分工差异：周砚青要求首问受理在学生事务端、按院系汇总并保留教师当场裁定，韩若谷则把线上入口放在教学发展中心、数据按课程汇总且当场记录自动进院系汇总，两者在首问主体和汇总口径上并未对齐。请周砚青与韩若谷明确：首问受理只能二选一还是按场景分工、院系汇总与课程汇总是否并存；这直接决定林明远第5条两张清单的争议该找谁对照处理，若两套入口并行，清单执行会被重复受理拖慢。",
+          "created_at": "2026-10-10T07:10:54.725134Z"
+        },
+        {
+          "id": "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 12,
+          "kind": "statement",
+          "content": "回应第10条：课程按课程统计、当场处置记录按院系汇总会造成两级口径并存，学生无法判断复核依据哪套数据。因此首问受理须二选一：学生事务端做总入口、教学发展中心只负责课程规则口径，否则第5条两张清单会引来重复受理。",
+          "created_at": "2026-10-10T07:10:57.288127Z"
+        }
+      ],
+      "cycle": 0,
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": null,
+      "public_focus": "",
+      "through_turn": 12,
+      "insight_version": 7,
+      "insights": {
+        "version": 0,
+        "through_turn": 0,
+        "items": []
+      }
+    },
+    "result": {
+      "task": "insights",
+      "items": [
+        {
+          "id": "dc1da472-79c7-5b4f-9009-279e3eef3966",
+          "kind": "consensus",
+          "content": "韩若谷与周砚青均认为，申诉等制度配套需要明确处理时限：他们分别提出统一申诉窗口应在三个工作日内答复。",
+          "source_message_ids": [
+            "6805f3d7-fd83-4246-af41-f7eae33664d1",
+            "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+          ]
+        },
+        {
+          "id": "dbf3b833-7dce-5219-a3a9-00f29f4b818a",
+          "kind": "consensus",
+          "content": "高知行与韩若谷均认可教师当场裁定的事后申诉复核走统一窗口，并按院系汇总。",
+          "source_message_ids": [
+            "ec8d9f5f-83ef-41ee-81be-e5bffb83978f",
+            "bbdc5d9c-7cd9-47c6-8562-57d6269793ec"
+          ]
+        },
+        {
+          "id": "3f95cb61-4c06-5565-bc6d-106e1370f39d",
+          "kind": "disagreement",
+          "content": "关于首问受理主体：周砚青主张申诉首问受理设在学生事务端并做总入口；韩若谷主张线上入口设在教学发展中心。双方对首问受理应设在哪一端存在相反判断。",
+          "source_message_ids": [
+            "6805f3d7-fd83-4246-af41-f7eae33664d1",
+            "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+          ]
+        },
+        {
+          "id": "bd563e0a-54b7-5bc0-9d49-d8cdaff899ab",
+          "kind": "disagreement",
+          "content": "关于统计汇总口径：周砚青主张按院系汇总公布；韩若谷主张按课程汇总。双方对申诉统计应按院系还是按课程汇总存在相反判断。",
+          "source_message_ids": [
+            "6805f3d7-fd83-4246-af41-f7eae33664d1",
+            "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+          ]
+        }
+      ]
+    }
+  },
+  "latest_targeted_summary": {
+    "request": {
+      "task": "summary",
+      "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+      "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+      "topic": "大学课堂是否应全面禁止学生使用手机，还是按教学场景有条件允许？",
+      "expert_count": 4,
+      "roster_revision": 1,
+      "actor_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+      "participants": [
+        {
+          "id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "HOST",
+          "name": "陈序",
+          "title": "圆桌主持人",
+          "stance": "澄清争议焦点：全面禁止与有条件允许各自要解决什么课堂问题，并以可核验的教学效果和校规可执行性为标准串联讨论。",
+          "color": "#64748B"
+        },
+        {
+          "id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "高知行",
+          "title": "教育心理学副教授",
+          "stance": "反对简单全面禁止，主张按认知负荷设计管理。理由：手机干扰主要来自通知与多任务切换，而非设备本身；在需要深度听讲时物理隔离或关闭通知更有效，在需要查证与反馈时允许有限使用，关键条件是用课堂任务与即时反馈替代单纯禁止。",
+          "color": "#059669"
+        },
+        {
+          "id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "周砚青",
+          "title": "高校学生事务管理者",
+          "stance": "倾向全面禁止课堂使用手机。担忧：统一禁令更容易执行，能减少课堂分心、录像侵权与作弊争议；若按场景允许，教师需频繁判定，规则成本与申诉成本过高。条件是可设置教学必需设备的报备或豁免通道。",
+          "color": "#D97706"
+        },
+        {
+          "id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "韩若谷",
+          "title": "数字教育产品与课堂技术顾问",
+          "stance": "支持有条件允许，但强调技术配套。理由：课堂互动平台能匿名提问、实时测评并照顾大班学生；若全面禁止，会损失这些数据反馈和参与机会。条件是需要低成本设备管理方案，并明确数据隐私、网络公平和替代参与方式。",
+          "color": "#9333EA"
+        },
+        {
+          "id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "roster_revision": 1,
+          "kind": "EXPERT",
+          "name": "林明远",
+          "title": "高校教学发展中心研究员",
+          "stance": "支持按教学场景有条件允许。理由：手机可用于即时检索、投票与协作，但教师有义务在课程大纲中写明使用边界；在讲授密集、考试与实验操作等场景则限制或禁止，条件是不能让使用边界模糊到无法执行。",
+          "color": "#2563EB"
+        }
+      ],
+      "messages": [
+        {
+          "id": "649c6e0f-0e0e-4007-b61b-d340168d083a",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "本场讨论聚焦一个具体矛盾：全面禁止能否以更低规则成本换来课堂专注，有条件允许又如何在教学必需场景中避免滥用。请高知行、周砚青、韩若谷、林明远分别从认知负荷、学生事务执行、技术配套和教学大纲边界四个角度说明各自方案针对的课堂问题与可核验标准。",
+          "created_at": "2026-10-10T07:10:04.035160Z"
+        },
+        {
+          "id": "4daf73d1-73c1-4c40-91cd-432bad1b146c",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我补充有条件允许的技术落地条件：用低频扫码签到和匿名提问替代全员手机在线，能直接降低周砚青第二条担心的判定与申诉成本。同时应把设备管理、数据隐私和网络公平写成可核验的课程规则，例如课前公布适用场景清单、签到与提问仅在指定时段开放、为无智能设备学生保留纸质或口头参与通道。",
+          "created_at": "2026-10-10T07:10:07.056387Z"
+        },
+        {
+          "id": "0c08a044-dc35-49d5-b0c5-059d48651301",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "我回应韩若谷关于扫码签到和匿名提问降低判定成本的说法：技术只压缩课堂内的判定环节，报备与申诉仍会转到学生事务端，若无统一申诉窗口、处理时限和匿名统计，成本只是从教师转移到我们这里。所以我坚持技术方案须配套这三项制度，否则全面禁止并设报备豁免通道仍是规则成本更可控的选择。",
+          "created_at": "2026-10-10T07:10:12.535239Z"
+        },
+        {
+          "id": "7a70ac04-f2cf-4b80-976a-9617044719a1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "我补充周砚青的申诉制度成本：认知负荷研究表明干扰主要来自通知与多任务切换，而非设备，因此课堂内只需统一关闭通知或物理隔离，即可减少教师即时判定。若把报备与申诉限定在课外统一窗口，并配限时处理和匿名统计，学生事务端的负担也能降下来，因此不必以全面禁止作为默认方案。",
+          "created_at": "2026-10-10T07:10:15.905891Z"
+        },
+        {
+          "id": "e338b348-650d-449b-9f54-de4baa36eb03",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "feeb8321-852f-5bea-9788-4955c5e7c69a",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "我补充高知行提到的关闭通知与课外申诉窗口如何写进课程大纲：每门课在学期初列出允许使用场景清单和限制场景清单，比如是否允许查证、投票、协作，以及在讲授密集、考试和实验操作中如何限制。两张清单固定后，教师课堂判定和学生预期都有依据，周砚青担心的申诉也可对照清单处理，不必等到争议发生再临时认定。",
+          "created_at": "2026-10-10T07:10:20.559968Z"
+        },
+        {
+          "id": "6805f3d7-fd83-4246-af41-f7eae33664d1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "回应周砚青第3条，我同意申诉不能只靠技术外推，可核验做法是统一申诉窗口由教学发展中心设线上入口、三个工作日内答复。匿名统计按课程汇总每学期公布次数与结果类型，同时确保低频扫码和匿名提问的数据只在校内平台留存，技术方案与这三项制度同步部署而不是先后分开。",
+          "created_at": "2026-10-10T07:10:25.613635Z"
+        },
+        {
+          "id": "13b6724c-fd86-4508-9289-6d01188b7dfb",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 7,
+          "kind": "linking",
+          "content": "周砚青第3条要求统一申诉窗口，高知行第4条主张限时课外窗口，韩若谷第6条给出三个工作日入口，分歧在窗口归属、处理时限与公布口径；我请三位明确：申诉统一设在教学发展中心和或学生事务端，统计按课程还是按院系，以及教师当场裁定是否仍需保留。这些选择会直接影响林明远第5条两张清单的可执行性，请先回应时限与归属，再谈是否需要全面禁止作为兜底。",
+          "created_at": "2026-10-10T07:10:31.533563Z"
+        },
+        {
+          "id": "e6cc325a-3d54-4836-ae4a-b40cfa8f3457",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 8,
+          "kind": "statement",
+          "content": "我补充高知行第4条的课外限时申诉窗口：若设在学生事务端，需明确首问受理、三个工作日答复，按院系汇总公布，并保留教师当场裁定作为紧急处理，避免与韩若谷第6条教学发展中心入口重复。只有把首问受理主体、答复时限和公布口径一次写清，学生事务端才接得住这套申诉，否则仍会回到第3条所说的成本转移。",
+          "created_at": "2026-10-10T07:10:34.695035Z"
+        },
+        {
+          "id": "ec8d9f5f-83ef-41ee-81be-e5bffb83978f",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "b5355e97-3147-596a-b972-fa1efef9eaa9",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "回应周砚青第8条，我补充衔接：课外限时窗口不适用于正在进行的课堂，教师当场裁定只应限于维持教学秩序的低风险处置，比如要求学生立即关闭通知或收起设备。这类当场处置的事后申诉复核仍走统一窗口，按院系汇总公布，既能保住课堂秩序又不把人力和成本转回学生事务端。",
+          "created_at": "2026-10-10T07:10:42.039545Z"
+        },
+        {
+          "id": "bbdc5d9c-7cd9-47c6-8562-57d6269793ec",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "f093db84-d18a-5c73-aa37-0b9a31854aa2",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "回应高知行第9条的事后复核衔接：我补充当场裁定所需的数据留痕，匿名提问与扫码数据按课程汇总、不绑定个人，学号仅在申诉窗口期内可查询。教师当场处置记录自动进入院系汇总，复核时只调取该课程统计而非逐条人工核对。",
+          "created_at": "2026-10-10T07:10:45.194579Z"
+        },
+        {
+          "id": "459e84ef-0ba9-44f7-95b2-98769b4cda83",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "57986d9d-0918-596e-a631-d0db4ca9f1d7",
+          "turn_no": 11,
+          "kind": "linking",
+          "content": "我串联第8条与第10条的分工差异：周砚青要求首问受理在学生事务端、按院系汇总并保留教师当场裁定，韩若谷则把线上入口放在教学发展中心、数据按课程汇总且当场记录自动进院系汇总，两者在首问主体和汇总口径上并未对齐。请周砚青与韩若谷明确：首问受理只能二选一还是按场景分工、院系汇总与课程汇总是否并存；这直接决定林明远第5条两张清单的争议该找谁对照处理，若两套入口并行，清单执行会被重复受理拖慢。",
+          "created_at": "2026-10-10T07:10:54.725134Z"
+        },
+        {
+          "id": "21eeca71-3157-4f00-bdca-2551c72e3ac1",
+          "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+          "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+          "participant_id": "ee247a39-0c76-587e-99eb-60272030b868",
+          "turn_no": 12,
+          "kind": "statement",
+          "content": "回应第10条：课程按课程统计、当场处置记录按院系汇总会造成两级口径并存，学生无法判断复核依据哪套数据。因此首问受理须二选一：学生事务端做总入口、教学发展中心只负责课程规则口径，否则第5条两张清单会引来重复受理。",
+          "created_at": "2026-10-10T07:10:57.288127Z"
+        }
+      ],
+      "cycle": 0,
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": null,
+      "public_focus": "",
+      "through_turn": 12,
+      "insight_version": null,
+      "insights": {
+        "version": 7,
+        "through_turn": 12,
+        "items": [
+          {
+            "id": "dc1da472-79c7-5b4f-9009-279e3eef3966",
+            "kind": "consensus",
+            "content": "韩若谷与周砚青均认为，申诉等制度配套需要明确处理时限：他们分别提出统一申诉窗口应在三个工作日内答复。",
+            "source_message_ids": [
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          },
+          {
+            "id": "dbf3b833-7dce-5219-a3a9-00f29f4b818a",
+            "kind": "consensus",
+            "content": "高知行与韩若谷均认可教师当场裁定的事后申诉复核走统一窗口，并按院系汇总。",
+            "source_message_ids": [
+              "ec8d9f5f-83ef-41ee-81be-e5bffb83978f",
+              "bbdc5d9c-7cd9-47c6-8562-57d6269793ec"
+            ]
+          },
+          {
+            "id": "3f95cb61-4c06-5565-bc6d-106e1370f39d",
+            "kind": "disagreement",
+            "content": "关于首问受理主体：周砚青主张申诉首问受理设在学生事务端并做总入口；韩若谷主张线上入口设在教学发展中心。双方对首问受理应设在哪一端存在相反判断。",
+            "source_message_ids": [
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          },
+          {
+            "id": "bd563e0a-54b7-5bc0-9d49-d8cdaff899ab",
+            "kind": "disagreement",
+            "content": "关于统计汇总口径：周砚青主张按院系汇总公布；韩若谷主张按课程汇总。双方对申诉统计应按院系还是按课程汇总存在相反判断。",
+            "source_message_ids": [
+              "6805f3d7-fd83-4246-af41-f7eae33664d1",
+              "e6cc325a-3d54-4836-ae4a-b40cfa8f3457"
+            ]
+          }
+        ]
+      }
+    },
+    "result": {
+      "task": "summary",
+      "content": "主持人总结：本场讨论围绕大学课堂应全面禁止手机，还是按教学场景有条件允许展开。截至第12条，讨论已从一般立场争辩深入到申诉受理、统计口径和课程清单的可执行性，但尚未形成能直接落地的全体方案。\n\n主要观点：高知行主张不必以全面禁止为默认，理由是干扰主要来自通知与多任务切换，课堂内可统一关闭通知或物理隔离；教师当场裁定只应限于维持教学秩序的低风险处置，事后申诉复核走统一窗口。周砚青倾向全面禁止，理由是统一禁令更易执行，并担心按场景允许会把判定与申诉成本转给学生事务端；同时坚持首问受理设在学生事务端、按院系汇总、保留教师当场裁定。韩若谷支持有条件允许，提出用低频扫码签到和匿名提问替代全员在线，线上入口设在教学发展中心，数据按课程汇总、不绑定个人，学号仅在申诉窗口期内可查询，并保留无智能设备学生的纸质或口头参与通道。林明远支持按教学场景有条件允许，主张每门课学期初列出允许与限制两张场景清单，讲授密集、考试和实验操作等场景限制或禁止，以便申诉对照处理。\n\n已有共识：已有证据支持的共识有限。其一，韩若谷与周砚青分别在第6条和第8条提出统一申诉窗口应在三个工作日内答复，仅处理时限这一点被两人共同提及，但首问主体和汇总口径并未对齐。其二，高知行与韩若谷分别在第9条和第10条认可教师当场裁定的事后申诉复核走统一窗口并按院系汇总；不过高知行第9条的重点是当场裁定限于低风险处置，韩若谷第10条同时提出按课程汇总、学号限于申诉窗口期查询，两人在汇总口径上仍不一致。\n\n未解决分歧：首问受理主体与统计汇总口径尚未解决。周砚青第12条要求首问受理二选一，主张学生事务端做总入口、教学发展中心只负责课程规则口径，统计按院系汇总；韩若谷第6条主张线上入口设在教学发展中心，统计按课程汇总。主持人第7条、第11条指出的窗口归属、公布口径与两家入口并行会拖慢清单执行，仍待两位继续对齐。全面禁止是否应作为兜底、教师当场裁定的权限边界，也未在本次讨论中形成共同条件。现有证据尚不足以认定已就首问受理或汇总口径达成共识。"
+    },
+    "calls": [
+      {
+        "task": "summary",
+        "discussion_id": "3f724323-4d3f-4eb3-b8d0-0681078c323d",
+        "run_id": "f0cef727-7375-40fd-bce0-af966582337f",
+        "status": "succeeded",
+        "usage": {
+          "prompt_tokens": 3171,
+          "completion_tokens": 540,
+          "total_tokens": 3711,
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 3043
+        },
+        "http_status": 200,
+        "reported_model": "deepseek-flash",
+        "duration_ms": 3375.0
+      }
+    ]
+  },
+  "notes": [
+    "Initial snapshot is preserved; targeted results were not written back to the discussion database.",
+    "These are fictional model-generated personas and unverified discussion claims.",
+    "Semantic limitations remain; this does not count toward the five final quality samples."
+  ]
+}

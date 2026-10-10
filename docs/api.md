@@ -233,3 +233,5 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 模型失败持久化到operation/failure_code/insight_status.error_code：认证MODEL_AUTH_FAILED、余额MODEL_BALANCE_EXHAUSTED、参数MODEL_REQUEST_INVALID、模型MODEL_NOT_FOUND，均不自动重试；限流MODEL_RATE_LIMITED、服务MODEL_SERVICE_UNAVAILABLE、网络MODEL_CONNECTION_FAILED、超时MODEL_TIMEOUT可有限重试，非法输出MODEL_RESULT_INVALID亦受原有限策略约束。响应不包含上游原始正文或密钥；配置修复后的显式重试仍使用新幂等键，讨论失败不自动续跑，总结失败只重试冻结边界。
 
 完整配置、六任务传输示例与官方依据见[模型适配](model-provider.md)。
+
+阶段6A定向修正：上游insights每项增加公开evidence数组（turn/quote），与source_turns一一对应，后端校验原文片段与专家归属；这些字段不进入业务HTTP或SSE。公开上下文每条消息附带speaker_name/title/kind。详情、实际引用及未全面通过的语义限制见[首轮质量记录](quality-first-round.md)。
