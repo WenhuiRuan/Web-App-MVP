@@ -29,6 +29,8 @@ class ModelServiceError(Exception):
 
 
 class ModelGateway(Protocol):
+    # Multi-request adapters may opt into multi_step_synthesis=True. They must
+    # enforce per-HTTP deadlines; the engine still owns the finite task budget.
     async def generate(self, request: ModelRequest) -> ModelResult: ...
 
 

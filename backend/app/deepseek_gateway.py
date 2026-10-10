@@ -323,6 +323,7 @@ def bind_result(request, content):
 
 
 class DeepSeekGateway:
+    multi_step_synthesis = True  # Individual HTTP timeout below; engine owns the total task deadline.
     def __init__(self, settings, client=None, metrics_sink=None):
         self.settings = settings
         self.owned_client = client is None
@@ -394,7 +395,8 @@ class DeepSeekGateway:
                 max_tokens=self.settings.model_thinking_max_tokens)
         try:
             response = await self.client.post(self.settings.model_base_url.rstrip('/') + '/chat/completions',
-                headers={'Authorization': 'Bearer ' + self.settings.model_api_key.get_secret_value()}, json=body)
+                headers={'Authorization': 'Bearer ' + self.settings.model_api_key.get_secret_value()}, json=body,
+                timeout=self.settings.model_timeout_seconds)
             metric['http_status'] = response.status_code
             if response.status_code != 200:
                 code, retryable = {

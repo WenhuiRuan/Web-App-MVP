@@ -2,6 +2,10 @@
 
 采用已锁定 httpx 0.28.1 调用 Chat Completions，不增加 SDK。应用模型由后端独立配置，与 Codex 开发模型无关。mock 保留确定性替身；deepseek 配置齐全才建立真实网关。六任务沿用原引擎逐任务调用，不预生成整场台本。
 
+当前配置（验收收尾）：六任务默认 thinking=enabled、reasoning_effort=low、max_tokens=16384；用户已允许全部任务思考。下文high/8192和短预算为历史验证配置。最终修正后的整场验收尚未完成，最新真实请求返回402，详见[本批质量记录](quality-acceptance.md)。
+
+多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖建议为120/240/180/600秒（HTTP/观点/总结/讨论）；已通过可控上游及引擎检查，尚未以这一预算修正版完成新的真实整场。用户.env保持不变。
+
 ## 官方接口依据（2026-10-10核对）
 
 - [Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)：POST {MODEL_BASE_URL}/chat/completions，OpenAI兼容消息。

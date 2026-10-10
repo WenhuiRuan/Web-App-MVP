@@ -118,3 +118,5 @@ DeepSeekGateway以stateless HTTP实现ModelGateway，任务Prompt在backend/prom
 ### 阶段6A验收收尾的上游模式
 
 DeepSeek六任务允许后端配置thinking.type=enabled，统一预算仍覆盖排队、每次草稿/逐项复核及有限重试；关闭/取消守卫不变。只消费content，HTTP层不处理reasoning_content。观点旧批次是逐来源重新核对的候选；同一逐字证据集合去重，后续撤回可以删除，不机械累积。词形来源守卫仅保守过滤，语义证明来自真实输出人工复核。外部HTTP/SSE及SQLite schema没有迁移。
+
+预算修正：多请求适配器可以声明multi_step_synthesis能力。引擎对观点/总结使用有限总任务截止时间，适配器对每个HTTP显式设置MODEL_TIMEOUT_SECONDS；避免把多段合法请求累计时间误认为单次HTTP超时。排队、退避与有限重试均不延长总预算，取消仍拒绝迟到结果。普通任务和未声明能力的网关继续原单次超时规则，不改变自主调度。

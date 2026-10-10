@@ -41,10 +41,14 @@ class DiscussionEngine:
                     async with self.supervisor.semaphore:
                         available=self.deadline-time.monotonic()
                         if available<=0: raise RunDeadline()
-                        budget_limited=available<=self.supervisor.settings.model_timeout_seconds
-                        call_timeout=asyncio.timeout(min(available,self.supervisor.settings.model_timeout_seconds))
+                        gateway=self.supervisor.gateway_getter()
+                        multi_step=request.task in ('insights','summary') and getattr(gateway,'multi_step_synthesis',False)
+                        budget_limited=multi_step or available<=self.supervisor.settings.model_timeout_seconds
+                        # Multi-step adapters enforce each HTTP timeout themselves. The
+                        # complete attempt and any retry share this finite task budget.
+                        call_timeout=asyncio.timeout(available if multi_step else min(available,self.supervisor.settings.model_timeout_seconds))
                         async with call_timeout:
-                            raw=await self.supervisor.gateway_getter().generate(request)
+                            raw=await gateway.generate(request)
                         if self.supervisor.closing or asyncio.current_task().cancelling():
                             raise asyncio.CancelledError()
                         if budget_timeout.expired() or (call_timeout.expired() and budget_limited) or time.monotonic()>=self.deadline:
