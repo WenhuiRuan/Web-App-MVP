@@ -3,6 +3,7 @@ import asyncio
 import json
 import time
 import logging
+import re
 from collections import deque
 from functools import lru_cache
 from pathlib import Path
@@ -11,7 +12,7 @@ from urllib.parse import urlsplit
 from uuid import uuid5
 
 import httpx
-from pydantic import Field, StrictInt, ValidationError
+from pydantic import Field, StrictBool, StrictInt, ValidationError
 
 from .contracts import Contract, ModelRequest
 from .model_gateway import InvalidModelResult, ModelServiceError, validate_result
@@ -69,6 +70,105 @@ class Summary(Contract):
     content: str
 
 
+class EvidenceChecks(Contract):
+    authors_correct: StrictBool
+    same_object: StrictBool
+    compatible_scope: StrictBool
+    every_condition_supported: StrictBool
+    explicit_positions: StrictBool
+    proposal_preserved: StrictBool
+
+
+class PointReview(Contract):
+    index: StrictInt
+    checks: EvidenceChecks
+    content: str = Field(min_length=1, max_length=500)
+    source_turns: tuple[StrictInt, ...]
+
+
+class PointsReview(Contract):
+    reviews: tuple[PointReview, ...]
+
+
+class SummaryPosition(Contract):
+    speaker_slot: StrictInt
+    source_turns: tuple[StrictInt, ...] = Field(min_length=1)
+    content: str = Field(min_length=1, max_length=400)
+
+
+class SummaryReview(Contract):
+    introduction: str = Field(min_length=1, max_length=500)
+    positions: tuple[SummaryPosition, ...] = Field(max_length=6)
+    consensus_indices: tuple[StrictInt, ...]
+    disagreement_indices: tuple[StrictInt, ...]
+    pending: str = Field(max_length=1200)
+
+
+def reviewed_summary(request, content):
+    try:
+        reviewed = SummaryReview.model_validate(json.loads(content))
+        messages = {m.turn_no: m for m in request.messages}
+        positions = []
+        for position in reviewed.positions:
+            if not 0 <= position.speaker_slot < len(request.participants): raise invalid('summary_author')
+            person = request.participants[position.speaker_slot]
+            if person.kind != 'EXPERT' or len(set(position.source_turns)) != len(position.source_turns) or any(
+                turn not in messages or messages[turn].participant_id != person.id for turn in position.source_turns):
+                raise invalid('summary_author')
+            positions.append(person.name + '：' + position.content)
+        def selected(indices, kind):
+            if len(set(indices)) != len(indices): raise invalid('summary_insight_reference')
+            if any(index < 0 or index >= len(request.insights.items) or request.insights.items[index].kind != kind for index in indices):
+                raise invalid('summary_insight_reference')
+            return '；'.join(request.insights.items[index].content for index in indices)
+        consensus = selected(reviewed.consensus_indices, 'consensus')
+        disagreement = selected(reviewed.disagreement_indices, 'disagreement')
+        body = '\n'.join([reviewed.introduction, '主要观点：' + ('；'.join(positions) or '尚无专家明确提出方案。'),
+            '已有共识：' + (consensus or '尚无充分共识。'),
+            '未解决分歧：' + (disagreement or '尚无充分证据表明已发生明确分歧。'),
+            '待澄清：' + (reviewed.pending or '暂无进一步明确的待澄清问题。')])
+        return json.dumps({'content': body}, ensure_ascii=False)
+    except InvalidModelResult:
+        raise
+    except (ValidationError, ValueError, TypeError):
+        raise invalid('summary_review_schema') from None
+
+
+def reviewed_points(request, candidate, content):
+    """Review cannot invent sources or people. Failed semantic checks remove the candidate.
+
+    These checks are model judgments, not deterministic proofs of semantic correctness.
+    """
+    try:
+        reviewed = PointsReview.model_validate(json.loads(content))
+        indices = [r.index for r in reviewed.reviews]
+        if sorted(indices) != list(range(len(candidate['items']))):
+            raise invalid('review_coverage')
+        messages = {m.turn_no: m for m in request.messages}
+        items = []
+        for review in sorted(reviewed.reviews, key=lambda r: r.index):
+            if not all(review.checks.model_dump().values()): continue
+            original = candidate['items'][review.index]
+            if len(set(review.source_turns)) != len(review.source_turns) or not set(review.source_turns).issubset(original['source_turns']):
+                raise invalid('review_source_expansion')
+            actors = {messages[t].participant_id for t in review.source_turns}
+            if any(p.id not in actors and p.name in review.content for p in request.participants):
+                raise invalid('review_actor_expansion')
+            evidence = [q for q in original['evidence'] if q['turn'] in review.source_turns]
+            if original['kind'] == 'consensus':
+                # Conservative lexical provenance, not a semantic agreement detector.
+                quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人)', review.content)
+                if any(quantity not in quote['quote'] for quantity in quantities for quote in evidence):
+                    raise invalid('consensus_quantity_unsupported')
+            items.append(dict(original, content=review.content, source_turns=list(review.source_turns),
+                evidence=evidence))
+        return json.dumps({'items': items}, ensure_ascii=False)
+    except InvalidModelResult:
+        raise
+    except (ValidationError, ValueError, TypeError):
+        raise invalid('review_schema') from None
+
+
 SCHEMAS = dict(roster=Roster, intent=Intent, utterance=Utterance,
                host_control=Control, insights=Points, summary=Summary)
 
@@ -100,7 +200,7 @@ def missing_configuration(settings):
     return missing
 
 
-@lru_cache(maxsize=7)
+@lru_cache(maxsize=9)
 def prompt(name):
     return (Path(__file__).parents[1] / 'prompts' / f'{name}.md').read_text(encoding='utf-8')
 
@@ -109,15 +209,24 @@ def public_context(request):
     slots = {p.id: index for index, p in enumerate(request.participants)}
     people = {p.id:p for p in request.participants}
     turns = {m.id: m.turn_no for m in request.messages}
-    return {'topic': request.topic, 'expert_count': request.expert_count,
-        'participants': [dict(slot=slots[p.id], kind=p.kind, name=p.name, title=p.title, stance=p.stance) for p in request.participants],
+    def public_message(message):
+        person = people[message.participant_id]
+        return dict(turn=message.turn_no, speaker_slot=slots[person.id], speaker_name=person.name,
+                    speaker_title=person.title, speaker_kind=person.kind, content=message.content, kind=message.kind)
+    messages = {m.id: public_message(m) for m in request.messages}
+    # Personas guide an actor, but are never evidence of an expressed opinion.
+    participants = [dict(slot=slots[p.id], kind=p.kind, name=p.name, title=p.title,
+        **({'stance': p.stance} if request.task in ('intent', 'utterance') else {})) for p in request.participants]
+    return {'task': request.task, 'topic': request.topic, 'expert_count': request.expert_count,
+        'participants': participants,
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,
         'target_turn': turns.get(request.target_message_id), 'host_task': request.host_task,
+        'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task == 'utterance',
         'public_focus': request.public_focus, 'through_turn': request.through_turn,
-        'messages': [dict(turn=m.turn_no, speaker_slot=slots[m.participant_id], speaker_name=people[m.participant_id].name,
-            speaker_title=people[m.participant_id].title, speaker_kind=people[m.participant_id].kind,
-            content=m.content, kind=m.kind) for m in request.messages],
-        'insights': [dict(kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids]) for i in request.insights.items]}
+        'messages': [m for m in messages.values() if request.task != 'insights' or m['speaker_kind'] == 'EXPERT'],
+        'insights': [dict(index=index, kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids],
+            semantic_status='candidate_requires_transcript_review',
+            sources=[messages[mid] for mid in i.source_message_ids]) for index, i in enumerate(request.insights.items)]}
 
 
 def bind_result(request, content):
@@ -171,14 +280,25 @@ class DeepSeekGateway:
         if self.owned_client: await self.client.aclose()
 
     async def generate(self, request: ModelRequest):
+        context = public_context(request)
+        synthesis = request.task in ('insights', 'summary')
+        result, final = await self._complete(request, context, 'draft' if synthesis else 'single')
+        if synthesis:
+            # A new stateless request sees the original evidence and an explicitly untrusted
+            # candidate, never a shared chat or hidden reasoning. Only reviewed output leaves.
+            result, _ = await self._complete(request, dict(context, candidate=json.loads(final)), 'review')
+        return result
+
+    async def _complete(self, request, context, stage):
         started = time.monotonic()
         metric = dict(task=request.task, discussion_id=str(request.discussion_id),
-            run_id=str(request.run_id) if request.run_id else None, status='pending', usage=None)
+            run_id=str(request.run_id) if request.run_id else None, stage=stage, status='pending', usage=None)
         body = dict(model=self.settings.model_name, thinking={'type': 'disabled'},
             response_format={'type': 'json_object'}, stream=False,
             max_tokens=2200 if request.task in ('roster', 'summary', 'insights') else 700,
-            messages=[{'role': 'system', 'content': prompt('common') + '\n' + prompt(request.task)},
-                      {'role': 'user', 'content': json.dumps(public_context(request), ensure_ascii=False)}])
+            messages=[{'role': 'system', 'content': prompt('common') + '\n' +
+                       prompt(request.task + '_review' if stage == 'review' else request.task)},
+                      {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}])
         try:
             response = await self.client.post(self.settings.model_base_url.rstrip('/') + '/chat/completions',
                 headers={'Authorization': 'Bearer ' + self.settings.model_api_key.get_secret_value()}, json=body)
@@ -207,9 +327,11 @@ class DeepSeekGateway:
                 if not isinstance(content, str) or not content.strip(): raise InvalidModelResult()
             except (KeyError, IndexError, TypeError, ValueError, AttributeError):
                 raise InvalidModelResult() from None
+            if stage == 'review':
+                content = reviewed_points(request, context['candidate'], content) if request.task == 'insights' else reviewed_summary(request, content)
             result = bind_result(request, content)
             metric['status'] = 'succeeded'
-            return result
+            return result, content
         except asyncio.CancelledError:
             metric['status'] = 'cancelled'
             raise

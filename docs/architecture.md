@@ -107,3 +107,5 @@ useDiscussion先快照后after订阅，重复seq忽略，缺口/旧run/格式异
 DeepSeekGateway以stateless HTTP实现ModelGateway，任务Prompt在backend/prompts，public_context只映射本场角色及正式消息。所有六类任务经DiscussionEngine.call_model的唯一超时/重试控制；阵容不再另写一次性调用策略。DB仍只接收经契约验证的绑定结果，模型IO在事务外，关闭先收集任务后关闭共享HTTP client。生产没有验证故障路由或指标查询接口。安全system公开mock/real/unavailable而非凭provider名称猜测，ready不付费探测。[详细规则](model-provider.md)。
 
 6A内容复核后，供应商观点采用公开逐字来源片段守卫：格式/归属失败不提交，保留已有业务观点。Prompt候选最大2共识/2分歧是内容建议，结构来源并非语义证明。验证脚本可注入安全metrics_sink逐请求落盘，生产默认不落盘不公开。已提交旧内容不由Prompt修改自动重写；定向质量复核不改变数据库。[实际证据及限制](quality-first-round.md)。
+
+阶段6A续批保留六任务与自主调度。真实观点/总结采用任务内draft→review，只有经复核和结构校验的最终结果进入原事务；不新增业务消息或事件类型。角色人设仅供intent/utterance，证据任务不消费人设。观点仅传专家发言但内部仍按完整已提交前缀校验，summary回读全部冻结发言。来源、版本、取消和事务守卫不变。模型checks不是语义证明，实际内容验收另列；细节见[模型边界](model-provider.md)。

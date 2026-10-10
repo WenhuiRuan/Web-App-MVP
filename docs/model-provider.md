@@ -35,11 +35,11 @@ system 返回 phase=6/version=0.6.0、model_mode=mock/real/unavailable、model_p
 
 ## 重试与观测
 
-全部任务由 DiscussionEngine.call_model 唯一重试，HTTP网关每次只发一个请求。MODEL_MAX_ATTEMPTS 含首次，默认2。401/403→MODEL_AUTH_FAILED、402→MODEL_BALANCE_EXHAUSTED、400/422→MODEL_REQUEST_INVALID、404→MODEL_NOT_FOUND，不自动重试；429→MODEL_RATE_LIMITED、5xx→MODEL_SERVICE_UNAVAILABLE、网络→MODEL_CONNECTION_FAILED、超时→MODEL_TIMEOUT，可在剩余预算内重试。Retry-After数值最多5秒，缺省0.5秒；HTTP-date不解析，回退0.5秒。非法输出依原策略最多2次。
+全部任务由 DiscussionEngine.call_model 唯一重试，网关不自行重试。普通任务每次尝试一个HTTP请求；观点/总结每次尝试为draft→review两个请求，结构非法的draft直接失败，不进入review。MODEL_MAX_ATTEMPTS含首次默认2，故观点/总结最多4次HTTP请求，并共享原任务总预算。401/403→MODEL_AUTH_FAILED、402→MODEL_BALANCE_EXHAUSTED、400/422→MODEL_REQUEST_INVALID、404→MODEL_NOT_FOUND，不自动重试；429→MODEL_RATE_LIMITED、5xx→MODEL_SERVICE_UNAVAILABLE、网络→MODEL_CONNECTION_FAILED、超时→MODEL_TIMEOUT，可在剩余预算内重试。Retry-After数值最多5秒，缺省0.5秒；HTTP-date不解析，回退0.5秒。非法输出依原策略最多2次。
 
 阵容总预算=单次超时×次数+5秒×重试间隔数，默认65秒。讨论300秒、单次IO30秒、提取10秒、总结60秒（独立），并发4；排队和退避计入预算。取消向下传播，监督器关闭后拒绝迟到结果，收集任务后关闭client。
 
-网关最多2000条安全内存指标：任务、讨论/run、HTTP状态、安全码、耗时、返回model别名、用量数字（prompt/completion/total/cache hit/miss）。不含Prompt、回答、reasoning、请求头或原始错误。无返回usage时为null，不能估算0。生产不公开指标接口、不写业务库；验证入口每次完成写入ignored work/安全JSONL，不再仅等待进程退出导出。返回model别名仅当匹配配置才记录，其他值unknown。非法格式/来源只记固定validation_issue代码，不记原始值。
+网关最多2000条安全内存指标：任务、讨论/run、stage(single/draft/review)、HTTP状态、安全码、耗时、返回model别名、用量数字（prompt/completion/total/cache hit/miss）。不含Prompt、回答、reasoning、请求头或原始错误。无返回usage时为null，不能估算0。生产不公开指标接口、不写业务库；验证入口每次完成写入ignored work/安全JSONL，不再仅等待进程退出导出。返回model别名仅当匹配配置才记录，其他值unknown。非法格式/来源只记固定validation_issue代码，不记原始值。
 
 ## 验证入口
 
@@ -54,3 +54,13 @@ test_deepseek.py 使用HTTP MockTransport检查请求/解析/错误/有限重试
 ```
 
 引用需在本次输入中逐字存在，示例不能直接用作实际共识；非法source/quote/非专家引用/来源不对应会失败。空items合法。角色、观点ID与业务事件结构不由供应商提供，前端HTTP/SSE契约保持原形。无usage/null/没有可用计数字段时指标usage=null，不因缺用量丢弃合法回答；错误类型的usage被视为非法信封。
+
+## 续批：证据复核与自然语言组装
+
+insights/summary/host_control上下文不传人设stance。insights上游messages只含专家正式发言（保留原turn，不重新编号）；内部ModelRequest仍校验冻结完整前缀，summary/主持保留主持消息。summary候选带index、原来源完整消息、作者与semantic_status，不把结构通过当作语义认证。
+
+普通六任务和业务契约不变，只有DeepSeek观点/总结内部增加独立、无共享历史的review；Prompt为insights_review.md、summary_review.md，review不混用draft格式示例。草稿不落业务库、不发布事件，review失败不退回草稿。全部IO在事务外，同一任务预算包括两段调用及统一重试；最多两次尝试/四个HTTP请求。
+
+观点review逐候选返回index、source_turns、content和六个公开来源checks（作者、对象、范围、条件、明确立场、提案属性）。任一false删除；这六项是模型判断，不能当作确定性语义证明。程序检查完整唯一index、来源只能缩小不新增、引文逐字存在、专家及run/边界；引用作者外的已知角色姓名不允许写入保留观点。常见带单位数字/中文数量必须在共识的每段保留quote中逐字出现，否则拒绝，不默认把指标认同扩展成阈值认同。该保守词面检查不换算两周/2周、不解决否定或隐含指代，会有假阴性；宁可失败/下一边界再提取，不保证全面数值语义。
+
+总结review返回introduction、positions(speaker_slot/source_turns/content)、consensus_indices、disagreement_indices、pending。作者由后端绑定且来源必须都是该专家的消息；共识/分歧只能选择捕获InsightBatch中相应kind的index，后端原样组装已有观点，不能由总结另造共识。输出业务Summary仍是自然语言content，非原JSON，无数据库迁移/API schema变更。其他段落的语义仍需人工复核，选择器不能证明概述和待澄清段绝无错误。
