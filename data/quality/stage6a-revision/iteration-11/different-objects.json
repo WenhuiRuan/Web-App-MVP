@@ -1,0 +1,164 @@
+{
+  "case": "different-objects",
+  "criterion": "对象为访问次数与授权申请次数，不同范围和记录条件可并存；共识和分歧都应为空。",
+  "calls": [
+    {
+      "request": {
+        "task": "summary",
+        "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+        "run_id": "ef3ae1ac-5171-5d61-a588-431897437602",
+        "topic": "资料服务如何记录使用情况？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": "228d109e-1164-5123-9e8e-fbf3e132c169",
+        "participants": [
+          {
+            "id": "228d109e-1164-5123-9e8e-fbf3e132c169",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "797ad24b-d756-56e3-9246-3517a63e94d5",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "5f65f7db-ec4d-5d44-87b4-b4cf184a1966",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "d68a82e4-71a7-5ae4-91da-00d55baa94c3",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "run_id": "ef3ae1ac-5171-5d61-a588-431897437602",
+            "participant_id": "228d109e-1164-5123-9e8e-fbf3e132c169",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "请说明不同资料的使用记录口径。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "c2adcfd8-3bbb-5e0c-8457-f86fd39eb23a",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "run_id": "ef3ae1ac-5171-5d61-a588-431897437602",
+            "participant_id": "797ad24b-d756-56e3-9246-3517a63e94d5",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "97f326d5-ec67-545f-ac68-6f8edbad359e",
+            "discussion_id": "4a2cca0d-ec18-50c5-bfa8-422fdd830b6b",
+            "run_id": "ef3ae1ac-5171-5d61-a588-431897437602",
+            "participant_id": "5f65f7db-ec4d-5d44-87b4-b4cf184a1966",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": null,
+        "insights": {
+          "version": 7,
+          "through_turn": 3,
+          "items": []
+        }
+      },
+      "public_context": {
+        "task": "summary",
+        "topic": "资料服务如何记录使用情况？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": 0,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "target_message": null,
+        "focus_is_unverified": false,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 1,
+            "speaker_slot": 0,
+            "speaker_name": "主持人",
+            "speaker_title": "讨论主持",
+            "speaker_kind": "HOST",
+            "content": "请说明不同资料的使用记录口径。",
+            "kind": "opening"
+          },
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。",
+            "kind": "statement"
+          }
+        ],
+        "insights": []
+      },
+      "provider_final_answers": [
+        "{\"content\":\"主持人总结：本轮讨论围绕“资料服务如何记录使用情况”展开，实际涉及两类不同资料与两种不同记录口径。\\n主要观点：甲针对公开资料提出，访问次数可按整个机构汇总，并且不记录个人身份；这是甲的建议，尚无其他专家附议或验证。乙针对受限资料提出，授权申请次数可按项目汇总，并保留授权责任人；这也是乙的建议，尚未形成共同结论。\\n已有共识：尚无充分共识。两位专家分别讨论公开资料的访问次数与受限资料的授权申请次数，对象和指标不同，不构成对同一最小主张的共同支持；不能据此认定机构汇总、项目汇总或不记录个人身份等做法已获专家群体认可。\\n未解决分歧与待澄清：现有发言没有形成对同一对象、同一范围的相反判断，因此尚不构成已证实的专家分歧。需要澄清的是：甲的“按整个机构汇总、不记录个人身份”是否只适用于公开资料的访问次数，是否允许在汇总之外保留其他记录；乙的“按项目汇总、保留授权责任人”是否只适用于受限资料的授权申请次数，项目汇总与责任人保留之间如何对应，以及公开资料与受限资料是否采用同一套记录框架。两位专家各自建议的适用范围、汇总层级和身份信息处理规则均未得到对方反馈，仍需进一步明确。\"}",
+        "{\"introduction\":\"本场围绕资料服务如何记录使用情况展开，主要涉及公开资料与受限资料两类对象。甲就公开资料的访问次数提出记录口径建议，乙就受限资料的授权申请次数提出记录口径建议；讨论尚未确定整体方案。\",\"positions\":[{\"speaker_slot\":1,\"source_turns\":[2],\"content\":\"对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。\"},{\"speaker_slot\":2,\"source_turns\":[3],\"content\":\"对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。\"}],\"consensus_indices\":[],\"disagreement_indices\":[],\"pending\":[{\"turn\":2,\"quote\":\"对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。\",\"issue\":\"UNANSWERED_QUESTION\"},{\"turn\":3,\"quote\":\"对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。\",\"issue\":\"UNANSWERED_QUESTION\"}]}"
+      ],
+      "result": {
+        "task": "summary",
+        "content": "本场围绕资料服务如何记录使用情况展开，主要涉及公开资料与受限资料两类对象。甲就公开资料的访问次数提出记录口径建议，乙就受限资料的授权申请次数提出记录口径建议；讨论尚未确定整体方案。\n主要观点：\n甲提出：“对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。”\n乙提出：“对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。”\n已有共识：尚无充分共识。\n未解决分歧：尚无充分证据表明已发生明确分歧。\n待澄清：\n追问待核对（甲第2条）：“对于公开资料的访问次数，我建议按整个机构汇总，且不记录个人身份。”\n追问待核对（乙第3条）：“对于受限资料的授权申请次数，我建议按项目汇总，并保留授权责任人。”"
+      }
+    }
+  ]
+}

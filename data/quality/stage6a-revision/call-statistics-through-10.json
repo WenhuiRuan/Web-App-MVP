@@ -1,0 +1,202 @@
+[
+  {
+    "label": "iteration-1",
+    "http_calls": 12,
+    "statuses": {
+      "succeeded": 10,
+      "MODEL_RESULT_INVALID": 2
+    },
+    "io_sum_ms": 20188.0,
+    "usage": {
+      "prompt_tokens": 21242,
+      "completion_tokens": 2990,
+      "total_tokens": 24232,
+      "prompt_cache_hit_tokens": 7936,
+      "prompt_cache_miss_tokens": 13306
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-2",
+    "http_calls": 4,
+    "statuses": {
+      "succeeded": 4
+    },
+    "io_sum_ms": 10500.0,
+    "usage": {
+      "prompt_tokens": 12562,
+      "completion_tokens": 1841,
+      "total_tokens": 14403,
+      "prompt_cache_hit_tokens": 1920,
+      "prompt_cache_miss_tokens": 10642
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-3",
+    "http_calls": 25,
+    "statuses": {
+      "succeeded": 24,
+      "MODEL_RESULT_INVALID": 1
+    },
+    "io_sum_ms": 40017.0,
+    "usage": {
+      "prompt_tokens": 53413,
+      "completion_tokens": 6159,
+      "total_tokens": 59572,
+      "prompt_cache_hit_tokens": 28160,
+      "prompt_cache_miss_tokens": 25253
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-4",
+    "http_calls": 11,
+    "statuses": {
+      "succeeded": 8,
+      "MODEL_RESULT_INVALID": 3
+    },
+    "io_sum_ms": 23547.0,
+    "usage": {
+      "prompt_tokens": 37964,
+      "completion_tokens": 4047,
+      "total_tokens": 42011,
+      "prompt_cache_hit_tokens": 22912,
+      "prompt_cache_miss_tokens": 15052
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-5",
+    "http_calls": 29,
+    "statuses": {
+      "succeeded": 26,
+      "MODEL_RESULT_INVALID": 3
+    },
+    "io_sum_ms": 51547.0,
+    "usage": {
+      "prompt_tokens": 61750,
+      "completion_tokens": 7453,
+      "total_tokens": 69203,
+      "prompt_cache_hit_tokens": 40313,
+      "prompt_cache_miss_tokens": 21437
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-6",
+    "http_calls": 25,
+    "statuses": {
+      "succeeded": 24,
+      "MODEL_RESULT_INVALID": 1
+    },
+    "io_sum_ms": 39953.0,
+    "usage": {
+      "prompt_tokens": 44891,
+      "completion_tokens": 5823,
+      "total_tokens": 50714,
+      "prompt_cache_hit_tokens": 16640,
+      "prompt_cache_miss_tokens": 28251
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-7",
+    "http_calls": 4,
+    "statuses": {
+      "succeeded": 4
+    },
+    "io_sum_ms": 5078.0,
+    "usage": {
+      "prompt_tokens": 5483,
+      "completion_tokens": 684,
+      "total_tokens": 6167,
+      "prompt_cache_hit_tokens": 3328,
+      "prompt_cache_miss_tokens": 2155
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-8",
+    "http_calls": 13,
+    "statuses": {
+      "succeeded": 13
+    },
+    "io_sum_ms": 23688.0,
+    "usage": {
+      "prompt_tokens": 34424,
+      "completion_tokens": 4239,
+      "total_tokens": 38663,
+      "prompt_cache_hit_tokens": 10368,
+      "prompt_cache_miss_tokens": 24056
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-9",
+    "http_calls": 7,
+    "statuses": {
+      "MODEL_RESULT_INVALID": 2,
+      "succeeded": 5
+    },
+    "io_sum_ms": 14313.0,
+    "usage": {
+      "prompt_tokens": 17745,
+      "completion_tokens": 2351,
+      "total_tokens": 20096,
+      "prompt_cache_hit_tokens": 12160,
+      "prompt_cache_miss_tokens": 5585
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "iteration-10",
+    "http_calls": 14,
+    "statuses": {
+      "succeeded": 14
+    },
+    "io_sum_ms": 34328.0,
+    "usage": {
+      "prompt_tokens": 30263,
+      "completion_tokens": 6003,
+      "total_tokens": 36266,
+      "prompt_cache_hit_tokens": 13056,
+      "prompt_cache_miss_tokens": 17207
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "complete-browser",
+    "http_calls": 86,
+    "statuses": {
+      "succeeded": 76,
+      "MODEL_RESULT_INVALID": 10
+    },
+    "io_sum_ms": 96123.0,
+    "usage": {
+      "prompt_tokens": 150850,
+      "completion_tokens": 10800,
+      "total_tokens": 161650,
+      "prompt_cache_hit_tokens": 104701,
+      "prompt_cache_miss_tokens": 46149
+    },
+    "missing_usage": 0
+  },
+  {
+    "label": "total-this-continuation",
+    "http_calls": 230,
+    "statuses": {
+      "succeeded": 208,
+      "MODEL_RESULT_INVALID": 22
+    },
+    "io_sum_ms": 359282.0,
+    "usage": {
+      "prompt_tokens": 470587,
+      "completion_tokens": 52390,
+      "total_tokens": 522977,
+      "prompt_cache_hit_tokens": 261494,
+      "prompt_cache_miss_tokens": 209093
+    },
+    "missing_usage": 0
+  }
+]

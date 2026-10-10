@@ -237,3 +237,5 @@ GET /api/health/ready 返回 {"status":"ready","database":"ready","model_mode":"
 阶段6A定向修正：上游insights每项增加公开evidence数组（turn/quote），与source_turns一一对应，后端校验原文片段与专家归属；这些字段不进入业务HTTP或SSE。公开上下文每条消息附带speaker_name/title/kind。详情、实际引用及未全面通过的语义限制见[首轮质量记录](quality-first-round.md)。
 
 阶段6A续批：业务HTTP/SSE/ModelResult及SQLite不变。DeepSeek任务内新增公开来源review协议，观点只保留有证据的候选（源集合不能扩大），总结以现有观点index选择并绑定实际发言作者，后端组装自然语言content。客户端仍接收原insights.updated/summary.ready，不接收草稿、checks或模型review JSON。失败沿用insight_status/summary failure_code与原重试规则；详细上游字段见[模型边界](model-provider.md)。
+
+续批最终摘要约束：positions按speaker_slot和source_turns绑定实际作者，content必须是该作者来源消息的连续原文；pending按turn/quote及有限issue标签绑定待核对片段。共识/分歧仍选已捕获批次index，正文为自然语言而非原JSON。该约束不认证原发言的事实，也不保证概述/选择/标签语义；真实检查与整场未重跑的边界见[质量修正验收](quality-revision.md)。

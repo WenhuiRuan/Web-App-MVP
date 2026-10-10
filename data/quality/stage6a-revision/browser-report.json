@@ -1,0 +1,157 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=playwright.corrected.config.ts"
+    ],
+    "configFile": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\playwright.corrected.config.ts",
+    "rootDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/work/stage6a-corrected-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/RWH/Documents/Codex/2026-10-08/ai-panel-studio-web-codex-gpt/ai-panel-studio/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "real-quality.spec.ts"
+        ],
+        "timeout": 480000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6a-corrected-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "snapshotDir": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\frontend\\tests",
+        "testIgnore": [],
+        "testMatch": "real-quality.spec.ts",
+        "timeout": 480000,
+        "use": {
+          "baseURL": "http://127.0.0.1:15175",
+          "channel": "msedge",
+          "viewport": {
+            "width": 1366,
+            "height": 768
+          },
+          "screenshot": "only-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../work/stage6a-corrected-browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm exec vite -- --host 127.0.0.1 --port 15175 --strictPort",
+      "url": "http://127.0.0.1:15175",
+      "reuseExistingServer": false,
+      "env": {
+        "PANEL_BACKEND_ORIGIN": "http://127.0.0.1:18082"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "real-quality.spec.ts",
+      "file": "real-quality.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrected real model flows from creation through live evidence to final summary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 480000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 74456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T09:06:46.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ff7f91f6d698812567b-b1ca666d1c1cc16b7182",
+          "file": "real-quality.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T09:06:43.218Z",
+    "duration": 78555.083,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

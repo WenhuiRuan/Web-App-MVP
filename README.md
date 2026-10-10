@@ -121,11 +121,11 @@ smoke_lifecycle/smoke_synthesis是阶段4真实TCP验证脚本，历史结果沿
 
 ## 已完成、限制与后续
 
-- 已完成：前述后端规则与恢复、持久化SSE、默认前端业务闭环和替身下真实HTTP/SSE浏览器E2E。
-- 未完成：真实模型适配、真实内容质量/语义证据/费用与时延验收、五条最终质量样例及最终材料/远程交付。
+- 已完成：前述后端规则与恢复、持久化SSE、默认前端业务闭环、替身下真实HTTP/SSE浏览器E2E；DeepSeek六任务适配、真实浏览器讨论与针对来源/条件/总结的质量修正和定向复核。
+- 未完成：最终版本完整讨论的内容质量复核、五份最终质量样例、工作流说明与交付包。已有完整真实流程技术通过，原场语义问题保留；定向修正不等于全场语义验收通过。费用账单及真实并发/p95未知。
 - 单worker/本地使用，无登录权限与公网部署。确定性后端生成验证结构和任务行为，不代表真实模型内容质量、成本或时延。
 - 限制：前端模拟数据不写SQLite，无跨标签页协作；浏览器存储不可用时仅保留在内存。模拟时钟、固定台本、故障按钮不证明专家自主调度或真实服务质量。
-- 下一步：阶段6依据用户提供的后端服务配置做真实ModelGateway适配、脱敏错误/限流/取消验证、内容质量与交付材料。
+- 下一步：本批先由用户复核；下一批应先以最新版本复核完整内容，再选至少五份高质量样例、编写工作流与打包。本批不自动开始下一批或远程交付。
 
 生产预览：项目根运行 `npm --prefix frontend run build`，再运行 `npm --prefix frontend run preview`，访问 http://127.0.0.1:4173。默认业务模式须同时运行后端；独立前端演示添加?mode=mock。Ctrl+C停止，服务5秒宽限后取消开放流并清理任务。页面设计及组件边界见 [前端设计](docs/frontend-design.md)。
 
@@ -145,3 +145,7 @@ if (-not $env:PANEL_API_KEY) {
 不要输出该变量，也不要在前端窗口复制它。顶部显示“DeepSeek · deepseek-flash（真实服务）”；ready仅配置检查，首次创建阵容才会真实付费调用。六任务Prompt、官方文档、重试及安全边界见[模型适配](docs/model-provider.md)。内容质量与样例交付分开：本批1–2真实议题复核，下一批至少五份最终样例和交付包。
 
 首轮两个真实议题、具体来源、修正与限制见[内容质量记录](docs/quality-first-round.md)，文本证据在data/quality/stage6a。来源与作者归属改进已定向复核，但不承诺所有共识都语义正确。修改Prompt后需重启后端；已保存讨论不会被自动重写。真实检查脚本是主动付费入口，常规pytest/Playwright不调用真实模型。检查结果与无法取得的整场用量分别记录。
+
+本次续批见[质量修正与验收](docs/quality-revision.md)：69项适配/实际HTTP检查、68项受影响回归、类型/构建及1个真实完整浏览器用例通过；原场11条正式消息、6次观点更新，实际结束为host_end。人工发现的误判按原边界另行修正，没有覆盖旧记录。最终摘要采用自然语言概述和实际作者的原文精选，提案与条件不自由改写；严格提取仍可能漏掉有效交集。
+
+仅在明确要重新进行付费验证时，后端专用终端运行 `python -m scripts.real_validation_server --label stage6a-corrected`（新临时SQLite，端口18082）；另一个不含密钥的前端终端设置PANEL_REAL_VALIDATION=1、PLAYWRIGHT_CHANNEL=msedge，在frontend运行 `npm exec playwright test -- --config=playwright.corrected.config.ts`。已有报告存在时测试拒绝覆盖，先保留或另存旧证据。定向任务脚本 `python -m scripts.review_quality_cases --help` 可查看选项，它也调用真实服务。日常使用仍按启动脚本运行；应用Prompt缓存需重启后端才能更新。

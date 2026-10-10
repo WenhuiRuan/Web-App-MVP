@@ -1,0 +1,309 @@
+{
+  "case": "unanswered-host",
+  "criterion": "主持问题与专家尚未形成意见，不能直接提观点，允许双空。",
+  "calls": [
+    {
+      "request": {
+        "task": "insights",
+        "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+        "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+        "topic": "居民活动室如何安排开放时段？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": null,
+        "participants": [
+          {
+            "id": "f631ffde-ea50-59a8-acd8-b8a0e1175443",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "36659f5b-ab4a-5701-8c67-0d62a7bd7e11",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "a3aba783-1c8e-5bb3-b9eb-a4dbbec3965d",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "fdd44630-f2b5-54b5-8bda-fc0bddbe8046",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "f631ffde-ea50-59a8-acd8-b8a0e1175443",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "是否周末开放、需要几位志愿者，大家更支持哪一个选项？",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "e1e97b76-9dc6-517c-8dae-fa6c0db1c143",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "36659f5b-ab4a-5701-8c67-0d62a7bd7e11",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "我需要先了解现有人手，暂时不提出方案。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "3e996c7b-2915-5c5d-88a7-4dc978bb2734",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "a3aba783-1c8e-5bb3-b9eb-a4dbbec3965d",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "在知道使用需求前，我也暂不判断是否周末开放。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": 7,
+        "insights": {
+          "version": 0,
+          "through_turn": 0,
+          "items": []
+        }
+      },
+      "public_context": {
+        "task": "insights",
+        "topic": "居民活动室如何安排开放时段？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": null,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我需要先了解现有人手，暂时不提出方案。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "在知道使用需求前，我也暂不判断是否周末开放。",
+            "kind": "statement"
+          }
+        ],
+        "insights": []
+      },
+      "provider_final_answers": [
+        "{\"items\":[]}",
+        "{\"reviews\":[]}"
+      ],
+      "result": {
+        "task": "insights",
+        "items": []
+      }
+    },
+    {
+      "request": {
+        "task": "summary",
+        "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+        "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+        "topic": "居民活动室如何安排开放时段？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": "f631ffde-ea50-59a8-acd8-b8a0e1175443",
+        "participants": [
+          {
+            "id": "f631ffde-ea50-59a8-acd8-b8a0e1175443",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "36659f5b-ab4a-5701-8c67-0d62a7bd7e11",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "a3aba783-1c8e-5bb3-b9eb-a4dbbec3965d",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "fdd44630-f2b5-54b5-8bda-fc0bddbe8046",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "f631ffde-ea50-59a8-acd8-b8a0e1175443",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "是否周末开放、需要几位志愿者，大家更支持哪一个选项？",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "e1e97b76-9dc6-517c-8dae-fa6c0db1c143",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "36659f5b-ab4a-5701-8c67-0d62a7bd7e11",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "我需要先了解现有人手，暂时不提出方案。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "3e996c7b-2915-5c5d-88a7-4dc978bb2734",
+            "discussion_id": "16543323-72ad-5204-a90e-2053d3f11c29",
+            "run_id": "d94c189f-70bd-59a1-a71b-361229fc3c2c",
+            "participant_id": "a3aba783-1c8e-5bb3-b9eb-a4dbbec3965d",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "在知道使用需求前，我也暂不判断是否周末开放。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": null,
+        "insights": {
+          "version": 7,
+          "through_turn": 3,
+          "items": []
+        }
+      },
+      "public_context": {
+        "task": "summary",
+        "topic": "居民活动室如何安排开放时段？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": 0,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 1,
+            "speaker_slot": 0,
+            "speaker_name": "主持人",
+            "speaker_title": "讨论主持",
+            "speaker_kind": "HOST",
+            "content": "是否周末开放、需要几位志愿者，大家更支持哪一个选项？",
+            "kind": "opening"
+          },
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我需要先了解现有人手，暂时不提出方案。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "在知道使用需求前，我也暂不判断是否周末开放。",
+            "kind": "statement"
+          }
+        ],
+        "insights": []
+      },
+      "provider_final_answers": [
+        "{\"content\":\"主持人总结：本次讨论仅形成一个开场问题和一个核心前提，尚未进入具体方案比较。以下内容只依据截至第3轮的公开发言。\\n主要观点：甲明确表示，在了解现有人手之前不提出方案，因此对周末开放与志愿者人数均未表态。乙明确表示，在知道使用需求之前不判断是否周末开放，即认为需求信息是判断周末开放与否的前置条件。主持人在开场中提出的问题是：是否周末开放、需要几位志愿者，大家更支持哪一个选项。\\n已有共识：两位专家虽未就开放时段方案表态，但都提出了务实的前提：甲要求先掌握现有人手，乙要求先了解使用需求。由此可以确认的最小共同立场是，讨论具体安排前应先补充相关信息；两位专家都没有在信息不足时贸然选择某个选项。这一共识仅限于“先了解信息再判断”，不涉及周末是否开放、需要几位志愿者或任何具体时段安排。\\n未解决分歧与待澄清：尚无专家对同一对象表达相反判断，因此目前不存在可确认的实质分歧。待澄清的问题有两项：一是居民活动室的实际使用需求是什么，包括哪些时段有人使用、需求规模如何；二是可用于活动室服务的现有人手有多少，能否支撑周末开放及需要几人值班。主持人的问题目前未获任何一方的选项性回答。\\n结论：本场讨论仍停留在信息准备阶段，没有形成关于周末开放或志愿者人数的提案、共同建议或决策。后续只有在补齐使用需求与人手信息后，才可能对开放时段和志愿者配置作出有依据的判断。\"}",
+        "{\"introduction\":\"本场围绕居民活动室如何安排开放时段展开，主持人提出是否周末开放、需要几位志愿者的问题；截至第3轮，两位专家均未提出具体方案，讨论尚未确定整体安排。\",\"positions\":[{\"speaker_slot\":1,\"source_turns\":[2],\"content\":\"表示需要先了解现有人手，暂时不提出方案，未对周末开放或志愿者人数表态。\"},{\"speaker_slot\":2,\"source_turns\":[3],\"content\":\"表示在知道使用需求前暂不判断是否周末开放，将使用需求视为判断前置条件。\"}],\"consensus_indices\":[],\"disagreement_indices\":[],\"pending\":\"本场已提出但尚待回答的疑点包括：居民活动室的实际使用需求（哪些时段有人使用、需求规模如何）以及可用于活动室服务的现有人手有多少、能否支撑周末开放及值班人数；主持人的选项性问题目前尚无专家作出选项性回答。\"}"
+      ],
+      "result": {
+        "task": "summary",
+        "content": "本场围绕居民活动室如何安排开放时段展开，主持人提出是否周末开放、需要几位志愿者的问题；截至第3轮，两位专家均未提出具体方案，讨论尚未确定整体安排。\n主要观点：甲：表示需要先了解现有人手，暂时不提出方案，未对周末开放或志愿者人数表态。；乙：表示在知道使用需求前暂不判断是否周末开放，将使用需求视为判断前置条件。\n已有共识：尚无充分共识。\n未解决分歧：尚无充分证据表明已发生明确分歧。\n待澄清：本场已提出但尚待回答的疑点包括：居民活动室的实际使用需求（哪些时段有人使用、需求规模如何）以及可用于活动室服务的现有人手有多少、能否支撑周末开放及值班人数；主持人的选项性问题目前尚无专家作出选项性回答。"
+      }
+    }
+  ]
+}

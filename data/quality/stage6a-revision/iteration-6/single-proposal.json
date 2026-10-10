@@ -1,0 +1,309 @@
+{
+  "case": "single-proposal",
+  "criterion": "单方八分钟阈值提案，另一人未表态，不能形成共识或分歧。",
+  "calls": [
+    {
+      "request": {
+        "task": "insights",
+        "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+        "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+        "topic": "配送站是否改变领取流程？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": null,
+        "participants": [
+          {
+            "id": "3daa7dbc-01de-5fed-bf62-97819712ed80",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "3ea37344-bbdd-537a-b441-3b6a6fadfa96",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "29b4434d-2918-532e-a407-80038975f148",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "55b66bd9-a501-5da3-8f88-c9d310c45f7a",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "3daa7dbc-01de-5fed-bf62-97819712ed80",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "请给出方案并说明证据。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "f41a85ed-3601-52e3-ae8b-33f75fdb4bb0",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "3ea37344-bbdd-537a-b441-3b6a6fadfa96",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "我提出一个待试验的规则：若排队超过八分钟就临时开放第二个窗口，这个阈值没有验证。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "5ddaa7c1-3410-5c23-9248-5cfe5d2dd70b",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "29b4434d-2918-532e-a407-80038975f148",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "我还没有判断这个方案，需要先看到实际排队记录。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": 7,
+        "insights": {
+          "version": 0,
+          "through_turn": 0,
+          "items": []
+        }
+      },
+      "public_context": {
+        "task": "insights",
+        "topic": "配送站是否改变领取流程？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": null,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我提出一个待试验的规则：若排队超过八分钟就临时开放第二个窗口，这个阈值没有验证。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我还没有判断这个方案，需要先看到实际排队记录。",
+            "kind": "statement"
+          }
+        ],
+        "insights": []
+      },
+      "provider_final_answers": [
+        "{\"items\":[]}",
+        "{\"reviews\":[]}"
+      ],
+      "result": {
+        "task": "insights",
+        "items": []
+      }
+    },
+    {
+      "request": {
+        "task": "summary",
+        "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+        "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+        "topic": "配送站是否改变领取流程？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": "3daa7dbc-01de-5fed-bf62-97819712ed80",
+        "participants": [
+          {
+            "id": "3daa7dbc-01de-5fed-bf62-97819712ed80",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "3ea37344-bbdd-537a-b441-3b6a6fadfa96",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "29b4434d-2918-532e-a407-80038975f148",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "55b66bd9-a501-5da3-8f88-c9d310c45f7a",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "3daa7dbc-01de-5fed-bf62-97819712ed80",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "请给出方案并说明证据。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "f41a85ed-3601-52e3-ae8b-33f75fdb4bb0",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "3ea37344-bbdd-537a-b441-3b6a6fadfa96",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "我提出一个待试验的规则：若排队超过八分钟就临时开放第二个窗口，这个阈值没有验证。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "5ddaa7c1-3410-5c23-9248-5cfe5d2dd70b",
+            "discussion_id": "2a76476a-590a-5224-8158-9742fb265623",
+            "run_id": "449ded7f-c15d-5f88-b67b-46157983bb8d",
+            "participant_id": "29b4434d-2918-532e-a407-80038975f148",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "我还没有判断这个方案，需要先看到实际排队记录。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": null,
+        "insights": {
+          "version": 7,
+          "through_turn": 3,
+          "items": []
+        }
+      },
+      "public_context": {
+        "task": "summary",
+        "topic": "配送站是否改变领取流程？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": 0,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 1,
+            "speaker_slot": 0,
+            "speaker_name": "主持人",
+            "speaker_title": "讨论主持",
+            "speaker_kind": "HOST",
+            "content": "请给出方案并说明证据。",
+            "kind": "opening"
+          },
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我提出一个待试验的规则：若排队超过八分钟就临时开放第二个窗口，这个阈值没有验证。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我还没有判断这个方案，需要先看到实际排队记录。",
+            "kind": "statement"
+          }
+        ],
+        "insights": []
+      },
+      "provider_final_answers": [
+        "{\"content\":\"主持人总结：本场讨论聚焦配送站是否应改变领取流程，目前只出现一个具体提案和一项证据要求，尚未形成方案层面的结论。\\n主要观点：甲提出一条待试验规则，即排队超过八分钟时临时开放第二个窗口，并明确说明该阈值没有经过验证。乙没有对该方案作出判断，表示需要先看到实际排队记录。\\n已有共识：两位专家尚未就任何流程改动形成共同支持的最小主张，因此目前尚无充分共识。可以确认的只是甲把八分钟阈值和开放第二窗口作为待试验、未验证的提案提出，不是已确认事实或正式决策。\\n未解决分歧与待澄清：本场未出现两位专家围绕同一对象表达相反判断，故不构成已证实的专家分歧。待澄清的是：实际排队记录能否支持八分钟这一触发阈值；第二个窗口临时开放的时长、人员来源与适用范围；以及是否需要先收集记录再决定是否试验。乙的“先看记录”是对方案的判断前提，不等于反对或赞成方案本身。在记录和适用范围明确前，不宜把该规则写成已达成的执行安排。\"}",
+        "{\"introduction\":\"本场围绕配送站是否改变领取流程展开，目前只出现一个待试验提案和一项证据要求，尚未形成方案层面的结论。\",\"positions\":[{\"speaker_slot\":1,\"source_turns\":[2],\"content\":\"提出一条待试验规则：若排队超过八分钟就临时开放第二个窗口，并明确说明该阈值没有验证。\"},{\"speaker_slot\":2,\"source_turns\":[3],\"content\":\"表示尚未判断该方案，需要先看到实际排队记录。\"}],\"consensus_indices\":[],\"disagreement_indices\":[],\"pending\":\"待澄清的是：实际排队记录能否支持八分钟这一触发阈值；第二个窗口临时开放的时长、人员来源与适用范围；以及是否需要先收集记录再决定是否试验。乙的“先看记录”是判断前提，不等于反对或赞成方案本身。\"}"
+      ],
+      "result": {
+        "task": "summary",
+        "content": "本场围绕配送站是否改变领取流程展开，目前只出现一个待试验提案和一项证据要求，尚未形成方案层面的结论。\n主要观点：甲：提出一条待试验规则：若排队超过八分钟就临时开放第二个窗口，并明确说明该阈值没有验证。；乙：表示尚未判断该方案，需要先看到实际排队记录。\n已有共识：尚无充分共识。\n未解决分歧：尚无充分证据表明已发生明确分歧。\n待澄清：待澄清的是：实际排队记录能否支持八分钟这一触发阈值；第二个窗口临时开放的时长、人员来源与适用范围；以及是否需要先收集记录再决定是否试验。乙的“先看记录”是判断前提，不等于反对或赞成方案本身。"
+      }
+    }
+  ]
+}

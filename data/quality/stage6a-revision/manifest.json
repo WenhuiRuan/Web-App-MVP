@@ -1,0 +1,27 @@
+{
+  "kind": "semantic-review-evidence-not-final-samples",
+  "thinking": "disabled",
+  "requested_model": "deepseek-flash",
+  "final_prompt_sha256_utf8_normalized": {
+    "common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "host_control.md": "b2dbc3074d77a83986823278680ec7cb6294dae95232824ad07b96116f508cd5",
+    "insights.md": "dd22cb6783b779c7edac51034f6b98cdc73c465dc96a7f8f929d4c2efac7539a",
+    "insights_review.md": "d0aef90eeec693a064540c5b564dfb3771449613a171daa74012d5648368e0af",
+    "intent.md": "18b1abdb53df48aafafd8c6c10619aac29a957e337ec8c2453ed726a1fce62e9",
+    "roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "summary.md": "e0ad6f8042c581a5957916149e29afa255501f4130b28b9ef8baf77669d8f4f3",
+    "summary_review.md": "1231b46a65a7bd9d199bf5e85ecef120af1dc178189b5154c42172752716ab30",
+    "utterance.md": "50064f3c99cb902491fd9e5a1ef975ac28904615db3444009d80a072b58e6a06"
+  },
+  "prompt_capture": "Frozen source inputs/public context and public final answers retained for every diagnostic. Final templates match iteration-11; intermediate system templates were not individually captured. Provider body capture added for future checks, without headers.",
+  "final_summary_insight_inputs": {
+    "original-1": "iteration-6",
+    "original-2": "iteration-8",
+    "explicit-support": "iteration-7",
+    "different-objects": "iteration-6",
+    "single-proposal": "iteration-6",
+    "unanswered-host": "iteration-6",
+    "live-11": "iteration-9"
+  },
+  "immutable_browser": "Browser and database evidence predates final targeted corrections; no original messages/events/summary overwritten."
+}

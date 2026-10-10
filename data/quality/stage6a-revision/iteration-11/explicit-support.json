@@ -1,0 +1,205 @@
+{
+  "case": "explicit-support",
+  "criterion": "甲乙明确支持同一范围和前提下的提案，可提共识，不能写成正式决策。",
+  "calls": [
+    {
+      "request": {
+        "task": "summary",
+        "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+        "run_id": "efc78752-ff2a-52be-8792-af801d0fbfc8",
+        "topic": "社区共享工具柜是否试点预约借用？",
+        "expert_count": 2,
+        "roster_revision": 1,
+        "actor_id": "51c6aafc-8a33-5a24-8af0-b3da43bc143c",
+        "participants": [
+          {
+            "id": "51c6aafc-8a33-5a24-8af0-b3da43bc143c",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "roster_revision": 1,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#64748B"
+          },
+          {
+            "id": "a51e5b5a-4a32-5a42-998f-42cea10811fd",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#2563EB"
+          },
+          {
+            "id": "6970a1c9-9e63-5c05-a00d-a055c1a54924",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "roster_revision": 1,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员",
+            "stance": "人设预设支持全面实施，但这不是已发表意见",
+            "color": "#D97706"
+          }
+        ],
+        "messages": [
+          {
+            "id": "24013f1e-fe54-541a-a51c-2edfad54bfbb",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "run_id": "efc78752-ff2a-52be-8792-af801d0fbfc8",
+            "participant_id": "51c6aafc-8a33-5a24-8af0-b3da43bc143c",
+            "turn_no": 1,
+            "kind": "opening",
+            "content": "请比较是否应该开展预约借用试点。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "235b0b4e-7fcf-57b8-a8d6-99f14a37a932",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "run_id": "efc78752-ff2a-52be-8792-af801d0fbfc8",
+            "participant_id": "a51e5b5a-4a32-5a42-998f-42cea10811fd",
+            "turn_no": 2,
+            "kind": "statement",
+            "content": "我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。",
+            "created_at": "2026-10-10T00:00:00Z"
+          },
+          {
+            "id": "d62ad68d-2494-5b43-91a5-f46e5194d66c",
+            "discussion_id": "917c5bab-d35a-50f0-bfab-157808faa6e0",
+            "run_id": "efc78752-ff2a-52be-8792-af801d0fbfc8",
+            "participant_id": "6970a1c9-9e63-5c05-a00d-a055c1a54924",
+            "turn_no": 3,
+            "kind": "statement",
+            "content": "我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。",
+            "created_at": "2026-10-10T00:00:00Z"
+          }
+        ],
+        "cycle": 0,
+        "participation_kind": null,
+        "target_message_id": null,
+        "host_task": null,
+        "public_focus": "",
+        "through_turn": 3,
+        "insight_version": null,
+        "insights": {
+          "version": 7,
+          "through_turn": 3,
+          "items": [
+            {
+              "id": "a63342c2-f93b-550a-820e-d7b296ccf4a5",
+              "kind": "consensus",
+              "content": "甲与乙共同建议仅对登记成员试点预约借用，前提是不增加志愿者值班时间；这是共同提出的试点建议，尚待确认执行细则。",
+              "source_message_ids": [
+                "235b0b4e-7fcf-57b8-a8d6-99f14a37a932",
+                "d62ad68d-2494-5b43-91a5-f46e5194d66c"
+              ]
+            }
+          ]
+        }
+      },
+      "public_context": {
+        "task": "summary",
+        "topic": "社区共享工具柜是否试点预约借用？",
+        "expert_count": 2,
+        "participants": [
+          {
+            "slot": 0,
+            "kind": "HOST",
+            "name": "主持人",
+            "title": "讨论主持"
+          },
+          {
+            "slot": 1,
+            "kind": "EXPERT",
+            "name": "甲",
+            "title": "服务运营研究员"
+          },
+          {
+            "slot": 2,
+            "kind": "EXPERT",
+            "name": "乙",
+            "title": "流程设计研究员"
+          }
+        ],
+        "actor_slot": 0,
+        "participation_kind": null,
+        "target_turn": null,
+        "host_task": null,
+        "target_message": null,
+        "focus_is_unverified": false,
+        "public_focus": "",
+        "through_turn": 3,
+        "messages": [
+          {
+            "turn": 1,
+            "speaker_slot": 0,
+            "speaker_name": "主持人",
+            "speaker_title": "讨论主持",
+            "speaker_kind": "HOST",
+            "content": "请比较是否应该开展预约借用试点。",
+            "kind": "opening"
+          },
+          {
+            "turn": 2,
+            "speaker_slot": 1,
+            "speaker_name": "甲",
+            "speaker_title": "服务运营研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。",
+            "kind": "statement"
+          },
+          {
+            "turn": 3,
+            "speaker_slot": 2,
+            "speaker_name": "乙",
+            "speaker_title": "流程设计研究员",
+            "speaker_kind": "EXPERT",
+            "content": "我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。",
+            "kind": "statement"
+          }
+        ],
+        "insights": [
+          {
+            "index": 0,
+            "kind": "consensus",
+            "content": "甲与乙共同建议仅对登记成员试点预约借用，前提是不增加志愿者值班时间；这是共同提出的试点建议，尚待确认执行细则。",
+            "source_turns": [
+              2,
+              3
+            ],
+            "semantic_status": "candidate_requires_transcript_review",
+            "sources": [
+              {
+                "turn": 2,
+                "speaker_slot": 1,
+                "speaker_name": "甲",
+                "speaker_title": "服务运营研究员",
+                "speaker_kind": "EXPERT",
+                "content": "我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。",
+                "kind": "statement"
+              },
+              {
+                "turn": 3,
+                "speaker_slot": 2,
+                "speaker_name": "乙",
+                "speaker_title": "流程设计研究员",
+                "speaker_kind": "EXPERT",
+                "content": "我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。",
+                "kind": "statement"
+              }
+            ]
+          }
+        ]
+      },
+      "provider_final_answers": [
+        "{\"content\":\"主持人总结：本次讨论围绕社区共享工具柜是否试点预约借用展开，只有甲、乙两位专家提交了正式发言，讨论范围有限。\\n主要观点：甲提出，仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。乙支持对登记成员试点预约借用，同时强调必须不增加志愿者值班时间。两人的主张在对象、范围和前提上一致，均限定为“登记成员”，并把“不增加志愿者值班时间”作为条件。\\n已有共识：经核对原始发言，甲与乙明确支持同一最小主张，即建议仅对登记成员试点预约借用，且不得增加志愿者值班时间。这是两位专家共同提出的试点建议，属于提案性质，不等于全体认可，也不构成正式决策；执行方式、登记成员如何界定、预约规则与监督安排均未讨论。\\n未解决分歧与待澄清：现有发言中没有专家对同一对象或互斥选项表达相反判断，因此尚不存在已证实的两方分歧。待澄清的问题包括：试点预约借用的具体流程与时间安排是什么，如何界定登记成员，如何判定“不增加志愿者值班时间”，以及该建议由谁负责落实和评估。上述问题目前没有专家回应，不能写成已确认的执行方案。\"}",
+        "{\"introduction\":\"本场围绕社区共享工具柜是否试点预约借用展开，目前仅甲、乙提交正式发言，尚无整体执行方案。\",\"positions\":[{\"speaker_slot\":1,\"source_turns\":[2],\"content\":\"我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。\"},{\"speaker_slot\":2,\"source_turns\":[3],\"content\":\"我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。\"}],\"consensus_indices\":[0],\"disagreement_indices\":[],\"pending\":[{\"turn\":2,\"quote\":\"我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。\",\"issue\":\"UNVERIFIED_PROPOSAL\"},{\"turn\":3,\"quote\":\"我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。\",\"issue\":\"UNVERIFIED_PROPOSAL\"}]}"
+      ],
+      "result": {
+        "task": "summary",
+        "content": "本场围绕社区共享工具柜是否试点预约借用展开，目前仅甲、乙提交正式发言，尚无整体执行方案。\n主要观点：\n甲提出：“我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。”\n乙提出：“我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。”\n已有共识：甲与乙共同建议仅对登记成员试点预约借用，前提是不增加志愿者值班时间；这是共同提出的试点建议，尚待确认执行细则。\n未解决分歧：尚无充分证据表明已发生明确分歧。\n待澄清：\n提案待验证（甲第2条）：“我建议仅对登记成员开展预约借用试点，前提是不增加志愿者值班时间。”\n提案待验证（乙第3条）：“我支持对登记成员试点预约借用，但必须不增加志愿者值班时间。”"
+      }
+    }
+  ]
+}
