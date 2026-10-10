@@ -198,7 +198,13 @@ def reviewed_points(request, candidate, content):
                 if re.search(joined,review.content) and any(re.search(r'还是|或',q['quote']) and not re.search(joined,q['quote']) for q in evidence):
                     continue  # A choice expression alone cannot prove joint adoption.
                 # Conservative lexical provenance, not a semantic agreement detector.
-                quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人|次)', review.content)
+                # Explicit support counts describe bound authors, not a proposed staffing
+                # condition. Verify these counts directly, then check other quantities.
+                support_counts=re.findall(r'(\d+|[一二三四五六两])(?:位专家|人)(?:的)?(?:共同|一致|均|都)',review.content)
+                numerals={'一':1,'二':2,'两':2,'三':3,'四':4,'五':5,'六':6}
+                if any((int(n) if n.isdigit() else numerals[n])!=len(actors) for n in support_counts): continue
+                conditions=re.sub(r'(\d+|[一二三四五六两])(?:位专家|人)(?:的)?(?:共同|一致|均|都)','',review.content)
+                quantities = re.findall(r'(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万两]+)(?:%|个?工作日|个?自然周|周|天|小时|分钟|成|人|次)', conditions)
                 if any(quantity not in quote['quote'] for quantity in quantities for quote in evidence):
                     continue  # Exclude this unsupported claim without discarding other candidates.
             names=[p.name for p in request.participants if p.id in actors]

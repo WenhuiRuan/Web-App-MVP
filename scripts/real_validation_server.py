@@ -21,7 +21,7 @@ from backend.app.main import create_app
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking'])
+    parser.add_argument('--label',default='stage6a-real',choices=['stage6a-real','stage6a-corrected','stage6a-final','stage6a-final-thinking','stage6a-accepted'])
     parser.add_argument('--capture-final-answers',action='store_true',help='Opt-in public validation evidence, never headers or reasoning')
     args=parser.parse_args()
     settings=load_settings()

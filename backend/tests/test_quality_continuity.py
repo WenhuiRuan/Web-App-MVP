@@ -32,6 +32,10 @@ def test_thinking_insight_budget_is_finite_and_can_cover_multiple_reviews():
         with pytest.raises(ValidationError): Settings(_env_file=None,insight_max_seconds=seconds)
 
 
+def test_default_thinking_output_budget_has_room_for_final_json():
+    assert Settings(_env_file=None).model_thinking_max_tokens==16384
+
+
 def library_point(req):
     return {'kind':'consensus','content':'沈知微与郑书言共同建议记录老年读者使用率和人工求助次数，用于判断是否调整时段。',
         'source_turns':[4,6], 'evidence':[{'turn':t,'quote':req.messages[t-1].content} for t in (4,6)]}
@@ -98,6 +102,15 @@ def test_review_can_requote_same_sources_to_narrow_a_polluted_candidate():
     review['reviews'][0]['evidence'][0]['quote']='从未发表的观点'
     with pytest.raises(InvalidModelResult):
         bind_result(req,reviewed_points(req,{'items':[polluted]},json.dumps(review,ensure_ascii=False)))
+
+
+def test_supporter_count_is_checked_against_authors_not_execution_conditions():
+    req=library();point=library_point(req)
+    for count,expected in (('两',1),('三',0)):
+        review={'reviews':[{'index':0,'source_turns':[4,6],'content':point['content']+f'这是{count}人的共同建议。',
+            'checks':checks(),'evidence':point['evidence']}]}
+        result=bind_result(req,reviewed_points(req,{'items':[point]},json.dumps(review,ensure_ascii=False)))
+        assert len(result.items)==expected
 
 
 def test_plain_proposal_cannot_be_classified_as_an_unanswered_question():
