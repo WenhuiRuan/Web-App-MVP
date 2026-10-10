@@ -36,7 +36,7 @@ def checks(**overrides):
 
 
 def summary_review(introduction='主持人总结：仅认可有限试点，细则尚未确认。', **overrides):
-    return dict(introduction=introduction, positions=[], consensus_indices=[], disagreement_indices=[], pending='尚待澄清执行细则。') | overrides
+    return dict(introduction=introduction, positions=[], consensus_indices=[], disagreement_indices=[], pending=[]) | overrides
 
 
 @pytest.mark.parametrize('task', ['roster','intent','utterance','host_control','insights','summary'])
@@ -402,7 +402,7 @@ def test_summary_binds_position_authors_and_copies_only_selected_existing_consen
         def upstream(http_request):
             context = json.loads(json.loads(http_request.content)['messages'][1]['content'])
             output = {'content':'错误草稿：全体已同意全部规则。'} if 'candidate' not in context else summary_review(
-                introduction='本场比较试点边界。', positions=[{'speaker_slot':1,'source_turns':[2],'content':'建议有限试点，成本需验证。'}], consensus_indices=[0])
+                introduction='本场比较试点边界。', positions=[{'speaker_slot':1,'source_turns':[2],'content':req.messages[1].content}], consensus_indices=[0])
             return httpx.Response(200, json=answer(output))
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
             result = await DeepSeekGateway(config(), client=client).generate(req)
@@ -480,3 +480,46 @@ def test_utterance_receives_bound_target_content_and_unverified_focus_label():
     assert context['target_message']['turn']==req.messages[0].turn_no
     assert context['target_message']['speaker_name']==req.participants[0].name
     assert context['target_message']['content']==req.messages[0].content
+
+
+def test_summary_position_cannot_change_source_alternatives_into_joint_requirements():
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    req=request('summary')
+    req=req.model_copy(update={'messages':tuple(m.model_copy(update={'content':'我建议保留视频协助或提供纸本说明。'}) if i==1 else m for i,m in enumerate(req.messages))})
+    async def run():
+        def upstream(http_request):
+            context=json.loads(json.loads(http_request.content)['messages'][1]['content'])
+            output=summary_review(positions=[{'speaker_slot':1,'source_turns':[2],'content':'我建议保留视频协助和提供纸本说明。'}]) if 'candidate' in context else {'content':'待复核草稿。'}
+            return httpx.Response(200,json=answer(output))
+        async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+            with pytest.raises(InvalidModelResult) as exc: await DeepSeekGateway(config(),client=client).generate(req)
+            assert exc.value.validation_issue=='summary_position_quote'
+    asyncio.run(run())
+
+
+def test_summary_pending_cannot_freely_merge_different_objects_into_a_conflict():
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    req=request('summary')
+    async def run():
+        def upstream(http_request):
+            context=json.loads(json.loads(http_request.content)['messages'][1]['content'])
+            output=summary_review(pending='三个不同指标的分母存在三方分歧。') if 'candidate' in context else {'content':'草稿。'}
+            return httpx.Response(200,json=answer(output))
+        async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+            with pytest.raises(InvalidModelResult): await DeepSeekGateway(config(),client=client).generate(req)
+    asyncio.run(run())
+
+
+def test_summary_pending_binds_a_public_source_and_a_limited_issue_label():
+    from backend.app.deepseek_gateway import DeepSeekGateway
+    req=request('summary')
+    async def run():
+        def upstream(http_request):
+            context=json.loads(json.loads(http_request.content)['messages'][1]['content'])
+            output=summary_review(pending=[{'turn':2,'quote':req.messages[1].content,'issue':'UNVERIFIED_PROPOSAL'}]) if 'candidate' in context else {'content':'草稿。'}
+            return httpx.Response(200,json=answer(output))
+        async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+            result=await DeepSeekGateway(config(),client=client).generate(req)
+            assert req.participants[1].name in result.content and req.messages[1].content in result.content
+            assert '提案待验证' in result.content
+    asyncio.run(run())

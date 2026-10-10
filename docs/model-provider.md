@@ -64,3 +64,5 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 观点review逐候选返回index、source_turns、content和六个公开来源checks（作者、对象、范围、条件、明确立场、提案属性）。任一false删除；这六项是模型判断，不能当作确定性语义证明。程序检查完整唯一index、来源只能缩小不新增、引文逐字存在、专家及run/边界；引用作者外的已知角色姓名不允许写入保留观点。常见带单位数字/中文数量必须在共识的每段保留quote中逐字出现，否则拒绝，不默认把指标认同扩展成阈值认同。该保守词面检查不换算两周/2周、不解决否定或隐含指代，会有假阴性；宁可失败/下一边界再提取，不保证全面数值语义。
 
 总结review返回introduction、positions(speaker_slot/source_turns/content)、consensus_indices、disagreement_indices、pending。作者由后端绑定且来源必须都是该专家的消息；共识/分歧只能选择捕获InsightBatch中相应kind的index，后端原样组装已有观点，不能由总结另造共识。输出业务Summary仍是自然语言content，非原JSON，无数据库迁移/API schema变更。其他段落的语义仍需人工复核，选择器不能证明概述和待澄清段绝无错误。
+
+最终补充协议：主要观点positions.content必须是其source_turns中某条实际作者消息的原文连续片段，后端以姓名+“提出”呈现精选，不认证原发言事实。pending为最多3项(turn/quote/issue)，逐字校验本场来源；issue仅UNANSWERED_QUESTION/UNVERIFIED_PROPOSAL/SCOPE_UNCLEAR/UNIT_OR_DIRECTION_UNCLEAR，后端呈现有限“待核对”标签与真实作者/turn。不能在自由待澄清段另造共识/分歧。introduction与选择哪些原句仍由模型生成/判断，不保证语义完整、标签准确或原发言事实正确。该取舍提高忠实度，正文采用简短概述+观点原文精选+已有观点+问题来源；不追求完全自由改写。没有新增数据库迁移、前端字段或业务JSON正文。

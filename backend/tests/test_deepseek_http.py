@@ -28,7 +28,7 @@ def test_all_six_tasks_over_actual_http_with_safe_public_responses(tmp_path):
             elif task=='utterance': output={'sentences':['应限定范围并明确执行成本。']}
             elif task=='host_control': output={'action':'end' if len(context['messages'])>=4 else 'followup','public_focus':'请回应成本边界'}
             elif task=='insights': output={'reviews':[]} if 'candidate' in context else {'items':[]}
-            else: output={'introduction':'本场比较执行成本。','positions':[],'consensus_indices':[],'disagreement_indices':[],'pending':'尚待确认试点边界。'} if 'candidate' in context else {'content':'主持人总结：各方讨论了执行成本，但尚未充分形成共识。'}
+            else: output={'introduction':'本场比较执行成本。','positions':[],'consensus_indices':[],'disagreement_indices':[],'pending':[]} if 'candidate' in context else {'content':'主持人总结：各方讨论了执行成本，但尚未充分形成共识。'}
             payload=json.dumps({'model':'controlled-http','choices':[{'finish_reason':'stop','message':{'content':json.dumps(output,ensure_ascii=False),'reasoning_content':'hidden-provider-sentinel'}}],'usage':{'total_tokens':15}}).encode()
             self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload)
     server=ThreadingHTTPServer(('127.0.0.1',0),Upstream)

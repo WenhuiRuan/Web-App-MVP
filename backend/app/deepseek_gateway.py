@@ -96,12 +96,16 @@ class SummaryPosition(Contract):
     content: str = Field(min_length=1, max_length=400)
 
 
+class SummaryPending(Quote):
+    issue: Literal['UNANSWERED_QUESTION','UNVERIFIED_PROPOSAL','SCOPE_UNCLEAR','UNIT_OR_DIRECTION_UNCLEAR']
+
+
 class SummaryReview(Contract):
     introduction: str = Field(min_length=1, max_length=500)
     positions: tuple[SummaryPosition, ...] = Field(max_length=6)
     consensus_indices: tuple[StrictInt, ...]
     disagreement_indices: tuple[StrictInt, ...]
-    pending: str = Field(max_length=1200)
+    pending: tuple[SummaryPending, ...] = Field(max_length=3)
 
 
 def reviewed_summary(request, content):
@@ -115,7 +119,9 @@ def reviewed_summary(request, content):
             if person.kind != 'EXPERT' or len(set(position.source_turns)) != len(position.source_turns) or any(
                 turn not in messages or messages[turn].participant_id != person.id for turn in position.source_turns):
                 raise invalid('summary_author')
-            positions.append(person.name + '：' + position.content)
+            if not any(position.content in messages[turn].content for turn in position.source_turns):
+                raise invalid('summary_position_quote')
+            positions.append(person.name + '提出：“' + position.content + '”')
         def selected(indices, kind):
             if len(set(indices)) != len(indices): raise invalid('summary_insight_reference')
             if any(index < 0 or index >= len(request.insights.items) or request.insights.items[index].kind != kind for index in indices):
@@ -123,10 +129,18 @@ def reviewed_summary(request, content):
             return '；'.join(request.insights.items[index].content for index in indices)
         consensus = selected(reviewed.consensus_indices, 'consensus')
         disagreement = selected(reviewed.disagreement_indices, 'disagreement')
-        body = '\n'.join([reviewed.introduction, '主要观点：' + ('；'.join(positions) or '尚无专家明确提出方案。'),
+        labels = dict(UNANSWERED_QUESTION='追问待核对',UNVERIFIED_PROPOSAL='提案待验证',
+            SCOPE_UNCLEAR='范围或前提待核对',UNIT_OR_DIRECTION_UNCLEAR='单位或方向待核对')
+        pending=[]
+        for item in reviewed.pending:
+            if item.turn not in messages or item.quote not in messages[item.turn].content:
+                raise invalid('summary_pending_quote')
+            person=next(p for p in request.participants if p.id==messages[item.turn].participant_id)
+            pending.append(f'{labels[item.issue]}（{person.name}第{item.turn}条）：“{item.quote}”')
+        body = '\n'.join([reviewed.introduction, '主要观点：\n' + ('\n'.join(positions) or '尚无专家明确提出方案。'),
             '已有共识：' + (consensus or '尚无充分共识。'),
             '未解决分歧：' + (disagreement or '尚无充分证据表明已发生明确分歧。'),
-            '待澄清：' + (reviewed.pending or '暂无进一步明确的待澄清问题。')])
+            '待澄清：\n' + ('\n'.join(pending) or '暂无进一步明确的待澄清问题。')])
         return json.dumps({'content': body}, ensure_ascii=False)
     except InvalidModelResult:
         raise

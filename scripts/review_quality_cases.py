@@ -10,7 +10,7 @@ from uuid import NAMESPACE_URL, uuid5
 import httpx
 
 from backend.app.config import load_settings
-from backend.app.contracts import InsightBatch, ModelRequest, Snapshot
+from backend.app.contracts import InsightBatch, ModelRequest, ModelResultAdapter, Snapshot
 from backend.app.deepseek_gateway import DeepSeekGateway, missing_configuration, public_context
 from backend.app.engine import DiscussionEngine, ModelCallFailure, RunDeadline
 
@@ -67,7 +67,7 @@ def cases(live_snapshot=None):
         yield 'live-host',dict(base,messages=snapshot.messages[:9]), '主持串联任务含错误作者提示，必须依据实际第9条纠正。'
 
 
-async def review(output_path, selected, live_snapshot=None):
+async def review(output_path, selected, live_snapshot=None, summaries_from=None):
     settings = load_settings()
     missing = missing_configuration(settings)
     if settings.model_provider != 'deepseek' or missing:
@@ -83,6 +83,9 @@ async def review(output_path, selected, live_snapshot=None):
     async def final_answer(response):
         await response.aread()
         if response.status_code == 200:
+            body=json.loads(response.request.content)
+            active.setdefault('provider_inputs',[]).append({key:body[key] for key in
+                ('model','thinking','response_format','stream','max_tokens','messages')})
             # Deliberately select only the public final answer, never reasoning or headers.
             value = response.json()['choices'][0]['message'].get('content')
             active.setdefault('provider_final_answers', []).append(value)
@@ -95,9 +98,9 @@ async def review(output_path, selected, live_snapshot=None):
             def save():
                 (output / f'{name}.json').write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding='utf-8')
             async def call(req):
-                active.clear(); active.update(case=name, provider_final_answers=[])
+                active.clear(); active.update(case=name, provider_final_answers=[],provider_inputs=[])
                 entry = dict(request=req.model_dump(mode='json'), public_context=public_context(req),
-                    provider_final_answers=active['provider_final_answers'])
+                    provider_final_answers=active['provider_final_answers'],provider_inputs=active['provider_inputs'])
                 record['calls'].append(entry); save()
                 supervisor = SimpleNamespace(repository=None, _db_call=None, settings=settings,
                     gateway_getter=lambda: gateway, semaphore=asyncio.Semaphore(settings.model_max_concurrency), closing=False)
@@ -117,7 +120,11 @@ async def review(output_path, selected, live_snapshot=None):
                     await call(ModelRequest(**base,task='utterance',actor_id=next(p.id for p in base['participants'] if p.kind=='HOST'),cycle=10,
                         host_task='linking',public_focus=full['messages'][9]['content'][:140]))
                     continue
-                points = await call(ModelRequest(**base, task='insights', through_turn=len(base['messages']), insight_version=7))
+                if summaries_from:
+                    prior=json.loads((Path(summaries_from)/f'{name}.json').read_text(encoding='utf-8'))
+                    points=ModelResultAdapter.validate_python(next(c['result'] for c in prior['calls'] if c['request']['task']=='insights'))
+                else:
+                    points = await call(ModelRequest(**base, task='insights', through_turn=len(base['messages']), insight_version=7))
                 if name in ('live-8','live-10'): continue
                 people = ModelRequest(**base, task='insights', through_turn=len(base['messages']), insight_version=7).participants
                 await call(ModelRequest(**base, task='summary', actor_id=people[0].id,
@@ -132,5 +139,6 @@ if __name__ == '__main__':
     parser.add_argument('--output', required=True)
     parser.add_argument('--cases', nargs='*')
     parser.add_argument('--live-snapshot')
+    parser.add_argument('--summaries-from',help='Reuse saved insights; only review affected summaries')
     args = parser.parse_args()
-    asyncio.run(review(args.output, args.cases, args.live_snapshot))
+    asyncio.run(review(args.output, args.cases, args.live_snapshot, args.summaries_from))
