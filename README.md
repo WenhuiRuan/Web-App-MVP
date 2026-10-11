@@ -98,7 +98,7 @@ Settings、`.env.example` 和日常真实配置采用同一套已验证有限预
 .\.venv\Scripts\python.exe -m scripts.final_samples
 # 服务停止时离线导入独立库；再次执行 imported=0, skipped=5
 .\.venv\Scripts\python.exe -m scripts.final_samples --database work/examples.sqlite3
-# 启动此库，首页“全部”可进入 READY 阵容，确认后才讨论
+# 启动此库，首页“已保存的讨论”可进入 READY 阵容，确认后才讨论
 $env:DATABASE_PATH='work/examples.sqlite3'
 .\scripts\start-backend.ps1 -ModelMode mock
 ```

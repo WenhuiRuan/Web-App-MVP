@@ -1,0 +1,114 @@
+{
+  "kind": "fresh-install-startup-check",
+  "date": "2026-10-11",
+  "revision": "12ba05c35eacec51e429a6d7e787cfeaa74cc7f7",
+  "browser": "Microsoft Edge",
+  "frontend_port": 15180,
+  "backend_port": 18100,
+  "system": {
+    "status": 200,
+    "body": {
+      "name": "AI Panel Studio",
+      "version": "0.6.0",
+      "phase": 6,
+      "model_mode": "mock",
+      "model_provider": "mock",
+      "model_name": "",
+      "discussion_engine_available": true
+    }
+  },
+  "ready": {
+    "status": 200,
+    "body": {
+      "status": "ready",
+      "database": "ready",
+      "model_mode": "mock"
+    }
+  },
+  "sample_count": 5,
+  "roster_people": 5,
+  "home_saved_samples": 5,
+  "refresh_restored": true,
+  "page_errors": [],
+  "requests": [
+    "GET /api/system",
+    "GET /api/health/ready",
+    "GET /api/system",
+    "GET /api/health/ready",
+    "GET /api/system",
+    "GET /api/health/ready",
+    "GET /api/discussions",
+    "GET /api/discussions",
+    "GET /api/system",
+    "GET /api/discussions",
+    "GET /api/system",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba",
+    "GET /api/discussions",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba/events",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba",
+    "GET /api/discussions",
+    "GET /api/system",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba",
+    "GET /api/discussions",
+    "GET /api/system",
+    "GET /api/discussions/482f9f95-5d55-5149-b4ff-efd8891a01ba/events"
+  ],
+  "model_calls": 0,
+  "business_full_e2e_reused": true,
+  "installation_directory": "work\\first-install-20261011-015245\\ai-panel-studio",
+  "installation": {
+    "new_venv": true,
+    "locked_pip_install": true,
+    "pip_check": "No broken requirements found",
+    "npm_ci": "29 packages, 8 seconds",
+    "initial_migrations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "repeat_migrations": [],
+    "sample_imports": [
+      {
+        "imported": 5,
+        "skipped": 0
+      },
+      {
+        "imported": 0,
+        "skipped": 5
+      }
+    ],
+    "typecheck": "PASS",
+    "production_build_ms": 479,
+    "contract_check": "PASS",
+    "document_check": "147 requirements / 157 cases / 23 docs",
+    "secrets_read": false
+  },
+  "dependency_lock_hashes": {
+    "backend\\requirements.lock": "026f0c679b3eff96bf00016ec62425e58f885c208c8bbd4a3bda681283a62270",
+    "frontend\\package-lock.json": "6bc908d8109d82944f5d1c2244d2b3c5faf4333eae77c7d13526da44c675e26d"
+  },
+  "database_checks": {
+    "schema_versions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "foreign_key_violations": [],
+    "integrity": "ok",
+    "discussion_count": 5,
+    "run_count": 0,
+    "event_count": 15
+  },
+  "earlier_failures": [
+    "Initial startup Port parameter misplaced; moved to first line and actual startup passed",
+    "Candidate omitted 4 Markdown-linked historical quality reports; included them and fresh document check passed"
+  ]
+}

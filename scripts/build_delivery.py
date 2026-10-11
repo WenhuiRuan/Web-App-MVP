@@ -35,7 +35,9 @@ def permitted(name):
         return False
     if path.name.startswith('.env') and not path.name.endswith('.example'):
         return False
-    if path.suffix.lower() in {'.db', '.sqlite', '.sqlite3', '.key', '.pem', '.p12', '.pfx', '.log', '.zip', '.pyc'}:
+    if re.search(r'\.(?:db|sqlite|sqlite3)(?:-(?:wal|shm|journal))?$', path.name, re.I):
+        return False
+    if path.suffix.lower() in {'.key', '.pem', '.p12', '.pfx', '.jks', '.log', '.zip', '.pyc'}:
         return False
     if len(path.parts) == 1 and name not in TOP_LEVEL:
         return False

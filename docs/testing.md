@@ -6,7 +6,7 @@
 
 配置用例先 2 failed / 1 passed（0.44 秒），统一 Settings 与示例后通过；样例工具最初缺模块，加载器完成后导入 3 failed / 2 passed（0.53 秒），再实现同事务离线导入。新增配置/样例加受影响基础及契约共 **14 passed / 1.85 秒**。覆盖默认预算与环境优先级、日常 20 与验证 8 上限、重复导入、跨讨论引用、冲突不覆盖及整批写入失败回滚。警告是现有 Starlette TestClient/httpx 弃用提示，未更改锁定依赖。
 
-独立新安装、数据库/样例重复操作、启动与浏览器代理检查结果见 [交付核对](delivery.md)，当前按实际完成状态维护。
+独立新安装、数据库/样例重复操作、启动与浏览器代理检查结果见 [交付核对](delivery.md)，独立锁定安装/001–006/五份导入与重复/真实浏览器代理及阵容刷新全部通过，模型调用0。代码12ba05c，报告data/delivery/first-run.json。
 
 ## 沿用的已验证业务结果
 
@@ -26,3 +26,7 @@
 在项目根按 README 安装，再运行 `python -m pytest -q`；只复现本批用 `python -m pytest backend/tests/test_delivery_config.py backend/tests/test_final_samples.py backend/tests/test_foundation.py backend/tests/test_artifacts.py -q`。执行 `python -m scripts.export_contracts --check` 和 `python -m scripts.check_docs` 检查契约产物/文档，`npm --prefix frontend run build` 做类型及生产构建。
 
 `npm --prefix frontend run test:live` 使用独立临时库和后端替身；`?mode=mock` 是另一种前端台本，不作业务验收。真实验证脚本是主动付费入口，不属于首次安装或常规测试步骤。
+
+## 交付导出规则补验
+
+导出边界新增用例先4 failed / 1 passed（0.20秒）：意外已跟踪的数据库WAL/SHM/journal与JKS也必须排除，不能只依赖.gitignore。补充拒绝规则后，导出安全、配置与样例13 passed / 0.59秒；不重跑未影响的引擎或E2E。当前包未发现真实运行文件，本次用例是防止导出规则将未来误跟踪文件带出。常见密钥模式与JSON隐藏推理字段负例通过，没有读取用户实际密钥。

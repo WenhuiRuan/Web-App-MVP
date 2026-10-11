@@ -4,7 +4,7 @@
 
 当前配置（验收收尾）：六任务默认 thinking=enabled、reasoning_effort=low、max_tokens=16384；用户已允许全部任务思考。下文high/8192和短预算为历史验证配置。最终修正后的整场浏览器和本批核心内容复核通过；此前402失败独立保留，详见[本批质量记录](quality-acceptance.md)。
 
-多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖为120/240/180/600秒（HTTP/观点/总结/讨论）；可控上游、引擎及一次新完整真实场通过，最后一批135.734秒仍成功。不是p95/并发保证，用户.env保持不变。
+多步insights/summary网关显式声明multi_step_synthesis：MODEL_TIMEOUT_SECONDS用于每个HTTP请求的httpx超时，所有草稿、逐项复核、重试、排队共用INSIGHT_MAX_SECONDS或SUMMARY_MAX_SECONDS总截止时间。普通任务仍受原单次调用和讨论截止时间约束。统一调用层是唯一重试所有者，子请求不自行重试。有限过程覆盖为120/240/180/600秒（HTTP/观点/总结/讨论）；可控上游、引擎及一次新完整真实场通过，最后一批135.734秒仍成功。不是p95/并发保证；该验证阶段保留.env，阶段6B仅同步非敏感配置。
 
 ## 当前启动配置（2026-10-11）
 
@@ -20,7 +20,7 @@
 
 ## 配置与就绪
 
-Settings 读取项目 .env，进程环境优先。MODEL_API_KEY=${PANEL_API_KEY} 使用 dotenv 展开；PANEL_API_KEY 必须被后端进程继承。机器级设置后已打开的终端可能尚未继承；重新打开终端，或仅将这个已授权变量导入后端启动进程。不打印、不改写用户 .env、不读取 Codex 凭据。
+Settings 读取项目 .env，进程环境优先。MODEL_API_KEY=${PANEL_API_KEY} 使用 dotenv 展开；PANEL_API_KEY 必须被后端进程继承。机器级设置后已打开的终端可能尚未继承；重新打开终端，或仅将这个已授权变量导入后端启动进程。不打印密钥、不改写密钥引用、不读取 Codex 凭据。
 
 必填 MODEL_BASE_URL、MODEL_NAME、MODEL_API_KEY；缺失/未展开时 ready=503，只列变量名。地址只允许 HTTPS，测试可 loopback HTTP；拒绝 URL 用户信息/query/fragment，关闭重定向。未知 provider 报 MODEL_PROVIDER。ready 只证明配置和数据库就绪，不检查认证、余额或网络，不发起付费调用。
 
