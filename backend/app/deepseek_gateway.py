@@ -324,6 +324,9 @@ def public_context(request):
         constraint=constraints[request.validation_feedback],
         instruction='上次最终回答未通过校验，请重新生成完整JSON。发言仅含sentences，恰好1–2项，每项一句非空正文、最多200字，总计含标点最多400字。保持角色、回应目标和任务；不要截断或照搬多句。' if request.task=='utterance' else '按当前任务字段、引用归属及证据约束纠正后重新生成完整JSON，不加解释或代码块。')
     return {'task': request.task, 'topic': request.topic, 'expert_count': request.expert_count,
+        **({'opening_rules':dict(original_question=request.topic,background_max_sentences=1,
+            question_must_be_last=True,assign_guest_directions=False)}
+            if request.task=='utterance' and request.host_task=='opening' else {}),
         'attempt':request.attempt, 'output_correction':correction,
         'participants': participants,
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,

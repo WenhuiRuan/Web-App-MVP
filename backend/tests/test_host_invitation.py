@@ -3,6 +3,7 @@ import asyncio
 import json
 
 import httpx
+import pytest
 from fastapi.testclient import TestClient
 
 from backend.app.config import Settings
@@ -13,6 +14,27 @@ from backend.tests.test_deepseek import request, config, answer
 from backend.tests.test_discussion_engine import ControlledGateway, start_ready
 from backend.tests.test_roster_tasks import wait_for
 from backend.tests.test_scheduling import panel, intent
+
+
+@pytest.mark.parametrize('topic', [
+    '你认为AI的飞速发展，在未来几年是否会造成大规模失业？',
+    '城市中的流浪猫应该以定点投喂和绝育管理为主，还是逐步转向收容与领养？',
+])
+def test_opening_http_context_preserves_created_question_after_background(topic):
+    req=request('utterance').model_copy(update={'topic':topic,'host_task':'opening','messages':()})
+    def upstream(http_req):
+        context=json.loads(json.loads(http_req.content)['messages'][1]['content'])
+        rules=context['opening_rules']
+        assert rules['original_question']==topic and context['topic']==topic
+        assert rules['question_must_be_last'] and rules['background_max_sentences']==1
+        assert rules['assign_guest_directions'] is False
+        # Controlled response checks transport and parsing, not actual model style.
+        return httpx.Response(200,json=answer({'sentences':['这个议题涉及多方影响，需要区分事实与判断。',rules['original_question']]}))
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+            result=await DeepSeekGateway(config(),client=client).generate(req)
+        assert len(result.sentences)==2 and result.sentences[-1]==topic
+    asyncio.run(run())
 
 
 def test_actual_intent_http_context_marks_host_question_as_optional():

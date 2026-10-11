@@ -53,3 +53,5 @@
 共享调用层额外受影响回归：insight_pipeline、summary_pipeline、summary_recovery、roster_tasks、turn_transactions、delivery_config、delivery_archive、final_samples，93 passed /63.63秒。两个新增模块联合34 passed /13.11秒；收尾新增引号结尾正文不重复加句号用例先1 failed /0.97秒，再修复组装判断，新model_recovery增至32项。各批次有重叠，不能合计为全量。
 
 最终引号组装修复后，仅两个新增模块/讨论引擎/发言事务再运行，69 passed /40.10秒（32+3项新增已含在内）。对应源码和Prompt SHA在data/quality/model-recovery/verification.json；包内manifest及Git历史标识提交版本。本轮真实调用数0，新的付费全程未执行。
+
+开场背景/原题补正：两个不同原题HTTPcontext用例先2 failed /1.19秒，实现opening_rules与两份主持Prompt后，host_invitation、deepseek、deepseek_http联合80 passed /5.64秒；host_invitation目前5项。验证原题原样传递、背景+原题受控返回及原自主参与回归，不证明模型实际语义执行。代码/Prompt身份另存opening-question.json，不覆盖384dc6e对应verification.json；调用付费模型0，未重跑无关引擎/SSE/布局/安装。

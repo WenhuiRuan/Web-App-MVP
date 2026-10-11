@@ -304,3 +304,5 @@ outcome=SUCCEEDED/FAILED/CANCELLED/DEADLINE/HOST_SKIPPED，安全failure_type详
 非开场主持非法输出重试耗尽可最多累计2次HOST_SKIPPED，原领取取消并同事务角色IDLE事件，下一周期专家自主决定；不发布turn.committed或虚假提问，不增加message_position。认证/取消/数据库错误不恢复；超限继续原FAILED和failure_code。旧失败场未保存诊断，007不能补出原响应原因。重启后端才启用；本轮只有可控验收，用户真实复测待完成。
 
 意图上游context新增participation_rules：host_question_is_invitation=true、may_pass=true、may_challenge_question=true、must_follow_host_conclusion=false，public_focus不继承主持任务。职业、stance及真实messages保留，PASS仍须target_turn=null，实际补充/反驳仍绑定当前已提交消息；主持点名不给出强制发言命令或预设结论。
+
+opening上游context增加opening_rules：original_question逐字取本次request.topic、background_max_sentences=1、question_must_be_last=true、assign_guest_directions=false。开场先可有最多一句中立背景，最后照引原题，不能重设为条件/应对等子问题；规则只传opening，HTTP/SSE/内部ModelRequest格式不变。不在后端强制拼接正文或新增逐字提交校验，受控验证只证明字段传输/解析，真实表达仍待用户复核，见model-recovery。

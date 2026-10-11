@@ -520,3 +520,9 @@ PL-018/019授权；开始main=53769ad、工作区干净。用户原1a44讨论/ru
 受影响的阵容/观点/总结/事务/配置/导出/样例93 passed/63.63秒；新恢复/主持联合34 passed/13.11秒，有重叠不相加。最后引号正文组装会重复补句号，1 failed/0.97秒后修复，仅在闭引号前已有终止符时保留正文，新恢复用例32项。此通用问题不能据此解释原未保存响应；正式短句约束及总长度保留，真实复测仍由用户执行。
 
 最终受影响补验69 passed/40.10秒（model_recovery、host_invitation、discussion_engine、turn_transactions）。实际原开场第1条确实逐一分配四人的职业角度，报告保留原文依据与说明写法示例，未包装为修正后真实输出。当前代码/Prompt安全SHA与测试范围记录verification.json；提交后候选ZIP按clean HEAD生成并逐文件、契约、五份阵容/导入、文档及新库迁移重复核对，结果outputs/delivery-check.json。依赖锁/安装/布局/SSE历史证据不冒称本轮重新执行，最新真实修正版仍待用户重启后端验证。
+
+## 2026-10-11：开场简短背景后提出创建原题
+
+PL-020授权，从clean384dc6e继续。用户指出此前主持例子将原题换成“哪些条件会……”子问题；改utterance开场为最多一句中立背景、最后照引创建原题，host_control围绕原题不由条件追问重定义议题。DeepSeek opening context携带原题及background_max_sentences=1/question_must_be_last/禁止分工，不在后端硬拼发言或修改通用校验、预算、调度和数据库。
+
+两个不同议题HTTPcontext用例先2 failed/1.19秒（缺opening_rules），实现后host_invitation/deepseek/deepseek_http80 passed/5.64秒，host_invitation共5项。原题/背景受控返回的请求与解析通过，不计为真实模型语义效果；无付费调用、无实际服务重启、无旧数据修改。code/Prompt SHA和受影响结果另存opening-question.json，原verification.json作为384dc6e历史证据不覆盖；当前示例、README/API/架构/约定/验收/测试同步。提交后按clean HEAD重建候选ZIP并核对当前哈希、契约和文档，真实复测仍由用户重启后端后新建讨论执行。
