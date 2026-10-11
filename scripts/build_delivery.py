@@ -8,7 +8,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
-TOP_LEVEL = {'.gitignore', '.env.example', 'AGENTS.md', 'README.md', 'pyproject.toml', 'pytest.ini'}
+TOP_LEVEL = {'.gitignore', '.gitattributes', '.env.example', 'AGENTS.md', 'README.md', 'pyproject.toml', 'pytest.ini'}
 SOURCE_DIRS = {'backend', 'frontend', 'scripts', 'db', 'docs', 'data'}
 EVIDENCE_PREFIXES = (
     'data/quality/stage6a-acceptance/complete-final/',
@@ -18,6 +18,10 @@ EVIDENCE_FILES = {
     'data/quality/stage6a/topic-1.json', 'data/quality/stage6a/topic-2.json',
     'data/quality/stage6a/known-calls.json',
     'data/quality/stage6a-revision/complete-browser.json',
+    'data/quality/stage6a-revision/manifest.json',
+    'data/quality/stage6a-revision/database-evidence.json',
+    'data/quality/stage6a-revision/browser-report.json',
+    'data/quality/stage6a-revision/call-statistics.json',
     'data/quality/stage6a-acceptance/verified-version.json',
 }
 FORBIDDEN_PARTS = {'.git', '.venv', 'venv', 'node_modules', '__pycache__', '.cache',
