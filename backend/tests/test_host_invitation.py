@@ -19,22 +19,66 @@ from backend.tests.test_scheduling import panel, intent
 @pytest.mark.parametrize('topic', [
     '你认为AI的飞速发展，在未来几年是否会造成大规模失业？',
     '城市中的流浪猫应该以定点投喂和绝育管理为主，还是逐步转向收容与领养？',
+    '大学课堂应该禁止使用手机吗？',
+    '公共图书馆是否应该延长夜间开放时间？',
 ])
-def test_opening_http_context_preserves_created_question_after_background(topic):
-    req=request('utterance').model_copy(update={'topic':topic,'host_task':'opening','messages':()})
+def test_opening_asks_original_topic_and_invites_without_prefilled_angles(topic):
+    req=request('utterance').model_copy(update={'topic':topic,'host_task':'opening','messages':(),
+        'public_focus':'说明议题与讨论范围', 'attempt':2,'validation_feedback':'SENTENCE_COUNT'})
     def upstream(http_req):
-        context=json.loads(json.loads(http_req.content)['messages'][1]['content'])
+        body=json.loads(http_req.content)
+        context=json.loads(body['messages'][1]['content'])
         rules=context['opening_rules']
         assert rules['original_question']==topic and context['topic']==topic
-        assert rules['question_must_be_last'] and rules['background_max_sentences']==1
+        assert rules['preserve_topic_meaning'] and rules['invite_views']
+        assert rules['allow_analysis_framework'] is False
         assert rules['assign_guest_directions'] is False
+        assert 'background_max_sentences' not in rules and 'question_must_be_last' not in rules
+        assert context['participants']==[{'slot':0,'kind':'HOST','name':req.participants[0].name,'title':req.participants[0].title}]
+        assert context['actor_slot']==0 and context['host_task']=='opening'
+        assert 'public_focus' not in context and 'messages' not in context
+        assert 'stance' not in json.dumps(context,ensure_ascii=False)
+        assert context['attempt']==2 and context['output_correction']['failure_type']=='SENTENCE_COUNT'
+        system=body['messages'][0]['content']
+        assert '不列讨论维度' in system and '自然的口语' in system
+        assert '职业决定关注点' not in system and '先区分两种情况' not in system
+        assert 'followup' not in system and 'linking' not in system
         # Controlled response checks transport and parsing, not actual model style.
-        return httpx.Response(200,json=answer({'sentences':['这个议题涉及多方影响，需要区分事实与判断。',rules['original_question']]}))
+        return httpx.Response(200,json=answer({'sentences':[rules['original_question'],'各位怎么看？']}))
     async def run():
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
             result=await DeepSeekGateway(config(),client=client).generate(req)
-        assert len(result.sentences)==2 and result.sentences[-1]==topic
+        assert result.sentences==(topic,'各位怎么看？')
     asyncio.run(run())
+
+
+def test_followup_keeps_actual_transcript_and_reference_without_opening_rules():
+    req=request('utterance')
+    target=req.messages[-1]
+    req=req.model_copy(update={'host_task':'followup','host_reference_message_id':target.id,
+        'addressed_actor_id':target.participant_id,'public_focus':'刚才的建议是否有依据？'})
+    def upstream(http_req):
+        body=json.loads(http_req.content);context=json.loads(body['messages'][1]['content'])
+        assert 'opening_rules' not in context
+        assert len(context['participants'])==len(req.participants)
+        assert context['messages'][-1]['content']==target.content
+        assert context['host_reference_message']['turn']==target.turn_no
+        assert context['addressed_slot']==2
+        assert context['public_focus']==req.public_focus
+        assert 'followup基于已经出现的具体主张' in body['messages'][0]['content']
+        return httpx.Response(200,json=answer({'sentences':['刚才提到执行成本需要验证，你愿意说明依据吗？']}))
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
+            result=await DeepSeekGateway(config(),client=client).generate(req)
+        assert len(result.sentences)==1
+    asyncio.run(run())
+
+
+def test_mock_opening_does_not_install_a_discussion_framework():
+    from backend.app.model_gateway import DeterministicModelGateway
+    req=request('utterance').model_copy(update={'host_task':'opening','messages':()})
+    result=asyncio.run(DeterministicModelGateway().generate(req))
+    assert result.sentences==('今天这个议题，大家怎么看？',)
 
 
 def test_actual_intent_http_context_marks_host_question_as_optional():

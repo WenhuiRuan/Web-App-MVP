@@ -323,10 +323,17 @@ def public_context(request):
     correction = None if request.validation_feedback is None else dict(failure_type=request.validation_feedback,
         constraint=constraints[request.validation_feedback],
         instruction='上次最终回答未通过校验，请重新生成完整JSON。发言仅含sentences，恰好1–2项，每项一句非空正文、最多200字，总计含标点最多400字。保持角色、回应目标和任务；不要截断或照搬多句。' if request.task=='utterance' else '按当前任务字段、引用归属及证据约束纠正后重新生成完整JSON，不加解释或代码块。')
+    if request.task == 'utterance' and request.host_task == 'opening':
+        # Opening asks the created topic, before any public opinions exist.
+        # Guest personas and the engine's generic focus must not pre-frame it.
+        return dict(task=request.task, topic=request.topic, host_task='opening',
+            actor_slot=slots.get(request.actor_id),
+            participants=[dict(slot=slots[p.id], kind=p.kind, name=p.name, title=p.title)
+                for p in request.participants if p.id == request.actor_id],
+            opening_rules=dict(original_question=request.topic, preserve_topic_meaning=True,
+                invite_views=True, allow_analysis_framework=False, assign_guest_directions=False),
+            attempt=request.attempt, output_correction=correction)
     return {'task': request.task, 'topic': request.topic, 'expert_count': request.expert_count,
-        **({'opening_rules':dict(original_question=request.topic,background_max_sentences=1,
-            question_must_be_last=True,assign_guest_directions=False)}
-            if request.task=='utterance' and request.host_task=='opening' else {}),
         'attempt':request.attempt, 'output_correction':correction,
         'participants': participants,
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,
@@ -445,7 +452,8 @@ class DeepSeekGateway:
             response_format={'type': 'json_object'}, stream=False,
             max_tokens=2200 if request.task in ('roster', 'summary', 'insights') else 700,
             messages=[{'role': 'system', 'content': prompt('common') + '\n' +
-                       prompt(request.task + '_' + stage if stage in ('review','repair') else request.task)},
+                       prompt('opening' if request.task=='utterance' and request.host_task=='opening'
+                              else request.task + '_' + stage if stage in ('review','repair') else request.task)},
                       {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}])
         if self.settings.model_thinking_mode == 'enabled':
             body.update(reasoning_effort=self.settings.model_reasoning_effort,

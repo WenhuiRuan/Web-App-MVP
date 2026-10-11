@@ -54,4 +54,8 @@
 
 最终引号组装修复后，仅两个新增模块/讨论引擎/发言事务再运行，69 passed /40.10秒（32+3项新增已含在内）。对应源码和Prompt SHA在data/quality/model-recovery/verification.json；包内manifest及Git历史标识提交版本。本轮真实调用数0，新的付费全程未执行。
 
-开场背景/原题补正：两个不同原题HTTPcontext用例先2 failed /1.19秒，实现opening_rules与两份主持Prompt后，host_invitation、deepseek、deepseek_http联合80 passed /5.64秒；host_invitation目前5项。验证原题原样传递、背景+原题受控返回及原自主参与回归，不证明模型实际语义执行。代码/Prompt身份另存opening-question.json，不覆盖384dc6e对应verification.json；调用付费模型0，未重跑无关引擎/SSE/布局/安装。
+历史PL-020（b53d42b）的开场背景/原题补正：两个不同原题HTTPcontext用例先2 failed /1.19秒，实现opening_rules与两份主持Prompt后，host_invitation、deepseek、deepseek_http联合80 passed /5.64秒；host_invitation目前5项。验证原题原样传递、背景+原题受控返回及原自主参与回归，不证明模型实际语义执行。代码/Prompt身份另存opening-question.json，不覆盖384dc6e对应verification.json；调用付费模型0，未重跑无关引擎/SSE/布局/安装。
+
+PL-021开场隔离：先host_invitation 5 failed /4 passed（2.35秒），新规则缺失及mock固定框架；实现后`python -m pytest backend/tests/test_host_invitation.py backend/tests/test_deepseek.py backend/tests/test_deepseek_http.py -q`为84 passed /5.31秒。host_invitation现9项，验证四种原议题、独立开场Prompt、排除嘉宾立场/通用focus/专家分析示例、保留纠正反馈，后续追问仍有实际来源，以及专家自主PASS回归。替身实际HTTP不证明Prompt语义效果；付费调用0，原始质量记录保留。版本SHA另存opening-invitation.json；opening-question.json继续只对应b53d42b。未重跑未受影响布局/SSE/安装/完整E2E。
+
+契约/制品受影响补验21 passed /1.52秒；export_contracts --check通过，未修改公开接口或机器契约。文档检查147需求/157验收/25文档通过（首次因新证据文件尚未生成而链接缺失，生成后通过，非业务TDD失败）。提交后交付包按manifest和当前opening-invitation.json逐文件核对，解包独立临时数据库/样例/普通FastAPI启动结果见outputs/delivery-check.json；使用现有锁定环境，不冒称重新安装依赖。

@@ -305,4 +305,10 @@ outcome=SUCCEEDED/FAILED/CANCELLED/DEADLINE/HOST_SKIPPED，安全failure_type详
 
 意图上游context新增participation_rules：host_question_is_invitation=true、may_pass=true、may_challenge_question=true、must_follow_host_conclusion=false，public_focus不继承主持任务。职业、stance及真实messages保留，PASS仍须target_turn=null，实际补充/反驳仍绑定当前已提交消息；主持点名不给出强制发言命令或预设结论。
 
-opening上游context增加opening_rules：original_question逐字取本次request.topic、background_max_sentences=1、question_must_be_last=true、assign_guest_directions=false。开场先可有最多一句中立背景，最后照引原题，不能重设为条件/应对等子问题；规则只传opening，HTTP/SSE/内部ModelRequest格式不变。不在后端强制拼接正文或新增逐字提交校验，受控验证只证明字段传输/解析，真实表达仍待用户复核，见model-recovery。
+opening上游context使用独立opening.md（仍属于utterance任务），opening_rules为：
+
+```json
+{"original_question":"公共图书馆是否应该延长夜间开放时间？","preserve_topic_meaning":true,"invite_views":true,"allow_analysis_framework":false,"assign_guest_directions":false}
+```
+
+original_question直接来自request.topic；开场自然提出原题并向全场邀请看法，1–2句，不改成条件/应对子问题、不添加分析框架或逐人任务。开场context仅含task/topic/host_task/actor_slot、主持身份participants及attempt/output_correction，不携带专家职业/stance、public_focus、messages或观点，避免提前安排切入角度。slot仍使用本场原始位置，结果身份仍由后端校验绑定。讨论中的followup/linking仍使用原公开Transcript、实际回应对象和具体疑问；专家参与context及仲裁不变。HTTP/SSE和内部ModelRequest契约不变；不硬拼正文、不新增逐字匹配或语义保证。受控检查与真实待验范围见model-recovery。

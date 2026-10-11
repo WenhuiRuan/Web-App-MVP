@@ -1,6 +1,6 @@
 # 实际进展记录
 
-更新：2026-10-11。阶段6A历史真实质量验收保留；当前为模型失败诊断/纠正/有限恢复及非强制主持修正，代码和可控验证完成，最新真实页面复测待用户，实际状态见末节。此前结果不覆盖原失败。
+更新：2026-10-11。阶段6A历史真实质量验收保留；当前为模型失败诊断/纠正/有限恢复、非强制主持及开场无预设框架修正，代码和可控验证完成，最新真实页面复测待用户，实际状态见末节。此前结果不覆盖原失败。
 
 ## 阶段1范围与实际产出（历史）
 
@@ -526,3 +526,9 @@ PL-018/019授权；开始main=53769ad、工作区干净。用户原1a44讨论/ru
 PL-020授权，从clean384dc6e继续。用户指出此前主持例子将原题换成“哪些条件会……”子问题；改utterance开场为最多一句中立背景、最后照引创建原题，host_control围绕原题不由条件追问重定义议题。DeepSeek opening context携带原题及background_max_sentences=1/question_must_be_last/禁止分工，不在后端硬拼发言或修改通用校验、预算、调度和数据库。
 
 两个不同议题HTTPcontext用例先2 failed/1.19秒（缺opening_rules），实现后host_invitation/deepseek/deepseek_http80 passed/5.64秒，host_invitation共5项。原题/背景受控返回的请求与解析通过，不计为真实模型语义效果；无付费调用、无实际服务重启、无旧数据修改。code/Prompt SHA和受影响结果另存opening-question.json，原verification.json作为384dc6e历史证据不覆盖；当前示例、README/API/架构/约定/验收/测试同步。提交后按clean HEAD重建候选ZIP并核对当前哈希、契约和文档，真实复测仍由用户重启后端后新建讨论执行。
+
+## 2026-10-11：PL-021开场原议题口语提问，不设分析框架
+
+从clean b53d42b继续。旧背景要求、专家分析示例、开场嘉宾立场与通用“讨论范围”focus存在预设角度诱因；拆出opening.md，并仅传原题/主持身份/开放规则/纠正反馈。去除开场背景/最后照引强制顺序，保留原题含义并允许自然口语，专家自主选择切入点；后续澄清依据实际发言。mock固定框架替换为通用邀请；engine/intent/scheduling/角色来源校验、数据库及预算不改。
+
+先5 failed /4 passed（2.35秒），再host_invitation/deepseek/deepseek_http 84 passed /5.31秒，四种原题HTTP/Prompt/context、原纠正反馈与后续实际来源、自主参与回归通过；不是实际模型输出验收。四个人工示例逐条检查无概念划分、框架或分工；原场/历史opening-question.json等保留，最新SHA见opening-invitation.json。付费调用0；用户需重启后端新建场复核，现有服务未操作。README/架构/API/约定/决策/验收/测试/原文记录同步；按提交后clean HEAD重建候选ZIP核对当前代码/Prompt哈希、契约/文档/样例及新临时SQLite初始化，不重复安装或付费完整场。

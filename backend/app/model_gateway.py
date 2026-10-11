@@ -127,7 +127,7 @@ class DeterministicModelGateway:
             raw = {'task': 'intent', 'kind':kind, 'target_message_id':target.id if target and kind in ('REBUT','SUPPLEMENT') else None,'relevance':50+(seed+len(request.messages)*11)%51,'public_focus':f'模拟：{actor.stance}'}
         elif request.task == 'utterance':
             actor=next(p for p in request.participants if p.id==request.actor_id)
-            host_lines={'opening':'本场先梳理议题的价值、成本与边界。','followup':'请进一步说明适用条件和验证方式。','linking':'目前已有不同视角，请回应前文并区分证据与假设。'}
+            host_lines={'opening':'今天这个议题，大家怎么看？','followup':'请进一步说明适用条件和验证方式。','linking':'目前已有不同视角，请回应前文并区分证据与假设。'}
             if request.host_task:
                 sentences=[host_lines[request.host_task]]
             else:
