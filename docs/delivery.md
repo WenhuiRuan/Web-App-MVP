@@ -4,13 +4,13 @@
 
 源码仓库：[WenhuiRuan/Web-App-MVP](https://github.com/WenhuiRuan/Web-App-MVP)
 
-应用代码对应 `ae2f54a2b6bca79866d08034ddb5c0c8789f23c1`。本次整理更新了 README、开发指令记录、工作流说明及本页，应用实现和测试代码保持原版本。
+应用代码对应 `ae2f54a2b6bca79866d08034ddb5c0c8789f23c1`。README 与邮件附件采用一致的项目介绍，详细启动与配置说明位于 [运行与配置](running.md)。应用实现和测试代码保持原版本。
 
 ## 材料索引
 
 | 材料 | 位置 |
 |---|---|
-| 完整源码、锁定依赖、环境与运行说明 | [README](../README.md)、backend、frontend |
+| 完整源码、锁定依赖、环境与运行说明 | [README](../README.md)、[运行与配置](running.md)、backend、frontend |
 | SQLite 初始化与迁移 | backend/app/database.py、db/migrations/001–007 |
 | 五份议题与对应嘉宾阵容 | [样例说明](../data/samples/final/README.md)、rosters.json |
 | 产品需求与架构 | [需求](requirements.md)、[架构](architecture.md)、[技术决策](decisions.md) |
@@ -22,7 +22,7 @@
 | 一页开发流程、实际问题与处理方法 | [工作流说明](workflow.md) |
 | 分阶段提交与完整开发记录 | GitHub 提交历史、[进展](progress.md)、[开发日志](prompt-log.md) |
 
-邮件附件为 `阮文慧_Web-App-MVP.zip`，包含上述材料及原有40次提交的离线 Git bundle。正式过程说明采用 Markdown；项目内的阶段记录保留原始内容。
+邮件附件为 `阮文慧_Web-App-MVP.zip`，包含上述材料及完整提交历史的离线 Git bundle。正式过程说明采用 Markdown；项目内的阶段记录保留原始内容。
 
 ## 已有验证
 
