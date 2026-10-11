@@ -269,3 +269,38 @@ insights.updated仍是完整批次替换，每批version递增且through_turn为
 补验内部上下文显式区分through_turn（冻结消息边界）、insights_through_turn及insights_version（输入成功观点边界/版本）。只传公开最终回答，HTTP/SSE不新增字段。共识候选整批合并按同一对象、动作、条件，不以相同来源或支持者更多制造重复项。仅在可靠但夹带单方条件的最多两项候选上进行一次合并收窄repair；共用240秒总预算，没有逐候选无限复核。
 
 总结positions逐字个人摘录仅允许该作者最后一条正式消息，source_turns恰好一条；内部summary_position_turns给出可选消息编号，程序拒绝早期个人摘录（summary_position_not_latest），统一有限重试不另增层。此保守选择不意味着旧观点撤回，早期仍成立的共识/分歧保留在独立复核的insights中；可能省略此前独立但未撤回的个人建议，列为召回限制。
+
+## 安全模型诊断查询
+
+新增只读`GET /api/discussions/{discussion_id}/diagnostics?run_id={run_id}&limit=100&before={id}`。run_id可省略（含本讨论阵容尝试），limit默认100且1–100，before可省略且为正整数；id倒序，next_before存在时续取旧页。不存在讨论或跨场运行404/RUN_NOT_FOUND（不存在讨论沿用DISCUSSION_NOT_FOUND），格式/范围422。业务消息/快照/SSE v1不变；诊断不进入Transcript。
+
+完整格式示例，**并非旧失败场的已知原因或补造记录**：
+
+```json
+{
+  "items": [{
+    "id": 73,
+    "discussion_id": "11111111-1111-4111-8111-111111111111",
+    "run_id": "22222222-2222-4222-8222-222222222222",
+    "roster_revision": 1,
+    "actor_id": "33333333-3333-4333-8333-333333333333",
+    "actor_name": "陈序", "actor_title": "圆桌主持人", "actor_kind": "HOST",
+    "turn_claim_id": "44444444-4444-4444-8444-444444444444",
+    "call_id": "55555555-5555-4555-8555-555555555555",
+    "task": "utterance", "host_task": "linking", "cycle": 15,
+    "message_position": 15, "attempt": 1, "stage": "single",
+    "outcome": "FAILED", "error_code": "MODEL_RESULT_INVALID",
+    "failure_type": "SENTENCE_BOUNDARY", "duration_ms": 1250,
+    "occurred_at": "2026-10-11T06:00:00Z"
+  }],
+  "next_before": null
+}
+```
+
+outcome=SUCCEEDED/FAILED/CANCELLED/DEADLINE/HOST_SKIPPED，安全failure_type详见[诊断报告](model-recovery.md#普通启动下的安全诊断)。actor资料来自同场阵容；阵容任务无actor/run/claim，message_position=0。utterance的position为计划下一条，其余任务为上下文边界。attempt是一次generate尝试序号（可能多段HTTP），并非HTTP调用数。stage只在可定位的失败保存，其他null；SUCCEEDED不是业务提交凭证。表中不保存完整响应、输入异常、密钥、认证头或reasoning_content。
+
+内部ModelRequest新增attempt=1、validation_feedback=null；纠正重试例如attempt=2 / validation_feedback=SENTENCE_BOUNDARY。上游context提供output_correction的固定安全约束，不携带上次坏正文。发言契约保持sentences 1–2项、每项一句/≤200字、总正文≤400；共享分句规则识别闭引号、嵌入问句、小数和常用缩写。严格校验不因恢复而绕过。
+
+非开场主持非法输出重试耗尽可最多累计2次HOST_SKIPPED，原领取取消并同事务角色IDLE事件，下一周期专家自主决定；不发布turn.committed或虚假提问，不增加message_position。认证/取消/数据库错误不恢复；超限继续原FAILED和failure_code。旧失败场未保存诊断，007不能补出原响应原因。重启后端才启用；本轮只有可控验收，用户真实复测待完成。
+
+意图上游context新增participation_rules：host_question_is_invitation=true、may_pass=true、may_challenge_question=true、must_follow_host_conclusion=false，public_focus不继承主持任务。职业、stance及真实messages保留，PASS仍须target_turn=null，实际补充/反驳仍绑定当前已提交消息；主持点名不给出强制发言命令或预设结论。

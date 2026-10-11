@@ -56,7 +56,7 @@ def test_upgrade_preserves_v5_jobs_and_adds_provider_codes(tmp_path):
         conn.execute("INSERT INTO summary_jobs(id,discussion_id,run_id,attempt,through_turn,insight_version) VALUES ('old-s','a','a-r',1,0,0)")
         history=[tuple(r) for r in conn.execute('SELECT version,name,checksum FROM schema_migrations')]
     upgraded=Database(database.path)
-    assert upgraded.migrate()==[6] and upgraded.migrate()==[]
+    assert upgraded.migrate()==[6,7] and upgraded.migrate()==[]
     with upgraded.connect() as conn:
         assert [tuple(r) for r in conn.execute('SELECT version,name,checksum FROM schema_migrations WHERE version<=5')]==history
         conn.execute("UPDATE insight_jobs SET state='FAILED',error_code='MODEL_BALANCE_EXHAUSTED' WHERE id='old-i'")

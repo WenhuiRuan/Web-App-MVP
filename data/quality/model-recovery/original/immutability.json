@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-10-11T05:38:52.405625+00:00",
+  "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+  "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+  "read_only": true,
+  "original_export_sha256": "c2371feff81708771db09ff309f5877964dbd1cbff21e8ab7f83a5b257a46071",
+  "state": "FAILED",
+  "new_paid_model_calls": 0,
+  "tables": {
+    "discussions": {
+      "rows": 1,
+      "current_rows": 1,
+      "all_fields_unchanged": true
+    },
+    "participants": {
+      "rows": 5,
+      "current_rows": 5,
+      "all_fields_unchanged": true
+    },
+    "runs": {
+      "rows": 1,
+      "current_rows": 1,
+      "all_fields_unchanged": true
+    },
+    "messages": {
+      "rows": 14,
+      "current_rows": 14,
+      "all_fields_unchanged": true
+    },
+    "speaking_intents": {
+      "rows": 44,
+      "current_rows": 44,
+      "all_fields_unchanged": true
+    },
+    "turn_claims": {
+      "rows": 15,
+      "current_rows": 15,
+      "all_fields_unchanged": true
+    },
+    "events": {
+      "rows": 200,
+      "current_rows": 200,
+      "all_fields_unchanged": true
+    },
+    "insight_jobs": {
+      "rows": 5,
+      "current_rows": 5,
+      "all_fields_unchanged": true
+    },
+    "insight_batches": {
+      "rows": 4,
+      "current_rows": 4,
+      "all_fields_unchanged": true
+    },
+    "insights": {
+      "rows": 12,
+      "current_rows": 12,
+      "all_fields_unchanged": true
+    },
+    "insight_sources": {
+      "rows": 28,
+      "current_rows": 28,
+      "all_fields_unchanged": true
+    },
+    "summary_jobs": {
+      "rows": 0,
+      "current_rows": 0,
+      "all_fields_unchanged": true
+    },
+    "summaries": {
+      "rows": 0,
+      "current_rows": 0,
+      "all_fields_unchanged": true
+    },
+    "operations": {
+      "rows": 3,
+      "current_rows": 3,
+      "all_fields_unchanged": true
+    }
+  },
+  "unchanged": true
+}

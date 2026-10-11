@@ -267,7 +267,7 @@ SCHEMAS = dict(roster=Roster, intent=Intent, utterance=Utterance,
 
 
 def invalid(issue):
-    error=InvalidModelResult()
+    error=InvalidModelResult('FIELD_STRUCTURE' if issue in ('wire_schema','structure','review_schema','summary_review_schema') else 'RESULT_CONSTRAINT')
     error.validation_issue=issue  # Fixed internal code only; never the provider value.
     return error
 
@@ -310,14 +310,31 @@ def public_context(request):
     # Personas guide an actor, but are never evidence of an expressed opinion.
     participants = [dict(slot=slots[p.id], kind=p.kind, name=p.name, title=p.title,
         **({'stance': p.stance} if request.task in ('intent', 'utterance') else {})) for p in request.participants]
+    constraints = dict(EMPTY_CONTENT='提供非空最终回答与非空正文，不要返回null或空字符串。',
+        OUTPUT_TRUNCATED='上次输出达到额度而截断；减少铺陈，在额度内完成整个JSON，不延续残缺内容。',
+        OUTPUT_REJECTED='上次最终输出未正常完成，请重新提供可完成的任务结果。',
+        JSON_PARSE='只输出合法JSON，使用双引号并闭合结构，不附代码块或额外正文。',
+        FIELD_STRUCTURE='严格使用本任务规定的字段、类型和枚举，不增加或遗漏字段。',
+        SENTENCE_COUNT='sentences必须恰好1或2项，不能为空或包含第3项。',
+        SENTENCE_BOUNDARY='每项只能一个完整句子；多个独立句子不得塞进同一项，总共不超过2句。',
+        SENTENCE_LENGTH='每项最多200字，优先50–100字，只回答一个关键点。',
+        UTTERANCE_LENGTH='总正文连同句末标点最多400字，重新简明表达，不能截取旧内容。',
+        RESULT_CONSTRAINT='重新核对本任务的角色、归属、回应目标和来源条件。')
+    correction = None if request.validation_feedback is None else dict(failure_type=request.validation_feedback,
+        constraint=constraints[request.validation_feedback],
+        instruction='上次最终回答未通过校验，请重新生成完整JSON。发言仅含sentences，恰好1–2项，每项一句非空正文、最多200字，总计含标点最多400字。保持角色、回应目标和任务；不要截断或照搬多句。' if request.task=='utterance' else '按当前任务字段、引用归属及证据约束纠正后重新生成完整JSON，不加解释或代码块。')
     return {'task': request.task, 'topic': request.topic, 'expert_count': request.expert_count,
+        'attempt':request.attempt, 'output_correction':correction,
         'participants': participants,
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,
         'target_turn': turns.get(request.target_message_id), 'host_task': request.host_task,
         'addressed_slot':slots.get(request.addressed_actor_id),
         'host_reference_message':messages.get(request.host_reference_message_id),
-        'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task == 'utterance',
-        'public_focus': request.public_focus, 'through_turn': request.through_turn,
+        'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task in ('intent','utterance'),
+        **({'participation_rules':dict(host_question_is_invitation=True,may_pass=True,
+            may_challenge_question=True,must_follow_host_conclusion=False)} if request.task=='intent' else {}),
+        # Intent is the expert's own decision. Do not carry a host focus as an assignment.
+        'public_focus': '' if request.task=='intent' else request.public_focus, 'through_turn': request.through_turn,
         'insights_through_turn': request.insights.through_turn, 'insights_version': request.insights.version,
         'summary_position_turns': [m.turn_no for m in request.messages
             if request.task == 'summary' and people[m.participant_id].kind == 'EXPERT'
@@ -369,6 +386,8 @@ def bind_result(request, content):
         raise invalid('wire_schema') from None
     except (KeyError, IndexError):
         raise invalid('reference') from None
+    except json.JSONDecodeError:
+        raise InvalidModelResult('JSON_PARSE') from None
     except (ValueError, TypeError):
         raise invalid('structure') from None
 
@@ -451,12 +470,19 @@ class DeepSeekGateway:
                 reported=payload.get('model')
                 metric['reported_model'] = reported if reported==self.settings.model_name else 'unknown'
                 choice = payload['choices'][0]
-                if choice['finish_reason'] != 'stop': raise InvalidModelResult()
+                if choice['finish_reason'] == 'length': raise InvalidModelResult('OUTPUT_TRUNCATED')
+                if choice['finish_reason'] != 'stop': raise InvalidModelResult('OUTPUT_REJECTED')
                 # Deliberately never read reasoning_content, including on errors.
                 content = choice['message']['content']
-                if not isinstance(content, str) or not content.strip(): raise InvalidModelResult()
+                if content is None or isinstance(content,str) and not content.strip(): raise InvalidModelResult('EMPTY_CONTENT')
+                if not isinstance(content,str): raise InvalidModelResult('FIELD_STRUCTURE')
+                json.loads(content)  # Separate invalid JSON from a valid but wrong field structure.
+            except InvalidModelResult:
+                raise
+            except json.JSONDecodeError:
+                raise InvalidModelResult('JSON_PARSE') from None
             except (KeyError, IndexError, TypeError, ValueError, AttributeError):
-                raise InvalidModelResult() from None
+                raise InvalidModelResult('FIELD_STRUCTURE') from None
             if stage in ('review','repair'):
                 content = reviewed_points(request, context['candidate'], content,repair_candidates=repair_candidates) if request.task == 'insights' else reviewed_summary(request, content)
             if stage=='draft' and request.task=='insights':
@@ -489,7 +515,10 @@ class DeepSeekGateway:
             raise ModelServiceError('MODEL_CONNECTION_FAILED', True, .5) from None
         except (ModelServiceError, InvalidModelResult) as exc:
             metric['status'] = str(exc)
-            if isinstance(exc, InvalidModelResult): metric['validation_issue']=getattr(exc,'validation_issue','envelope_or_contract')
+            if isinstance(exc, InvalidModelResult):
+                exc.validation_stage=stage
+                metric['failure_type']=exc.failure_type
+                metric['validation_issue']=getattr(exc,'validation_issue','envelope_or_contract')
             raise
         finally:
             metric['duration_ms'] = round((time.monotonic() - started) * 1000, 2)

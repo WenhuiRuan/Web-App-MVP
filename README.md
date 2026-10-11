@@ -66,10 +66,11 @@ Settings、`.env.example` 和日常真实配置采用同一套已验证有限预
 | 配置 | 默认值 | 含义 |
 |---|---|---|
 | MODEL_TIMEOUT_SECONDS | 120 秒 | 每个模型 HTTP 请求上限；多步提取/总结共用下方任务预算 |
-| INSIGHT_MAX_SECONDS | 240 秒 | 每批观点总预算，包含排队、草稿、逐项复核、有限重试 |
+| INSIGHT_MAX_SECONDS | 240 秒 | 每批观点总预算，包含排队、草稿、整批复核、有限收窄和重试 |
 | SUMMARY_MAX_SECONDS | 180 秒 | 总结独立预算，讨论时长用尽后仍可生成 |
 | DISCUSSION_MAX_SECONDS | 600 秒 | 运行上限；启动时冻结到 run，旧 run 不变 |
 | DISCUSSION_MAX_TURNS | 20 | 日常最多正式发言数，含主持人；主持可提前结束 |
+| DISCUSSION_HOST_SKIP_LIMIT | 2 | 每run累计最多跳过两次重试耗尽的非法非开场主持发言；0关闭，不跳过认证/取消/数据库错误 |
 | MODEL_MAX_ATTEMPTS / MODEL_MAX_CONCURRENCY | 2 / 4 | 含首次的有限尝试数 / 全局模型并发 |
 | DISCUSSION_MAX_ACTIVE | 3 | GENERATING、RUNNING、SUMMARIZING 的活动容量 |
 | BACKEND_HOST / BACKEND_PORT | 127.0.0.1 / 8000 | 单进程本地服务，禁止多 worker 共管同一数据库 |
@@ -89,7 +90,7 @@ Settings、`.env.example` 和日常真实配置采用同一套已验证有限预
 .\.venv\Scripts\python.exe -m backend.app.database --path work/examples.sqlite3
 ```
 
-首次迁移 `[1, 2, 3, 4, 5, 6]`，重复 `[]`，不清空内容。SQL 历史带校验和，新变化追加迁移；无自动降级。001 中的历史 SQL 默认值保留，应用创建 run 时显式写入当前 Settings 上限。
+首次迁移 `[1, 2, 3, 4, 5, 6, 7]`，006旧库升级仅`[7]`，重复 `[]`，不清空内容。后端启动也会自动迁移。SQL 历史带校验和，新变化追加迁移；无自动降级。001 中的历史 SQL 默认值保留，应用创建 run 时显式写入当前 Settings 上限。
 
 至少五份预设议题与阵容见[样例索引](data/samples/final/README.md)，可以直接阅读姓名、职业、立场和颜色，来源/质量说明分开记录。其中四份为编写复核的预设阵容，一份复用合格真实阵容；不冒充五场真实完整讨论。
 
@@ -116,11 +117,16 @@ $env:DATABASE_PATH='work/examples.sqlite3'
 | POST /api/discussions/{id}/start | 确认当前 roster_revision，唯一 run，自动调度 |
 | POST /api/discussions/{id}/summary-retry | 原 run 与冻结消息边界的总结重试 |
 | GET /api/discussions/{id}/operations/{operation_id} | 安全操作状态/错误码 |
+| GET /api/discussions/{id}/diagnostics?run_id={run}&limit=100 | 普通启动持久化的模型尝试与恢复诊断；next_before用于旧页 |
 | GET /api/discussions/{id}/events?after={seq} | 顺序持久化 SSE，Last-Event-ID 优先，15 秒心跳 |
 
 所有命令要求 UUID 格式 Idempotency-Key；网络重发保留原键，失败后的显式重试用新键。快照读取后从高水位订阅，缺口/断线重新取快照恢复，不重放业务。每两条已提交发言触发观点，结束补尾；只引用本 run 已提交消息，共识需至少两专家的明确共同主张，证据不足允许为空。总结失败可重试，不重新生成阵容或讨论。
 
 服务关闭/重启时遗留活动任务标为 INTERRUPTED；阵容与总结可按阶段重试，讨论运行中断不能自动续播。模型 IO 不持有数据库事务，事件与业务数据原子提交。完整示例及错误见[API](docs/api.md)。
+
+非法输出仍严格校验并在原有限预算内反馈具体纠正约束；只有非开场主持linking/followup耗尽校验重试，且已有专家发言、运行仍有效时可有限跳过。取消原领取并记录HOST_SKIPPED，随后专家自主参与，不生成虚假主持消息。持续失败明确终止，保留已有内容。诊断只保存安全类别、任务/角色/位置/尝试与耗时，不保存完整响应、密钥或隐藏推理。
+
+本轮诊断/恢复与主持邀请修正已完成可控验证，**尚未进行修正版付费复测**。需要重启后端加载代码/Prompt及007迁移，前端无须因本轮修改重启。旧失败讨论保持原状，复测请新建讨论；具体观察及诊断查询见[模型恢复报告](docs/model-recovery.md)。
 
 ## 测试与已验证范围
 
@@ -153,6 +159,8 @@ npm --prefix frontend run test:live
 ## 自主互动与观点更新
 
 主持可选择继续专家讨论、实际追问、串联或结束；选人按相关性与回应关系确定，公平性防止长期独占，不保证每人依次发言。观点提取与后续发言并行，每场只保留一个在途提取和一个最新待处理前缀，面板显示已成功提取的消息边界。结束后先核对最终前缀，再用独立预算总结；600秒讨论预算并非整体完成时间上限。
+
+开场只简短提出核心取舍，不给每位嘉宾分配方向或排序；追问/串联基于已出现的具体主张，点名是邀请，不规定结论。专家依职业、立场和公开消息决定回应对象，可以质疑问题前提、补充或PASS，未回应不代表赞同。上下文明确标识邀请非强制，身份/引用校验保持；示例及验证范围见[模型恢复报告](docs/model-recovery.md#主持邀请修正)。
 
 语义合并和未决条件仍需要模型判断，不宣称逐字来源校验能够保证全部内容正确。本轮原场问题、修正、定向与完整真实复核见[互动质量报告](docs/quality-interaction.md)。旧安装/布局记录沿用，本轮只补验受影响逻辑。五份离线阵容来源不变，不代表本轮新跑了五场付费讨论。
 

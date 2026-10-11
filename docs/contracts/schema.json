@@ -740,6 +740,37 @@
     "ModelRequest": {
       "additionalProperties": false,
       "properties": {
+        "attempt": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "validation_feedback": {
+          "anyOf": [
+            {
+              "enum": [
+                "EMPTY_CONTENT",
+                "OUTPUT_TRUNCATED",
+                "OUTPUT_REJECTED",
+                "JSON_PARSE",
+                "FIELD_STRUCTURE",
+                "SENTENCE_COUNT",
+                "SENTENCE_BOUNDARY",
+                "SENTENCE_LENGTH",
+                "UTTERANCE_LENGTH",
+                "RESULT_CONSTRAINT"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Validation Feedback"
+        },
         "task": {
           "enum": [
             "roster",

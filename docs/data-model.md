@@ -1,6 +1,6 @@
 # 数据模型与 SQLite 约束
 
-更新：2026-10-11。当前SQLite迁移001–006，生命周期/发言/观点/总结及供应商失败持久化已实现。历史迁移不改；Schema和Pydantic绑定在backend/app/contracts.py。
+更新：2026-10-11。当前SQLite迁移001–007，生命周期/发言/观点/总结、供应商失败及安全模型尝试诊断持久化已实现。历史迁移不改；Schema和Pydantic绑定在backend/app/contracts.py。
 
 ## ER 图
 
@@ -31,6 +31,10 @@ erDiagram
     discussions ||--o{ operations : commands
     discussions ||--o{ events : streams
     runs o|--o{ events : attributes
+    discussions ||--o{ model_diagnostics : diagnoses
+    runs o|--o{ model_diagnostics : scopes
+    participants o|--o{ model_diagnostics : actor
+    turn_claims o|--o{ model_diagnostics : utterance_attempt
 ```
 
 `rosters` 生成期间可以暂时无 participant，ER 的完整阵容关系只描述 READY 后状态；`insight_sources` 至少一条属于应用完整性校验，数据库外键仅保证存在及归属。不能把 ER 图的业务基数误认为全部已由 SQL 强制。
@@ -137,3 +141,9 @@ events.type追加insights.status_changed；实体/关联不变，原ER图继续�
 insight_jobs通过显式through_turn领取；每run唯一在途worker、一个可覆盖的待提取前缀只驻内存。数据库原有version/through_turn、PENDING/SUPERSEDED/FAILED/INTERRUPTED守卫及批次事务继续适用。取消旧任务后最终前缀领取原子替代其job，不向快照暴露SUPERSEDED为最新公开状态；关停回收遗留PENDING为INTERRUPTED，讨论失败事务改为FAILED并发布状态事件。
 
 主持本次ModelRequest的addressed_actor_id/host_reference_message_id绑定本场阵容/已提交消息，属于不可变任务上下文；现有turn_claims持久化host_task/public_focus、正式消息及专家的target_message_id。当前不持久化主持指定收件人字段，也不从中断轮次自动续跑；重启标记中断，与既有恢复规则一致。真实验收的安全模型请求记录保留这些绑定供复核。
+
+## 007安全诊断与主持恢复事务
+
+新增STRICT表model_diagnostics及索引，不重建业务表或重写历史事件。字段与示例见[API](api.md#安全模型诊断查询)。discussion_id必填；run_id、actor_id、turn_claim_id可空（阵容任务尚无运行/角色），非空时复合FK绑定同讨论/revision/run。call_id/attempt/outcome唯一；HOST_SKIPPED领取另有部分唯一索引，约束为非开场主持的MODEL_RESULT_INVALID。failure_type/outcome/stage为白名单，不保存模型正文或错误输入。
+
+尝试诊断用单独短事务，可独立于后续消息事务留存；SUCCEEDED只表示结果通过校验，正式提交以messages/events为准。恢复事务将原领取CANCELLED、HOST_SKIPPED诊断、主持IDLE及对应角色事件一起保存，失败整体回滚；消息边界和编号不变。007使旧库只新增空诊断表，不能补造旧场尝试明细。重复迁移为空；历史001–006校验和不变。

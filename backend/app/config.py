@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     model_max_attempts: int = Field(default=2, ge=1, le=3)
     discussion_max_active: int = Field(default=3, ge=1, le=10)
     discussion_max_turns: int = Field(default=20, ge=1, le=100)
+    discussion_host_skip_limit: int = Field(default=2, ge=0, le=3)
     discussion_max_seconds: int = Field(default=600, ge=10, le=3600)
     summary_max_seconds: int = Field(default=180, ge=1, le=180)
     insight_max_seconds: int = Field(default=240, ge=1, le=300)

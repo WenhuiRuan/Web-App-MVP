@@ -102,7 +102,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.exception_handler(LifecycleError)
     async def lifecycle_error(request, exc):
-        status = 404 if exc.code in ('DISCUSSION_NOT_FOUND', 'OPERATION_NOT_FOUND') else 422 if exc.code == 'VALIDATION_ERROR' else 503 if exc.code in ('CAPACITY_EXCEEDED','MODEL_NOT_CONFIGURED','SERVICE_SHUTTING_DOWN') else 409
+        status = 404 if exc.code in ('DISCUSSION_NOT_FOUND', 'OPERATION_NOT_FOUND','RUN_NOT_FOUND') else 422 if exc.code == 'VALIDATION_ERROR' else 503 if exc.code in ('CAPACITY_EXCEEDED','MODEL_NOT_CONFIGURED','SERVICE_SHUTTING_DOWN') else 409
         response = error_response(request, status, exc.code, exc.message, exc.code in ('CAPACITY_EXCEEDED','SERVICE_SHUTTING_DOWN'))
         if exc.code == 'CAPACITY_EXCEEDED':
             response.headers['Retry-After'] = '2'

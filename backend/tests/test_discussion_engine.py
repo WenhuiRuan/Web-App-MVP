@@ -212,7 +212,9 @@ def test_transient_invalid_utterance_retries_same_claim_then_commits_once(engine
     client,gateway=engine_setup('transient',discussion_max_turns=2)
     did,_=start_ready(client); snapshot=wait_for(client,did,'SUMMARIZING')
     requests=[r for r in gateway.requests if r.participation_kind]
-    assert len(requests)==2 and requests[0]==requests[1]
+    assert len(requests)==2
+    assert requests[1].attempt==2 and requests[1].validation_feedback=='SENTENCE_COUNT'
+    assert requests[0].model_copy(update={'attempt':2,'validation_feedback':'SENTENCE_COUNT'})==requests[1]
     assert len(snapshot['messages'])==2
     assert sum(e['type']=='turn.committed' for e in events(client,did))==2
 

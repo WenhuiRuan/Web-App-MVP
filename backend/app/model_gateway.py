@@ -3,14 +3,30 @@ import asyncio
 from typing import Protocol
 from uuid import uuid5
 
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
+from .text_rules import CLOSERS, sentence_count
 
 from .contracts import ModelRequest, ModelResult, ModelResultAdapter, validate_insight_evidence
 
 
 class InvalidModelResult(ValueError):
-    def __init__(self):
+    def __init__(self, failure_type='RESULT_CONSTRAINT'):
+        self.failure_type = failure_type if failure_type in VALIDATION_FAILURES else 'RESULT_CONSTRAINT'
         super().__init__('MODEL_RESULT_INVALID')
+
+
+VALIDATION_FAILURES = frozenset({'EMPTY_CONTENT','OUTPUT_TRUNCATED','OUTPUT_REJECTED','JSON_PARSE',
+    'FIELD_STRUCTURE','SENTENCE_COUNT','SENTENCE_BOUNDARY','SENTENCE_LENGTH','UTTERANCE_LENGTH','RESULT_CONSTRAINT'})
+
+
+def check_utterance(sentences):
+    if not isinstance(sentences,(tuple,list)) or any(not isinstance(s,str) for s in sentences):
+        raise InvalidModelResult('FIELD_STRUCTURE')
+    if not 1<=len(sentences)<=2: raise InvalidModelResult('SENTENCE_COUNT')
+    for text in sentences:
+        if not text.strip(): raise InvalidModelResult('EMPTY_CONTENT')
+        if len(text.strip())>200: raise InvalidModelResult('SENTENCE_LENGTH')
+        if sentence_count(text.strip())!=1: raise InvalidModelResult('SENTENCE_BOUNDARY')
 
 
 MODEL_FAILURE_CODES = frozenset({'MODEL_TIMEOUT', 'MODEL_RESULT_INVALID', 'TASK_FAILED',
@@ -35,15 +51,20 @@ class ModelGateway(Protocol):
 
 
 def utterance_text(result):
-    value=''.join(s if s[-1] in '。！？!?.' else s+'。' for s in result.sentences)
+    # A terminal inside a closing quote already ends the sentence; don't append twice.
+    value=''.join(s if s.rstrip(CLOSERS)[-1:] in '。！？!?.' else s+'。' for s in result.sentences)
     if len(value)>400:
-        raise InvalidModelResult()
+        raise InvalidModelResult('UTTERANCE_LENGTH')
     return value
 
 
 def validate_result(request: ModelRequest, raw: object) -> ModelResult:
     """Never propagate raw provider output or validation input to callers."""
     try:
+        if request.task=='utterance':
+            value=raw.model_dump() if isinstance(raw,BaseModel) else raw
+            if not isinstance(value,dict) or 'sentences' not in value: raise InvalidModelResult('FIELD_STRUCTURE')
+            check_utterance(value['sentences'])
         result = ModelResultAdapter.validate_python(raw)
         if result.task != request.task:
             raise ValueError('task mismatch')
@@ -79,7 +100,11 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
                 raise ValueError('foreign source')
             validate_insight_evidence(request.participants, request.messages, result.items)
         return result
-    except (ValidationError, ValueError, TypeError):
+    except InvalidModelResult:
+        raise
+    except ValidationError:
+        raise InvalidModelResult('FIELD_STRUCTURE') from None
+    except (ValueError, TypeError):
         raise InvalidModelResult() from None
 
 

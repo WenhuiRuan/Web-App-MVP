@@ -5,7 +5,7 @@ from uuid import UUID
 from fastapi import APIRouter, Header, Query, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 
-from .contracts import CreateDiscussion, DiscussionList, EmptyCommand, ErrorResponse, Operation, OperationAccepted, Snapshot, StartDiscussion
+from .contracts import CreateDiscussion, DiagnosticPage, DiscussionList, EmptyCommand, ErrorResponse, Operation, OperationAccepted, Snapshot, StartDiscussion
 
 router = APIRouter(prefix='/api/discussions', responses={404:{'model':ErrorResponse},409:{'model':ErrorResponse},503:{'model':ErrorResponse}})
 Key = Annotated[UUID, Header(alias='Idempotency-Key')]
@@ -31,6 +31,12 @@ def get_snapshot(discussion_id: UUID, request: Request):
 async def generate_roster(discussion_id: UUID, request: Request, idempotency_key: Key, body: EmptyCommand | None = None):
     response = await request.app.state.tasks.generate(discussion_id, idempotency_key)
     return JSONResponse(response.body, status_code=response.status)
+
+
+@router.get('/{discussion_id}/diagnostics',response_model=DiagnosticPage)
+def get_diagnostics(discussion_id: UUID,request: Request,run_id: UUID|None=None,
+                    limit: Annotated[int,Query(ge=1,le=100)]=100,before: Annotated[int|None,Query(ge=1)]=None):
+    return request.app.state.repository.diagnostics(discussion_id,run_id,limit,before)
 
 
 @router.post('/{discussion_id}/start', status_code=202, response_model=OperationAccepted)

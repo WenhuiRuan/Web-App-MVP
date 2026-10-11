@@ -16,7 +16,7 @@
 | 首页/创建/阵容/演播厅/总结、布局 | 四视口静态；真实增长 1366/2560/390 | docs/frontend-design.md 与 progress；此次配置变化不重新截图布局 |
 | 真实适配、HTTP、共识连续性、多步预算 | 101 passed / 10.17 秒 | test_deepseek、test_deepseek_http、test_quality_continuity、test_synthesis_call_budget；不证明所有自然语言语义正确 |
 | 调度/观点/总结与恢复 | 65 passed / 60.11 秒；006 后受影响 47 passed / 39.92 秒 | test_discussion_engine、test_insight_pipeline、test_summary_pipeline、test_summary_recovery；两批分别执行 |
-| 供应商失败持久化及基础契约 | 46 passed / 7.85 秒 | test_provider_failure_persistence、test_database、foundation/contracts/artifacts，007 未创建，当前 schema006 |
+| 供应商失败持久化及基础契约 | 46 passed / 7.85 秒 | test_provider_failure_persistence、test_database、foundation/contracts/artifacts，当时schema006；本轮007另验 |
 | 最终真实模型完整浏览器流程 | 1 passed，观察 418.333 秒 | code0465f68；8正式发言、4成功观点批次、412字总结、turn_limit；62 HTTP / 200543 reported tokens |
 
 最终真实场与逐条源消息判断见 [质量验收](quality-acceptance.md)，没有发生撤回或条件改变的场景；这些由之前独立定向验证和测试证明。原失败仍保留，不能把格式通过或定向生成替换原场内容验收。真实调用费用、真实并发、p95、跨平台未知。
@@ -39,3 +39,17 @@
 失败过程与结果分别记录quality-interaction。较大受影响回归163 passed/51.60秒（八文件、当时12新增用例），新增单项隔离/收窄后适配+连续性+本轮111 passed/5.60秒；不存在将两者相加作为一次全量的结论。当时14新增用例。前端类型/生产构建通过275ms，仅改最终观点核对状态及空分歧说明，不重跑四视口布局。当时全新真实浏览器验证待执行；实际执行结果见下方收尾，安装/静态布局/SSE协议未受影响。
 
 本轮收尾：新增观点边界元数据用例先KeyError失败，个人早期摘录用例先DID NOT RAISE失败，再实现明确最新来源规则；当前16个新增互动用例。最新适配/连续性/互动/HTTP/制品联合116 passed / 8.48秒；此前较大163通过记录沿用，数字不相加。真实HTTP/SSE替身E2E补验创建完整流、总结失败恢复、提取失败保留三项3 passed /27.6秒；fixture followup改continue，异步提取的断言等待实际边界4，避免将发言推进等同观点已完成。真实DeepSeek浏览器1 passed /7.2分钟，干净23db026、11消息、host_end、运行中两次非空观点更新；内容残留另做实际提取/总结定向修正，原场不覆盖，最终范围见quality-interaction。未重跑未受影响安装、布局及SSE协议。
+
+## 模型失败与非强制主持修正（当前代码的验证）
+
+有效首批red为15 failed /4 passed（7.29秒），随后实现共享句子规则、安全错误分类、持久化诊断/查询、纠正重试与主持累计有限跳过。扩大到28项后，八文件受影响回归165 passed /49.07秒；最后新增JSON纠正、一次跳过完成、认证不跳过，model_recovery独立31 passed /12.34秒。迁移/重试元数据旧断言随新契约同步，夹具修正不冒称业务TDD。
+
+主持邀请新增HTTPcontext用例先KeyError（1 failed /2 passed，1.92秒），实现非强制规则和隔离主持public_focus后，host_invitation、scheduling、interaction_revision、deepseek、deepseek_http联合119 passed /10.85秒。验证被点名者PASS、其他人质疑前提或更高价值回应被选、职业立场仍在上下文、身份/目标校验保持。三个新用例不是模型语义验收。
+
+结果分批有重叠，不相加为全量。警告沿用Starlette/httpx弃用，未升级依赖。本轮没有付费调用、页面布局修改或完整浏览器重跑；历史SSE/布局/安装与未受影响E2E沿用。原场只读逐表14张/全部字段不变；具体已确认事实、未知原因、用户真实复测步骤见[模型恢复报告](model-recovery.md)。
+
+复现：`python -m pytest backend/tests/test_model_recovery.py backend/tests/test_host_invitation.py -q`；八文件联合与主持相关五文件列表见报告及上文。新后端必须重启才能启用007与新Prompt。运行原FAILED讨论的重复start不会重放，真实复测应新建讨论。
+
+共享调用层额外受影响回归：insight_pipeline、summary_pipeline、summary_recovery、roster_tasks、turn_transactions、delivery_config、delivery_archive、final_samples，93 passed /63.63秒。两个新增模块联合34 passed /13.11秒；收尾新增引号结尾正文不重复加句号用例先1 failed /0.97秒，再修复组装判断，新model_recovery增至32项。各批次有重叠，不能合计为全量。
+
+最终引号组装修复后，仅两个新增模块/讨论引擎/发言事务再运行，69 passed /40.10秒（32+3项新增已含在内）。对应源码和Prompt SHA在data/quality/model-recovery/verification.json；包内manifest及Git历史标识提交版本。本轮真实调用数0，新的付费全程未执行。

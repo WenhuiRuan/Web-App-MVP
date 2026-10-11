@@ -6,6 +6,10 @@ from uuid import UUID
 
 from pydantic import (AfterValidator, AwareDatetime, BaseModel, ConfigDict, Field,
                       StrictInt, StringConstraints, TypeAdapter, model_validator)
+from .text_rules import sentence_count
+
+ValidationFailure = Literal['EMPTY_CONTENT','OUTPUT_TRUNCATED','OUTPUT_REJECTED','JSON_PARSE','FIELD_STRUCTURE',
+    'SENTENCE_COUNT','SENTENCE_BOUNDARY','SENTENCE_LENGTH','UTTERANCE_LENGTH','RESULT_CONSTRAINT']
 
 
 class Contract(BaseModel):
@@ -22,8 +26,7 @@ RoleStatus = Literal['IDLE', 'PREPARING', 'SPEAKING']
 
 
 def validate_sentence(value: str) -> str:
-    pieces = [p.strip() for p in re.split(r'[。！？!?]+|(?<!\d)\.(?!\d)', value) if p.strip()]
-    if len(pieces) != 1:
+    if sentence_count(value) != 1:
         raise ValueError('expected one sentence')
     return value
 
@@ -84,8 +87,7 @@ class Message(Contract):
 
     @model_validator(mode='after')
     def short_content(self) -> Self:
-        parts = [p.strip() for p in re.split(r'[。！？!?]+|(?<!\d)\.(?!\d)', self.content) if p.strip()]
-        if not 1 <= len(parts) <= 2:
+        if not 1 <= sentence_count(self.content) <= 2:
             raise ValueError('expected 1-2 sentences')
         return self
 
@@ -333,7 +335,38 @@ Event = Annotated[StateEvent | RosterEvent | RoleEvent | TurnEvent | InsightsEve
 EventAdapter = TypeAdapter(Event)
 
 
+class ModelDiagnostic(Contract):
+    id: Positive
+    discussion_id: UUID
+    run_id: UUID | None
+    roster_revision: Positive
+    actor_id: UUID | None
+    actor_name: str | None
+    actor_title: str | None
+    actor_kind: Literal['HOST','EXPERT'] | None
+    turn_claim_id: UUID | None
+    call_id: UUID
+    task: Literal['roster','intent','utterance','host_control','insights','summary']
+    host_task: Literal['opening','followup','linking'] | None
+    cycle: Nonnegative
+    message_position: Nonnegative
+    attempt: Annotated[StrictInt, Field(ge=1,le=3)]
+    stage: Literal['single','draft','review','repair'] | None
+    outcome: Literal['SUCCEEDED','FAILED','CANCELLED','DEADLINE','HOST_SKIPPED']
+    error_code: str | None
+    failure_type: ValidationFailure | Literal['MODEL_ERROR','INTERNAL_ERROR','CANCELLED','BUDGET_EXHAUSTED'] | None
+    duration_ms: Nonnegative
+    occurred_at: AwareDatetime
+
+
+class DiagnosticPage(Contract):
+    items: tuple[ModelDiagnostic, ...]
+    next_before: Positive | None
+
+
 class ModelRequest(Contract):
+    attempt: Annotated[StrictInt, Field(ge=1,le=3)] = 1
+    validation_feedback: ValidationFailure | None = None
     task: Literal['roster', 'intent', 'utterance', 'host_control', 'insights', 'summary']
     discussion_id: UUID
     run_id: UUID | None = None

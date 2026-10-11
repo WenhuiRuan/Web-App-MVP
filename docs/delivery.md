@@ -7,7 +7,7 @@
 | 题目材料 | 当前成果 |
 |---|---|
 | 完整源码与依赖锁 | backend、frontend、backend/requirements.lock、frontend/package-lock.json |
-| 初始化及迁移 | python -m backend.app.database，db/migrations/001–006 |
+| 初始化及迁移 | python -m backend.app.database，db/migrations/001–007 |
 | 至少五份不同议题和对应阵容 | data/samples/final/rosters.json 与 README，离线校验/导入脚本 |
 | PRD、架构、ER、API、测试 | requirements、architecture、data-model（Mermaid ER）、api、testing及实际 tests |
 | 运行/环境/选型/主要API/完成/后续 | 根 README |
@@ -27,7 +27,7 @@
 
 报告 [first-run.json](../data/delivery/first-run.json)，截图 [安全证据索引](screenshots/README.md)。业务/SSE/布局及完整替身E2E沿用[测试说明](testing.md)，本次没有重跑完整讨论。
 
-完整安装/启动证据执行源版本为12ba05c，首次依赖安装5195c0f。该首次安装结果来自当时版本；本轮另改互动逻辑并补验受影响业务，依赖锁/迁移/安装启动脚本保持不变。首次安装不冒称在本轮版本重新安装；最终清单逐文件SHA256核对，完整新场另见quality-interaction。
+完整安装/启动证据执行源版本为12ba05c，首次依赖安装5195c0f。该证据来自当时001–006版本；互动修正未改锁/安装脚本，本轮失败修复另新增007迁移，相关数据库检查单独记录。首次安装不冒称在本轮重新执行；最新清单逐文件SHA256核对，历史完整新场另见quality-interaction，最新真实修复验收仍待用户。
 
 ## 打包边界
 
@@ -48,3 +48,9 @@ ZIP 包含源码、锁、迁移、最终样例、文档及必要安全质量证�
 ## 本轮互动修正后的包核对
 
 最新ZIP以本轮全部修改提交后的clean HEAD生成，含本轮原场只读证据、新完整真实场与之后定向修正、实际Prompt副本/SHA、TDD及浏览器测试。outputs/delivery-check.json和.zip.sha256给出实际revision/逐文件数量/校验结果；包内delivery/manifest.json与git-history.txt可查。完整场执行代码23db026，最终归纳/总结修改有独立实际验证，不将原截图描述为修改后结果。旧安装/迁移/锁依赖记录沿用，未重新安装或跑五场模型。ZIP再解压到独立目录做清单、当前契约、样例和文档核对，不影响原数据库/服务。
+
+## 当前模型恢复与主持邀请候选包
+
+本轮追加安全诊断007、严格句子/纠正重试、主持有限恢复与开放邀请，详细范围见[修复报告](model-recovery.md)。包内新增原1a44失败的只读公开证据、逐字段不变检查及可控验证记录，历史样例/成功与失败证据保留。五份阵容无需重新生成，当前契约离线检查通过；锁依赖/安装/布局/SSE未变，旧结果沿用，新增迁移与受影响逻辑分别补验。
+
+outputs/ai-panel-studio-delivery.zip按修复提交的clean HEAD重建，manifest列出实际revision与文件SHA；outputs/delivery-check.json记录候选核对。**本轮未调用付费模型，不能把候选包描述为最新真实全程验收已通过**。用户应先重启后端（自动007）、新建场次验证主持开放引导及实际纠正/恢复行为，再决定正式外部提交。旧FAILED讨论不改写或续播，远程/邮件未执行。

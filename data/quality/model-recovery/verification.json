@@ -1,0 +1,159 @@
+{
+  "format": "controlled-model-recovery-v1",
+  "recorded_at": "2026-10-11T05:48:03.356321+00:00",
+  "baseline_revision": "53769ad5a5505a8bd7386f813475741bdeb19ca4",
+  "code_identity_method": "SHA256 of final source bytes; commit identity is in delivery/manifest.json and Git history",
+  "code_sha256": {
+    "backend/app/__init__.py": "b4ff6768136e70cf87b50c843ee249cff65832e9ab83e309db27e1739d394d96",
+    "backend/app/config.py": "e84a80847103a504990f45237cfe7ad298fb4aa366be7807470a3b089aac7e69",
+    "backend/app/contracts.py": "385961495e408796fe50cab0fe4ab161164a78c0e2c41381d64fc98beb5109c8",
+    "backend/app/database.py": "20d3b46fbec72c61149f052be2a5709a1f7814e72a8f9a782295ec57bcf61456",
+    "backend/app/deepseek_gateway.py": "5896942944207c89f1bb7ea1e6a019b62930c85ede922466b35ba10120469e50",
+    "backend/app/discussion_api.py": "703379fd3f0188803b3d1d24687ed8d841f2c438b16d857681d8c9b9db332b90",
+    "backend/app/engine.py": "1c82f118f7ef0a345a03bd40800c73e4c33bc31fe79c2bdda9fcc68f061871bb",
+    "backend/app/lifecycle.py": "d31abacc0491de230503b8dc26239d529d10efe5db94c2ec9d5422bf45cd8461",
+    "backend/app/main.py": "868e1778c566fa8aaabb52e846f105edde924363d398222252facf27097e84d2",
+    "backend/app/model_gateway.py": "35b3a62f5949e06456d3f99247fa2bb062bf90d6d013bda663d883296cc33109",
+    "backend/app/repository.py": "eb08a22b5c0deb9e8aa044281abd73931192f1c5e51db442aeed45ec027a04c5",
+    "backend/app/run_repository.py": "13c541a57c6223a3055d43e7f90158f1dea8c107f9bfe8ef53ba90579a7f5fae",
+    "backend/app/scheduling.py": "5bd284f57a3bf463059be2079a7adf7b1428baf94780ab0182f4fbb761d692d8",
+    "backend/app/server.py": "04adcc64deae0c3e05468221485834776e002e507961505561b2bfa976295119",
+    "backend/app/sse.py": "81c912d0c7febe50ab348a5f373ba5c34c83b623cda4df046bbef995deb895fd",
+    "backend/app/synthesis.py": "a5386a9c5cd17677b65f2b25b96dbe9288bfb184e41f49a751e7c8c57fe0cb02",
+    "backend/app/synthesis_repository.py": "1877a790ae5d6e7a14f188fec1b4dd01b4c9a91c791368aee9bb10e9a9e397c0",
+    "backend/app/tasks.py": "a81af489ecdfc14c9334394eb75da5865f75b1ed2acf6e492d5400b03ffc3406",
+    "backend/app/text_rules.py": "47e0729a0a0652572bc34d08fa4eb7e6e64712950f154683cf963f22a38acd7f",
+    "db/migrations/007_model_diagnostics.sql": "9a39af2caa40753de8ef809ba9f0e1af3c7b10d6d3bd17a6b359f6bec1bbe40e"
+  },
+  "prompt_sha256": {
+    "backend/prompts/common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "backend/prompts/host_control.md": "85411c5231bb5ce73ea341f4028d478ae5ec375952951952713376c868fc3289",
+    "backend/prompts/insights.md": "8e95184239b3812f2ed4cd7e8ac97a99ea6e9900437423a7f608692aff47e25b",
+    "backend/prompts/insights_repair.md": "07807f1502b6be9fedf44849ada07ca3f5c21c7d88fea8ddd94a1f3d5bcfbd9c",
+    "backend/prompts/insights_review.md": "36b0a184949c17df2da4cc8b83c947e1c4df18813404f3847a05e811b96c6d14",
+    "backend/prompts/intent.md": "7f201d274e506da56cb59745f9b31c8555228315f46edd06b70e163e56552a7e",
+    "backend/prompts/roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "backend/prompts/summary.md": "c818857c7dce1aac35c385290bdd87334bdf72f021c0b25c00ad2fae6535d75f",
+    "backend/prompts/summary_review.md": "ad28b8c279d8e92f97465f4fa28288bd2ddec95a75538a27fe176901fdb315ba",
+    "backend/prompts/utterance.md": "8614d8be5bc52a344b254247766cd6ec0f64ba05354a855f69158385049b9390"
+  },
+  "paid_model_calls_this_revision": 0,
+  "real_model_verification": "pending user browser run after backend restart",
+  "original_discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+  "original_run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+  "original_confirmed": {
+    "messages": 14,
+    "events": 200,
+    "elapsed_seconds": 296.207517,
+    "failed_claim_position": 15,
+    "host_task": "linking",
+    "error_code": "MODEL_RESULT_INVALID",
+    "state": "FAILED"
+  },
+  "original_unknown": [
+    "validation_failure_type",
+    "raw_final_response",
+    "finish_reason",
+    "actual_attempt_count",
+    "usage",
+    "cost"
+  ],
+  "checks": [
+    {
+      "scope": [
+        "model_recovery",
+        "discussion_engine",
+        "deepseek",
+        "synthesis_call_budget",
+        "provider_failure_persistence",
+        "database",
+        "contracts",
+        "artifacts"
+      ],
+      "passed": 165,
+      "duration_seconds": 49.07,
+      "source_stage": "before host invitation refinement"
+    },
+    {
+      "scope": [
+        "model_recovery"
+      ],
+      "passed": 31,
+      "duration_seconds": 12.34,
+      "source_stage": "before quoted terminal assembly refinement"
+    },
+    {
+      "scope": [
+        "host_invitation",
+        "scheduling",
+        "interaction_revision",
+        "deepseek",
+        "deepseek_http"
+      ],
+      "passed": 119,
+      "duration_seconds": 10.85
+    },
+    {
+      "scope": [
+        "insight_pipeline",
+        "summary_pipeline",
+        "summary_recovery",
+        "roster_tasks",
+        "turn_transactions",
+        "delivery_config",
+        "delivery_archive",
+        "final_samples"
+      ],
+      "passed": 93,
+      "duration_seconds": 63.63
+    },
+    {
+      "scope": [
+        "model_recovery",
+        "host_invitation"
+      ],
+      "passed": 34,
+      "duration_seconds": 13.11,
+      "source_stage": "before quoted terminal assembly refinement"
+    },
+    {
+      "scope": [
+        "model_recovery",
+        "host_invitation",
+        "discussion_engine",
+        "turn_transactions"
+      ],
+      "passed": 69,
+      "duration_seconds": 40.1,
+      "source_stage": "final code and prompts",
+      "new_cases": 35
+    }
+  ],
+  "counts_overlap": true,
+  "red_evidence": [
+    {
+      "scope": "first valid recovery TDD run",
+      "failed": 15,
+      "passed": 4,
+      "duration_seconds": 7.29
+    },
+    {
+      "scope": "host invitation context",
+      "failed": 1,
+      "passed": 2,
+      "duration_seconds": 1.92
+    },
+    {
+      "scope": "quoted utterance assembly",
+      "failed": 1,
+      "duration_seconds": 0.97
+    }
+  ],
+  "unchanged_evidence": "original/immutability.json",
+  "limits": [
+    "Surface sentence rules are heuristics",
+    "Actual provider correction, style and recovery remain unverified for this code",
+    "Historical failures are not overwritten",
+    "Prior untouched SSE/layout/install/E2E results are reused, not rerun"
+  ]
+}

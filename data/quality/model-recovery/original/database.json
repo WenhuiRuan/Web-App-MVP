@@ -1,0 +1,3239 @@
+{
+  "discussions": [
+    {
+      "id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "topic": "你认为AI的飞速发展,在未来几年是否会造成大规模失业?",
+      "expert_count": 4,
+      "state": "FAILED",
+      "version": 4,
+      "roster_revision": 1,
+      "current_run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "failure_stage": "discussion",
+      "last_event_seq": 200,
+      "created_at": "2026-10-11T05:03:11.413697Z",
+      "updated_at": "2026-10-11T05:08:26.178720Z",
+      "failure_code": "MODEL_RESULT_INVALID"
+    }
+  ],
+  "participants": [
+    {
+      "id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "周敏",
+      "title": "劳工权利律师、工会顾问",
+      "stance": "担忧大规模失业，认为资本替代劳动的速度远超新岗位创造，低技能与部分白领首当其冲；主张缩短工时、强化集体谈判与探索全民基本收入作为条件。",
+      "color": "#059669"
+    },
+    {
+      "id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "赵明远",
+      "title": "劳动经济学家",
+      "stance": "担忧未来3—5年出现结构性失业高峰，尤其行政、客服、基础编程等岗位；但认为总量失业取决于再培训速度与社保衔接，若政策缺位则风险显著上升。",
+      "color": "#2563EB"
+    },
+    {
+      "id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "kind": "HOST",
+      "name": "陈序",
+      "title": "圆桌主持人",
+      "stance": "引导讨论，区分短期冲击与长期趋势，要求各方说明判断依据与政策条件。",
+      "color": "#64748B"
+    },
+    {
+      "id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "吴澜",
+      "title": "教育社会学家",
+      "stance": "认为不会均匀大规模失业，但会加剧职业两极分化与地区不平等；支持把终身学习、数字素养和职业指导纳入公共教育，否则弱势群体被甩出劳动力市场。",
+      "color": "#9333EA"
+    },
+    {
+      "id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "孙可",
+      "title": "AI企业创始人",
+      "stance": "支持技术乐观判断：AI会替代任务而非整个职业，并催生提示工程、AI运维等新岗位；担忧的是转型期技能断层，需企业投资在岗再培训。",
+      "color": "#D97706"
+    }
+  ],
+  "runs": [
+    {
+      "id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "roster_revision": 1,
+      "status": "FAILED",
+      "max_turns": 20,
+      "max_seconds": 600,
+      "summary_through_turn": null,
+      "started_at": "2026-10-11T05:03:29.971203Z",
+      "ended_at": "2026-10-11T05:08:26.178720Z",
+      "cycle": 15,
+      "stop_reason": null,
+      "error_code": "MODEL_RESULT_INVALID"
+    }
+  ],
+  "messages": [
+    {
+      "id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "turn_no": 1,
+      "kind": "opening",
+      "content": "今天要问的核心取舍是：未来几年AI带来的是短期结构性失业高峰，还是长期总量可被新岗位和技能转换吸收，关键取决于替代速度与再培训、社保衔接能否同步。请赵明远、周敏、吴澜和孙可分别从劳动市场、劳动权利、教育分化和企业转型说明判断依据，并回应“大规模”指总量还是局部、持续多久。",
+      "created_at": "2026-10-11T05:03:35.213412+00:00"
+    },
+    {
+      "id": "fc3be772-60fe-4778-9be5-bd88d1caf014",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "turn_no": 2,
+      "kind": "statement",
+      "content": "我补充企业侧的判断：AI先替代的是任务而非整个职业，所以短期更可能表现为局部岗位重构，而不是均匀的总量失业。但转型期技能断层确实是主要风险，是否演变成大规模失业，取决于企业是否把在岗再培训当作投资而非可裁成本。",
+      "created_at": "2026-10-11T05:03:47.030805+00:00"
+    },
+    {
+      "id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "turn_no": 3,
+      "kind": "statement",
+      "content": "我同意孙可说的AI先替代任务，但陈序问的“大规模”若指局部，我的判断更悲观：行政、客服和基础编程这类可标准化任务集中的岗位，未来三到五年出现结构性失业高峰的概率不低。不过总量是否失控，取决于再培训速度和社保衔接能否跟上替代节奏，政策缺位时局部高峰可能拖成长期失业。",
+      "created_at": "2026-10-11T05:04:06.213163+00:00"
+    },
+    {
+      "id": "19397236-31f6-4683-8edb-e9d61f5c86e3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "turn_no": 4,
+      "kind": "statement",
+      "content": "赵明远说的再培训速度和社保衔接确实是条件，但劳动权利角度还要追问谁承担转型成本：资本用AI加速替代时，低技能与部分白领往往先失去议价权。",
+      "created_at": "2026-10-11T05:04:18.867845+00:00"
+    },
+    {
+      "id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "turn_no": 5,
+      "kind": "statement",
+      "content": "赵明远把局部高峰说得比总量更紧迫，我接受技能断层真实存在，但行政、客服、基础编程的岗位本身就是可拆解任务，转型未必只有裁员一条路。具体看，客服可转向AI训练与异常处理，基础编程可转向代码审查与系统集成，这些路径要跑通得靠企业预留在岗培训预算并让工会参与岗位调整协商。",
+      "created_at": "2026-10-11T05:04:48.627637+00:00"
+    },
+    {
+      "id": "adbcf723-60e1-4534-afc5-1b7efa7383e0",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "turn_no": 6,
+      "kind": "statement",
+      "content": "孙可说的客服转向AI训练、基础编程转向代码审查，我承认是真实路径，但这是有时间和资质门槛的重新匹配，不等于原岗位员工能马上平移。如果企业培训预算仍只靠自愿、工会协商机制又未普遍覆盖，那在三到五年窗口里局部结构性失业高峰仍会先出现，总量能否被吸收要看公共再培训与社保衔接是否托底。",
+      "created_at": "2026-10-11T05:05:18.482529+00:00"
+    },
+    {
+      "id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "turn_no": 7,
+      "kind": "statement",
+      "content": "孙可，你举的客服转AI训练、基础编程转代码审查这些路径确实存在，但它们依赖数字素养和本地产业支撑，不是每个被替代者都能自然进入。如果终身学习仍停留在个人或企业自愿层面，这些转型入口会先被已有教育优势地区和人群获取，职业两极分化与地区不平等反而会被放大。",
+      "created_at": "2026-10-11T05:05:49.943813+00:00"
+    },
+    {
+      "id": "d1fe5e77-a049-4c17-9f57-9670cf1441e4",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "turn_no": 8,
+      "kind": "statement",
+      "content": "吴澜说的数字素养和本地产业支撑确实是转型入口的门槛，但劳工权利角度还要看另一个门槛：即使培训铺开，若被替代者没有集体谈判权参与岗位调整，资本替代速度仍可能快于新岗位创造，转型成本最终仍落到个人。所以我的补充是，与其把终身学习当成个人责任，不如把缩短工时和集体谈判权作为前置再分配条件，并可假设探索UBI试点来保障被替代者的议价权。",
+      "created_at": "2026-10-11T05:06:08.430276+00:00"
+    },
+    {
+      "id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "turn_no": 9,
+      "kind": "linking",
+      "content": "孙可，你和赵明远、吴澜在“技能断层与局部岗位重构真实存在”上有交集，但周敏追问的转型成本由谁承担、被替代者能否参与岗位调整仍未答清：如果企业培训预算靠自愿、工会协商未普遍覆盖，客服转AI训练这类路径如何确保先落到低议价群体？工会参与岗位调整协商到底只是缓冲，还是足以改变赵明远所说三到五年局部失业高峰，请你回应。",
+      "created_at": "2026-10-11T05:06:24.288813+00:00"
+    },
+    {
+      "id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "turn_no": 10,
+      "kind": "statement",
+      "content": "陈序，你点出的漏洞成立：只靠自愿培训，客服转AI训练这类入口会先被议价能力强的群体拿到，所以我建议把企业获得的AI相关公共支持与可核查的在岗培训义务绑定，并让员工代表进入岗位调整委员会。但工会参与只能改变转型成本和入口的分配，不能单独把赵明远说的三到五年局部高峰抹平，因为替代速度还受技术扩散与市场需求驱动，公共社保和再培训托底不可省。",
+      "created_at": "2026-10-11T05:06:48.434483+00:00"
+    },
+    {
+      "id": "f1bdd72b-9a5f-4870-b1fe-e88c85101a7b",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "turn_no": 11,
+      "kind": "statement",
+      "content": "孙可，你承认公共社保和再培训托底不可省，这点我同意，但你把工会参与限定为事后改变转型成本和入口分配，仍低估了它前置影响替代节奏的可能。若集体谈判权能进入技术部署评估和岗位调整方案，工会参与就不只是缓冲，而会改变替代速度与成本承担，这也不等于单独抹平高峰。",
+      "created_at": "2026-10-11T05:07:13.331187+00:00"
+    },
+    {
+      "id": "755bb39f-673c-42b1-8df3-ecc77e8a84f5",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "turn_no": 12,
+      "kind": "linking",
+      "content": "周敏和孙可的交集是公共社保与再培训托底不可省，分歧在工会参与只是事后缓冲，还是能前置改变替代节奏与成本承担。赵明远，若集体谈判权进入技术部署评估和岗位调整方案，你判断未来三到五年局部失业高峰在时间、规模或分布上会因此改变吗？",
+      "created_at": "2026-10-11T05:07:26.640373+00:00"
+    },
+    {
+      "id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "turn_no": 13,
+      "kind": "statement",
+      "content": "陈序，集体谈判权若真能前置进入技术部署评估，我判断局部失业高峰更可能从集中爆发变为拉长、分行业出现，时间与分布会改变，但规模压缩有限，因为谈判覆盖不到的行政、客服等低议价岗位仍可能先失业。这不等于前置参与本身能替代社保和再培训托底，关键约束仍是协商覆盖率和托底政策能否同步落地。",
+      "created_at": "2026-10-11T05:07:46.254662+00:00"
+    },
+    {
+      "id": "0e24497c-7bba-4652-b8bf-69043eab3407",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "turn_no": 14,
+      "kind": "statement",
+      "content": "赵明远，你强调协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，建议用行业或部门延伸谈判、技术部署前强制披露和协商义务去覆盖行政、客服等低议价岗位，这会改变替代节奏与成本承担。但这仍要以可执行的谈判主体和托底政策为前提，不能替代社保与再培训。",
+      "created_at": "2026-10-11T05:08:09.898698+00:00"
+    }
+  ],
+  "speaking_intents": [
+    {
+      "id": "fa778257-460f-4c89-83a4-e38df53e135b",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 85,
+      "public_focus": "作为劳动经济学家，我判断未来3—5年行政、客服、基础编程岗位将出现结构性失业高峰，但总量是否演变为大规模失业取决于再培训速度与社保衔接；若政策缺位，风险显著上升。"
+    },
+    {
+      "id": "bab96665-3915-46d3-9de5-5d64bd7e8152",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 95,
+      "public_focus": "回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。"
+    },
+    {
+      "id": "076916be-4105-4f36-adc0-88677c639bf7",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "0381c2e0-335e-4886-a173-b0fd06c02ff8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3",
+      "relevance": 78,
+      "public_focus": "承接周敏的转型成本归属问题：若企业把替代成本外推给社会，三到五年结构性失业高峰会更难回落；需要工资保险、可携带福利和培训账户等衔接工具把成本内部化，而非只靠个人再培训。"
+    },
+    {
+      "id": "fadd9a06-35e5-40b4-88ff-940f88056241",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 6,
+      "based_on_turn": 5,
+      "kind": "REBUT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "relevance": 85,
+      "public_focus": "回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。"
+    },
+    {
+      "id": "9c257b9d-bed7-4c57-a569-f22321dd29df",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "赵明远在turn 6已回应孙可的岗位转型路径，并说明资质与时间门槛；当前无新增关键条件或需澄清之处。"
+    },
+    {
+      "id": "3d50ac1c-ef25-43ba-bd53-49ca0426e89a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "relevance": 78,
+      "public_focus": "回应吴澜的地区不平等：同意转型入口不均，补充公共再培训须与失业救济、社保可携带、企业联合培训基金绑定，并以再就业率和工资保留率评估，而非只看结业人数。"
+    },
+    {
+      "id": "9f10c724-a69d-40a9-ac57-1bdbd79c0555",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "relevance": 88,
+      "public_focus": "回应主持问孙可的工会协商作用：工会参与岗位调整能缓冲并分配转型成本，但无法单独改变替代速度和技术可行性；要压低三到五年局部失业高峰，需公共再培训覆盖与社保衔接同步跟上，否则高峰仍会先出现。"
+    },
+    {
+      "id": "73e86402-e319-4d21-8fff-d70eb9ad9a95",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "relevance": 80,
+      "public_focus": "补充孙可提到的公共社保与再培训托底：在三到五年窗口内，应把失业保险领取与行业技能账户培训绑定，并对替代岗位集中企业设过渡期缴费，否则局部高峰仍会先于总量吸收出现。"
+    },
+    {
+      "id": "a3ce955a-ae60-44b5-85bd-67e07bc0bd5e",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 13,
+      "based_on_turn": 12,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "755bb39f-673c-42b1-8df3-ecc77e8a84f5",
+      "relevance": 95,
+      "public_focus": "回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。"
+    },
+    {
+      "id": "e26f43bf-cabf-43c9-80ff-21494de9c18a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "cycle": 14,
+      "based_on_turn": 13,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "我方已在第13轮回应主持人的问题，当前没有新增信息或必要澄清，暂不发言。"
+    },
+    {
+      "id": "7496dbc1-b9ae-40bc-aae6-24e44a989276",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "REQUEST",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 90,
+      "public_focus": "回应主持人问题：我判断未来3—5年会出现结构性失业高峰，资本替代行政、客服、基础白领的速度快于新岗位创造。若没有缩短工时、强化集体谈判与全民基本收入试点，失业冲击将集中且持续，总量失业也会上升。"
+    },
+    {
+      "id": "47eac7fe-d138-4ac4-b826-18e708a7923a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "REBUT",
+      "target_message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014",
+      "relevance": 85,
+      "public_focus": "从劳动权利角度，大规模失业指局部集中且持续，非均匀总量；反驳孙可：资本替代快于新岗位创造，需缩短工时、集体谈判与UBI。"
+    },
+    {
+      "id": "1ea22c09-69ad-45ab-8f68-faee1667ee89",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "relevance": 88,
+      "public_focus": "从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。"
+    },
+    {
+      "id": "791bb121-23c5-46ad-9c60-b0cfe6a18be3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "8c4deee4-c067-43de-983e-9192c22fe25c",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 6,
+      "based_on_turn": 5,
+      "kind": "REBUT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "relevance": 82,
+      "public_focus": "回应孙可第5轮：企业自愿预留培训预算与工会个案参与不足以改变议价失衡，需强制培训基金、便携福利和可执行的集体协商权，否则客服、行政等低议价岗位仍先被替代。"
+    },
+    {
+      "id": "fe26df60-ec46-455e-9bdd-42ca56397301",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "relevance": 78,
+      "public_focus": "回应孙可：工会参与协商不等于有集体谈判权；若AI部署与培训预算仍由企业单方决定，岗位转向只是自愿路径。应把替代方案纳入集体协商前置程序，并用缩短工时和转型基金分摊成本。"
+    },
+    {
+      "id": "63674616-c4ea-43c9-a9ba-2195f5f210be",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "relevance": 86,
+      "public_focus": "吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。"
+    },
+    {
+      "id": "f509b922-99fa-4687-af58-e10144aca965",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "relevance": 75,
+      "public_focus": "补充可操作前置条件：企业培训预算不应靠自愿，应由行业集体协商按岗位替代规模提取转型基金，并给低议价群体带薪培训假与复职优先权，否则客服转AI训练等路径不会先落到他们。"
+    },
+    {
+      "id": "4b89c791-8a2b-4c8e-b474-fe636cefcb75",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "REBUT",
+      "target_message_id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "relevance": 80,
+      "public_focus": "孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。"
+    },
+    {
+      "id": "8de197ee-a193-4106-873d-90c8fe12de67",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 13,
+      "based_on_turn": 12,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "主持人正请赵明远判断工会前置参与能否改变三到五年局部失业高峰，周敏已在第11轮说明该机制，无需重复发言。"
+    },
+    {
+      "id": "b60ce21d-180b-4d9f-a692-bc4d30c760be",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "cycle": 14,
+      "based_on_turn": 13,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "relevance": 78,
+      "public_focus": "赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。"
+    },
+    {
+      "id": "a0b247c4-d181-459e-8066-97be3e2ce261",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "REQUEST",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 85,
+      "public_focus": "AI不会均匀造成大规模失业，但会加剧职业两极分化与地区不平等；若终身学习、数字素养和职业指导不纳入公共教育，弱势群体将被甩出劳动力市场。需区分总量与局部、短期与长期。"
+    },
+    {
+      "id": "c702a407-3b39-4916-a056-872668dcd398",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014",
+      "relevance": 88,
+      "public_focus": "补充孙可：任务替代不等于职业消失，但教育社会学看，冲击会沿地区与职业层级集中，低数字素养和县域劳动者更难转入新岗位；应把终身学习、数字素养和职业指导嵌入公共教育，并配套地方再培训。"
+    },
+    {
+      "id": "af7db0ca-f8a0-4e1a-a9a5-73b7d2173628",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 88,
+      "public_focus": "回应陈序对“大规模”界定的要求：AI不会造成均匀总量失业，但会通过职业两极分化与地区差异制造局部集中失业；若把“大规模”只等同于总量，会忽略低技能与弱势地区被甩出劳动力市场的持续性。终身学习、数字素养和职业指导须嵌入公共教育，而非仅靠自愿培训。"
+    },
+    {
+      "id": "c0cf04c4-c388-44eb-85d3-1a78d6faf341",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "REQUEST",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 88,
+      "public_focus": "从教育社会学补充：失业不会均匀发生，风险集中在低学历、低数字素养和产业单一地区，导致职业两极分化与地区不平等；主张把终身学习、数字素养和职业指导纳入公共教育，尤其面向弱势群体。"
+    },
+    {
+      "id": "f728e6f2-cd7b-4c5d-bd1b-5e1c599e05d4",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 6,
+      "based_on_turn": 5,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "relevance": 80,
+      "public_focus": "补充孙可的‘在岗培训可转型’判断：转型路径不会均匀分布，低数字素养与低教育地区缺乏在岗培训和企业岗位，AI替代会放大职业两极分化和地区不平等，公共教育须提供终身学习、数字素养与职业指导。"
+    },
+    {
+      "id": "77f48c09-0a8e-4086-9852-472e2c562b60",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "relevance": 90,
+      "public_focus": "补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。"
+    },
+    {
+      "id": "9122ee75-6f9e-4541-9178-b5482ce5fc53",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "e3de5f6d-ebbb-4f98-beae-117d3ca9a1e3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前点名对象是孙可，我此前已提出数字素养与本地产业支撑条件，暂无新增内容。"
+    },
+    {
+      "id": "5af92cd0-8bdf-4d89-9a6c-a97242fd96e1",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "relevance": 74,
+      "public_focus": "孙可把培训义务绑公共AI支持并设岗位调整委员会，仍以有雇主、有产业为前提；我补充地区维度：低产业密度地区的被替代者不在这类企业议程内，需由公共教育系统按地区配置数字素养与职业指导，并把再培训经费与地方就业服务绑定，否则两极分化会从职业差距转为地区差距。"
+    },
+    {
+      "id": "17ad9f63-3655-42b6-b8ef-9d94d7edac6b",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 13,
+      "based_on_turn": 12,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "755bb39f-673c-42b1-8df3-ecc77e8a84f5",
+      "relevance": 68,
+      "public_focus": "工会前置协商能改变替代节奏，但覆盖不到灵活就业和非工会低议价者；公共终身学习与地区职业指导应嵌入技术部署评估，否则地区不平等仍会扩大。"
+    },
+    {
+      "id": "4c4ea539-3e06-44ab-96d9-e2f2d5cfd6e3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "cycle": 14,
+      "based_on_turn": 13,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "relevance": 70,
+      "public_focus": "回应赵明远提到协商覆盖率之外，公共教育供给若按地方财政决定，转型入口和失业高峰会更向教育弱势地区集中；主张终身学习与职业指导由上级财政统筹，否则工会与社保托底仍难覆盖这些地区。"
+    },
+    {
+      "id": "19d44453-09d3-4dbf-b4f4-a53f86d9db7d",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "relevance": 88,
+      "public_focus": "补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。"
+    },
+    {
+      "id": "94b922de-fa33-4ce2-84ff-fff6080dfba4",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "已在第2轮回应企业侧判断，当前没有新增关注点。"
+    },
+    {
+      "id": "ffb48370-d569-4995-bb56-aa90f1c118b7",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "relevance": 72,
+      "public_focus": "回应赵明远：同意局部结构性失业高峰判断，补充企业侧可操作条件——把再培训预算与AI部署立项绑定、先做岗位再设计与受影响任务清单，否则任务替代会拖成长期失业。"
+    },
+    {
+      "id": "fa4bd661-f4f1-4ed3-b838-56155c101706",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "relevance": 85,
+      "public_focus": "针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。"
+    },
+    {
+      "id": "c22eeb5e-f782-4c15-b0ee-bed0edcd4598",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 6,
+      "based_on_turn": 5,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "0114fa77-1bd1-41cc-a00c-c31a30d8c3fc",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "adbcf723-60e1-4534-afc5-1b7efa7383e0",
+      "relevance": 78,
+      "public_focus": "承认转岗有时间和资质门槛，补充企业可执行的过渡机制：把在岗培训预算、技能凭证与工会参与的岗位调整协商绑定，分阶段转岗，而不是把再培训当成自愿福利。"
+    },
+    {
+      "id": "7d4f4b52-4f4c-4373-ade0-a129c2cf0d00",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "relevance": 86,
+      "public_focus": "回应吴澜：承认转型路径依赖数字素养与本地产业，补充企业可将再培训写入岗位调整协议并与公共终身学习账户衔接，避免仅靠个人自愿，优先覆盖被替代风险高的岗位。"
+    },
+    {
+      "id": "ae7a9c8e-75dd-452f-b6dc-00d364f79878",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "relevance": 95,
+      "public_focus": "回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。"
+    },
+    {
+      "id": "5a8959df-5941-441d-b5e3-2afb6e617f3a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前主持点名问题已在第10轮回应，暂无新增判断或必要澄清，不重复发言。"
+    },
+    {
+      "id": "db1d7d02-dfd2-430c-af2a-799148236bf4",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 13,
+      "based_on_turn": 12,
+      "kind": "REBUT",
+      "target_message_id": "f1bdd72b-9a5f-4870-b1fe-e88c85101a7b",
+      "relevance": 82,
+      "public_focus": "回应周敏第11轮质疑：工会可前置影响企业部署节奏和成本承担，但行业替代速度仍受技术扩散与市场竞争约束；可把分阶段上线、培训先行、影响评估作为企业级协商条件，而非总量高峰的单独决定变量。"
+    },
+    {
+      "id": "2b4ecc7f-95cf-4ff5-aeb9-c7e1f82e74d2",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "cycle": 14,
+      "based_on_turn": 13,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "relevance": 75,
+      "public_focus": "回应赵明远：同意前置协商会改变高峰时间与分布、压缩规模有限；补充企业侧约束——低议价岗位常在外包、平台和中小企业，协商若只覆盖大企业，需把AI采购与外包合同中的培训转岗条款纳入，否则覆盖率仍决定谁先被替代。"
+    }
+  ],
+  "turn_claims": [
+    {
+      "id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 1,
+      "based_on_turn": 0,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "opening",
+      "public_focus": "说明议题与讨论范围",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "fc3be772-60fe-4778-9be5-bd88d1caf014",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 2,
+      "based_on_turn": 1,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "host_task": null,
+      "public_focus": "补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 3,
+      "based_on_turn": 2,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6",
+      "host_task": null,
+      "public_focus": "回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "19397236-31f6-4683-8edb-e9d61f5c86e3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 4,
+      "based_on_turn": 3,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "host_task": null,
+      "public_focus": "从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 5,
+      "based_on_turn": 4,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "65a2abb7-52bc-46a4-b743-50442b314d08",
+      "host_task": null,
+      "public_focus": "针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "adbcf723-60e1-4534-afc5-1b7efa7383e0",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 6,
+      "based_on_turn": 5,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "participation_kind": "REBUT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "host_task": null,
+      "public_focus": "回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 7,
+      "based_on_turn": 6,
+      "participant_id": "8a0e7052-cfc8-5871-b8aa-54e39536ab7b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3",
+      "host_task": null,
+      "public_focus": "补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "d1fe5e77-a049-4c17-9f57-9670cf1441e4",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 8,
+      "based_on_turn": 7,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "01df83d7-2170-41b2-9799-b75056aa62c8",
+      "host_task": null,
+      "public_focus": "吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 9,
+      "based_on_turn": 8,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "linking",
+      "public_focus": "串联孙可的岗位转换路径、赵明远的3到5年门槛与周敏的集体谈判/再分配条件：请孙可回应企业自愿培训不足时，客服转AI训练等路径如何覆盖低议价群体，并说明工会参与协商是否足以改变局部失业高峰。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 10,
+      "based_on_turn": 9,
+      "participant_id": "c488d379-936f-51f3-96b5-96a2ba4a9804",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "3941ff14-fce0-4d8a-8d11-91b69e1e5741",
+      "host_task": null,
+      "public_focus": "回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "f1bdd72b-9a5f-4870-b1fe-e88c85101a7b",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 11,
+      "based_on_turn": 10,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "participation_kind": "REBUT",
+      "target_message_id": "617c49ce-1115-457e-8767-f0a93578c6c8",
+      "host_task": null,
+      "public_focus": "孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "755bb39f-673c-42b1-8df3-ecc77e8a84f5",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 12,
+      "based_on_turn": 11,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "linking",
+      "public_focus": "串联周敏与孙可关于工会能否前置影响替代速度的分歧，请赵明远评估这对三到五年局部失业高峰判断意味着什么。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 13,
+      "based_on_turn": 12,
+      "participant_id": "3a4d00eb-5718-530f-9615-8c475f3803c9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "755bb39f-673c-42b1-8df3-ecc77e8a84f5",
+      "host_task": null,
+      "public_focus": "回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "0e24497c-7bba-4652-b8bf-69043eab3407",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 14,
+      "based_on_turn": 13,
+      "participant_id": "771a509b-15b8-5c74-adf2-7737521e23b9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "faefb963-c91f-443f-8f0c-a70dfabd3858",
+      "host_task": null,
+      "public_focus": "赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "e993b154-8655-4fb0-ae14-3bbaaedd4609",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "roster_revision": 1,
+      "cycle": 15,
+      "based_on_turn": 14,
+      "participant_id": "597f36b0-3bae-5424-94ea-ba25da1e533a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "linking",
+      "public_focus": "串联周敏的行业延伸谈判/强制披露与吴澜的地区不平等：请吴澜判断这些机制能否覆盖数字素养和本地产业薄弱地区，防止局部失业高峰固化为地区长期失业。",
+      "status": "CANCELLED"
+    }
+  ],
+  "events": [
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 1,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T05:03:11.413697Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"DRAFT\",\"version\":0}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 2,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T05:03:11.431212Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"GENERATING\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 3,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "roster.ready",
+      "occurred_at": "2026-10-11T05:03:18.288930Z",
+      "payload": "{\"participants\":[{\"color\":\"#64748B\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"kind\":\"HOST\",\"name\":\"陈序\",\"roster_revision\":1,\"stance\":\"引导讨论，区分短期冲击与长期趋势，要求各方说明判断依据与政策条件。\",\"title\":\"圆桌主持人\"},{\"color\":\"#2563EB\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"kind\":\"EXPERT\",\"name\":\"赵明远\",\"roster_revision\":1,\"stance\":\"担忧未来3—5年出现结构性失业高峰，尤其行政、客服、基础编程等岗位；但认为总量失业取决于再培训速度与社保衔接，若政策缺位则风险显著上升。\",\"title\":\"劳动经济学家\"},{\"color\":\"#D97706\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"kind\":\"EXPERT\",\"name\":\"孙可\",\"roster_revision\":1,\"stance\":\"支持技术乐观判断：AI会替代任务而非整个职业，并催生提示工程、AI运维等新岗位；担忧的是转型期技能断层，需企业投资在岗再培训。\",\"title\":\"AI企业创始人\"},{\"color\":\"#059669\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"kind\":\"EXPERT\",\"name\":\"周敏\",\"roster_revision\":1,\"stance\":\"担忧大规模失业，认为资本替代劳动的速度远超新岗位创造，低技能与部分白领首当其冲；主张缩短工时、强化集体谈判与探索全民基本收入作为条件。\",\"title\":\"劳工权利律师、工会顾问\"},{\"color\":\"#9333EA\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"kind\":\"EXPERT\",\"name\":\"吴澜\",\"roster_revision\":1,\"stance\":\"认为不会均匀大规模失业，但会加剧职业两极分化与地区不平等；支持把终身学习、数字素养和职业指导纳入公共教育，否则弱势群体被甩出劳动力市场。\",\"title\":\"教育社会学家\"}],\"roster_revision\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 4,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T05:03:18.289927Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"READY\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 5,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T05:03:29.971203Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"RUNNING\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 6,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.008549Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 7,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.008549Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 8,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.008549Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 9,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.008549Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 10,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.008549Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"PREPARING\",\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 11,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:30.025631Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"SPEAKING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 12,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:03:35.213412Z",
+      "payload": "{\"content\":\"今天要问的核心取舍是：未来几年AI带来的是短期结构性失业高峰，还是长期总量可被新岗位和技能转换吸收，关键取决于替代速度与再培训、社保衔接能否同步。请赵明远、周敏、吴澜和孙可分别从劳动市场、劳动权利、教育分化和企业转型说明判断依据，并回应“大规模”指总量还是局部、持续多久。\",\"created_at\":\"2026-10-11T05:03:35.213412Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"98f6ad1a-c3d1-430c-af9d-2c8e83e6bde6\",\"kind\":\"opening\",\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 13,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:35.213412Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 14,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:35.238994Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 15,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:35.238994Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 16,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:35.238994Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 17,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:35.238994Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 18,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.211076Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"作为劳动经济学家，我判断未来3—5年行政、客服、基础编程岗位将出现结构性失业高峰，但总量是否演变为大规模失业取决于再培训速度与社保衔接；若政策缺位，风险显著上升。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 19,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.211076Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"回应主持人问题：我判断未来3—5年会出现结构性失业高峰，资本替代行政、客服、基础白领的速度快于新岗位创造。若没有缩短工时、强化集体谈判与全民基本收入试点，失业冲击将集中且持续，总量失业也会上升。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 20,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.212073Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"AI不会均匀造成大规模失业，但会加剧职业两极分化与地区不平等；若终身学习、数字素养和职业指导不纳入公共教育，弱势群体将被甩出劳动力市场。需区分总量与局部、短期与长期。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 21,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.212073Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 22,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.230028Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 23,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:46.240996Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。\",\"state\":\"SPEAKING\",\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 24,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:03:47.030805Z",
+      "payload": "{\"content\":\"我补充企业侧的判断：AI先替代的是任务而非整个职业，所以短期更可能表现为局部岗位重构，而不是均匀的总量失业。但转型期技能断层确实是主要风险，是否演变成大规模失业，取决于企业是否把在岗再培训当作投资而非可裁成本。\",\"created_at\":\"2026-10-11T05:03:47.030805Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"kind\":\"statement\",\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 25,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.030805Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"补充企业侧判断：AI先替代任务而非整个职业，短期会出现提示工程、AI运维等新岗位，但转型期技能断层是主要风险；应把企业投资在岗再培训作为判断‘大规模失业’能否缓解的关键条件。\",\"state\":\"IDLE\",\"version\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 26,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.047571Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 27,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.047571Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 28,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.047571Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 29,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.047571Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 30,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:03:47.072811Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 31,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T05:03:49.669107Z",
+      "payload": "{\"items\":[],\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 32,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:03:49.669107Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 33,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.092092Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 34,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.092092Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"从劳动权利角度，大规模失业指局部集中且持续，非均匀总量；反驳孙可：资本替代快于新岗位创造，需缩短工时、集体谈判与UBI。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 35,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.092092Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可：任务替代不等于职业消失，但教育社会学看，冲击会沿地区与职业层级集中，低数字素养和县域劳动者更难转入新岗位；应把终身学习、数字素养和职业指导嵌入公共教育，并配套地方再培训。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 36,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.092092Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"已在第2轮回应企业侧判断，当前没有新增关注点。\",\"state\":\"IDLE\",\"version\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 37,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.118970Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 38,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:03:57.132856Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。\",\"state\":\"SPEAKING\",\"version\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 39,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:04:06.213163Z",
+      "payload": "{\"content\":\"我同意孙可说的AI先替代任务，但陈序问的“大规模”若指局部，我的判断更悲观：行政、客服和基础编程这类可标准化任务集中的岗位，未来三到五年出现结构性失业高峰的概率不低。不过总量是否失控，取决于再培训速度和社保衔接能否跟上替代节奏，政策缺位时局部高峰可能拖成长期失业。\",\"created_at\":\"2026-10-11T05:04:06.213163Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"kind\":\"statement\",\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 40,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:06.213163Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应主持人：未来3—5年行政、客服、基础编程等岗位可能现结构性失业高峰；总量失业取决于再培训速度与社保衔接，政策缺位则风险上升。\",\"state\":\"IDLE\",\"version\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 41,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:06.226750Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 42,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:06.226750Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 43,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:06.226750Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 44,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:06.226750Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 45,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.812544Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 46,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.812544Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。\",\"state\":\"IDLE\",\"version\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 47,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.812544Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"回应陈序对“大规模”界定的要求：AI不会造成均匀总量失业，但会通过职业两极分化与地区差异制造局部集中失业；若把“大规模”只等同于总量，会忽略低技能与弱势地区被甩出劳动力市场的持续性。终身学习、数字素养和职业指导须嵌入公共教育，而非仅靠自愿培训。\",\"state\":\"IDLE\",\"version\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 48,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.812544Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应赵明远：同意局部结构性失业高峰判断，补充企业侧可操作条件——把再培训预算与AI部署立项绑定、先做岗位再设计与受影响任务清单，否则任务替代会拖成长期失业。\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 49,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.825950Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。\",\"state\":\"PREPARING\",\"version\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 50,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:17.843122Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。\",\"state\":\"SPEAKING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 51,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:04:18.867845Z",
+      "payload": "{\"content\":\"赵明远说的再培训速度和社保衔接确实是条件，但劳动权利角度还要追问谁承担转型成本：资本用AI加速替代时，低技能与部分白领往往先失去议价权。\",\"created_at\":\"2026-10-11T05:04:18.867845Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"19397236-31f6-4683-8edb-e9d61f5c86e3\",\"kind\":\"statement\",\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 52,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.867845Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"从劳动权利角度补充：大规模与否不只看岗位总数，更看替代速度与劳动者议价权；资本以AI加速替代，低技能与部分白领先受冲击。应把缩短工时、集体谈判和全民基本收入作为分配前提，否则局部高峰会固化为长期失业。\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 53,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.888832Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 54,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.906906Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 55,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.906906Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 56,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.907904Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 57,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:18.907904Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 58,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.733958Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"承接周敏的转型成本归属问题：若企业把替代成本外推给社会，三到五年结构性失业高峰会更难回落；需要工资保险、可携带福利和培训账户等衔接工具把成本内部化，而非只靠个人再培训。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 59,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.734955Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 60,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.734955Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"从教育社会学补充：失业不会均匀发生，风险集中在低学历、低数字素养和产业单一地区，导致职业两极分化与地区不平等；主张把终身学习、数字素养和职业指导纳入公共教育，尤其面向弱势群体。\",\"state\":\"IDLE\",\"version\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 61,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.734955Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 62,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.747586Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 63,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:39.758557Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。\",\"state\":\"SPEAKING\",\"version\":14}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 64,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:04:48.627637Z",
+      "payload": "{\"content\":\"赵明远把局部高峰说得比总量更紧迫，我接受技能断层真实存在，但行政、客服、基础编程的岗位本身就是可拆解任务，转型未必只有裁员一条路。具体看，客服可转向AI训练与异常处理，基础编程可转向代码审查与系统集成，这些路径要跑通得靠企业预留在岗培训预算并让工会参与岗位调整协商。\",\"created_at\":\"2026-10-11T05:04:48.627637Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"4878e228-14f3-45c5-87f3-f47eb22e91b3\",\"kind\":\"statement\",\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 65,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:48.628634Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"针对赵明远点名的行政、客服、基础编程岗位，补充其任务可拆解转型路径，如客服转向AI训练与异常处理，基础编程转向AI代码审查与系统集成，以此说明局部失业可通过在岗再培训缓解，但需企业预算与工会协商保障。\",\"state\":\"IDLE\",\"version\":15}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 66,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:48.648928Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 67,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:48.648928Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 68,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:48.648928Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 69,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:04:48.648928Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":16}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 70,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T05:05:05.887245Z",
+      "payload": "{\"items\":[{\"content\":\"孙可和赵明远共同认为AI先替代的是任务。\",\"id\":\"70bce374-416e-5960-9855-821542d02bdd\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\"]},{\"content\":\"孙可、赵明远和周敏共同认为再培训是影响AI替代下是否出现大规模失业的条件之一。\",\"id\":\"b1cfd2f7-2f19-5bf6-935c-d4975c6b6044\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]},{\"content\":\"赵明远和周敏共同认为社保衔接是影响AI替代下是否出现大规模失业的条件之一。\",\"id\":\"0d0a5317-5e03-5389-a62a-f19ecc454639\",\"kind\":\"consensus\",\"source_message_ids\":[\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]}],\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 71,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:05:05.887245Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 72,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.885121Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 73,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.886118Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"回应孙可第5轮：企业自愿预留培训预算与工会个案参与不足以改变议价失衡，需强制培训基金、便携福利和可执行的集体协商权，否则客服、行政等低议价岗位仍先被替代。\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 74,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.886118Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可的‘在岗培训可转型’判断：转型路径不会均匀分布，低数字素养与低教育地区缺乏在岗培训和企业岗位，AI替代会放大职业两极分化和地区不平等，公共教育须提供终身学习、数字素养与职业指导。\",\"state\":\"IDLE\",\"version\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 75,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.886118Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":17}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 76,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.905343Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 77,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:14.917625Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。\",\"state\":\"SPEAKING\",\"version\":16}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 78,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:05:18.482529Z",
+      "payload": "{\"content\":\"孙可说的客服转向AI训练、基础编程转向代码审查，我承认是真实路径，但这是有时间和资质门槛的重新匹配，不等于原岗位员工能马上平移。如果企业培训预算仍只靠自愿、工会协商机制又未普遍覆盖，那在三到五年窗口里局部结构性失业高峰仍会先出现，总量能否被吸收要看公共再培训与社保衔接是否托底。\",\"created_at\":\"2026-10-11T05:05:18.482529Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"adbcf723-60e1-4534-afc5-1b7efa7383e0\",\"kind\":\"statement\",\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 79,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.482529Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应孙可turn5：承认客服、基础编程任务可拆解，但新增客服转AI训练、编程转代码审查有时间与资质门槛；企业自愿培训预算和工会协商覆盖率不足，不能短期吸收三到五年结构性失业高峰。\",\"state\":\"IDLE\",\"version\":17}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 80,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.502754Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 81,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.502754Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":18}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 82,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.502754Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 83,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.502754Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":18}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 84,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:05:18.515810Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 85,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.618804Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"赵明远在turn 6已回应孙可的岗位转型路径，并说明资质与时间门槛；当前无新增关键条件或需澄清之处。\",\"state\":\"IDLE\",\"version\":19}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 86,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.618804Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"回应孙可：工会参与协商不等于有集体谈判权；若AI部署与培训预算仍由企业单方决定，岗位转向只是自愿路径。应把替代方案纳入集体协商前置程序，并用缩短工时和转型基金分摊成本。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 87,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.618804Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。\",\"state\":\"IDLE\",\"version\":13}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 88,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.618804Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"承认转岗有时间和资质门槛，补充企业可执行的过渡机制：把在岗培训预算、技能凭证与工会参与的岗位调整协商绑定，分阶段转岗，而不是把再培训当成自愿福利。\",\"state\":\"IDLE\",\"version\":19}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 89,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.640183Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。\",\"state\":\"PREPARING\",\"version\":14}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 90,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:45.650157Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。\",\"state\":\"SPEAKING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 91,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:05:49.943813Z",
+      "payload": "{\"content\":\"孙可，你举的客服转AI训练、基础编程转代码审查这些路径确实存在，但它们依赖数字素养和本地产业支撑，不是每个被替代者都能自然进入。如果终身学习仍停留在个人或企业自愿层面，这些转型入口会先被已有教育优势地区和人群获取，职业两极分化与地区不平等反而会被放大。\",\"created_at\":\"2026-10-11T05:05:49.943813Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"01df83d7-2170-41b2-9799-b75056aa62c8\",\"kind\":\"statement\",\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 92,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:49.943813Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"补充孙可的转型路径：客服转AI训练、编程转代码审查需要数字素养与本地产业支撑；若终身学习不纳入公共教育，这些路径只会被已有教育优势地区和人群获取，加剧职业两极分化与地区不平等。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 93,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:49.963045Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 94,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:49.963045Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":20}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 95,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:49.963045Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 96,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:05:49.963045Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":20}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 97,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.598224Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应吴澜的地区不平等：同意转型入口不均，补充公共再培训须与失业救济、社保可携带、企业联合培训基金绑定，并以再就业率和工资保留率评估，而非只看结业人数。\",\"state\":\"IDLE\",\"version\":21}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 98,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.598224Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。\",\"state\":\"IDLE\",\"version\":18}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 99,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.599221Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":18}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 100,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.599221Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应吴澜：承认转型路径依赖数字素养与本地产业，补充企业可将再培训写入岗位调整协议并与公共终身学习账户衔接，避免仅靠个人自愿，优先覆盖被替代风险高的岗位。\",\"state\":\"IDLE\",\"version\":21}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 101,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.609883Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。\",\"state\":\"PREPARING\",\"version\":19}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 102,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:01.625087Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。\",\"state\":\"SPEAKING\",\"version\":20}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 103,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:06:08.431273Z",
+      "payload": "{\"content\":\"吴澜说的数字素养和本地产业支撑确实是转型入口的门槛，但劳工权利角度还要看另一个门槛：即使培训铺开，若被替代者没有集体谈判权参与岗位调整，资本替代速度仍可能快于新岗位创造，转型成本最终仍落到个人。所以我的补充是，与其把终身学习当成个人责任，不如把缩短工时和集体谈判权作为前置再分配条件，并可假设探索UBI试点来保障被替代者的议价权。\",\"created_at\":\"2026-10-11T05:06:08.430276Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"d1fe5e77-a049-4c17-9f57-9670cf1441e4\",\"kind\":\"statement\",\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 104,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:08.431273Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"吴澜指出转型入口依赖数字素养与本地产业支撑，我补充：若只靠终身学习，仍挡不住资本替代快于岗位创造。应把缩短工时、集体谈判权和UBI试点作为再分配条件，保障被替代者议价权，而非把转型风险全推给个人。\",\"state\":\"IDLE\",\"version\":21}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 105,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:08.448476Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":22}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 106,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:08.448476Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":22}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 107,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:08.448476Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":19}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 108,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:08.448476Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":22}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 109,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.100605Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":23}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 110,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.100605Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":23}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 111,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.100605Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":20}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 112,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.100605Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":23}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 113,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.100605Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联孙可的岗位转换路径、赵明远的3到5年门槛与周敏的集体谈判/再分配条件：请孙可回应企业自愿培训不足时，客服转AI训练等路径如何覆盖低议价群体，并说明工会参与协商是否足以改变局部失业高峰。\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 114,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:17.122328Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联孙可的岗位转换路径、赵明远的3到5年门槛与周敏的集体谈判/再分配条件：请孙可回应企业自愿培训不足时，客服转AI训练等路径如何覆盖低议价群体，并说明工会参与协商是否足以改变局部失业高峰。\",\"state\":\"SPEAKING\",\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 115,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T05:06:22.907648Z",
+      "payload": "{\"items\":[{\"content\":\"孙可与赵明远共同判断：AI先替代的是任务。\",\"id\":\"c5050f7a-1adc-5057-9020-bd8056dbfbd2\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\"]},{\"content\":\"孙可、赵明远、周敏共同认为，再培训是影响AI替代下失业是否失控的条件之一。\",\"id\":\"48040fcb-27d8-5a6e-9f54-2bae6ab1eb49\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]},{\"content\":\"赵明远、周敏共同认为，社保衔接是影响AI替代下失业是否失控的条件之一。\",\"id\":\"5a68e686-3577-5bab-a49c-ed865ee4d2dc\",\"kind\":\"consensus\",\"source_message_ids\":[\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]}],\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 116,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:06:22.908646Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 117,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:06:22.921613Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":8,\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 118,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:06:24.288813Z",
+      "payload": "{\"content\":\"孙可，你和赵明远、吴澜在“技能断层与局部岗位重构真实存在”上有交集，但周敏追问的转型成本由谁承担、被替代者能否参与岗位调整仍未答清：如果企业培训预算靠自愿、工会协商未普遍覆盖，客服转AI训练这类路径如何确保先落到低议价群体？工会参与岗位调整协商到底只是缓冲，还是足以改变赵明远所说三到五年局部失业高峰，请你回应。\",\"created_at\":\"2026-10-11T05:06:24.288813Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"3941ff14-fce0-4d8a-8d11-91b69e1e5741\",\"kind\":\"linking\",\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 119,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:24.288813Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联孙可的岗位转换路径、赵明远的3到5年门槛与周敏的集体谈判/再分配条件：请孙可回应企业自愿培训不足时，客服转AI训练等路径如何覆盖低议价群体，并说明工会参与协商是否足以改变局部失业高峰。\",\"state\":\"IDLE\",\"version\":6}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 120,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:24.314171Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 121,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:24.314171Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 122,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:24.315168Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":21}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 123,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:24.315168Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 124,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.148318Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应主持问孙可的工会协商作用：工会参与岗位调整能缓冲并分配转型成本，但无法单独改变替代速度和技术可行性；要压低三到五年局部失业高峰，需公共再培训覆盖与社保衔接同步跟上，否则高峰仍会先出现。\",\"state\":\"IDLE\",\"version\":25}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 125,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.148318Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"补充可操作前置条件：企业培训预算不应靠自愿，应由行业集体协商按岗位替代规模提取转型基金，并给低议价群体带薪培训假与复职优先权，否则客服转AI训练等路径不会先落到他们。\",\"state\":\"IDLE\",\"version\":25}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 126,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.148318Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"当前点名对象是孙可，我此前已提出数字素养与本地产业支撑条件，暂无新增内容。\",\"state\":\"IDLE\",\"version\":22}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 127,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.149315Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。\",\"state\":\"IDLE\",\"version\":25}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 128,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.164282Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。\",\"state\":\"PREPARING\",\"version\":26}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 129,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:38.175256Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。\",\"state\":\"SPEAKING\",\"version\":27}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 130,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:06:48.434483Z",
+      "payload": "{\"content\":\"陈序，你点出的漏洞成立：只靠自愿培训，客服转AI训练这类入口会先被议价能力强的群体拿到，所以我建议把企业获得的AI相关公共支持与可核查的在岗培训义务绑定，并让员工代表进入岗位调整委员会。但工会参与只能改变转型成本和入口的分配，不能单独把赵明远说的三到五年局部高峰抹平，因为替代速度还受技术扩散与市场需求驱动，公共社保和再培训托底不可省。\",\"created_at\":\"2026-10-11T05:06:48.434483Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"617c49ce-1115-457e-8767-f0a93578c6c8\",\"kind\":\"statement\",\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 131,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:48.434483Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应主持人：仅靠自愿培训不够；需把AI节流按比例强制进入在岗培训基金，并让工会/员工代表参与岗位调整委员会，使客服转AI训练等入口优先覆盖被替代低议价群体；这能压低局部高峰，但不能单独消除三到五年结构性失业，仍需公共社保与再培训托底。\",\"state\":\"IDLE\",\"version\":28}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 132,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:48.445948Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":26}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 133,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:48.455944Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":26}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 134,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:48.455944Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":23}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 135,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:06:48.455944Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":29}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 136,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.212142Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"补充孙可提到的公共社保与再培训托底：在三到五年窗口内，应把失业保险领取与行业技能账户培训绑定，并对替代岗位集中企业设过渡期缴费，否则局部高峰仍会先于总量吸收出现。\",\"state\":\"IDLE\",\"version\":27}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 137,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.213138Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。\",\"state\":\"IDLE\",\"version\":27}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 138,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.213138Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"孙可把培训义务绑公共AI支持并设岗位调整委员会，仍以有雇主、有产业为前提；我补充地区维度：低产业密度地区的被替代者不在这类企业议程内，需由公共教育系统按地区配置数字素养与职业指导，并把再培训经费与地方就业服务绑定，否则两极分化会从职业差距转为地区差距。\",\"state\":\"IDLE\",\"version\":24}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 139,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.213138Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"当前主持点名问题已在第10轮回应，暂无新增判断或必要澄清，不重复发言。\",\"state\":\"IDLE\",\"version\":30}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 140,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.233088Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。\",\"state\":\"PREPARING\",\"version\":28}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 141,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:09.243062Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。\",\"state\":\"SPEAKING\",\"version\":29}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 142,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:07:13.331187Z",
+      "payload": "{\"content\":\"孙可，你承认公共社保和再培训托底不可省，这点我同意，但你把工会参与限定为事后改变转型成本和入口分配，仍低估了它前置影响替代节奏的可能。若集体谈判权能进入技术部署评估和岗位调整方案，工会参与就不只是缓冲，而会改变替代速度与成本承担，这也不等于单独抹平高峰。\",\"created_at\":\"2026-10-11T05:07:13.331187Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"f1bdd72b-9a5f-4870-b1fe-e88c85101a7b\",\"kind\":\"statement\",\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 143,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:13.332185Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"孙可把工会参与限定为事后分配，但若与技术部署前强制协商绑定，它可前置影响替代速度与成本承担，而不只是缓冲，也不等于单独抹平高峰。\",\"state\":\"IDLE\",\"version\":30}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 144,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:13.344291Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":31}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 145,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:13.344291Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":28}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 146,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:13.344291Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":25}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 147,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:13.344291Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":31}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 148,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.712824Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":29}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 149,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.713821Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":32}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 150,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.713821Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":26}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 151,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.713821Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":32}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 152,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.713821Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联周敏与孙可关于工会能否前置影响替代速度的分歧，请赵明远评估这对三到五年局部失业高峰判断意味着什么。\",\"state\":\"PREPARING\",\"version\":7}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 153,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:22.727192Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联周敏与孙可关于工会能否前置影响替代速度的分歧，请赵明远评估这对三到五年局部失业高峰判断意味着什么。\",\"state\":\"SPEAKING\",\"version\":8}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 154,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:07:26.640373Z",
+      "payload": "{\"content\":\"周敏和孙可的交集是公共社保与再培训托底不可省，分歧在工会参与只是事后缓冲，还是能前置改变替代节奏与成本承担。赵明远，若集体谈判权进入技术部署评估和岗位调整方案，你判断未来三到五年局部失业高峰在时间、规模或分布上会因此改变吗？\",\"created_at\":\"2026-10-11T05:07:26.640373Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"755bb39f-673c-42b1-8df3-ecc77e8a84f5\",\"kind\":\"linking\",\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 155,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:26.640373Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联周敏与孙可关于工会能否前置影响替代速度的分歧，请赵明远评估这对三到五年局部失业高峰判断意味着什么。\",\"state\":\"IDLE\",\"version\":9}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 156,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:26.656077Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":33}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 157,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:26.656077Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":30}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 158,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:26.656077Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":27}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 159,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:26.657074Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":33}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 160,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.089771Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。\",\"state\":\"IDLE\",\"version\":31}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 161,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.090281Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"主持人正请赵明远判断工会前置参与能否改变三到五年局部失业高峰，周敏已在第11轮说明该机制，无需重复发言。\",\"state\":\"IDLE\",\"version\":34}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 162,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.090281Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"工会前置协商能改变替代节奏，但覆盖不到灵活就业和非工会低议价者；公共终身学习与地区职业指导应嵌入技术部署评估，否则地区不平等仍会扩大。\",\"state\":\"IDLE\",\"version\":28}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 163,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.090281Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应周敏第11轮质疑：工会可前置影响企业部署节奏和成本承担，但行业替代速度仍受技术扩散与市场竞争约束；可把分阶段上线、培训先行、影响评估作为企业级协商条件，而非总量高峰的单独决定变量。\",\"state\":\"IDLE\",\"version\":34}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 164,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.104505Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。\",\"state\":\"PREPARING\",\"version\":32}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 165,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:39.118476Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。\",\"state\":\"SPEAKING\",\"version\":33}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 166,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:07:46.254662Z",
+      "payload": "{\"content\":\"陈序，集体谈判权若真能前置进入技术部署评估，我判断局部失业高峰更可能从集中爆发变为拉长、分行业出现，时间与分布会改变，但规模压缩有限，因为谈判覆盖不到的行政、客服等低议价岗位仍可能先失业。这不等于前置参与本身能替代社保和再培训托底，关键约束仍是协商覆盖率和托底政策能否同步落地。\",\"created_at\":\"2026-10-11T05:07:46.254662Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"faefb963-c91f-443f-8f0c-a70dfabd3858\",\"kind\":\"statement\",\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":13}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 167,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:46.255660Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"回应陈序第12轮点名：集体谈判权进入技术部署评估，可把集中裁员转为分阶段调整，改变局部高峰的时间与行业分布；但若覆盖率低且再培训社保未托底，三到五年低议价岗位仍先失业，规模压缩有限。\",\"state\":\"IDLE\",\"version\":34}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 168,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:46.268761Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":35}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 169,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:46.269758Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":35}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 170,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:46.269758Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":29}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 171,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:07:46.269758Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":35}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 172,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T05:07:52.397790Z",
+      "payload": "{\"items\":[{\"content\":\"孙可、赵明远、周敏共同认为，再培训速度或在岗再培训是否到位，是影响AI替代是否演变成大规模失业或总量失控的条件之一。\",\"id\":\"34e27e56-f328-5d67-b10b-39e6dccdd179\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]},{\"content\":\"赵明远、周敏共同认为，社保衔接是否跟上替代节奏，是影响AI替代下失业是否失控的条件之一。\",\"id\":\"073f3be4-38f4-59c2-bfe7-fa1acefbbaa7\",\"kind\":\"consensus\",\"source_message_ids\":[\"65a2abb7-52bc-46a4-b743-50442b314d08\",\"19397236-31f6-4683-8edb-e9d61f5c86e3\"]},{\"content\":\"孙可、赵明远共同判断：AI先替代的是任务而非整个职业。\",\"id\":\"f7dc52f9-7fc2-5bb8-9b0c-878dde13ff28\",\"kind\":\"consensus\",\"source_message_ids\":[\"fc3be772-60fe-4778-9be5-bd88d1caf014\",\"65a2abb7-52bc-46a4-b743-50442b314d08\"]},{\"content\":\"孙可、赵明远、吴澜共同承认，客服转AI训练、基础编程转代码审查等转型路径存在，但并非被替代者自动可进入。\",\"id\":\"31a44eb3-797c-5dc9-89a8-7d33c77943d1\",\"kind\":\"consensus\",\"source_message_ids\":[\"4878e228-14f3-45c5-87f3-f47eb22e91b3\",\"adbcf723-60e1-4534-afc5-1b7efa7383e0\",\"01df83d7-2170-41b2-9799-b75056aa62c8\"]},{\"content\":\"吴澜、周敏共同认为，终身学习不能只靠个人自愿或个人责任来推进。\",\"id\":\"5abbc536-559e-538a-8669-c534dcafba81\",\"kind\":\"consensus\",\"source_message_ids\":[\"01df83d7-2170-41b2-9799-b75056aa62c8\",\"d1fe5e77-a049-4c17-9f57-9670cf1441e4\"]},{\"content\":\"孙可、周敏共同建议，AI岗位调整应让工会或集体谈判机制参与协商。\",\"id\":\"37daf52e-f948-5cc0-9c8f-2de51ab9ab5e\",\"kind\":\"consensus\",\"source_message_ids\":[\"4878e228-14f3-45c5-87f3-f47eb22e91b3\",\"d1fe5e77-a049-4c17-9f57-9670cf1441e4\"]}],\"through_turn\":8,\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 173,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:07:52.397790Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":8,\"version\":4}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 174,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:07:52.416101Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":12,\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 175,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.477922Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"我方已在第13轮回应主持人的问题，当前没有新增信息或必要澄清，暂不发言。\",\"state\":\"IDLE\",\"version\":36}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 176,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.477922Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。\",\"state\":\"IDLE\",\"version\":36}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 177,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.477922Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"回应赵明远提到协商覆盖率之外，公共教育供给若按地方财政决定，转型入口和失业高峰会更向教育弱势地区集中；主张终身学习与职业指导由上级财政统筹，否则工会与社保托底仍难覆盖这些地区。\",\"state\":\"IDLE\",\"version\":30}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 178,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.478919Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"回应赵明远：同意前置协商会改变高峰时间与分布、压缩规模有限；补充企业侧约束——低议价岗位常在外包、平台和中小企业，协商若只覆盖大企业，需把AI采购与外包合同中的培训转岗条款纳入，否则覆盖率仍决定谁先被替代。\",\"state\":\"IDLE\",\"version\":36}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 179,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.491846Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。\",\"state\":\"PREPARING\",\"version\":37}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 180,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:02.498111Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。\",\"state\":\"SPEAKING\",\"version\":38}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 181,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T05:08:09.898698Z",
+      "payload": "{\"content\":\"赵明远，你强调协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，建议用行业或部门延伸谈判、技术部署前强制披露和协商义务去覆盖行政、客服等低议价岗位，这会改变替代节奏与成本承担。但这仍要以可执行的谈判主体和托底政策为前提，不能替代社保与再培训。\",\"created_at\":\"2026-10-11T05:08:09.898698Z\",\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"id\":\"0e24497c-7bba-4652-b8bf-69043eab3407\",\"kind\":\"statement\",\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"turn_no\":14}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 182,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:09.898698Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"赵明远用协商覆盖率限制工会作用，我补充：覆盖率低不是给定约束，可通过行业/部门延伸谈判和技术部署前强制披露、协商义务来覆盖低议价岗位，这会改变替代节奏与成本承担。\",\"state\":\"IDLE\",\"version\":39}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 183,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:09.918904Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":40}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 184,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:09.920112Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":37}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 185,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:09.920112Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":31}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 186,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:09.921108Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":37}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 187,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:17.986306Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":38}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 188,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:17.986306Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":41}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 189,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:17.986306Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":32}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 190,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:17.986306Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":38}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 191,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:17.986306Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联周敏的行业延伸谈判/强制披露与吴澜的地区不平等：请吴澜判断这些机制能否覆盖数字素养和本地产业薄弱地区，防止局部失业高峰固化为地区长期失业。\",\"state\":\"PREPARING\",\"version\":10}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 192,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:18.000430Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"串联周敏的行业延伸谈判/强制披露与吴澜的地区不平等：请吴澜判断这些机制能否覆盖数字素养和本地产业薄弱地区，防止局部失业高峰固化为地区长期失业。\",\"state\":\"SPEAKING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 193,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.177723Z",
+      "payload": "{\"participant_id\":\"3a4d00eb-5718-530f-9615-8c475f3803c9\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":39}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 194,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"participant_id\":\"597f36b0-3bae-5424-94ea-ba25da1e533a\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 195,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"participant_id\":\"771a509b-15b8-5c74-adf2-7737521e23b9\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":42}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 196,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"participant_id\":\"8a0e7052-cfc8-5871-b8aa-54e39536ab7b\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":33}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 197,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"participant_id\":\"c488d379-936f-51f3-96b5-96a2ba4a9804\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":39}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 198,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"error_code\":\"MODEL_RESULT_INVALID\",\"state\":\"FAILED\",\"through_turn\":12,\"version\":5}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 199,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "operation.failed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"code\":\"MODEL_RESULT_INVALID\",\"message\":\"讨论推进失败，已提交发言保留。\",\"operation_id\":\"e23362a8-0fac-4ddc-a3dd-bac12f54b7de\",\"retryable\":false,\"stage\":\"discussion\"}"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "seq": 200,
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T05:08:26.178720Z",
+      "payload": "{\"failure_code\":\"MODEL_RESULT_INVALID\",\"failure_stage\":\"discussion\",\"state\":\"FAILED\",\"version\":4}"
+    }
+  ],
+  "insight_jobs": [
+    {
+      "id": "86f6378b-7170-4231-a856-dca5d4e7a4ee",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 1,
+      "through_turn": 2,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "b81720dc-0184-4979-b3d0-ce7cf6fea82f",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 2,
+      "through_turn": 4,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "a6079808-4169-46cd-a672-05c83016671a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 3,
+      "through_turn": 6,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "af7a2f6f-5893-4b46-af56-cb8e9faa3456",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 4,
+      "through_turn": 8,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "25c44a54-71fd-47c3-9541-f5f3b25d002a",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 5,
+      "through_turn": 12,
+      "state": "FAILED",
+      "error_code": "MODEL_RESULT_INVALID"
+    }
+  ],
+  "insight_batches": [
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 1,
+      "through_turn": 2
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 2,
+      "through_turn": 4
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 3,
+      "through_turn": 6
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "version": 4,
+      "through_turn": 8
+    }
+  ],
+  "insights": [
+    {
+      "id": "0d0a5317-5e03-5389-a62a-f19ecc454639",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "赵明远和周敏共同认为社保衔接是影响AI替代下是否出现大规模失业的条件之一。"
+    },
+    {
+      "id": "70bce374-416e-5960-9855-821542d02bdd",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "孙可和赵明远共同认为AI先替代的是任务。"
+    },
+    {
+      "id": "b1cfd2f7-2f19-5bf6-935c-d4975c6b6044",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "孙可、赵明远和周敏共同认为再培训是影响AI替代下是否出现大规模失业的条件之一。"
+    },
+    {
+      "id": "48040fcb-27d8-5a6e-9f54-2bae6ab1eb49",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "孙可、赵明远、周敏共同认为，再培训是影响AI替代下失业是否失控的条件之一。"
+    },
+    {
+      "id": "5a68e686-3577-5bab-a49c-ed865ee4d2dc",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "赵明远、周敏共同认为，社保衔接是影响AI替代下失业是否失控的条件之一。"
+    },
+    {
+      "id": "c5050f7a-1adc-5057-9020-bd8056dbfbd2",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "孙可与赵明远共同判断：AI先替代的是任务。"
+    },
+    {
+      "id": "073f3be4-38f4-59c2-bfe7-fa1acefbbaa7",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "赵明远、周敏共同认为，社保衔接是否跟上替代节奏，是影响AI替代下失业是否失控的条件之一。"
+    },
+    {
+      "id": "31a44eb3-797c-5dc9-89a8-7d33c77943d1",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "孙可、赵明远、吴澜共同承认，客服转AI训练、基础编程转代码审查等转型路径存在，但并非被替代者自动可进入。"
+    },
+    {
+      "id": "34e27e56-f328-5d67-b10b-39e6dccdd179",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "孙可、赵明远、周敏共同认为，再培训速度或在岗再培训是否到位，是影响AI替代是否演变成大规模失业或总量失控的条件之一。"
+    },
+    {
+      "id": "37daf52e-f948-5cc0-9c8f-2de51ab9ab5e",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "孙可、周敏共同建议，AI岗位调整应让工会或集体谈判机制参与协商。"
+    },
+    {
+      "id": "5abbc536-559e-538a-8669-c534dcafba81",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "吴澜、周敏共同认为，终身学习不能只靠个人自愿或个人责任来推进。"
+    },
+    {
+      "id": "f7dc52f9-7fc2-5bb8-9b0c-878dde13ff28",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "kind": "consensus",
+      "content": "孙可、赵明远共同判断：AI先替代的是任务而非整个职业。"
+    }
+  ],
+  "insight_sources": [
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "0d0a5317-5e03-5389-a62a-f19ecc454639",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "0d0a5317-5e03-5389-a62a-f19ecc454639",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "70bce374-416e-5960-9855-821542d02bdd",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "70bce374-416e-5960-9855-821542d02bdd",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "b1cfd2f7-2f19-5bf6-935c-d4975c6b6044",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "b1cfd2f7-2f19-5bf6-935c-d4975c6b6044",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 2,
+      "insight_id": "b1cfd2f7-2f19-5bf6-935c-d4975c6b6044",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "48040fcb-27d8-5a6e-9f54-2bae6ab1eb49",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "48040fcb-27d8-5a6e-9f54-2bae6ab1eb49",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "48040fcb-27d8-5a6e-9f54-2bae6ab1eb49",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "5a68e686-3577-5bab-a49c-ed865ee4d2dc",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "5a68e686-3577-5bab-a49c-ed865ee4d2dc",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "c5050f7a-1adc-5057-9020-bd8056dbfbd2",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 3,
+      "insight_id": "c5050f7a-1adc-5057-9020-bd8056dbfbd2",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "073f3be4-38f4-59c2-bfe7-fa1acefbbaa7",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "073f3be4-38f4-59c2-bfe7-fa1acefbbaa7",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "31a44eb3-797c-5dc9-89a8-7d33c77943d1",
+      "message_id": "01df83d7-2170-41b2-9799-b75056aa62c8"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "31a44eb3-797c-5dc9-89a8-7d33c77943d1",
+      "message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "31a44eb3-797c-5dc9-89a8-7d33c77943d1",
+      "message_id": "adbcf723-60e1-4534-afc5-1b7efa7383e0"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "34e27e56-f328-5d67-b10b-39e6dccdd179",
+      "message_id": "19397236-31f6-4683-8edb-e9d61f5c86e3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "34e27e56-f328-5d67-b10b-39e6dccdd179",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "34e27e56-f328-5d67-b10b-39e6dccdd179",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "37daf52e-f948-5cc0-9c8f-2de51ab9ab5e",
+      "message_id": "4878e228-14f3-45c5-87f3-f47eb22e91b3"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "37daf52e-f948-5cc0-9c8f-2de51ab9ab5e",
+      "message_id": "d1fe5e77-a049-4c17-9f57-9670cf1441e4"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "5abbc536-559e-538a-8669-c534dcafba81",
+      "message_id": "01df83d7-2170-41b2-9799-b75056aa62c8"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "5abbc536-559e-538a-8669-c534dcafba81",
+      "message_id": "d1fe5e77-a049-4c17-9f57-9670cf1441e4"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "f7dc52f9-7fc2-5bb8-9b0c-878dde13ff28",
+      "message_id": "65a2abb7-52bc-46a4-b743-50442b314d08"
+    },
+    {
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "run_id": "dcc4efeb-e324-44ac-9256-6113f1f040d7",
+      "batch_version": 4,
+      "insight_id": "f7dc52f9-7fc2-5bb8-9b0c-878dde13ff28",
+      "message_id": "fc3be772-60fe-4778-9be5-bd88d1caf014"
+    }
+  ],
+  "summary_jobs": [],
+  "summaries": [],
+  "operations": [
+    {
+      "id": "a3e57ca8-7181-4b24-abd8-bddcd9c21cb3",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "scope": "global",
+      "kind": "create",
+      "idempotency_key": "11a08883-638e-4fdb-9a4f-fa2a20b6f92c",
+      "request_hash": "68f2d634a1bb356c08319c05b610bdba7a81a37fe08ba5a24c92b9bc8df555ec",
+      "status": "SUCCEEDED",
+      "response_status": 201,
+      "response_json": "{\"discussion\":{\"created_at\":\"2026-10-11T05:03:11.413697Z\",\"expert_count\":4,\"failure_code\":null,\"failure_stage\":null,\"id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"roster_revision\":0,\"run_id\":null,\"state\":\"DRAFT\",\"topic\":\"你认为AI的飞速发展,在未来几年是否会造成大规模失业?\",\"updated_at\":\"2026-10-11T05:03:11.413697Z\",\"version\":0},\"insight_status\":{\"error_code\":null,\"state\":\"IDLE\",\"through_turn\":0,\"version\":0},\"insights\":{\"items\":[],\"through_turn\":0,\"version\":0},\"last_event_seq\":1,\"messages\":[],\"participants\":[],\"role_states\":[],\"summary\":null}",
+      "error_code": null
+    },
+    {
+      "id": "aa3956f8-64e2-43cc-b712-3d810d7689f8",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "scope": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "kind": "roster-generation",
+      "idempotency_key": "0d0f0b05-946c-434d-b72f-e2d6169016ea",
+      "request_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "status": "SUCCEEDED",
+      "response_status": 202,
+      "response_json": "{\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"operation_id\":\"aa3956f8-64e2-43cc-b712-3d810d7689f8\",\"run_id\":null,\"state\":\"GENERATING\"}",
+      "error_code": null
+    },
+    {
+      "id": "e23362a8-0fac-4ddc-a3dd-bac12f54b7de",
+      "discussion_id": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "scope": "1a44dc34-3cae-480f-9d65-700b8b23c98c",
+      "kind": "start",
+      "idempotency_key": "5e9942b6-347f-40d9-886f-37521cfe5ab0",
+      "request_hash": "ba161a6df89ab6117048077f2338362620642b0572be7c9d087c0166047f238e",
+      "status": "SUCCEEDED",
+      "response_status": 202,
+      "response_json": "{\"discussion_id\":\"1a44dc34-3cae-480f-9d65-700b8b23c98c\",\"operation_id\":\"e23362a8-0fac-4ddc-a3dd-bac12f54b7de\",\"run_id\":\"dcc4efeb-e324-44ac-9256-6113f1f040d7\",\"state\":\"RUNNING\"}",
+      "error_code": null
+    }
+  ]
+}

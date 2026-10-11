@@ -1,5 +1,5 @@
 """Transactional run progression. All provider IO belongs outside this module."""
-from .model_gateway import MODEL_FAILURE_CODES
+from .model_gateway import MODEL_FAILURE_CODES, VALIDATION_FAILURES
 from dataclasses import dataclass
 from datetime import datetime,timezone
 from uuid import UUID,uuid4
@@ -25,6 +25,45 @@ class TurnClaim:
 
 
 class RunRepository(DiscussionRepository):
+    def _diagnostic(self,conn,request,call_id,attempt,outcome,*,failure_type=None,code=None,stage=None,duration_ms=0,claim_id=None):
+        if code is not None and code not in MODEL_FAILURE_CODES: code='TASK_FAILED'
+        if failure_type not in VALIDATION_FAILURES|{'MODEL_ERROR','INTERNAL_ERROR','CANCELLED','BUDGET_EXHAUSTED',None}: failure_type='RESULT_CONSTRAINT'
+        if stage not in ('single','draft','review','repair'): stage=None
+        if outcome not in ('SUCCEEDED','FAILED','CANCELLED','DEADLINE','HOST_SKIPPED'): raise ValueError('invalid diagnostic outcome')
+        conn.execute('INSERT INTO model_diagnostics(discussion_id,run_id,roster_revision,actor_id,turn_claim_id,call_id,task,host_task,cycle,message_position,attempt,stage,outcome,error_code,failure_type,duration_ms,occurred_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            (str(request.discussion_id),str(request.run_id) if request.run_id else None,request.roster_revision,
+             str(request.actor_id) if request.actor_id else None,str(claim_id) if claim_id else None,str(call_id),request.task,request.host_task,
+             request.cycle,len(request.messages)+(1 if request.task=='utterance' else 0),attempt,stage,outcome,code,failure_type,max(0,int(duration_ms)),timestamp()))
+
+    def record_diagnostic(self,request,call_id,attempt,outcome,**fields):
+        with self.transaction() as conn:
+            self._diagnostic(conn,request,call_id,attempt,outcome,**fields)
+
+    def diagnostics(self,did,run_id=None,limit=100,before=None):
+        from .contracts import DiagnosticPage
+        with self.transaction(write=False) as conn:
+            self._discussion(conn,did)
+            if run_id and not conn.execute('SELECT 1 FROM runs WHERE discussion_id=? AND id=?',(str(did),str(run_id))).fetchone():
+                raise LifecycleError('RUN_NOT_FOUND','该运行不属于本讨论。')
+            rows=list(conn.execute('SELECT md.*,p.name actor_name,p.title actor_title,p.kind actor_kind FROM model_diagnostics md LEFT JOIN participants p ON p.discussion_id=md.discussion_id AND p.roster_revision=md.roster_revision AND p.id=md.actor_id WHERE md.discussion_id=? AND (? IS NULL OR md.run_id=?) AND (? IS NULL OR md.id<?) ORDER BY md.id DESC LIMIT ?',
+                (str(did),str(run_id) if run_id else None,str(run_id) if run_id else None,before,before,limit+1)))
+            return DiagnosticPage.model_validate(dict(items=[dict(r) for r in rows[:limit]],next_before=rows[limit-1]['id'] if len(rows)>limit else None))
+
+    def skip_host_turn(self,context,claim_id,failure,limit):
+        d=context.snapshot.discussion
+        with self.transaction() as conn:
+            if self._guard(conn,context) is None: return 'STOPPED'
+            claim=self._claim(conn,context,claim_id,'SPEAKING')
+            if claim is None: return 'STOPPED'
+            experts={p.id for p in context.snapshot.participants if p.kind=='EXPERT'}
+            used=conn.execute("SELECT count(*) FROM model_diagnostics WHERE discussion_id=? AND run_id=? AND outcome='HOST_SKIPPED'",(str(d.id),str(d.run_id))).fetchone()[0]
+            if failure.code!='MODEL_RESULT_INVALID' or claim['host_task'] not in ('linking','followup') or used>=limit or not any(m.participant_id in experts for m in context.snapshot.messages): return 'DENIED'
+            request=ModelRequest(task='utterance',discussion_id=d.id,run_id=d.run_id,topic=d.topic,expert_count=d.expert_count,roster_revision=d.roster_revision,actor_id=claim['participant_id'],participants=context.snapshot.participants,messages=context.snapshot.messages,cycle=context.cycle,host_task=claim['host_task'])
+            conn.execute("UPDATE turn_claims SET status='CANCELLED' WHERE id=?",(str(claim_id),))
+            self._diagnostic(conn,request,failure.call_id,failure.attempts,'HOST_SKIPPED',failure_type=failure.failure_type,code=failure.code,claim_id=claim_id)
+            self._role(conn,d.id,d.run_id,claim['participant_id'],'IDLE','主持发言未通过校验，本轮暂由专家继续')
+            return 'SKIPPED'
+
     def _active(self,conn,did,rid):
         return conn.execute("SELECT r.* FROM runs r JOIN discussions d ON d.id=r.discussion_id AND d.current_run_id=r.id WHERE r.discussion_id=? AND r.id=? AND r.status='ACTIVE' AND d.state='RUNNING'",(str(did),str(rid))).fetchone()
 

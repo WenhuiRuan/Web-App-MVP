@@ -525,6 +525,133 @@
         "x-implemented": true
       }
     },
+    "/api/discussions/{discussion_id}/diagnostics": {
+      "get": {
+        "summary": "Get Diagnostics",
+        "operationId": "get_diagnostics_api_discussions__discussion_id__diagnostics_get",
+        "parameters": [
+          {
+            "name": "discussion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Discussion Id"
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Before"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "x-implemented": true
+      }
+    },
     "/api/discussions/{discussion_id}/start": {
       "post": {
         "summary": "Start Discussion",
@@ -963,6 +1090,36 @@
         "title": "CreateDiscussion",
         "type": "object"
       },
+      "DiagnosticPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModelDiagnostic"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_before": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Before"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_before"
+        ],
+        "title": "DiagnosticPage"
+      },
       "Discussion": {
         "additionalProperties": false,
         "properties": {
@@ -1365,6 +1522,254 @@
         ],
         "title": "Message",
         "type": "object"
+      },
+      "ModelDiagnostic": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Id"
+          },
+          "discussion_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Discussion Id"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "roster_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Roster Revision"
+          },
+          "actor_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor Id"
+          },
+          "actor_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor Name"
+          },
+          "actor_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor Title"
+          },
+          "actor_kind": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "HOST",
+                  "EXPERT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor Kind"
+          },
+          "turn_claim_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn Claim Id"
+          },
+          "call_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Call Id"
+          },
+          "task": {
+            "type": "string",
+            "enum": [
+              "roster",
+              "intent",
+              "utterance",
+              "host_control",
+              "insights",
+              "summary"
+            ],
+            "title": "Task"
+          },
+          "host_task": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "opening",
+                  "followup",
+                  "linking"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Host Task"
+          },
+          "cycle": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Cycle"
+          },
+          "message_position": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Message Position"
+          },
+          "attempt": {
+            "type": "integer",
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Attempt"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "single",
+                  "draft",
+                  "review",
+                  "repair"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stage"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "SUCCEEDED",
+              "FAILED",
+              "CANCELLED",
+              "DEADLINE",
+              "HOST_SKIPPED"
+            ],
+            "title": "Outcome"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "failure_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EMPTY_CONTENT",
+                  "OUTPUT_TRUNCATED",
+                  "OUTPUT_REJECTED",
+                  "JSON_PARSE",
+                  "FIELD_STRUCTURE",
+                  "SENTENCE_COUNT",
+                  "SENTENCE_BOUNDARY",
+                  "SENTENCE_LENGTH",
+                  "UTTERANCE_LENGTH",
+                  "RESULT_CONSTRAINT"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "MODEL_ERROR",
+                  "INTERNAL_ERROR",
+                  "CANCELLED",
+                  "BUDGET_EXHAUSTED"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Type"
+          },
+          "duration_ms": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Duration Ms"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "discussion_id",
+          "run_id",
+          "roster_revision",
+          "actor_id",
+          "actor_name",
+          "actor_title",
+          "actor_kind",
+          "turn_claim_id",
+          "call_id",
+          "task",
+          "host_task",
+          "cycle",
+          "message_position",
+          "attempt",
+          "stage",
+          "outcome",
+          "error_code",
+          "failure_type",
+          "duration_ms",
+          "occurred_at"
+        ],
+        "title": "ModelDiagnostic"
       },
       "Operation": {
         "additionalProperties": false,
@@ -2094,6 +2499,37 @@
       "ModelRequest": {
         "additionalProperties": false,
         "properties": {
+          "attempt": {
+            "default": 1,
+            "maximum": 3,
+            "minimum": 1,
+            "title": "Attempt",
+            "type": "integer"
+          },
+          "validation_feedback": {
+            "anyOf": [
+              {
+                "enum": [
+                  "EMPTY_CONTENT",
+                  "OUTPUT_TRUNCATED",
+                  "OUTPUT_REJECTED",
+                  "JSON_PARSE",
+                  "FIELD_STRUCTURE",
+                  "SENTENCE_COUNT",
+                  "SENTENCE_BOUNDARY",
+                  "SENTENCE_LENGTH",
+                  "UTTERANCE_LENGTH",
+                  "RESULT_CONSTRAINT"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Validation Feedback"
+          },
           "task": {
             "enum": [
               "roster",
