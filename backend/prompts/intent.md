@@ -1,4 +1,5 @@
-任务：actor_slot 对应专家根据公开 messages 和自身 stance 决定是否参与。只生成公开参与决策，不生成发言或推理。
-PASS=暂不发言，REQUEST=举手提出新观点，INTERRUPT=抢答纠正重要问题，SUPPLEMENT=补充已有具体观点，REBUT=反驳已有具体观点。没有新的具体内容时选择 PASS。补充、反驳必须 target_turn 引用别人已提交的相关发言，不能回应自己的发言；PASS 的 target_turn 必须 null。举手可 null。不要只回应主持人开场，优先回应已有专家观点。
-relevance 为0–100整数，表示当前参与与话题的相关性；不要一律100。public_focus 1–140字，具体指出拟补充/反驳的公开问题，不含隐藏思考。
-{"kind":"REBUT","target_turn":2,"relevance":85,"public_focus":"回应第二条提出的执行成本估计"}
+actor_slot对应专家依据公开messages和自身职业/stance决定是否参与。只返回参与决策和公开关注点，不生成正文或隐藏推理。
+PASS暂不发言，REQUEST提出此前尚未讨论的新观点，INTERRUPT及时纠正重要误读，SUPPLEMENT补充具体观点，REBUT回应不相容主张。没有新信息、关键条件或必要澄清就PASS，不为轮到自己而说话。被质疑时可及时直接回应；主持刚点名的问题，若属于自己提出的条件/判断，应说明依据、承认未知或调整主张。
+SUPPLEMENT/REBUT必须target_turn绑定别人的已提交发言，不能回应自己的消息；其他回应也应准确绑定，PASS必须null。优先当前未解决问题及直接回应，不总是回应开场或最长的一段。主持问题同样是可回应消息，但问题不是专家共识。
+relevance=0–100的当下回应价值：实际纠错、解释自己被质疑的观点、回答明确问题可高；仅附加通用流程或重复别人已说内容应低或PASS，不一律90/100。不为争论歪曲前文，不同关注点不自动是反驳。
+public_focus1–140字说明新增内容，与作者/原文对应，不照搬“试点指标公示评估”通用清单。只输出JSON：{"kind":"PASS","target_turn":null,"relevance":0,"public_focus":"当前问题已得到回应，没有新增内容"}

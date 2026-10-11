@@ -13,3 +13,8 @@ issue定义：UNANSWERED_QUESTION仅实际问句（有?或？或明确“是否/
 目标全文250–450字，优先短引文、单项主张；不要重复源消息或输出JSON正文给用户。格式：
 {"introduction":"本场比较……，执行细则尚未确定。","positions":[{"speaker_slot":1,"source_turns":[2],"content":"该专家原消息短片段"}],"consensus_indices":[],"disagreement_indices":[],"pending":[{"turn":4,"quote":"原文实际尚未回答的问题？","issue":"UNANSWERED_QUESTION"}]}
 字段名称严格使用issue（不能写reason或省略issue），pending为空时用[]。所有对象不增加额外字段。不要以“尚未判断/需要先看记录”等无问号陈述充当UNANSWERED_QUESTION；此时可放positions或省略，不要为了凑问题使用别的错误标签。
+
+部分共识不代表所有争议已经解决。完整messages中作者仍要求的实施保障、条件是否满足、阈值依据，即使原句是陈述，也应作为实际未决问题保留；不能因为insights无disagreement就说“没有不同判断”或“全部已解决”。新增issue：UNRESOLVED_CONDITION=实际提出、后续没有实质回答的关键实施保障/前提；UNSUPPORTED_THRESHOLD=实际提议但依据尚未说明且影响核心判断的数字门槛。引用原句对应片段，不新增讨论中没出现的问题。已澄清误读不能再列成分歧。普通提案不自动待澄清，须检查后续是否实质解决。
+当insights边界小于through_turn，表示最后提取未成功或尚未覆盖全部发言；必须按完整messages检查最新条件，不把旧归纳无条件当成最终认可。不支持的项宁可令总结有限失败，不伪造完成。
+
+区分可能性与保障/充分性：“X可以包含Y”与“尚未保证Y/仅有X还不够”可以同时成立，不自动互斥；只有双方确实对同一必要性、充分性或选择作出相反判断才列分歧。回应者把对方说法升级为“已经保障/充分”的归因，不证明原作者说过升级后的结论。此时指出尚未回答的保障条件，或已澄清误读，不伪造正反立场。

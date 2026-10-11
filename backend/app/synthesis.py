@@ -10,10 +10,10 @@ logger=logging.getLogger('panel')
 
 
 class SynthesisEngine(DiscussionEngine):
-    async def extract(self,did,rid):
+    async def extract(self,did,rid,through_turn=None):
         claim=None
         try:
-            claim=await self.db(self.repository.claim_insights,did,rid)
+            claim=await self.db(self.repository.claim_insights,did,rid,through_turn)
             if claim is None: return
             self.deadline=time.monotonic()+self.supervisor.settings.insight_max_seconds
             output=await self.call_model(claim.request)

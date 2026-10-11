@@ -1867,6 +1867,7 @@
           },
           "action": {
             "enum": [
+              "continue",
               "followup",
               "linking",
               "end"
@@ -1879,6 +1880,32 @@
             "minLength": 1,
             "title": "Public Focus",
             "type": "string"
+          },
+          "addressed_actor_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Addressed Actor Id"
+          },
+          "target_message_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Target Message Id"
           }
         },
         "required": [
@@ -2198,6 +2225,32 @@
             ],
             "default": null,
             "title": "Host Task"
+          },
+          "addressed_actor_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Addressed Actor Id"
+          },
+          "host_reference_message_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Host Reference Message Id"
           },
           "public_focus": {
             "default": "",

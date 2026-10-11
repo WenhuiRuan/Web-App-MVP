@@ -148,3 +148,10 @@ npm --prefix frontend run test:live
 本地交付包含源码、锁、迁移、五份阵容样例、开发文档、六段核心 Prompt、一页工作流和必要质量证据；原始过程与 Git 历史保留。下一步由用户准备姓名、发布 GitHub/Gitee、核对 72 小时起算与发送邮件，不自动发布或发送。见[交付核对](docs/delivery.md)。
 
 文档：[需求](docs/requirements.md) · [ER/数据模型](docs/data-model.md) · [验收](docs/acceptance.md) · [核心开发 Prompt](docs/core-prompts.md) · [工作流](docs/workflow.md) · [进展](docs/progress.md) · [原始 Prompt 记录](docs/prompt-log.md)。
+
+
+## 自主互动与观点更新
+
+主持可选择继续专家讨论、实际追问、串联或结束；选人按相关性与回应关系确定，公平性防止长期独占，不保证每人依次发言。观点提取与后续发言并行，每场只保留一个在途提取和一个最新待处理前缀，面板显示已成功提取的消息边界。结束后先核对最终前缀，再用独立预算总结；600秒讨论预算并非整体完成时间上限。
+
+语义合并和未决条件仍需要模型判断，不宣称逐字来源校验能够保证全部内容正确。本轮原场问题、修正、定向与完整真实复核见[互动质量报告](docs/quality-interaction.md)。旧安装/布局记录沿用，本轮只补验受影响逻辑。五份离线阵容来源不变，不代表本轮新跑了五场付费讨论。

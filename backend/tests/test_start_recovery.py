@@ -51,7 +51,7 @@ def test_confirm_freezes_roster_and_operation_while_opening_is_in_flight(setup):
     with client.app.state.database.connect() as conn:
         run = dict(conn.execute('SELECT * FROM runs WHERE discussion_id=?',(did,)).fetchone())
         assert run['status']=='ACTIVE' and run['roster_revision']==1
-        assert (run['max_turns'],run['max_seconds']) == (20,300)
+        assert (run['max_turns'],run['max_seconds']) == (20,600)
         assert conn.execute('SELECT confirmed_at FROM rosters WHERE discussion_id=?',(did,)).fetchone()[0]
     stream = events(client,did)
     running_events=[e for e in stream if e['type']=='discussion.state_changed' and e['payload']['state']=='RUNNING']

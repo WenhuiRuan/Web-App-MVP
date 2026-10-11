@@ -19,6 +19,9 @@ class TaskSupervisor:
         self.scheduled_runs: set[str] = set()
         self.summary_tasks: dict[str, asyncio.Task] = {}
         self.scheduled_summaries: set[str] = set()
+        self.insight_tasks: dict[str, asyncio.Task] = {}
+        self.insight_targets: dict[str, int] = {}
+        self.insight_inflight: dict[str, int] = {}
         self.admissions: set[asyncio.Task] = set()
         self.database_workers: set[asyncio.Task] = set()
         self.semaphore = asyncio.Semaphore(settings.model_max_concurrency)
@@ -66,12 +69,63 @@ class TaskSupervisor:
         if not task.cancelled() and task.exception() is not None:
             logger.error('discussion_task_requires_restart_recovery')
 
+    def request_insights(self,did,rid,through_turn):
+        """One worker and one coalesced pending boundary per run, no unbounded queue."""
+        rid=str(rid)
+        if self.closing: return
+        if through_turn<=self.insight_inflight.get(rid,0): return
+        self.insight_targets[rid]=max(through_turn,self.insight_targets.get(rid,0))
+        active=self.insight_tasks.get(rid)
+        if active is not None and not active.done(): return
+        task=asyncio.create_task(self._extract_pending(did,rid),name=f'insights:{did}:{rid}')
+        self.insight_tasks[rid]=task
+        task.add_done_callback(lambda finished:self._insight_finished(rid,finished))
+
+    async def _extract_pending(self,did,rid):
+        from .synthesis import SynthesisEngine
+        try:
+            while not self.closing and rid in self.insight_targets:
+                boundary=self.insight_targets.pop(rid)
+                self.insight_inflight[rid]=boundary
+                await SynthesisEngine(self).extract(did,rid,boundary)
+        finally:
+            self.insight_inflight.pop(rid,None)
+
+    def _insight_finished(self,rid,task):
+        if self.insight_tasks.get(rid) is task: self.insight_tasks.pop(rid,None)
+        if not task.cancelled() and task.exception() is not None:
+            logger.error('insight_task_requires_restart_recovery')
+
+    async def cancel_insights(self,rid):
+        rid=str(rid)
+        task=self.insight_tasks.get(rid)
+        if task is not None and not task.done():
+            task.cancel()
+            await asyncio.gather(task,return_exceptions=True)
+        self.insight_targets.pop(rid,None)
+
+    async def finalize_insights(self,did,rid):
+        rid=str(rid)
+        snapshot=await self._db_call(self.repository.snapshot,did)
+        if snapshot.discussion.state!='SUMMARIZING':
+            await self.cancel_insights(rid)
+            return
+        boundary=len(snapshot.messages)
+        task=self.insight_tasks.get(rid)
+        if task is not None and not task.done() and self.insight_inflight.get(rid)!=boundary:
+            # The final prefix replaces obsolete work; claiming it atomically supersedes
+            # the cancelled job. No old result is allowed to become the final projection.
+            await self.cancel_insights(rid)
+        self.request_insights(did,rid,boundary)
+        task=self.insight_tasks.get(rid)
+        if task is not None: await task
+
     async def _run_discussion(self,did,rid):
         from .engine import DiscussionEngine,ModelCallFailure,RunDeadline
         try:
             await DiscussionEngine(self).run(did,rid)
             from .synthesis import SynthesisEngine
-            await SynthesisEngine(self).extract(did,rid)
+            await self.finalize_insights(did,rid)
             await SynthesisEngine(self).summarize(did,rid)
             return
         except asyncio.CancelledError:
@@ -80,7 +134,7 @@ class TaskSupervisor:
             try:
                 await self._db_call(self.repository.finish_run,did,rid,'time_limit')
                 from .synthesis import SynthesisEngine
-                await SynthesisEngine(self).extract(did,rid)
+                await self.finalize_insights(did,rid)
                 await SynthesisEngine(self).summarize(did,rid)
                 return
             except RepositoryUnavailable:
@@ -93,6 +147,7 @@ class TaskSupervisor:
             code='DATABASE_UNAVAILABLE'
         except Exception:
             code='TASK_FAILED'
+        await self.cancel_insights(rid)
         try:
             await self._db_call(self.repository.fail_run,did,rid,code)
         except RepositoryUnavailable:
@@ -174,7 +229,7 @@ class TaskSupervisor:
 
     async def close(self):
         self.closing = True
-        tasks = [*self.admissions, *self.tasks.values(), *self.run_tasks.values(), *self.summary_tasks.values()]
+        tasks = [*self.admissions, *self.tasks.values(), *self.run_tasks.values(), *self.summary_tasks.values(), *self.insight_tasks.values()]
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
@@ -186,6 +241,9 @@ class TaskSupervisor:
             logger.error('shutdown_recovery_requires_writable_database_on_restart')
         self.tasks.clear()
         self.run_tasks.clear()
+        self.insight_tasks.clear()
+        self.insight_targets.clear()
+        self.insight_inflight.clear()
         self.scheduled_runs.clear()
         self.summary_tasks.clear()
         self.scheduled_summaries.clear()

@@ -347,6 +347,8 @@ class ModelRequest(Contract):
     participation_kind: Literal['REQUEST','INTERRUPT','SUPPLEMENT','REBUT'] | None = None
     target_message_id: UUID | None = None
     host_task: Literal['opening','followup','linking'] | None = None
+    addressed_actor_id: UUID | None = None
+    host_reference_message_id: UUID | None = None
     public_focus: Annotated[str, StringConstraints(max_length=140)] = ''
 
     through_turn: Nonnegative | None = None
@@ -369,6 +371,10 @@ class ModelRequest(Contract):
         actor = next((p for p in self.participants if p.id == self.actor_id), None)
         if self.task in ('intent','utterance','host_control') and self.cycle < 1:
             raise ValueError('positive cycle required')
+        if self.addressed_actor_id or self.host_reference_message_id:
+            if self.task!='utterance' or actor.kind!='HOST': raise ValueError('host address only in host utterance')
+            if self.addressed_actor_id and not any(p.id==self.addressed_actor_id and p.kind=='EXPERT' for p in self.participants): raise ValueError('host address scope')
+            if self.host_reference_message_id and not any(m.id==self.host_reference_message_id for m in self.messages): raise ValueError('host reference scope')
         if self.task == 'utterance':
             if actor.kind == 'HOST':
                 if self.host_task is None or self.participation_kind or self.target_message_id:
@@ -437,8 +443,10 @@ class UtteranceResult(Contract):
 
 class HostControlResult(Contract):
     task: Literal['host_control']
-    action: Literal['followup', 'linking', 'end']
+    action: Literal['continue', 'followup', 'linking', 'end']
     public_focus: ShortText
+    addressed_actor_id: UUID | None = None
+    target_message_id: UUID | None = None
 
 
 class InsightsResult(Contract):

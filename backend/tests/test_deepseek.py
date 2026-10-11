@@ -261,12 +261,12 @@ def test_summary_candidates_include_bound_source_authors_and_full_messages():
         assert source['content'] == original.content and source['turn'] == original.turn_no
 
 
-def test_extraction_evidence_context_excludes_host_questions_but_keeps_original_turns():
+def test_extraction_context_marks_host_questions_as_context_not_expert_evidence():
     from backend.app.deepseek_gateway import public_context
     req = request('insights')
     context = public_context(req)
-    assert [m['turn'] for m in context['messages']] == [2, 3]
-    assert all(m['speaker_kind'] == 'EXPERT' for m in context['messages'])
+    assert [m['turn'] for m in context['messages']] == [1, 2, 3]
+    assert context['messages'][0]['speaker_kind']=='HOST'
     assert context['through_turn'] == 3
     assert len(public_context(request('summary'))['messages']) == 3
 
@@ -288,7 +288,7 @@ def test_only_grounding_review_result_can_leave_the_gateway(task):
             gateway = DeepSeekGateway(config(), client=client)
             result = await gateway.generate(req)
             assert len(seen) == 2
-            assert seen[1]['candidate'] == draft
+            assert seen[1]['candidate'] == (dict(items=[dict(p,index=i) for i,p in enumerate(draft['items'])]) if task=='insights' else draft)
             assert seen[1]['messages'] == seen[0]['messages']
             assert [m['stage'] for m in gateway.metrics] == ['draft', 'review']
             if task == 'insights': assert result.items == ()
@@ -413,7 +413,7 @@ def test_summary_binds_position_authors_and_copies_only_selected_existing_consen
             assert req.participants[1].name in result.content
             assert req.insights.items[0].content in result.content
             assert '全体已同意' not in result.content
-            assert '已有共识：' in result.content and '未解决分歧：尚无充分证据' in result.content
+            assert '已有共识：' in result.content and '尚无充分证据表明已发生明确分歧' not in result.content
     asyncio.run(run())
 
 

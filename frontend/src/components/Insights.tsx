@@ -24,7 +24,7 @@ export function Insights({ snapshot, visible, onSource }: { snapshot: Snapshot; 
         <p className="insight-note">观点来自已发生的发言。点击依据，可回到讨论现场。</p>
         {categories.map(category => <div className={`insight-section ${category.kind}`} key={category.kind}>
           <h3><span>{category.symbol}</span>{category.label}<b>{snapshot.insights.items.filter(i => i.kind === category.kind).length.toString().padStart(2, '0')}</b></h3>
-          {!snapshot.insights.items.some(i => i.kind === category.kind) && <div className="insight-empty">{category.kind === 'consensus' ? '观点仍在碰撞，暂未形成足够依据的共识。' : '等待不同观点的回应，分歧会在讨论中显现。'}</div>}
+          {!snapshot.insights.items.some(i => i.kind === category.kind) && <div className="insight-empty">{category.kind === 'consensus' ? '观点仍在碰撞，暂未形成足够依据的共识。' : '尚未提取到有充分依据的未解决分歧；未回答的问题仍可能存在。'}</div>}
           {snapshot.insights.items.filter(i => i.kind === category.kind).map(insight => <article className="insight-item" data-testid="insight" key={insight.id}><p>{insight.content}</p><div className="sources"><span>发言依据</span>{insight.source_message_ids.map(id => {
             const message = snapshot.messages.find(m => m.id === id)
             if (!message) return null

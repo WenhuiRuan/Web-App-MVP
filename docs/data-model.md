@@ -130,3 +130,10 @@ events.type追加insights.status_changed；实体/关联不变，原ER图继续�
 ## 最终样例数据
 
 五份JSON复用CreateDiscussion/Participant契约，归属、阵容基数、身份及颜色唯一性在离线加载时校验。导入同事务写discussions/rosters/participants与三条events，状态READY、revision1，无run/消息/总结；固定ID重复导入跳过，已有内容冲突整体回滚，不覆盖原真实演示。001中run的300秒历史SQL默认不修改，应用启动显式传入当前Settings的600秒；配置变化无需新迁移。
+
+
+## 互动修正的边界补充（不新增迁移）
+
+insight_jobs通过显式through_turn领取；每run唯一在途worker、一个可覆盖的待提取前缀只驻内存。数据库原有version/through_turn、PENDING/SUPERSEDED/FAILED/INTERRUPTED守卫及批次事务继续适用。取消旧任务后最终前缀领取原子替代其job，不向快照暴露SUPERSEDED为最新公开状态；关停回收遗留PENDING为INTERRUPTED，讨论失败事务改为FAILED并发布状态事件。
+
+主持本次ModelRequest的addressed_actor_id/host_reference_message_id绑定本场阵容/已提交消息，属于不可变任务上下文；现有turn_claims持久化host_task/public_focus、正式消息及专家的target_message_id。当前不持久化主持指定收件人字段，也不从中断轮次自动续跑；重启标记中断，与既有恢复规则一致。真实验收的安全模型请求记录保留这些绑定供复核。

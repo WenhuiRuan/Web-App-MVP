@@ -37,7 +37,7 @@ class ControlledGateway(DeterministicModelGateway):
             await asyncio.sleep(.003)
             if self.mode=='fail_A' and request.topic=='A' and request.task=='utterance': raise RuntimeError('private-provider-sentinel')
             if request.task=='host_control':
-                action='end' if self.mode=='host_end' and len(request.messages)>=2 else 'linking' if self.mode=='linking' and request.messages[-1].kind=='statement' else 'followup'
+                action='end' if self.mode=='host_end' and len(request.messages)>=2 else 'linking' if self.mode=='linking' and request.messages[-1].kind=='statement' else 'continue'
                 return {'task':'host_control','action':action,'public_focus':'邀请专家说明边界'}
             if request.task=='intent':
                 actor=next(p for p in request.participants if p.id==request.actor_id)

@@ -31,12 +31,15 @@ class SynthesisRepository(RunRepository):
         return ModelRequest(task='insights', discussion_id=d.id, run_id=d.run_id, topic=d.topic, expert_count=d.expert_count, roster_revision=d.roster_revision,
                             participants=snapshot.participants, messages=tuple(m for m in snapshot.messages if m.turn_no<=job['through_turn']), through_turn=job['through_turn'], insight_version=job['version'], insights=snapshot.insights)
 
-    def claim_insights(self, did, rid):
+    def claim_insights(self, did, rid, through_turn=None):
         with self.transaction() as conn:
             run = self._synthesis_run(conn,did,rid)
             if run is None: return None
             count = conn.execute('SELECT count(*) FROM messages WHERE discussion_id=? AND run_id=?',(str(did),str(rid))).fetchone()[0]
             boundary = run['summary_through_turn'] if run['summary_through_turn'] is not None else count
+            if through_turn is not None:
+                if through_turn<1 or through_turn>boundary: raise ValueError('invalid insight boundary')
+                boundary=through_turn
             if boundary == 0 or conn.execute('SELECT 1 FROM insight_jobs WHERE discussion_id=? AND run_id=? AND through_turn=?',(str(did),str(rid),boundary)).fetchone(): return None
             previous = conn.execute('SELECT max(version) FROM (SELECT version FROM insight_jobs WHERE discussion_id=? AND run_id=? UNION ALL SELECT version FROM insight_batches WHERE discussion_id=? AND run_id=?)',(str(did),str(rid),str(did),str(rid))).fetchone()[0] or 0
             conn.execute("UPDATE insight_jobs SET state='SUPERSEDED' WHERE discussion_id=? AND run_id=? AND state='PENDING'",(str(did),str(rid)))

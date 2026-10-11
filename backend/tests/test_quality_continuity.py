@@ -121,9 +121,11 @@ def test_one_invalid_review_cannot_discard_an_independently_valid_point():
             def upstream(http_request):
                 ctx=json.loads(json.loads(http_request.content)['messages'][1]['content'])
                 if 'candidate' not in ctx:return httpx.Response(200,json=answer({'items':[point,dict(point,content=point['content']+'这是共同提案。')]}))
-                reviewed=ctx['candidate']['items'][0]
-                quotes=[dict(q,quote='未曾说过的引用') for q in reviewed['evidence']] if all_invalid or ctx['review_origin_index']==1 else reviewed['evidence']
-                return httpx.Response(200,json=answer({'reviews':[{'index':0,'source_turns':[4,6],'content':point['content'],'evidence':quotes,'checks':checks()}]}))
+                reviews=[]
+                for i,reviewed in enumerate(ctx['candidate']['items']):
+                    quotes=[dict(q,quote='未曾说过的引用') for q in reviewed['evidence']] if all_invalid or i==1 else reviewed['evidence']
+                    reviews.append({'index':i,'source_turns':[4,6],'content':point['content'],'evidence':quotes,'checks':checks()})
+                return httpx.Response(200,json=answer({'reviews':reviews}))
             async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
                 gateway=DeepSeekGateway(config(),client=client)
                 if all_invalid:
@@ -197,7 +199,7 @@ def test_draft_bad_quote_does_not_block_review_of_a_valid_candidate():
         def upstream(http_request):
             context=json.loads(json.loads(http_request.content)['messages'][1]['content'])
             if 'candidate' not in context: return httpx.Response(200,json=answer({'items':[bad,point]}))
-            assert context['candidate']['items']==[point]
+            assert context['candidate']['items']==[dict(point,index=0)]
             return httpx.Response(200,json=answer({'reviews':[dict(index=0,source_turns=[4,6],content=point['content'],checks=checks(not_superseded=True))]}))
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
             assert len((await DeepSeekGateway(config(),client=client).generate(req)).items)==1
@@ -215,7 +217,7 @@ def test_summary_allows_actual_interrogative_without_question_mark_and_avoids_su
     assert json.loads(reviewed_summary(req,json.dumps(output,ensure_ascii=False)))['content'].count('执行成本需要单独验证')==1
 
 
-def test_each_candidate_review_focuses_on_its_sources_and_later_supporter_statements():
+def test_one_batch_review_sees_all_candidates_and_full_latest_prefix():
     req=library(); a=library_point(req)
     b=dict(kind='consensus',content='郑书言与周敏行共同建议比较上午自助下午人工安排。',source_turns=[2,3],
         evidence=[dict(turn=t,quote=req.messages[t-1].content) for t in (2,3)])
@@ -223,11 +225,9 @@ def test_each_candidate_review_focuses_on_its_sources_and_later_supporter_statem
         def upstream(http_request):
             context=json.loads(json.loads(http_request.content)['messages'][1]['content'])
             if 'candidate' not in context: return httpx.Response(200,json=answer({'items':[a,b]}))
-            assert len(context['candidate']['items'])==1
-            point=context['candidate']['items'][0]
-            if point['source_turns']==[4,6]:
-                assert {m['turn'] for m in context['messages']}=={4,6,9}
-            return httpx.Response(200,json=answer({'reviews':[dict(index=0,source_turns=point['source_turns'],content=point['content'],checks=checks(not_superseded=True))]}))
+            assert len(context['candidate']['items'])==2
+            assert {m['turn'] for m in context['messages']}==set(range(1,len(req.messages)+1))
+            return httpx.Response(200,json=answer({'reviews':[dict(index=i,source_turns=point['source_turns'],content=point['content'],checks=checks(not_superseded=True)) for i,point in enumerate(context['candidate']['items'])]}))
         async with httpx.AsyncClient(transport=httpx.MockTransport(upstream)) as client:
             result=await DeepSeekGateway(config(),client=client).generate(req)
             assert len(result.items)==2 and len({p.id for p in result.items})==2
@@ -253,7 +253,7 @@ def test_supplement_without_explicit_opposition_is_not_published_as_disagreement
     req=library()
     point=dict(kind='disagreement',content='周敏行与郑书言对巡检是否由志愿者承担存在互斥立场。',source_turns=[3,6],
         evidence=[dict(turn=t,quote=req.messages[t-1].content) for t in (3,6)])
-    output={'reviews':[dict(index=0,source_turns=[3,6],content=point['content'],checks=checks(not_superseded=True))]}
+    output={'reviews':[dict(index=0,source_turns=[3,6],content=point['content'],checks=checks(explicit_positions=False))]}
     assert bind_result(req,reviewed_points(req,{'items':[point]},json.dumps(output,ensure_ascii=False))).items==()
 
 
@@ -267,7 +267,7 @@ def test_selection_question_does_not_support_a_joint_recording_consensus():
 
 def test_same_exact_evidence_does_not_repeat_rephrased_claim():
     req=library(); p=library_point(req)
-    output={'reviews':[dict(index=i,source_turns=[4,6],evidence=p['evidence'],
-        content=p['content'] if i==0 else '双方共同建议统计这两项指标，用来判断是否调整时段。',checks=checks(not_superseded=True)) for i in (0,1)]}
+    output={'reviews':[dict(index=0,source_turns=[4,6],evidence=p['evidence'],content=p['content'],merge_with=[1],checks=checks()),
+        dict(index=1,source_turns=[],content='',checks=checks(explicit_positions=False))]}
     result=bind_result(req,reviewed_points(req,{'items':[p,p]},json.dumps(output,ensure_ascii=False)))
     assert len(result.items)==1

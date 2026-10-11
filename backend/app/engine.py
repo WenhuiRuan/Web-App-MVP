@@ -5,7 +5,7 @@ from functools import partial
 
 from pydantic import ValidationError
 
-from .contracts import ModelRequest
+from .contracts import ModelRequest, HostControlResult
 from .model_gateway import InvalidModelResult,ModelServiceError,validate_result
 from .scheduling import choose_speaker
 
@@ -101,12 +101,12 @@ class DiscussionEngine:
         output=await self.call_model(claim.request)
         committed=await self.db(self.repository.commit_turn,context,claim.id,output)
         if committed and (len(context.snapshot.messages)+1)%2==0:
-            from .synthesis import SynthesisEngine
-            await SynthesisEngine(self.supervisor).extract(context.snapshot.discussion.id,context.snapshot.discussion.run_id)
+            self.supervisor.request_insights(context.snapshot.discussion.id,context.snapshot.discussion.run_id,len(context.snapshot.messages)+1)
         return committed
 
     async def run(self,did,rid):
         first=True
+        addressed=None
         while not self.supervisor.closing:
             context=await self.db(self.repository.begin_cycle,did,rid)
             if context is None: return
@@ -118,18 +118,23 @@ class DiscussionEngine:
             if not snapshot.messages:
                 if not await self.speak(context,host.id,host_task='opening',public_focus='说明议题与讨论范围'): return
                 continue
-            control=await self.call_model(self.context_request(context,'host_control',host.id))
+            # A host question gets a response opportunity before another control decision.
+            last=snapshot.messages[-1]
+            after_question=last.kind in ('followup','linking')
+            control=HostControlResult(task='host_control',action='continue',public_focus='回应主持人尚未解决的问题') if after_question else await self.call_model(self.context_request(context,'host_control',host.id))
             if control.action=='end':
                 await self.db(self.repository.finish_run,did,rid,'host_end')
                 return
+            if control.action in ('followup','linking') and not after_question:
+                addressed=control.addressed_actor_id
+                if not await self.speak(context,host.id,host_task=control.action,public_focus=control.public_focus,
+                    addressed_actor_id=addressed,host_reference_message_id=control.target_message_id): return
+                continue
             candidates=await self.collect_intents(context)
             if not await self.db(self.repository.record_intents,context,candidates): return
-            actor=choose_speaker(snapshot,candidates)
-            last=snapshot.messages[-1]
-            last_expert=any(p.id==last.participant_id and p.kind=='EXPERT' for p in snapshot.participants)
-            if control.action=='linking' and last_expert:
-                success=await self.speak(context,host.id,host_task='linking',public_focus=control.public_focus)
-            elif actor is None:
+            actor=choose_speaker(snapshot,candidates,addressed if after_question else None)
+            addressed=None
+            if actor is None:
                 success=await self.speak(context,host.id,host_task='followup',public_focus=control.public_focus)
             else:
                 intent=candidates[actor]

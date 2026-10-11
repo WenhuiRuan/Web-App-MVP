@@ -1,6 +1,6 @@
 # HTTP API 与 SSE 契约 v1
 
-更新于2026-10-10，阶段5已接通持久化SSE及默认前端业务客户端，阶段6A增加DeepSeek真实适配，保留确定性替身。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
+更新于2026-10-11，阶段5已接通持久化SSE及默认前端业务客户端，阶段6A增加DeepSeek真实适配，保留确定性替身。基础地址`http://127.0.0.1:8000`，UUID标识、UTC带时区时间、UTF-8 JSON；请求禁止多余字段，密钥只在后端环境。
 
 ## 实现状态与机器契约
 
@@ -254,3 +254,14 @@ HTTP/SSE字段与导出schema不变。多步观点/总结按每HTTP超时和统�
 ## 最终运行参数与样例入口
 
 API v1和事件格式未因交付改变，系统版本0.6.0/phase6。默认日常run显式20条/600秒；验证8条不是产品要求。DeepSeek enabled/low/16384；HTTP120秒、观点240秒、总结180秒。公开端点不返回密钥/完整配置；离线样例导入不是新HTTP接口，见根README。
+
+
+## 互动修正后的模型内部契约（HTTP/SSE v1不变）
+
+HostControlResult.action允许continue/followup/linking/end。continue仅继续专家；followup/linking实际调用主持utterance。可选addressed_actor_id及target_message_id必须属于当前专家阵容/已提交消息，continue/end禁止带目标。DeepSeek仅返回addressed_slot/target_turn，后端绑定UUID。示例：`{"action":"followup","public_focus":"请说明刚提出的比例依据","addressed_slot":2,"target_turn":7}`，引用为实际上下文编号，非固定答案。
+
+主持utterance请求增加可选addressed_actor_id、host_reference_message_id，与host_task绑定；专家仍使用participation_kind/target_message_id。专家响应机会在主持追问后先执行，内部参与意图不进入Transcript。
+
+模型复核PointsReview每个index一次，增加merge_with（默认[]）。明确语义重复的leader可引用合并组来源并集，其他项explicit_positions=false，不再按引用相同自动合并。SummaryPending新增UNRESOLVED_CONDITION/UNSUPPORTED_THRESHOLD，引用仍逐字对应原消息。自然正文不再从空disagreement自动宣称没有争议。
+
+insights.updated仍是完整批次替换，每批version递增且through_turn为冻结前缀；后台合并待处理边界，因此不保证每两条发言都产生一个版本。insights.status_changed展示正在提取的前缀与失败，旧观点保留；正式发言可与提取同时推进。SUMMARIZING先收敛最终边界，再独立总结预算；失败保留旧批次并携带其旧边界，原发言仍为总结核对依据。

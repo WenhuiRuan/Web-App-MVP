@@ -43,8 +43,10 @@ class Utterance(Contract):
 
 
 class Control(Contract):
-    action: Literal['followup', 'linking', 'end']
+    action: Literal['continue', 'followup', 'linking', 'end']
     public_focus: str
+    addressed_slot: StrictInt | None = None
+    target_turn: StrictInt | None = None
 
 
 class Point(Contract):
@@ -85,6 +87,7 @@ class PointReview(Contract):
     checks: EvidenceChecks
     content: str = Field(max_length=500)
     source_turns: tuple[StrictInt, ...]
+    merge_with: tuple[StrictInt, ...] = ()
     evidence: tuple[Quote, ...] | None = None
     kind: Literal['consensus','disagreement'] | None = None
 
@@ -100,7 +103,7 @@ class SummaryPosition(Contract):
 
 
 class SummaryPending(Quote):
-    issue: Literal['UNANSWERED_QUESTION','UNVERIFIED_PROPOSAL','SCOPE_UNCLEAR','UNIT_OR_DIRECTION_UNCLEAR']
+    issue: Literal['UNANSWERED_QUESTION','UNVERIFIED_PROPOSAL','SCOPE_UNCLEAR','UNIT_OR_DIRECTION_UNCLEAR','UNRESOLVED_CONDITION','UNSUPPORTED_THRESHOLD']
 
 
 class SummaryReview(Contract):
@@ -112,10 +115,10 @@ class SummaryReview(Contract):
 
 
 def distinct_evidence(items):
-    """One rendering per identical kind/source excerpt set; not semantic equivalence."""
+    """Only exact claim/evidence duplicates; shared sources do not imply one claim."""
     distinct={}
     for item in items:
-        key=(item['kind'],tuple(sorted((q['turn'],q['quote'].strip('。！？!? ')) for q in item['evidence'])))
+        key=(item['kind'],re.sub(r'\s+','',item['content']).strip('。！？!? '),tuple(sorted((q['turn'],q['quote'].strip('。！？!? ')) for q in item['evidence'])))
         distinct.setdefault(key,item)
     return list(distinct.values())
 
@@ -147,7 +150,7 @@ def reviewed_summary(request, content):
         if set(reviewed.consensus_indices)|set(reviewed.disagreement_indices)!=set(range(len(request.insights.items))):
             raise invalid('summary_insight_omission')
         labels = dict(UNANSWERED_QUESTION='尚未回答的问题',UNVERIFIED_PROPOSAL='明确未验证的条件',
-            SCOPE_UNCLEAR='范围或前提待核对',UNIT_OR_DIRECTION_UNCLEAR='单位或方向待核对')
+            SCOPE_UNCLEAR='范围或前提待核对',UNIT_OR_DIRECTION_UNCLEAR='单位或方向待核对',UNRESOLVED_CONDITION='尚未解决的实施条件',UNSUPPORTED_THRESHOLD='尚未说明依据的阈值提案')
         pending=[]
         for item in reviewed.pending:
             if item.turn not in messages or item.quote not in messages[item.turn].content:
@@ -160,7 +163,7 @@ def reviewed_summary(request, content):
             excerpts.add(item.quote)
         body = '\n'.join([reviewed.introduction, *(['主要观点：\n' + '\n'.join(positions)] if positions else []),
             '已有共识：' + (consensus or '尚无充分共识。'),
-            '未解决分歧：' + (disagreement or '尚无充分证据表明已发生明确分歧。'),
+            *(['未解决分歧：' + disagreement] if disagreement else []),
             *(['待澄清：\n' + '\n'.join(pending)] if pending else [])])
         return json.dumps({'content': body}, ensure_ascii=False)
     except InvalidModelResult:
@@ -169,7 +172,7 @@ def reviewed_summary(request, content):
         raise invalid('summary_review_schema') from None
 
 
-def reviewed_points(request, candidate, content):
+def reviewed_points(request, candidate, content, repair_candidates=None):
     """Review cannot invent sources or people. Failed semantic checks remove the candidate.
 
     These checks are model judgments, not deterministic proofs of semantic correctness.
@@ -181,18 +184,44 @@ def reviewed_points(request, candidate, content):
             raise invalid('review_coverage')
         messages = {m.turn_no: m for m in request.messages}
         items = []
+        by_index={r.index:r for r in reviewed.reviews}
+        if repair_candidates is not None:
+            merged_followers={i for r in reviewed.reviews for i in r.merge_with}
+            for r in reviewed.reviews:
+                c=r.checks
+                if r.index in merged_followers or c.explicit_positions or c.every_condition_supported: continue
+                if not (c.authors_correct and c.same_object and c.compatible_scope and c.proposal_preserved and c.not_superseded): continue
+                group=[r.index,*r.merge_with]
+                if any(i<0 or i>=len(candidate['items']) for i in group): raise invalid('review_merge_reference')
+                original=candidate['items'][r.index]
+                if original['kind']!='consensus' or any(candidate['items'][i]['kind']!='consensus' for i in group): continue
+                quotes={q['turn']:q for i in group for q in candidate['items'][i]['evidence']}
+                item=dict(original,source_turns=sorted(quotes),evidence=list(quotes.values()),index=len(repair_candidates))
+                if len(repair_candidates)<2: repair_candidates.append(item)
+        followers=[i for r in reviewed.reviews if all(r.checks.model_dump().values()) for i in r.merge_with]
+        if len(set(followers))!=len(followers): raise invalid('review_merge_overlap')
+        failures=[]
+        rejected_semantically=False
         for review in sorted(reviewed.reviews, key=lambda r: r.index):
-            if not all(review.checks.model_dump().values()): continue
+            if not all(review.checks.model_dump().values()):
+                rejected_semantically=True
+                continue
             original = candidate['items'][review.index]
-            if len(set(review.source_turns)) != len(review.source_turns) or not set(review.source_turns).issubset(original['source_turns']):
+            merged=[review.index,*review.merge_with]
+            if len(set(merged))!=len(merged) or any(i<0 or i>=len(candidate['items']) for i in merged):
+                raise invalid('review_merge_reference')
+            if any(by_index[i].checks.explicit_positions or by_index[i].merge_with for i in review.merge_with):
+                raise invalid('review_merge_duplicate')
+            if any(candidate['items'][i]['kind']!=original['kind'] for i in review.merge_with):
+                raise invalid('review_merge_kind')
+            allowed_sources={t for i in merged for t in candidate['items'][i]['source_turns']}
+            if len(set(review.source_turns)) != len(review.source_turns) or not set(review.source_turns).issubset(allowed_sources):
                 raise invalid('review_source_expansion')
             actors = {messages[t].participant_id for t in review.source_turns}
             if any(p.id not in actors and p.name in review.content for p in request.participants):
                 raise invalid('review_actor_expansion')
-            evidence = [q.model_dump() for q in review.evidence] if review.evidence is not None else [q for q in original['evidence'] if q['turn'] in review.source_turns]
+            evidence = [q.model_dump() for q in review.evidence] if review.evidence is not None else list({q['turn']:q for i in merged for q in candidate['items'][i]['evidence'] if q['turn'] in review.source_turns}.values())
             kind=review.kind or original['kind']
-            if kind=='disagreement' and not any(re.search(r'反对|反驳|不同意|不赞成|不支持|不接受|不认同|不再认可|不再支持|撤回',q['quote']) for q in evidence):
-                continue  # Conservative explicit-opposition gate; implicit alternatives may be omitted.
             if kind == 'consensus':
                 joined=r'同时|并记|一并|并行'
                 if re.search(joined,review.content) and any(re.search(r'还是|或',q['quote']) and not re.search(joined,q['quote']) for q in evidence):
@@ -209,8 +238,14 @@ def reviewed_points(request, candidate, content):
                     continue  # Exclude this unsupported claim without discarding other candidates.
             names=[p.name for p in request.participants if p.id in actors]
             text=review.content if all(name in review.content for name in names) else '与'.join(names)+'：'+review.content
-            items.append(dict(original, kind=kind, content=text, source_turns=list(review.source_turns),
-                evidence=evidence))
+            item=dict(original, kind=kind, content=text, source_turns=list(review.source_turns),evidence=evidence)
+            item.pop('index',None)
+            try: bind_result(request,json.dumps({'items':[item]},ensure_ascii=False))
+            except InvalidModelResult as exc:
+                failures.append(exc)
+                continue
+            items.append(item)
+        if failures and not items and not rejected_semantically: raise failures[0]
         unique={}
         for item in items:
             key=(item['kind'],item['content'],tuple(sorted(item['source_turns'])))
@@ -274,10 +309,12 @@ def public_context(request):
         'participants': participants,
         'actor_slot': slots.get(request.actor_id), 'participation_kind': request.participation_kind,
         'target_turn': turns.get(request.target_message_id), 'host_task': request.host_task,
+        'addressed_slot':slots.get(request.addressed_actor_id),
+        'host_reference_message':messages.get(request.host_reference_message_id),
         'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task == 'utterance',
         'public_focus': request.public_focus, 'through_turn': request.through_turn,
         'previous_through_turn': request.insights.through_turn if request.task=='insights' else None,
-        'messages': [m for m in messages.values() if request.task != 'insights' or m['speaker_kind'] == 'EXPERT'],
+        'messages': list(messages.values()),
         'insights': [dict(index=index, kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids],
             semantic_status='candidate_requires_transcript_review',
             sources=[messages[mid] for mid in i.source_message_ids]) for index, i in enumerate(request.insights.items)]}
@@ -298,6 +335,11 @@ def bind_result(request, content):
         elif request.task == 'intent':
             target = raw.pop('target_turn')
             raw['target_message_id'] = None if target is None else turns[target]
+        elif request.task=='host_control':
+            slot=raw.pop('addressed_slot');target=raw.pop('target_turn')
+            if slot is not None and not 0<=slot<len(request.participants): raise invalid('host_address')
+            raw['addressed_actor_id']=request.participants[slot].id if slot is not None else None
+            raw['target_message_id']=turns[target] if target is not None else None
         elif request.task == 'insights':
             messages={m.turn_no:m for m in request.messages}
             experts={p.id for p in request.participants if p.kind=='EXPERT'}
@@ -354,32 +396,16 @@ class DeepSeekGateway:
                 for item in candidate['items']:
                     key=(item['kind'],item['content'],tuple(sorted(item['source_turns'])))
                     unique.setdefault(key,item)
-                candidate['items']=list(unique.values())
-            if request.task=='insights' and candidate['items']:
-                reviewed=[]; valid_reviews=0; failure=None
-                for index,item in enumerate(candidate['items']):
-                    sources=set(item['source_turns'])
-                    actors={m.participant_id for m in request.messages if m.turn_no in sources}
-                    boundary=max(sources)
-                    focused=[m for m in context['messages'] if m['turn'] in sources or
-                        (m['turn']>boundary and request.participants[m['speaker_slot']].id in actors)]
-                    try:
-                        _, final_point=await self._complete(request,dict(context,messages=focused,insights=[],
-                            candidate={'items':[item]},review_origin_index=index),'review')
-                    except InvalidModelResult as exc:
-                        failure=exc
-                        continue  # Never publish this candidate; other independent reviews remain valid.
-                    valid_reviews+=1
-                    reviewed.extend(json.loads(final_point)['items'])
-                if failure is not None and not valid_reviews: raise failure
-                unique={}
-                for item in reviewed:
-                    unique.setdefault((item['kind'],item['content'],tuple(sorted(item['source_turns']))),item)
-                return bind_result(request,json.dumps({'items':distinct_evidence(list(unique.values()))},ensure_ascii=False))
-            result, _ = await self._complete(request, dict(context, candidate=candidate), 'review')
+                candidate['items']=[dict(item,index=i) for i,item in enumerate(unique.values())]
+            repair=[]
+            result, reviewed = await self._complete(request, dict(context, insights=[] if request.task=='insights' else context['insights'],candidate=candidate), 'review',repair_candidates=repair if request.task=='insights' else None)
+            if repair:
+                _, narrowed=await self._complete(request,dict(context,insights=[],candidate={'items':repair},accepted_claims=json.loads(reviewed)['items']),'repair')
+                merged=distinct_evidence(json.loads(reviewed)['items']+json.loads(narrowed)['items'])
+                result=bind_result(request,json.dumps({'items':merged},ensure_ascii=False))
         return result
 
-    async def _complete(self, request, context, stage):
+    async def _complete(self, request, context, stage, repair_candidates=None):
         started = time.monotonic()
         metric = dict(task=request.task, discussion_id=str(request.discussion_id),
             run_id=str(request.run_id) if request.run_id else None, stage=stage, status='pending', usage=None)
@@ -388,7 +414,7 @@ class DeepSeekGateway:
             response_format={'type': 'json_object'}, stream=False,
             max_tokens=2200 if request.task in ('roster', 'summary', 'insights') else 700,
             messages=[{'role': 'system', 'content': prompt('common') + '\n' +
-                       prompt(request.task + '_review' if stage == 'review' else request.task)},
+                       prompt(request.task + '_' + stage if stage in ('review','repair') else request.task)},
                       {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}])
         if self.settings.model_thinking_mode == 'enabled':
             body.update(reasoning_effort=self.settings.model_reasoning_effort,
@@ -422,23 +448,22 @@ class DeepSeekGateway:
                 if not isinstance(content, str) or not content.strip(): raise InvalidModelResult()
             except (KeyError, IndexError, TypeError, ValueError, AttributeError):
                 raise InvalidModelResult() from None
-            if stage == 'review':
-                content = reviewed_points(request, context['candidate'], content) if request.task == 'insights' else reviewed_summary(request, content)
+            if stage in ('review','repair'):
+                content = reviewed_points(request, context['candidate'], content,repair_candidates=repair_candidates) if request.task == 'insights' else reviewed_summary(request, content)
             if stage=='draft' and request.task=='insights':
-                try:
-                    parsed=Points.model_validate(json.loads(content))
-                except ValidationError:
-                    raise invalid('wire_schema') from None
-                except (ValueError,TypeError):
-                    raise invalid('structure') from None
+                envelope=json.loads(content)
+                if not isinstance(envelope,dict) or set(envelope)!={'items'} or not isinstance(envelope['items'],list): raise invalid('wire_schema')
                 safe=[]; failure=None
-                for item in parsed.items:
+                for raw_item in envelope['items']:
                     try:
+                        item=Point.model_validate(raw_item)
                         bind_result(request,json.dumps({'items':[item.model_dump()]},ensure_ascii=False))
                         safe.append(item.model_dump())
+                    except ValidationError:
+                        failure=invalid('wire_schema')
                     except InvalidModelResult as exc:
                         failure=exc
-                metric['discarded_candidates']=len(parsed.items)-len(safe)
+                metric['discarded_candidates']=len(envelope['items'])-len(safe)
                 if failure is not None and not safe and not request.insights.items: raise failure
                 content=json.dumps({'items':safe},ensure_ascii=False)
             result = bind_result(request, content)

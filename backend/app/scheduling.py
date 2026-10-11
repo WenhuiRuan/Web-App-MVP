@@ -15,10 +15,11 @@ def validate_intents(snapshot, candidates):
             raise LifecycleError('INVALID_INTENT','参与类型与回应目标不一致。')
 
 
-def choose_speaker(snapshot, candidates):
+def choose_speaker(snapshot, candidates, addressed_actor=None):
     validate_intents(snapshot,candidates)
     last_actor=snapshot.messages[-1].participant_id if snapshot.messages else None
     recent=Counter(m.participant_id for m in snapshot.messages[-3:])
+    occupancy=Counter(m.participant_id for m in snapshot.messages[-6:])
     bonuses={'REQUEST':0,'INTERRUPT':8,'SUPPLEMENT':12,'REBUT':20}
     eligible={actor:result for actor,result in candidates.items() if result.kind!='PASS' and actor!=last_actor}
     if not eligible:
@@ -27,7 +28,12 @@ def choose_speaker(snapshot, candidates):
     def rank(actor):
         result=eligible[actor]
         freshness=max(0,5-(len(snapshot.messages)-positions[result.target_message_id])) if result.target_message_id else 0
-        return (-(result.relevance+bonuses[result.kind]+freshness-25*recent[actor]),str(actor))
+        direct = result.target_message_id == (snapshot.messages[-1].id if snapshot.messages else None)
+        returning = direct and result.kind in ('REBUT','INTERRUPT') and any(m.participant_id==actor for m in snapshot.messages)
+        fairness = 2*recent[actor]+6*max(0,occupancy[actor]-2)
+        if returning: fairness=min(fairness,6)
+        addressed = 20 if actor==addressed_actor and direct else 0
+        return (-(result.relevance+bonuses[result.kind]+freshness+8*returning+addressed-fairness),str(actor))
     return min(eligible,key=rank)
 
 

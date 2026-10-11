@@ -66,6 +66,10 @@ def validate_result(request: ModelRequest, raw: object) -> ModelResult:
                 raise ValueError('pass cannot respond')
             if result.target_message_id and any(m.id==result.target_message_id and m.participant_id==request.actor_id for m in request.messages):
                 raise ValueError('self response')
+        if result.task=='host_control':
+            if result.addressed_actor_id and not any(p.id==result.addressed_actor_id and p.kind=='EXPERT' for p in request.participants): raise ValueError('foreign addressed expert')
+            if result.target_message_id and result.target_message_id not in message_ids: raise ValueError('foreign host target')
+            if result.action in ('continue','end') and (result.addressed_actor_id or result.target_message_id): raise ValueError('no host question to bind')
         if result.task=='utterance':
             utterance_text(result)
         if result.task == 'insights':
@@ -106,7 +110,7 @@ class DeterministicModelGateway:
                 sentences=[f'从{actor.stance}的角度，我对第{target}条发言提出{request.participation_kind}意见。' if target else f'从{actor.stance}的角度，需要先验证方案的适用条件。','这是确定性模型的工程演示内容。']
             raw = {'task':'utterance','sentences':sentences}
         elif request.task == 'host_control':
-            raw = {'task':'host_control','action':'end' if len(request.messages)>=8 else 'linking' if len(request.messages)%3==0 else 'followup','public_focus':'模拟：梳理适用条件与已公开分歧。'}
+            raw = {'task':'host_control','action':'end' if len(request.messages)>=8 else 'linking' if len(request.messages)%3==0 else 'continue','public_focus':'模拟：梳理适用条件与已公开分歧。'}
         elif request.task == 'insights':
             experts={p.id for p in request.participants if p.kind=='EXPERT'}
             by_actor={}

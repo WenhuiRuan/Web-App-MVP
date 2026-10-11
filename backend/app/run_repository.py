@@ -85,6 +85,9 @@ class RunRepository(DiscussionRepository):
                     raise LifecycleError('INVALID_INTENT','发言必须对应本轮已验证意图。')
             claim_id=uuid4()
             conn.execute("INSERT INTO turn_claims(id,discussion_id,run_id,roster_revision,cycle,based_on_turn,participant_id,participation_kind,target_message_id,host_task,public_focus,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,'PREPARING')",(str(claim_id),str(d.id),str(d.run_id),d.roster_revision,context.cycle,len(context.snapshot.messages),str(actor),request.participation_kind,str(request.target_message_id) if request.target_message_id else None,request.host_task,request.public_focus))
+            if request.host_task:
+                for person in context.snapshot.participants:
+                    if person.kind=='EXPERT': self._role(conn,d.id,d.run_id,person.id,'IDLE','聆听主持人问题')
             self._role(conn,d.id,d.run_id,actor,'PREPARING',request.public_focus)
             return TurnClaim(claim_id,request)
 
@@ -138,6 +141,10 @@ class RunRepository(DiscussionRepository):
             row=self._active(conn,did,rid)
             if row is None: return False
             self._reset_roles(conn,did,rid)
+            pending=list(conn.execute("SELECT id,version,through_turn FROM insight_jobs WHERE discussion_id=? AND run_id=? AND state='PENDING'",(str(did),str(rid))))
+            conn.execute("UPDATE insight_jobs SET state='FAILED',error_code=? WHERE discussion_id=? AND run_id=? AND state='PENDING'",(code,str(did),str(rid)))
+            for job in pending:
+                self._event(conn,did,'insights.status_changed',dict(state='FAILED',version=job['version'],through_turn=job['through_turn'],error_code=code),rid)
             conn.execute("UPDATE runs SET status='FAILED',error_code=?,ended_at=? WHERE discussion_id=? AND id=?",(code,timestamp(),str(did),str(rid)))
             op=conn.execute("SELECT id FROM operations WHERE discussion_id=? AND kind='start' AND json_extract(response_json,'$.run_id')=? ORDER BY rowid LIMIT 1",(str(did),str(rid))).fetchone()
             self._event(conn,did,'operation.failed',{'operation_id':op['id'],'stage':'discussion','code':code,'message':'讨论推进失败，已提交发言保留。','retryable':False},rid)

@@ -1,0 +1,20 @@
+{
+  "original_unchanged": true,
+  "source_sha256": "6a2db1b44d68267cda8d3b470770296d30d1e8a810f67753ade32cd633ad76ac",
+  "table_counts": {
+    "discussions": 1,
+    "participants": 5,
+    "runs": 1,
+    "messages": 8,
+    "speaking_intents": 28,
+    "turn_claims": 8,
+    "events": 113,
+    "insight_jobs": 4,
+    "insight_batches": 4,
+    "insights": 11,
+    "insight_sources": 22,
+    "summary_jobs": 1,
+    "summaries": 1,
+    "operations": 3
+  }
+}

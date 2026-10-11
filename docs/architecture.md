@@ -10,7 +10,7 @@
 | 嘉宾生成 | 议题、人数 → RosterRevision、Participant | 4A已实现：TaskSupervisor调用ModelGateway并校验结果，repository原子提交后才READY |
 | 参与意图 | 本讨论公开上下文、角色 → SpeakingIntent | 4B已实现：并发评估、归属/target验证、结构化意图保存；不进入正式消息 |
 | 发言调度 | 本轮有效意图 → 一个获选角色 | 4B已实现：纯评分/回应/近期惩罚与连续占用回退，唯一领取及消息提交 |
-| 主持人控制 | 公开上下文、运行额度 → 追问/串联/结束 | 4B已实现：开场先行，无候选追问、专家发言后串联、决定结束冻结边界 |
+| 主持人控制 | 公开上下文、运行额度 → 追问/串联/结束 | 已实现：开场先行，continue继续专家、followup/linking实际主持介入，问题后给回应机会，结束冻结边界 |
 | 观点提取 | 正式消息冻结前缀 → InsightBatch/InsightStatus | 4C已实现：SynthesisEngine/SynthesisRepository，来源/版本/领取、原子事件与有限失败；总结单独捕获边界 |
 | 事件分发 | 与业务写入同事务的 Event → SSE | 每讨论有序持久化日志，读库补传；阶段5已挂载SSE短事务读库及补发 |
 
@@ -126,3 +126,14 @@ DeepSeek六任务允许后端配置thinking.type=enabled，统一预算仍覆盖
 ## 最终配置与本地交付边界
 
 Settings与.env.example统一enabled/low/16384、HTTP120、提取240、总结180、讨论600秒，日常20条。启动脚本configured遵循进程优先，mock/deepseek可显式覆盖provider；前端只读取本地代理目标。离线样例工具不加载.env、不调用模型，READY阵容与三个初始事件同事务，冲突不覆盖。只运行单owner，所有后端任务及供应商语义边界沿用原实现。
+
+
+## 交付后提取并行与主持语义修正（当前实现）
+
+每次偶数正式消息提交后仅调用TaskSupervisor.request_insights，不等待模型。以run_id管理唯一insight_tasks及一个最新insight_targets边界；在途前缀不可变，排队中间边界合并。正常仍可连续提交观点版本，失败保留上版并显示状态。进入SUMMARIZING取消旧前缀，最终冻结前缀的有限预算提取完成/失败后才领取总结；不是无限等待，也不并行无限创建任务。
+
+shutdown取消并收集所有insight worker、运行/总结/阵容/受理任务，等待SQLite后执行恢复；讨论失败先取消worker，再同事务标记残留PENDING提取FAILED及事件。取消旧作业后新领取原子SUPERSEDED，模型调用仍在事务外，提交受当前run/state/version约束。
+
+continue不形成主持发言，followup/linking形成真实正式消息，不被专家候选替代；刚问完先采集专家意图，相关人回应最新主持问题获得有限优先，不强迫PASS发言。主持可绑定已提交消息和本场专家，绑定随本次不可变请求传递（后台不续跑中断轮次），公开消息/意图及任务领取仍持久化。
+
+观点草稿及上一版候选用整批一次复核代替N次串行复核，完整公开前缀包括主持语境；引用来源仅专家。merge_with由模型判断语义，程序检查组索引、来源并集、作者、引用和数量条件，不能自动用相同来源合并主张。详细证据与限制见quality-interaction.md。

@@ -26,7 +26,7 @@ def test_all_six_tasks_over_actual_http_with_safe_public_responses(tmp_path):
             if task=='roster': output={'participants':[{'kind':'HOST' if i==0 else 'EXPERT','name':f'嘉宾{i}','title':f'职业{i}','stance':f'视角{i}'} for i in range(context['expert_count']+1)]}
             elif task=='intent': output={'kind':'REBUT','target_turn':1,'relevance':80,'public_focus':'执行成本'}
             elif task=='utterance': output={'sentences':['应限定范围并明确执行成本。']}
-            elif task=='host_control': output={'action':'end' if len(context['messages'])>=4 else 'followup','public_focus':'请回应成本边界'}
+            elif task=='host_control': output={'action':'end' if len(context['messages'])>=4 else 'continue','public_focus':'请回应成本边界'}
             elif task=='insights': output={'reviews':[]} if 'candidate' in context else {'items':[]}
             else: output={'introduction':'本场比较执行成本。','positions':[],'consensus_indices':[],'disagreement_indices':[],'pending':[]} if 'candidate' in context else {'content':'主持人总结：各方讨论了执行成本，但尚未充分形成共识。'}
             payload=json.dumps({'model':'controlled-http','choices':[{'finish_reason':'stop','message':{'content':json.dumps(output,ensure_ascii=False),'reasoning_content':'hidden-provider-sentinel'}}],'usage':{'total_tokens':15}}).encode()
