@@ -1,6 +1,10 @@
 # AI Panel Studio
 
-本地多专家实时圆桌 Web 应用：输入议题 → 生成主持人与专家 → 确认阵容 → 观看自主讨论及实时共识/分歧 → 查看主持人自然语言总结。默认前端使用真实 HTTP/SSE 和 SQLite；运行模型由后端配置，与 Codex 开发工具独立。
+阮文慧
+
+源码仓库：[WenhuiRuan/Web-App-MVP](https://github.com/WenhuiRuan/Web-App-MVP)
+
+本地多专家实时圆桌 Web 应用：输入议题 → 生成主持人与专家 → 确认阵容 → 观看自主讨论及实时共识/分歧 → 查看主持人自然语言总结。前后端通过 HTTP/SSE 通信，SQLite 保存讨论内容，运行模型由后端配置。
 
 ## 环境与首次安装
 
@@ -149,9 +153,9 @@ npm --prefix frontend run test:live
 
 已完成创建、生成/确认、专家自主参与与回应、主持控制、公开角色状态、正式短句、实时有来源观点、自然语言总结、失败恢复、持久化有序 SSE 和浏览器业务闭环。使用 React + TypeScript + Vite、FastAPI、SQLite、SSE、pytest、Playwright，模块说明见[架构](docs/architecture.md)。
 
-本地单 worker、无登录/公网权限、多进程/大量并发尚未验证。真实模型语义不能仅凭结构保证；保守复核可能漏掉共识或隐含分歧，后续发言仍需用户辨别。费用、跨平台、真实并发及 p95 未知。运行中断不能自动继续；无视频录制或时间轴回放播放器。已保存内容可重新查看。
+本地单 worker、无登录/公网权限、多进程/大量并发尚未验证。真实模型语义不能仅凭结构保证；保守复核可能漏掉共识或隐含分歧，后续发言仍需用户辨别。费用、跨平台、真实并发及 p95 未知。运行中断不能自动继续，已保存内容可重新查看。
 
-本地交付包含源码、锁、迁移、五份阵容样例、开发文档、六段核心 Prompt、一页工作流和必要质量证据；原始过程与 Git 历史保留。下一步由用户准备姓名、发布 GitHub/Gitee、核对 72 小时起算与发送邮件，不自动发布或发送。见[交付核对](docs/delivery.md)。
+本次提交包含源码、依赖锁、数据库迁移、五份议题阵容样例、开发文档、六段核心 Prompt 和工作流说明。源码及分阶段提交已发布到 GitHub，材料索引及验证范围见[提交说明](docs/delivery.md)。
 
 文档：[需求](docs/requirements.md) · [ER/数据模型](docs/data-model.md) · [验收](docs/acceptance.md) · [核心开发 Prompt](docs/core-prompts.md) · [工作流](docs/workflow.md) · [进展](docs/progress.md) · [原始 Prompt 记录](docs/prompt-log.md)。
 

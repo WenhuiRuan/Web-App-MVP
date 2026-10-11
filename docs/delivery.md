@@ -1,56 +1,47 @@
-# 本地交付核对与提交准备
+# 提交说明
 
-更新：2026-10-11，第六阶段第二批完成后互动修正。任务边界是本地材料及已授权真实质量复核，不自动发布远程仓库或发送邮件。首次使用入口是根 README，历史细节在 progress、prompt-log 和质量记录，不要求收件人拼接历史启动步骤。
+阮文慧 · 2026年10月11日
+
+源码仓库：[WenhuiRuan/Web-App-MVP](https://github.com/WenhuiRuan/Web-App-MVP)
+
+应用代码对应 `ae2f54a2b6bca79866d08034ddb5c0c8789f23c1`。本次整理更新了 README、开发指令记录、工作流说明及本页，应用实现和测试代码保持原版本。
 
 ## 材料索引
 
-| 题目材料 | 当前成果 |
+| 材料 | 位置 |
 |---|---|
-| 完整源码与依赖锁 | backend、frontend、backend/requirements.lock、frontend/package-lock.json |
-| 初始化及迁移 | python -m backend.app.database，db/migrations/001–007 |
-| 至少五份不同议题和对应阵容 | data/samples/final/rosters.json 与 README，离线校验/导入脚本 |
-| PRD、架构、ER、API、测试 | requirements、architecture、data-model（Mermaid ER）、api、testing及实际 tests |
-| 运行/环境/选型/主要API/完成/后续 | 根 README |
-| 至少五段核心开发 Prompt | core-prompts.md，六段完整实际任务原文覆盖SDD/DDD/TDD/E2E，不含授权/充值 |
-| 1–1.5页工作流 | workflow.md 源文及 workflow.pdf，一页PDF，三项实际问题/修正 |
-| 演进记录 | docs/progress.md、prompt-log.md、独立 main Git历史；ZIP附 Git日志，真实仓库仍在本地 |
-| 本地 ZIP | outputs/ai-panel-studio-delivery.zip；同目录提供.zip.sha256 |
+| 完整源码、锁定依赖、环境与运行说明 | [README](../README.md)、backend、frontend |
+| SQLite 初始化与迁移 | backend/app/database.py、db/migrations/001–007 |
+| 五份议题与对应嘉宾阵容 | [样例说明](../data/samples/final/README.md)、rosters.json |
+| 产品需求与架构 | [需求](requirements.md)、[架构](architecture.md)、[技术决策](decisions.md) |
+| ER 图与数据模型 | [数据模型](data-model.md) |
+| API、错误格式与 SSE 事件 | [API](api.md)、docs/contracts |
+| 页面设计 | [前端设计](frontend-design.md) |
+| 测试代码、结果与验收 | backend/tests、frontend/tests、[测试说明](testing.md)、[验收记录](acceptance.md) |
+| 六段核心开发 Prompt | [开发指令记录](core-prompts.md) |
+| 一页开发流程、实际问题与处理方法 | [工作流说明](workflow.md) |
+| 分阶段提交与完整开发记录 | GitHub 提交历史、[进展](progress.md)、[开发日志](prompt-log.md) |
 
-## 首次运行验证
+邮件附件为 `阮文慧_Web-App-MVP.zip`，包含上述材料及原有40次提交的离线 Git bundle。正式过程说明采用 Markdown；项目内的阶段记录保留原始内容。
 
-已在work/first-install-20261011-015245/ai-panel-studio独立目录完成，未使用原项目venv/node_modules/数据库：
+## 已有验证
 
-- setup.ps1建立全新Python3.12虚拟环境，按完整requirements.lock安装成功，pip check无缺失；npm ci锁安装29包（8秒），版本未升级。
-- 首次迁移[1,2,3,4,5,6]；重复[]。样例校验5份，离线导入5/0，再次0/5；5场READY、0 run、15初始事件，FK无违例、integrity ok。
-- 原样运行后端脚本mock/18100，前端脚本15180；Edge通过Vite代理取得ready/system/list/snapshot，首页已保存的讨论5份，阵容5人，刷新恢复，页面异常0。只有GET请求，模型调用0。
-- TypeScript及生产构建通过（479ms）；包内契约与文档检查通过。初次发现Port参数位置/遗漏直接证据链接，两项修正后只补验相关启动与包内文档，锁定依赖保持不变。
+首次独立安装记录来自12ba05c及其依赖安装批次，使用全新虚拟环境和数据库，锁定依赖安装、当时001–006迁移、重复初始化、五份样例导入及前后端启动通过。后续新增007迁移，当前七个迁移和重复初始化另有检查记录。详情见[首次运行记录](../data/delivery/first-run.json)及[测试说明](testing.md)。
 
-报告 [first-run.json](../data/delivery/first-run.json)，截图 [安全证据索引](screenshots/README.md)。业务/SSE/布局及完整替身E2E沿用[测试说明](testing.md)，本次没有重跑完整讨论。
+真实模型完整流程包括图书馆议题的8条发言，以及互动修正后另一场讨论的11条发言、运行中观点更新和主持人自主结束。完整场与后续定向修正分别记录在[真实质量报告](quality-acceptance.md)及[互动质量报告](quality-interaction.md)。
 
-完整安装/启动证据执行源版本为12ba05c，首次依赖安装5195c0f。该证据来自当时001–006版本；互动修正未改锁/安装脚本，本轮失败修复另新增007迁移，相关数据库检查单独记录。首次安装不冒称在本轮重新执行；最新清单逐文件SHA256核对，历史完整新场另见quality-interaction，最新真实修复验收仍待用户。
+最新分歧修复新增15项验证，受影响回归分别通过174项和95项检查，三项真实 HTTP/SSE 的替身浏览器测试通过，前端类型及生产构建通过。批次计数存在重叠，分别保留执行范围。诊断和恢复见[模型恢复报告](model-recovery.md)，分歧证据与过程发布见[分歧过程报告](quality-disagreement.md)。
 
-## 打包边界
+最新诊断、开场和分歧修复尚未重新做整场真实模型验证。模型语义判断、响应时间、大量真实并发与跨平台运行仍有未验证范围，具体限制见 README 和上述报告。
 
-ZIP 包含源码、锁、迁移、最终样例、文档及必要安全质量证据，不含 .git 对象库、真实 .env、密钥、node_modules、虚拟环境、缓存、日志或运行数据库。全部源码测试保留，包括共识连续性实际快照回归fixture；临时调试目录和冗余旧请求转储不全量装包。原始失败/公开来源可在本地原仓库及历史追溯，选取的完整真实最终快照和版本/内容判断随包保留；包内清单列出实际路径、SHA256和遗漏规则。
+## 附件范围
 
-原质量文档中的历史路径有些只在原仓库中，ZIP不是历史调试材料全集。未发布的远程链接不填假地址。构建工具仅读取明确列出的项目文件，不读取 PANEL_API_KEY 或展开 .env；安全核对验证排除路径、格式和明显密钥文本，并沿用既有真实密钥哨兵证据，不宣称本批读取密钥逐字扫描。
+附件保留源码、锁、迁移、样例、测试和选取的公开质量证据，不包含真实环境文件、模型密钥、依赖目录、虚拟环境、缓存、日志或本机运行数据库。文件校验见附件的 SHA256SUMS.txt。早期失败与实际模型输出保留原版本，历史测试和内容复核不改写为本次重新执行。
 
-## 仍待完成的外部提交
+## 邮件
 
-1. 用户选择 GitHub 或 Gitee，创建远程并发布当前 main，检查公开或收件人可访问性；目前 git remote 为空，无可提供的仓库链接。
-2. 填写真实姓名、联系方式；邮件主题为“【远程作业提交】姓名”。收件地址按题目为 xulei@wisquest.com，发送前由用户复核。
-3. 核对题目“收到后72小时”的实际起算时刻，当前未知，不能断言截止时间或仍在期限内。
-4. 附本地 ZIP、核心 Prompt 文档、工作流 PDF/源文和仓库链接，确认大小与访问权限后由用户发送；本批没有发送邮件。
+收件人：`xulei@wisquest.com`
 
-建议邮件正文：您好，我是【姓名】。附件为 AI Panel Studio 本地交付包、核心开发 Prompt 与工作流说明。仓库：【GitHub/Gitee实际链接】。安装与验证入口见 README，已验证范围与限制见测试说明及验收矩阵。请查收。
+主题：`【远程作业提交】阮文慧`
 
-
-## 本轮互动修正后的包核对
-
-最新ZIP以本轮全部修改提交后的clean HEAD生成，含本轮原场只读证据、新完整真实场与之后定向修正、实际Prompt副本/SHA、TDD及浏览器测试。outputs/delivery-check.json和.zip.sha256给出实际revision/逐文件数量/校验结果；包内delivery/manifest.json与git-history.txt可查。完整场执行代码23db026，最终归纳/总结修改有独立实际验证，不将原截图描述为修改后结果。旧安装/迁移/锁依赖记录沿用，未重新安装或跑五场模型。ZIP再解压到独立目录做清单、当前契约、样例和文档核对，不影响原数据库/服务。
-
-## 当前模型恢复与主持邀请候选包
-
-本轮追加安全诊断007、严格句子/纠正重试、主持有限恢复与开放邀请，详细范围见[修复报告](model-recovery.md)。包内新增原1a44失败的只读公开证据、逐字段不变检查及可控验证记录，历史样例/成功与失败证据保留。五份阵容无需重新生成，当前契约离线检查通过；锁依赖/安装/布局/SSE未变，旧结果沿用，新增迁移与受影响逻辑分别补验。
-
-outputs/ai-panel-studio-delivery.zip按修复提交的clean HEAD重建，manifest列出实际revision与文件SHA；outputs/delivery-check.json记录候选核对。**本轮未调用付费模型，不能把候选包描述为最新真实全程验收已通过**。用户应先重启后端（自动007）、新建场次验证主持开放引导及实际纠正/恢复行为，再决定正式外部提交。旧FAILED讨论不改写或续播，远程/邮件未执行。
+正文提供项目仓库链接，附上 ZIP。发送前核对附件、仓库访问和收到题目后72小时的实际截止时间。
