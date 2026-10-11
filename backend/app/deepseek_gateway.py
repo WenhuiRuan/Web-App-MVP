@@ -127,6 +127,7 @@ def reviewed_summary(request, content):
     try:
         reviewed = SummaryReview.model_validate(json.loads(content))
         messages = {m.turn_no: m for m in request.messages}
+        latest_by_actor = {m.participant_id: m.turn_no for m in request.messages}
         positions = []
         excerpts = set()
         for position in reviewed.positions:
@@ -137,6 +138,10 @@ def reviewed_summary(request, content):
                 raise invalid('summary_author')
             if not any(position.content in messages[turn].content for turn in position.source_turns):
                 raise invalid('summary_position_quote')
+            # Conservative quote selection, not a claim that every older view was withdrawn.
+            # Earlier jointly supported views remain eligible via the reviewed insight batch.
+            if position.source_turns != (latest_by_actor[person.id],):
+                raise invalid('summary_position_not_latest')
             if position.content not in excerpts:
                 positions.append(person.name + '建议／观点：“' + position.content + '”')
                 excerpts.add(position.content)
@@ -313,6 +318,10 @@ def public_context(request):
         'host_reference_message':messages.get(request.host_reference_message_id),
         'target_message': messages.get(request.target_message_id), 'focus_is_unverified': request.task == 'utterance',
         'public_focus': request.public_focus, 'through_turn': request.through_turn,
+        'insights_through_turn': request.insights.through_turn, 'insights_version': request.insights.version,
+        'summary_position_turns': [m.turn_no for m in request.messages
+            if request.task == 'summary' and people[m.participant_id].kind == 'EXPERT'
+            and not any(later.participant_id == m.participant_id and later.turn_no > m.turn_no for later in request.messages)],
         'previous_through_turn': request.insights.through_turn if request.task=='insights' else None,
         'messages': list(messages.values()),
         'insights': [dict(index=index, kind=i.kind, content=i.content, source_turns=[turns[mid] for mid in i.source_message_ids],

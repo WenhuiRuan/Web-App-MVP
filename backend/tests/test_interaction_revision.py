@@ -254,3 +254,26 @@ def test_partial_shared_candidate_gets_one_bounded_narrowing_review():
             assert len(result.items)==1 and '公示投喂点' in result.items[0].content
             assert [m['stage'] for m in gateway.metrics]==['draft','review','repair']
     asyncio.run(run())
+
+
+def test_summary_context_exposes_insight_boundary_separately_from_frozen_messages():
+    from backend.app.deepseek_gateway import public_context
+    from backend.app.contracts import InsightBatch
+    req=original_request('summary').model_copy(update={'insights':InsightBatch(version=2,through_turn=4)})
+    context=public_context(req)
+    assert context['through_turn']==8
+    assert context['insights_through_turn']==4 and context['insights_version']==2
+
+
+def test_summary_personal_quote_is_selected_from_authors_latest_message():
+    import pytest
+    from backend.app.deepseek_gateway import reviewed_summary
+    from backend.app.model_gateway import InvalidModelResult
+    from backend.tests.test_deepseek import summary_review
+    req=original_request('summary')
+    earlier=req.messages[1]; latest=req.messages[5]
+    slot=next(i for i,p in enumerate(req.participants) if p.id==earlier.participant_id)
+    def material(message):
+        return json.dumps(summary_review(positions=[dict(speaker_slot=slot,source_turns=[message.turn_no],content=message.content[:100])]),ensure_ascii=False)
+    with pytest.raises(InvalidModelResult): reviewed_summary(req,material(earlier))
+    assert latest.content[:100] in json.loads(reviewed_summary(req,material(latest)))['content']

@@ -1,0 +1,20 @@
+{
+  "base_revision": "23db026489525f4336d9c6147819bacb20a53a61",
+  "working_tree_patch": "Hard latest-author individual quote selection, TDD first; earlier valid shared claims retained in reviewed insights",
+  "insights_reused_from": "../post-full-final/retained-run.json",
+  "prompt_sha256_utf8_normalized": {
+    "common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "host_control.md": "2fc424a684c4bf78102517839e61afb2b1681f75c3efd170e7654707a7ed4ae7",
+    "insights.md": "6db6d6310323e91dff33d7e37704f27752ed939f89d99078542489ecc438043b",
+    "insights_repair.md": "00afa70c70ac3b723818afe2923bd2d3dd180128ce48d574e345bb0c61ec939d",
+    "insights_review.md": "4c1ef4ef11edef3e5a41c42b2b565ff20cd2bd8ef042411a32573322cdc21375",
+    "intent.md": "1a746a04555073760a706cafe3ad1c23b9b0040be5c02e7896f997f714538511",
+    "roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "summary.md": "5047aee04f5f51fa9cc9d528c8c4d17cdb9aa43e5afa1c13af6a83e3ebd11f11",
+    "summary_review.md": "602a837e40b07350278287b4b7428495db4ebd55b8db1bd74144f4a44ee080f3",
+    "utterance.md": "915f1642164a34fd486b57d11f5d348fa13ed2fb1fd2d7633c91ffed90e9b2a8"
+  },
+  "implementation_source_sha256": {
+    "backend/app/deepseek_gateway.py": "252dd94a4bb6b1678d733a4e4e75673e0871a90a1eea16c9793d6fd6aa91832b"
+  }
+}

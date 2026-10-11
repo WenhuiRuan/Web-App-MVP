@@ -1,0 +1,16 @@
+{
+  "base_revision": "23db026489525f4336d9c6147819bacb20a53a61",
+  "working_tree_patch": "Atomic action/object review; latest conditioned summary; boundary metadata",
+  "prompt_sha256_utf8_normalized": {
+    "common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "host_control.md": "2fc424a684c4bf78102517839e61afb2b1681f75c3efd170e7654707a7ed4ae7",
+    "insights.md": "6db6d6310323e91dff33d7e37704f27752ed939f89d99078542489ecc438043b",
+    "insights_repair.md": "00afa70c70ac3b723818afe2923bd2d3dd180128ce48d574e345bb0c61ec939d",
+    "insights_review.md": "4c1ef4ef11edef3e5a41c42b2b565ff20cd2bd8ef042411a32573322cdc21375",
+    "intent.md": "1a746a04555073760a706cafe3ad1c23b9b0040be5c02e7896f997f714538511",
+    "roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "summary.md": "df71770b8715a1026c60d06517a2cdb9b329b8b7fd4b65c105da227744d7bbc1",
+    "summary_review.md": "5dceca04aaa18031835c7af3005c2b0f5f90e8ac9b7eb0fd316ae2c9cdf8ceef",
+    "utterance.md": "915f1642164a34fd486b57d11f5d348fa13ed2fb1fd2d7633c91ffed90e9b2a8"
+  }
+}

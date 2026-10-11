@@ -1,0 +1,2644 @@
+{
+  "discussions": [
+    {
+      "id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "topic": "城市中的流浪猫应该以定点投喂和绝育管理为主，还是逐步转向收容与领养？",
+      "expert_count": 4,
+      "state": "COMPLETED",
+      "version": 5,
+      "roster_revision": 1,
+      "current_run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "failure_stage": null,
+      "last_event_seq": 158,
+      "created_at": "2026-10-11T04:17:31.504786Z",
+      "updated_at": "2026-10-11T04:24:35.363751Z",
+      "failure_code": null
+    }
+  ],
+  "participants": [
+    {
+      "id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "王磊",
+      "title": "动物收容所运营主管",
+      "stance": "支持逐步转向收容与领养，但强调必须同步扩大领养渠道与绝育；若收容容量不足，盲目收容反而导致安乐死增加。",
+      "color": "#059669"
+    },
+    {
+      "id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "林禾",
+      "title": "城市生态学研究员",
+      "stance": "支持以TNR和定点投喂为主，因为收容领养容量有限且可能增加安乐死；但需控制投喂点密度与时段，减少对野生动物的影响。",
+      "color": "#2563EB"
+    },
+    {
+      "id": "f65330c1-3739-5093-bccf-08aa30dc992a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "kind": "HOST",
+      "name": "陈序",
+      "title": "圆桌主持人",
+      "stance": "澄清问题与证据，引导讨论聚焦于管理目标与可执行条件。",
+      "color": "#64748B"
+    },
+    {
+      "id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "周颖",
+      "title": "社区治理与居民权益研究者",
+      "stance": "认为应优先TNR与投喂管理，因收容领养成本高且居民对猫的容忍度不一；但需建立社区协商机制，对投诉集中区域调整方案。",
+      "color": "#9333EA"
+    },
+    {
+      "id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "kind": "EXPERT",
+      "name": "赵敏",
+      "title": "兽医公共卫生医师",
+      "stance": "担忧定点投喂导致猫群聚集，增加人畜共患病与扰民风险；主张TNR必须结合疫苗接种与卫生管理，若无法落实则支持逐步转向收容。",
+      "color": "#D97706"
+    }
+  ],
+  "runs": [
+    {
+      "id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "roster_revision": 1,
+      "status": "COMPLETED",
+      "max_turns": 20,
+      "max_seconds": 600,
+      "summary_through_turn": 11,
+      "started_at": "2026-10-11T04:17:36.658309Z",
+      "ended_at": "2026-10-11T04:24:35.363751Z",
+      "cycle": 12,
+      "stop_reason": "host_end",
+      "error_code": null
+    }
+  ],
+  "messages": [
+    {
+      "id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f65330c1-3739-5093-bccf-08aa30dc992a",
+      "turn_no": 1,
+      "kind": "opening",
+      "content": "今天要讨论的是，城市流浪猫管理应以定点投喂加绝育为主，还是逐步转向收容与领养，关键取舍在于短期可控性与长期领养出路之间的条件是否具备。不同专业视角可以就成本、居民容忍度、猫群健康和收容容量给出各自的判断依据。",
+      "created_at": "2026-10-11T04:17:44.535942+00:00"
+    },
+    {
+      "id": "f1862109-502e-44ac-9137-407155f4c680",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "turn_no": 2,
+      "kind": "statement",
+      "content": "陈序提到的成本和居民容忍度，我想补充一个容易被忽略的条件：居民容忍度在社区里是动态的，取决于投喂点、时段和责任人是否可协商。在投诉集中区域，与其直接转向收容，不如先调整投喂点位置、喂食时段和明确责任人，把TNR和定点投喂做成有约束的社区协商方案。",
+      "created_at": "2026-10-11T04:17:56.866515+00:00"
+    },
+    {
+      "id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "turn_no": 3,
+      "kind": "statement",
+      "content": "周颖把投喂点、时段和责任人纳入社区协商，我认同；但从生态角度看，协商变量里还应加入投喂点与城市残存绿地、水体的距离，否则居民投诉可能减少，野生动物聚集风险却会上升。建议把投喂点密度、夜间投喂时段和残食清理写进同一份社区约定，作为TNR继续推进的前置条件，而不是另设一套指标。",
+      "created_at": "2026-10-11T04:18:07.403550+00:00"
+    },
+    {
+      "id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "turn_no": 4,
+      "kind": "statement",
+      "content": "林禾把投喂点与绿地、水体的距离纳入社区约定，我认同，但若生态前置条件卡住，猫群不会自动消失，最终可能被要求送入收容，收容所无法凭空扩容。因此转向收容领养必须与领养渠道、绝育同步扩容，否则收容所满员后只会推高安乐死，我的判断是TNR与有限收容并行而非替代。",
+      "created_at": "2026-10-11T04:18:21.038256+00:00"
+    },
+    {
+      "id": "466bfe1f-c946-4589-b9d5-7702b183ecd4",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "turn_no": 5,
+      "kind": "statement",
+      "content": "林禾把投喂点密度、夜间时段和残食清理作为TNR前置条件，我认同，但从兽医公共卫生看，同一约定至少还要加同步疫苗接种、食盆与粪便消毒、投喂人员防护和猫群健康监测。若这些卫生条件无法稳定落实，定点投喂只会放大聚集性传染病风险，此时我支持逐步转向收容而不是继续维持投喂。",
+      "created_at": "2026-10-11T04:18:37.119571+00:00"
+    },
+    {
+      "id": "f524b68c-8b25-43b9-b7b5-d5c4fb7d2858",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f65330c1-3739-5093-bccf-08aa30dc992a",
+      "turn_no": 6,
+      "kind": "linking",
+      "content": "王磊的收容容量约束和赵敏的卫生条件触发点其实交汇在同一个问题上：当收容容量有限、卫生条件又无法稳定落实时，优先收容哪些区域或猫群。想请赵敏说明，这个优先顺序是按居民投诉集中度、传染病风险还是领养可能性来排，依据是什么。",
+      "created_at": "2026-10-11T04:18:47.345578+00:00"
+    },
+    {
+      "id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "turn_no": 7,
+      "kind": "statement",
+      "content": "陈序问的这个优先顺序，我会把传染病风险放在第一位：同一区域猫群密度高、已有发病或死亡报告、且疫苗接种与食盆粪便消毒无法稳定落实的，收容位应优先给它们，因为收容位稀缺时先切断公共卫生外部性。居民投诉集中度更适合作为启动排查和协商的触发信号，领养可能性则用来安排收容后的安置节奏，不宜反过来决定谁先进收容。",
+      "created_at": "2026-10-11T04:19:09.893423+00:00"
+    },
+    {
+      "id": "5233a082-d04b-402c-819d-cca7e05614e3",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "turn_no": 8,
+      "kind": "statement",
+      "content": "赵敏把传染病风险排在前面我接受，但收容端要先解决一个运营前提：高风险猫不能和普通猫排同一条收容队列。若隔离观察区、疫苗记录和检测能力不到位，按单一风险优先反而会造成交叉感染，我建议按隔离等级分流，并把领养可能性用于安排腾退节奏。",
+      "created_at": "2026-10-11T04:19:28.923047+00:00"
+    },
+    {
+      "id": "62a496aa-bf0d-454b-8797-6596272c3cac",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "turn_no": 9,
+      "kind": "statement",
+      "content": "王磊提出的隔离分流我接受，但传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位。若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。",
+      "created_at": "2026-10-11T04:19:55.713898+00:00"
+    },
+    {
+      "id": "8412ef03-4b9a-4800-b59a-af1a3d07a2ef",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "turn_no": 10,
+      "kind": "statement",
+      "content": "王磊，收容无法凭空扩容、TNR与有限收容并行，这点我认同。但生态前置条件卡住时，应先调整投喂点位置与夜间时段，而不是取消TNR或整群收容，因为繁殖反弹和觅食扩散会加剧绿地水体边的野生动物冲突。",
+      "created_at": "2026-10-11T04:20:22.845741+00:00"
+    },
+    {
+      "id": "bf602f16-65fe-474f-aa52-204b0b7673a1",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "turn_no": 11,
+      "kind": "statement",
+      "content": "林禾，调整投喂点位置与夜间时段我同意，但生态前置条件卡住并不等于取消TNR或整群收容。我的有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。",
+      "created_at": "2026-10-11T04:20:41.254724+00:00"
+    }
+  ],
+  "speaking_intents": [
+    {
+      "id": "3c95d0c9-6fd4-4378-9434-6016b8a80f33",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "relevance": 85,
+      "public_focus": "回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。"
+    },
+    {
+      "id": "3a20b765-296c-40d5-b74a-43895d7289a0",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "5858dc02-c6ef-4fda-8d0d-fa1c509678d7",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "relevance": 85,
+      "public_focus": "回应林禾第3轮：社区协商除投喂点、时段、责任人外，应把临近绿地/水体的生态评估纳入，并以居民投诉和野生动物目击作为调整触发条件，而非另设独立指标。"
+    },
+    {
+      "id": "1f6f3758-8146-4ff0-8245-449071f5f73e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "relevance": 78,
+      "public_focus": "认同王磊的有限收容并行，但补充治理程序：收容与领养作为有限出口，应由社区、物业、投喂责任人和收容机构共同设定转入条件（如投诉持续、疫病风险、生态敏感），并明确退回TNR管理的条件，避免把收容当作对投诉的自动反应。"
+    },
+    {
+      "id": "8f4d431a-d5d9-4445-904e-03000046c211",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "主持人正请赵敏说明收容优先顺序，当前没有需要周颖补充或纠正的新增内容。"
+    },
+    {
+      "id": "733bb3bf-8e16-4679-9a4b-876d44c68944",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "relevance": 75,
+      "public_focus": "赵敏按传染病风险排收容优先，我补充社区治理条件：投诉集中区若只启动排查协商而排不上收容，必须给出限时整改与责任人，卫生条件不落实再转收容，否则居民会认为诉求无回应，容忍度下降。"
+    },
+    {
+      "id": "299536ee-fc8f-46cb-882a-6a6e4f13e266",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 9,
+      "based_on_turn": 8,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "relevance": 70,
+      "public_focus": "回应赵敏第7轮把投诉集中度作为协商触发信号：社区投诉量易被少数高频投诉者放大，应区分重复投诉类型、时段与可核实事项，否则收容位和协商资源会被少数声音主导。"
+    },
+    {
+      "id": "adf89510-8471-4c42-863e-54bd84a7c5c5",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "62a496aa-bf0d-454b-8797-6596272c3cac",
+      "relevance": 75,
+      "public_focus": "回应赵敏第9轮：原地疫苗、消毒和健康监测若没有社区责任主体、经费与时限，风险区仍会僵住；建议把投诉集中触发信号嵌入可执行的社区协商程序。"
+    },
+    {
+      "id": "5968699c-b85d-4194-a810-8c83f258b7b5",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "relevance": 82,
+      "public_focus": "回应赵敏以居民投诉集中度作触发信号：需把投诉转成可核查记录，区分偶发与重复投诉，并让投喂责任人、居民代表共同参与排序，避免投诉量直接决定收容优先级。"
+    },
+    {
+      "id": "e7981cb0-c7c9-4878-ade9-34ed2760ac20",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "REQUEST",
+      "target_message_id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "relevance": 85,
+      "public_focus": "支持以TNR和定点投喂为主，但新增条件：投喂点密度、时段和清洁管理必须纳入方案，否则猫群聚集会加大野生动物与公共卫生风险。"
+    },
+    {
+      "id": "0651a4b1-aeb5-4750-8c30-9bdaa9328099",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "f1862109-502e-44ac-9137-407155f4c680",
+      "relevance": 85,
+      "public_focus": "补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。"
+    },
+    {
+      "id": "db0af4b7-d4af-49a6-9491-35fae903d771",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "b8095e6e-e2d4-4f34-bffe-b06963e48623",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "relevance": 78,
+      "public_focus": "回应王磊：生态距离与残食清理前置条件不是硬性停摆，而是对不达标投喂点迁移或撤点；仍保留TNR，避免把生态约束直接转成收容压力。"
+    },
+    {
+      "id": "1de87ff0-c085-4659-863f-3264dc5bcd5a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "466bfe1f-c946-4589-b9d5-7702b183ecd4",
+      "relevance": 75,
+      "public_focus": "回应赵敏的卫生触发条件：优先顺序还应加入生态风险维度；对邻近残存绿地或水体的投喂点，先撤移并同步TNR与领养转移，而非直接转入收容。"
+    },
+    {
+      "id": "71e44332-44a2-4385-af63-f247beacaad9",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "relevance": 70,
+      "public_focus": "回应赵敏的收容优先顺序：生态暴露可与传染病风险合并排序，把高密度猫群紧邻残存绿地、水体且残食清理不到位的点位列为前置排查依据，不必等发病报告才启动收容。"
+    },
+    {
+      "id": "eb4aeef4-4a04-40d7-abf5-2d1b94ff533f",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 9,
+      "based_on_turn": 8,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "5233a082-d04b-402c-819d-cca7e05614e3",
+      "relevance": 72,
+      "public_focus": "王磊按隔离等级分流可操作；但生态风险不应并入收容风险队列。建议投喂点按与湿地、绿地距离分级，敏感区先撤点或改时段，TNR优先核心猫群，避免把生态风险等同于传染病风险而占用隔离收容位。"
+    },
+    {
+      "id": "53fab757-bfd9-4aea-bc23-6e514a7602e0",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "relevance": 85,
+      "public_focus": "王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。"
+    },
+    {
+      "id": "b55f0ecb-41b6-4bb0-9c1b-2b8a3210a12a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容；林禾关于投喂点与绿地水体距离、夜间时段等生态前置条件已在第3、10轮说明，无需重复。"
+    },
+    {
+      "id": "034a229b-e560-4e77-b91b-25803b4329a2",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "relevance": 85,
+      "public_focus": "收容转向的可行前提是领养渠道与绝育同步扩容；若收容容量不足，盲目收容会推高安乐死，先明确容量与领养转化率再谈转向。"
+    },
+    {
+      "id": "9ea99764-8dbc-4093-9a18-fa46c820a44d",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "REQUEST",
+      "target_message_id": null,
+      "relevance": 86,
+      "public_focus": "从收容运营角度提出此前未谈的可执行条件：逐步转向收容领养前，需先公布可持续领养转化率、容量与平均停留时间、绝育和回置接口；达不到阈值时盲目收容会挤占容量并推高安乐死。"
+    },
+    {
+      "id": "0437871a-9482-477e-8cf6-30ff239e1a0a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "relevance": 85,
+      "public_focus": "林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。"
+    },
+    {
+      "id": "dac19d0d-934a-4639-9c4c-0e00268de86e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前没有新的已提交发言或主持人追问需要我回应，维持第4轮关于收容须与领养、绝育同步扩容的判断即可。"
+    },
+    {
+      "id": "453daa8e-44ff-48a2-b45b-3353865de891",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "REQUEST",
+      "target_message_id": "f524b68c-8b25-43b9-b7b5-d5c4fb7d2858",
+      "relevance": 85,
+      "public_focus": "收容容量有限时，优先顺序应先看领养概率与医疗可治性，再看公共卫生风险；仅按投诉集中度收容会把不可领养猫推入安乐死。"
+    },
+    {
+      "id": "b0310975-f494-4ac2-8c43-0b77e1f3547a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "relevance": 90,
+      "public_focus": "赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。"
+    },
+    {
+      "id": "1c94cad3-7a59-4c31-aaa6-b0abc048b246",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 9,
+      "based_on_turn": 8,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "71143247-c385-49ad-b372-2bfe76989238",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "62a496aa-bf0d-454b-8797-6596272c3cac",
+      "relevance": 78,
+      "public_focus": "回应赵敏turn9：原地管理若缺乏稳定责任方、物资和时限，就无法作为等待隔离条件的过渡；收容分流需先评估原地执行能力，否则收容计划无法排期。"
+    },
+    {
+      "id": "a9eb78ee-236e-4909-8b5d-00a96666a600",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "8412ef03-4b9a-4800-b59a-af1a3d07a2ef",
+      "relevance": 82,
+      "public_focus": "回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。"
+    },
+    {
+      "id": "4e548137-1533-4461-b3de-0433476bbfda",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 2,
+      "based_on_turn": 1,
+      "kind": "REQUEST",
+      "target_message_id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "relevance": 86,
+      "public_focus": "主持开场未纳入公共卫生条件：我提出定点投喂若造成猫群聚集，TNR必须同步疫苗接种、粪便与跳蚤卫生管理，并监测扰民与病原风险；这些无法落实时，应逐步转向收容与领养。"
+    },
+    {
+      "id": "ea048b8a-96bb-421c-966f-d1978de5a779",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 3,
+      "based_on_turn": 2,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "f1862109-502e-44ac-9137-407155f4c680",
+      "relevance": 85,
+      "public_focus": "周颖提出用投喂点位置、时段和责任人做社区协商；公共健康视角需补充：这些约束仍须配套疫苗接种与食盆/粪便卫生管理，作为投喂可继续的前置条件，否则聚集风险不减，达不到就应转向收容。"
+    },
+    {
+      "id": "b2f73644-2621-4876-b1c6-07982ec67d7d",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 4,
+      "based_on_turn": 3,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "relevance": 82,
+      "public_focus": "林禾提出的密度、时段、残食清理前置条件还缺公共卫生项：定点投喂会聚集猫群，应把TNR同步疫苗与驱虫、投喂点粪便与食具卫生、发现异常猫只的上报流程写进同一份社区约定，否则扰民投诉下降但人畜共患病风险仍在。这个条件不落实时，转向收容才更可讨论。"
+    },
+    {
+      "id": "da77b60a-d01a-4022-acc5-41b101f5c7ae",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 5,
+      "based_on_turn": 4,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "relevance": 88,
+      "public_focus": "林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。"
+    },
+    {
+      "id": "d69e74ec-77cb-46c9-b33f-863129378f18",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 7,
+      "based_on_turn": 6,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "f524b68c-8b25-43b9-b7b5-d5c4fb7d2858",
+      "relevance": 95,
+      "public_focus": "按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。"
+    },
+    {
+      "id": "f6f283e1-9246-465f-a382-e1d118f5279d",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 8,
+      "based_on_turn": 7,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    },
+    {
+      "id": "c3947c6d-1598-4193-93e1-6d291d9e0cf6",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 9,
+      "based_on_turn": 8,
+      "kind": "SUPPLEMENT",
+      "target_message_id": "5233a082-d04b-402c-819d-cca7e05614e3",
+      "relevance": 88,
+      "public_focus": "王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。"
+    },
+    {
+      "id": "a713747c-665d-450e-86be-521e009a2913",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 10,
+      "based_on_turn": 9,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "主持人第6轮所问收容优先顺序已在第7轮回应，王磊第8轮的隔离分流建议也已在第9轮接受并补充条件，当前没有新增公共卫生判断。"
+    },
+    {
+      "id": "3bda8d3b-d897-49da-8386-81fbf9bb25e8",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "cycle": 11,
+      "based_on_turn": 10,
+      "kind": "PASS",
+      "target_message_id": null,
+      "relevance": 0,
+      "public_focus": "当前问题已得到回应，没有新增内容"
+    }
+  ],
+  "turn_claims": [
+    {
+      "id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 1,
+      "based_on_turn": 0,
+      "participant_id": "f65330c1-3739-5093-bccf-08aa30dc992a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "opening",
+      "public_focus": "说明议题与讨论范围",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "f1862109-502e-44ac-9137-407155f4c680",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 2,
+      "based_on_turn": 1,
+      "participant_id": "3deed38e-0d11-5eb9-98cb-c5b158edde4b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "5ac90f98-1cc8-4376-aff6-82aa402f237e",
+      "host_task": null,
+      "public_focus": "回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 3,
+      "based_on_turn": 2,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "f1862109-502e-44ac-9137-407155f4c680",
+      "host_task": null,
+      "public_focus": "补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 4,
+      "based_on_turn": 3,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "host_task": null,
+      "public_focus": "林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "466bfe1f-c946-4589-b9d5-7702b183ecd4",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 5,
+      "based_on_turn": 4,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2",
+      "host_task": null,
+      "public_focus": "林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "f524b68c-8b25-43b9-b7b5-d5c4fb7d2858",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 6,
+      "based_on_turn": 5,
+      "participant_id": "f65330c1-3739-5093-bccf-08aa30dc992a",
+      "participation_kind": null,
+      "target_message_id": null,
+      "host_task": "linking",
+      "public_focus": "串联王磊的收容容量约束与赵敏的卫生条件转向主张，请赵敏说明容量有限时优先处理哪些区域或猫群。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 7,
+      "based_on_turn": 6,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "f524b68c-8b25-43b9-b7b5-d5c4fb7d2858",
+      "host_task": null,
+      "public_focus": "按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "5233a082-d04b-402c-819d-cca7e05614e3",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 8,
+      "based_on_turn": 7,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7",
+      "host_task": null,
+      "public_focus": "赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "62a496aa-bf0d-454b-8797-6596272c3cac",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 9,
+      "based_on_turn": 8,
+      "participant_id": "f9063dfd-a316-5a71-b94c-39a5fee1684b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "5233a082-d04b-402c-819d-cca7e05614e3",
+      "host_task": null,
+      "public_focus": "王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "8412ef03-4b9a-4800-b59a-af1a3d07a2ef",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 10,
+      "based_on_turn": 9,
+      "participant_id": "b45e5861-13ec-5fdf-9b4d-11cee80b931b",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617",
+      "host_task": null,
+      "public_focus": "王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。",
+      "status": "COMMITTED"
+    },
+    {
+      "id": "bf602f16-65fe-474f-aa52-204b0b7673a1",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "roster_revision": 1,
+      "cycle": 11,
+      "based_on_turn": 10,
+      "participant_id": "c0accd84-3813-5803-8e13-ada1b4dffbb9",
+      "participation_kind": "SUPPLEMENT",
+      "target_message_id": "8412ef03-4b9a-4800-b59a-af1a3d07a2ef",
+      "host_task": null,
+      "public_focus": "回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。",
+      "status": "COMMITTED"
+    }
+  ],
+  "events": [
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 1,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:17:31.504786Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"DRAFT\",\"version\":0}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 2,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:17:31.528932Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"GENERATING\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 3,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "roster.ready",
+      "occurred_at": "2026-10-11T04:17:36.326540Z",
+      "payload": "{\"participants\":[{\"color\":\"#64748B\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"kind\":\"HOST\",\"name\":\"陈序\",\"roster_revision\":1,\"stance\":\"澄清问题与证据，引导讨论聚焦于管理目标与可执行条件。\",\"title\":\"圆桌主持人\"},{\"color\":\"#2563EB\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"kind\":\"EXPERT\",\"name\":\"林禾\",\"roster_revision\":1,\"stance\":\"支持以TNR和定点投喂为主，因为收容领养容量有限且可能增加安乐死；但需控制投喂点密度与时段，减少对野生动物的影响。\",\"title\":\"城市生态学研究员\"},{\"color\":\"#D97706\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"kind\":\"EXPERT\",\"name\":\"赵敏\",\"roster_revision\":1,\"stance\":\"担忧定点投喂导致猫群聚集，增加人畜共患病与扰民风险；主张TNR必须结合疫苗接种与卫生管理，若无法落实则支持逐步转向收容。\",\"title\":\"兽医公共卫生医师\"},{\"color\":\"#059669\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"kind\":\"EXPERT\",\"name\":\"王磊\",\"roster_revision\":1,\"stance\":\"支持逐步转向收容与领养，但强调必须同步扩大领养渠道与绝育；若收容容量不足，盲目收容反而导致安乐死增加。\",\"title\":\"动物收容所运营主管\"},{\"color\":\"#9333EA\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"kind\":\"EXPERT\",\"name\":\"周颖\",\"roster_revision\":1,\"stance\":\"认为应优先TNR与投喂管理，因收容领养成本高且居民对猫的容忍度不一；但需建立社区协商机制，对投诉集中区域调整方案。\",\"title\":\"社区治理与居民权益研究者\"}],\"roster_revision\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 4,
+      "run_id": null,
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:17:36.327537Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"READY\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 5,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:17:36.659155Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"RUNNING\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 6,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.722392Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 7,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.722392Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 8,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.723389Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 9,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.723389Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 10,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.724386Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"PREPARING\",\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 11,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:36.760986Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"SPEAKING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 12,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:17:44.535942Z",
+      "payload": "{\"content\":\"今天要讨论的是，城市流浪猫管理应以定点投喂加绝育为主，还是逐步转向收容与领养，关键取舍在于短期可控性与长期领养出路之间的条件是否具备。不同专业视角可以就成本、居民容忍度、猫群健康和收容容量给出各自的判断依据。\",\"created_at\":\"2026-10-11T04:17:44.535942Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"5ac90f98-1cc8-4376-aff6-82aa402f237e\",\"kind\":\"opening\",\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 13,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:44.535942Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"说明议题与讨论范围\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 14,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:44.555994Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 15,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:44.555994Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 16,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:44.555994Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 17,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:44.555994Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 18,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.590799Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 19,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.590799Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"支持以TNR和定点投喂为主，但新增条件：投喂点密度、时段和清洁管理必须纳入方案，否则猫群聚集会加大野生动物与公共卫生风险。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 20,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.590799Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"收容转向的可行前提是领养渠道与绝育同步扩容；若收容容量不足，盲目收容会推高安乐死，先明确容量与领养转化率再谈转向。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 21,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.590799Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"主持开场未纳入公共卫生条件：我提出定点投喂若造成猫群聚集，TNR必须同步疫苗接种、粪便与跳蚤卫生管理，并监测扰民与病原风险；这些无法落实时，应逐步转向收容与领养。\",\"state\":\"IDLE\",\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 22,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.606887Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 23,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:51.639446Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。\",\"state\":\"SPEAKING\",\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 24,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:17:56.867026Z",
+      "payload": "{\"content\":\"陈序提到的成本和居民容忍度，我想补充一个容易被忽略的条件：居民容忍度在社区里是动态的，取决于投喂点、时段和责任人是否可协商。在投诉集中区域，与其直接转向收容，不如先调整投喂点位置、喂食时段和明确责任人，把TNR和定点投喂做成有约束的社区协商方案。\",\"created_at\":\"2026-10-11T04:17:56.866515Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"f1862109-502e-44ac-9137-407155f4c680\",\"kind\":\"statement\",\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 25,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:56.867026Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应主持人关于成本与居民容忍度的框架，主张以TNR和定点投喂为主，但需建立社区协商机制：投诉集中区域应调整投喂点、时段和责任人，并把居民容忍度作为动态指标而非固定前提。\",\"state\":\"IDLE\",\"version\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 26,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:56.894991Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 27,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:56.894991Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 28,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:56.894991Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 29,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:17:56.895988Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 30,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:17:57.237299Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 31,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T04:17:58.535328Z",
+      "payload": "{\"items\":[],\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 32,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:17:58.536321Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":2,\"version\":1}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 33,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.798838Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":8}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 34,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.799934Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 35,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.799934Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"从收容运营角度提出此前未谈的可执行条件：逐步转向收容领养前，需先公布可持续领养转化率、容量与平均停留时间、绝育和回置接口；达不到阈值时盲目收容会挤占容量并推高安乐死。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 36,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.800673Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"周颖提出用投喂点位置、时段和责任人做社区协商；公共健康视角需补充：这些约束仍须配套疫苗接种与食盆/粪便卫生管理，作为投喂可继续的前置条件，否则聚集风险不减，达不到就应转向收容。\",\"state\":\"IDLE\",\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 37,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.819175Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 38,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:04.834551Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。\",\"state\":\"SPEAKING\",\"version\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 39,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:18:07.403550Z",
+      "payload": "{\"content\":\"周颖把投喂点、时段和责任人纳入社区协商，我认同；但从生态角度看，协商变量里还应加入投喂点与城市残存绿地、水体的距离，否则居民投诉可能减少，野生动物聚集风险却会上升。建议把投喂点密度、夜间投喂时段和残食清理写进同一份社区约定，作为TNR继续推进的前置条件，而不是另设一套指标。\",\"created_at\":\"2026-10-11T04:18:07.403550Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"kind\":\"statement\",\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 40,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:07.413809Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"补充生态视角：定点投喂的密度与时段控制需纳入社区协商，以减少对野生动物的影响，这与周颖的调整思路互补。\",\"state\":\"IDLE\",\"version\":8}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 41,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:07.430769Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 42,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:07.431766Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 43,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:07.431766Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 44,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:07.431766Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 45,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.911544Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应林禾第3轮：社区协商除投喂点、时段、责任人外，应把临近绿地/水体的生态评估纳入，并以居民投诉和野生动物目击作为调整触发条件，而非另设独立指标。\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 46,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.911544Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 47,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.911544Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。\",\"state\":\"IDLE\",\"version\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 48,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.911544Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"林禾提出的密度、时段、残食清理前置条件还缺公共卫生项：定点投喂会聚集猫群，应把TNR同步疫苗与驱虫、投喂点粪便与食具卫生、发现异常猫只的上报流程写进同一份社区约定，否则扰民投诉下降但人畜共患病风险仍在。这个条件不落实时，转向收容才更可讨论。\",\"state\":\"IDLE\",\"version\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 49,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.939363Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。\",\"state\":\"PREPARING\",\"version\":8}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 50,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:14.955323Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。\",\"state\":\"SPEAKING\",\"version\":9}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 51,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:18:21.038256Z",
+      "payload": "{\"content\":\"林禾把投喂点与绿地、水体的距离纳入社区约定，我认同，但若生态前置条件卡住，猫群不会自动消失，最终可能被要求送入收容，收容所无法凭空扩容。因此转向收容领养必须与领养渠道、绝育同步扩容，否则收容所满员后只会推高安乐死，我的判断是TNR与有限收容并行而非替代。\",\"created_at\":\"2026-10-11T04:18:21.038256Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"4b4a87d2-9d72-410c-9606-b46b1e7b6617\",\"kind\":\"statement\",\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 52,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.039253Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"林禾、周颖讨论投喂点协商与生态前置条件，但未涉及收容容量与领养渠道的实际约束。我补充：若盲目录取，收容所容量不足会导致安乐死率上升，因此转向收容领养必须同步扩大领养渠道和绝育，否则TNR与收容应并行而非替代。\",\"state\":\"IDLE\",\"version\":10}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 53,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.058987Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 54,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.071438Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 55,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.071438Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 56,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.071438Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 57,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:21.071438Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":8}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 58,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.672260Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"认同王磊的有限收容并行，但补充治理程序：收容与领养作为有限出口，应由社区、物业、投喂责任人和收容机构共同设定转入条件（如投诉持续、疫病风险、生态敏感），并明确退回TNR管理的条件，避免把收容当作对投诉的自动反应。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 59,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.672260Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"回应王磊：生态距离与残食清理前置条件不是硬性停摆，而是对不达标投喂点迁移或撤点；仍保留TNR，避免把生态约束直接转成收容压力。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 60,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.673257Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"当前没有新的已提交发言或主持人追问需要我回应，维持第4轮关于收容须与领养、绝育同步扩容的判断即可。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 61,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.673257Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。\",\"state\":\"IDLE\",\"version\":9}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 62,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.741358Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。\",\"state\":\"PREPARING\",\"version\":10}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 63,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:31.760153Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。\",\"state\":\"SPEAKING\",\"version\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 64,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:18:37.119571Z",
+      "payload": "{\"content\":\"林禾把投喂点密度、夜间时段和残食清理作为TNR前置条件，我认同，但从兽医公共卫生看，同一约定至少还要加同步疫苗接种、食盆与粪便消毒、投喂人员防护和猫群健康监测。若这些卫生条件无法稳定落实，定点投喂只会放大聚集性传染病风险，此时我支持逐步转向收容而不是继续维持投喂。\",\"created_at\":\"2026-10-11T04:18:37.119571Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"466bfe1f-c946-4589-b9d5-7702b183ecd4\",\"kind\":\"statement\",\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 65,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:37.119571Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"林禾提出投喂点密度、时段与残食清理作为前置条件，我补充兽医公共卫生条件：TNR需同步疫苗接种、食盆和粪便消毒、投喂人员防护与猫群健康监测；若这些无法落实，应逐步转收容，避免聚集放大传染病风险。\",\"state\":\"IDLE\",\"version\":12}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 66,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:37.138684Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 67,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:37.139680Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 68,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:37.139680Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 69,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:37.139680Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":13}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 70,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.352991Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 71,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.353987Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 72,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.353987Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 73,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.353987Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"聆听主持人问题\",\"state\":\"IDLE\",\"version\":14}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 74,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.353987Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"串联王磊的收容容量约束与赵敏的卫生条件转向主张，请赵敏说明容量有限时优先处理哪些区域或猫群。\",\"state\":\"PREPARING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 75,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:42.371939Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"串联王磊的收容容量约束与赵敏的卫生条件转向主张，请赵敏说明容量有限时优先处理哪些区域或猫群。\",\"state\":\"SPEAKING\",\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 76,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:18:47.346575Z",
+      "payload": "{\"content\":\"王磊的收容容量约束和赵敏的卫生条件触发点其实交汇在同一个问题上：当收容容量有限、卫生条件又无法稳定落实时，优先收容哪些区域或猫群。想请赵敏说明，这个优先顺序是按居民投诉集中度、传染病风险还是领养可能性来排，依据是什么。\",\"created_at\":\"2026-10-11T04:18:47.345578Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"f524b68c-8b25-43b9-b7b5-d5c4fb7d2858\",\"kind\":\"linking\",\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 77,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:47.346575Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"串联王磊的收容容量约束与赵敏的卫生条件转向主张，请赵敏说明容量有限时优先处理哪些区域或猫群。\",\"state\":\"IDLE\",\"version\":6}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 78,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:47.368772Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 79,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:47.369769Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 80,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:47.369769Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 81,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:18:47.369769Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":15}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 82,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T04:18:50.023194Z",
+      "payload": "{\"items\":[{\"content\":\"周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定，作为有约束推进TNR与投喂管理的条件。\",\"id\":\"4180b95a-c468-5b28-a0d3-fa59029aa3b1\",\"kind\":\"consensus\",\"source_message_ids\":[\"f1862109-502e-44ac-9137-407155f4c680\",\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\"]},{\"content\":\"林禾与王磊共同认同将投喂点与城市绿地、水体的距离纳入社区约定，作为投喂点协商的前置条件之一。\",\"id\":\"6aaa38f8-3839-504d-b997-73082b74f25e\",\"kind\":\"consensus\",\"source_message_ids\":[\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"4b4a87d2-9d72-410c-9606-b46b1e7b6617\"]}],\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 83,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:18:50.024193Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":4,\"version\":2}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 84,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:18:50.041963Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 85,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.931540Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"主持人正请赵敏说明收容优先顺序，当前没有需要周颖补充或纠正的新增内容。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 86,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.931540Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"回应赵敏的卫生触发条件：优先顺序还应加入生态风险维度；对邻近残存绿地或水体的投喂点，先撤移并同步TNR与领养转移，而非直接转入收容。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 87,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.931540Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"收容容量有限时，优先顺序应先看领养概率与医疗可治性，再看公共卫生风险；仅按投诉集中度收容会把不可领养猫推入安乐死。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 88,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.931540Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。\",\"state\":\"IDLE\",\"version\":16}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 89,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.951721Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 90,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:03.969248Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。\",\"state\":\"SPEAKING\",\"version\":18}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 91,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:19:09.894420Z",
+      "payload": "{\"content\":\"陈序问的这个优先顺序，我会把传染病风险放在第一位：同一区域猫群密度高、已有发病或死亡报告、且疫苗接种与食盆粪便消毒无法稳定落实的，收容位应优先给它们，因为收容位稀缺时先切断公共卫生外部性。居民投诉集中度更适合作为启动排查和协商的触发信号，领养可能性则用来安排收容后的安置节奏，不宜反过来决定谁先进收容。\",\"created_at\":\"2026-10-11T04:19:09.893423Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"209c3de8-aad3-4974-bc76-36d77f974ba7\",\"kind\":\"statement\",\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 92,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:09.894420Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"按传染病风险优先、其次投诉集中度、最后领养可能性；依据是收容位稀缺时先降低公共卫生外部性，投诉可协商缓解，领养可能用于后续安置而非决定收容顺序。\",\"state\":\"IDLE\",\"version\":19}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 93,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:09.909465Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 94,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:09.913980Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 95,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:09.913980Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":17}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 96,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:09.913980Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":20}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 97,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.271202Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"赵敏按传染病风险排收容优先，我补充社区治理条件：投诉集中区若只启动排查协商而排不上收容，必须给出限时整改与责任人，卫生条件不落实再转收容，否则居民会认为诉求无回应，容忍度下降。\",\"state\":\"IDLE\",\"version\":18}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 98,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.271202Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"回应赵敏的收容优先顺序：生态暴露可与传染病风险合并排序，把高密度猫群紧邻残存绿地、水体且残食清理不到位的点位列为前置排查依据，不必等发病报告才启动收容。\",\"state\":\"IDLE\",\"version\":18}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 99,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.271202Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。\",\"state\":\"IDLE\",\"version\":18}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 100,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.272199Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":21}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 101,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.298442Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。\",\"state\":\"PREPARING\",\"version\":19}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 102,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:24.313067Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。\",\"state\":\"SPEAKING\",\"version\":20}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 103,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:19:28.923047Z",
+      "payload": "{\"content\":\"赵敏把传染病风险排在前面我接受，但收容端要先解决一个运营前提：高风险猫不能和普通猫排同一条收容队列。若隔离观察区、疫苗记录和检测能力不到位，按单一风险优先反而会造成交叉感染，我建议按隔离等级分流，并把领养可能性用于安排腾退节奏。\",\"created_at\":\"2026-10-11T04:19:28.923047Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"5233a082-d04b-402c-819d-cca7e05614e3\",\"kind\":\"statement\",\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":8}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 104,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:28.923047Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"赵敏的风险优先要落地，需先定义隔离观察区、检测能力和疫苗记录等收容准入条件；缺少这些条件时，高风险猫进入普通收容会交叉感染，收容位应按隔离等级分流而非单一排队。\",\"state\":\"IDLE\",\"version\":21}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 105,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:28.943784Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":22}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 106,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:28.943784Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":19}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 107,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:28.944783Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":19}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 108,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:28.944783Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":22}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 109,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.036469Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应赵敏第7轮把投诉集中度作为协商触发信号：社区投诉量易被少数高频投诉者放大，应区分重复投诉类型、时段与可核实事项，否则收容位和协商资源会被少数声音主导。\",\"state\":\"IDLE\",\"version\":20}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 110,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.036469Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"王磊按隔离等级分流可操作；但生态风险不应并入收容风险队列。建议投喂点按与湿地、绿地距离分级，敏感区先撤点或改时段，TNR优先核心猫群，避免把生态风险等同于传染病风险而占用隔离收容位。\",\"state\":\"IDLE\",\"version\":20}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 111,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.046466Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":23}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 112,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.046466Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。\",\"state\":\"IDLE\",\"version\":23}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 113,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.063545Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。\",\"state\":\"PREPARING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 114,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:45.077509Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。\",\"state\":\"SPEAKING\",\"version\":25}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 115,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T04:19:50.844440Z",
+      "payload": "{\"items\":[{\"content\":\"周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。\",\"id\":\"a2512c23-1f85-5a2a-a089-a2316bfe942c\",\"kind\":\"consensus\",\"source_message_ids\":[\"f1862109-502e-44ac-9137-407155f4c680\",\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\"]},{\"content\":\"林禾与王磊共同认同把投喂点与城市绿地、水体的距离纳入社区约定。\",\"id\":\"7f8bb5fd-9736-55ed-8e3b-0cf870c46c3c\",\"kind\":\"consensus\",\"source_message_ids\":[\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"4b4a87d2-9d72-410c-9606-b46b1e7b6617\"]},{\"content\":\"林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。\",\"id\":\"c5a159ce-2a7f-52ab-b6b9-3e2dd57dfd4e\",\"kind\":\"consensus\",\"source_message_ids\":[\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"466bfe1f-c946-4589-b9d5-7702b183ecd4\"]}],\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 116,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:19:50.845438Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":6,\"version\":3}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 117,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:19:50.878019Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":8,\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 118,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:19:55.717966Z",
+      "payload": "{\"content\":\"王磊提出的隔离分流我接受，但传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位。若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。\",\"created_at\":\"2026-10-11T04:19:55.713898Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"62a496aa-bf0d-454b-8797-6596272c3cac\",\"kind\":\"statement\",\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":9}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 119,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:55.718483Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"王磊指出高风险猫不能与普通猫同队列，我补充：传染病风险优先只适用于隔离观察、疫苗记录和检测能力可用的收容位；若这些条件不具备，高风险猫不应送入共享收容区，而应转为原地疫苗、消毒和健康监测，待隔离条件具备再收容。\",\"state\":\"IDLE\",\"version\":26}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 120,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:55.743565Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 121,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:55.744562Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":21}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 122,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:55.744562Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":21}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 123,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:19:55.744562Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":27}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 124,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.393430Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应赵敏第9轮：原地疫苗、消毒和健康监测若没有社区责任主体、经费与时限，风险区仍会僵住；建议把投诉集中触发信号嵌入可执行的社区协商程序。\",\"state\":\"IDLE\",\"version\":22}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 125,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.394428Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。\",\"state\":\"IDLE\",\"version\":22}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 126,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.394428Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"回应赵敏turn9：原地管理若缺乏稳定责任方、物资和时限，就无法作为等待隔离条件的过渡；收容分流需先评估原地执行能力，否则收容计划无法排期。\",\"state\":\"IDLE\",\"version\":25}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 127,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.394428Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"主持人第6轮所问收容优先顺序已在第7轮回应，王磊第8轮的隔离分流建议也已在第9轮接受并补充条件，当前没有新增公共卫生判断。\",\"state\":\"IDLE\",\"version\":28}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 128,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.414894Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。\",\"state\":\"PREPARING\",\"version\":23}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 129,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:19.431096Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。\",\"state\":\"SPEAKING\",\"version\":24}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 130,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:20:22.845741Z",
+      "payload": "{\"content\":\"王磊，收容无法凭空扩容、TNR与有限收容并行，这点我认同。但生态前置条件卡住时，应先调整投喂点位置与夜间时段，而不是取消TNR或整群收容，因为繁殖反弹和觅食扩散会加剧绿地水体边的野生动物冲突。\",\"created_at\":\"2026-10-11T04:20:22.845741Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"8412ef03-4b9a-4800-b59a-af1a3d07a2ef\",\"kind\":\"statement\",\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":10}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 131,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:22.845741Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"王磊担心生态前置条件卡住后猫群会被送入收容。生态学补充：条件不达标时先调投喂点位置与时段，而不是取消TNR或整群收容；否则繁殖反弹和觅食扩散会加剧野生动物冲突。\",\"state\":\"IDLE\",\"version\":25}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 132,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:22.881048Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":26}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 133,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:22.882046Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":26}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 134,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:22.882046Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":23}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 135,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:22.882046Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":29}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 136,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.610021Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"回应赵敏以居民投诉集中度作触发信号：需把投诉转成可核查记录，区分偶发与重复投诉，并让投喂责任人、居民代表共同参与排序，避免投诉量直接决定收容优先级。\",\"state\":\"IDLE\",\"version\":24}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 137,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.610021Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"当前问题已得到回应，没有新增内容；林禾关于投喂点与绿地水体距离、夜间时段等生态前置条件已在第3、10轮说明，无需重复。\",\"state\":\"IDLE\",\"version\":27}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 138,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.610021Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。\",\"state\":\"IDLE\",\"version\":27}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 139,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.610021Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"当前问题已得到回应，没有新增内容\",\"state\":\"IDLE\",\"version\":30}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 140,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.634973Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。\",\"state\":\"PREPARING\",\"version\":28}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 141,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:36.650785Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。\",\"state\":\"SPEAKING\",\"version\":29}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 142,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "turn.committed",
+      "occurred_at": "2026-10-11T04:20:41.254724Z",
+      "payload": "{\"content\":\"林禾，调整投喂点位置与夜间时段我同意，但生态前置条件卡住并不等于取消TNR或整群收容。我的有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。\",\"created_at\":\"2026-10-11T04:20:41.254724Z\",\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"id\":\"bf602f16-65fe-474f-aa52-204b0b7673a1\",\"kind\":\"statement\",\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"turn_no\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 143,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:41.255722Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"回应林禾：我不主张生态条件不达标就取消TNR或整群收容；有限收容只针对原地疫苗、隔离和健康监测无法落实且已构成卫生或扰民风险的猫群，其余仍应调整投喂点并继续TNR。\",\"state\":\"IDLE\",\"version\":30}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 144,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:41.267914Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":31}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 145,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:41.267914Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":28}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 146,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:41.267914Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":25}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 147,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:41.267914Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"正在评估是否参与\",\"state\":\"PREPARING\",\"version\":31}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 148,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.111446Z",
+      "payload": "{\"participant_id\":\"3deed38e-0d11-5eb9-98cb-c5b158edde4b\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":26}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 149,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.111446Z",
+      "payload": "{\"participant_id\":\"b45e5861-13ec-5fdf-9b4d-11cee80b931b\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":29}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 150,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.112372Z",
+      "payload": "{\"participant_id\":\"c0accd84-3813-5803-8e13-ada1b4dffbb9\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":32}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 151,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.112474Z",
+      "payload": "{\"participant_id\":\"f65330c1-3739-5093-bccf-08aa30dc992a\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":7}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 152,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "participant.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.112474Z",
+      "payload": "{\"participant_id\":\"f9063dfd-a316-5a71-b94c-39a5fee1684b\",\"public_focus\":\"\",\"state\":\"IDLE\",\"version\":32}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 153,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:20:47.113137Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"SUMMARIZING\",\"version\":4}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 154,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:20:47.153676Z",
+      "payload": "{\"error_code\":null,\"state\":\"PENDING\",\"through_turn\":11,\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 155,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.updated",
+      "occurred_at": "2026-10-11T04:23:39.646610Z",
+      "payload": "{\"items\":[{\"content\":\"周颖、林禾、赵敏、王磊共同认同将投喂点位置/密度与夜间/喂食时段纳入社区约定或调整，以配合TNR管理。\",\"id\":\"9298bdb4-4ae1-51df-a47e-91d565119173\",\"kind\":\"consensus\",\"source_message_ids\":[\"f1862109-502e-44ac-9137-407155f4c680\",\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"466bfe1f-c946-4589-b9d5-7702b183ecd4\",\"bf602f16-65fe-474f-aa52-204b0b7673a1\"]},{\"content\":\"林禾与王磊共同认同：将投喂点与城市绿地、水体的距离纳入社区约定；TNR应与有限收容并行而非替代。\",\"id\":\"db2bcab4-fe2f-54bc-b57a-1343a93075ee\",\"kind\":\"consensus\",\"source_message_ids\":[\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"4b4a87d2-9d72-410c-9606-b46b1e7b6617\",\"8412ef03-4b9a-4800-b59a-af1a3d07a2ef\"]},{\"content\":\"王磊与赵敏共同认同高风险猫收容需按隔离等级分流，不能与普通猫同队列；传染病风险优先仅适用于隔离观察、疫苗记录和检测能力可用的收容位。\",\"id\":\"eddbf5a1-fbd5-5d94-bc85-2b8b56cb1d17\",\"kind\":\"consensus\",\"source_message_ids\":[\"209c3de8-aad3-4974-bc76-36d77f974ba7\",\"5233a082-d04b-402c-819d-cca7e05614e3\",\"62a496aa-bf0d-454b-8797-6596272c3cac\"]},{\"content\":\"周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。\",\"id\":\"40f83f31-0f64-5152-8109-999a77cce36e\",\"kind\":\"consensus\",\"source_message_ids\":[\"f1862109-502e-44ac-9137-407155f4c680\",\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\"]},{\"content\":\"林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。\",\"id\":\"8a8fe307-1608-52da-aa66-954239790b1d\",\"kind\":\"consensus\",\"source_message_ids\":[\"1770328e-31d9-40c9-a7f5-3cd07aa6b7a2\",\"466bfe1f-c946-4589-b9d5-7702b183ecd4\"]}],\"through_turn\":11,\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 156,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "insights.status_changed",
+      "occurred_at": "2026-10-11T04:23:39.647607Z",
+      "payload": "{\"error_code\":null,\"state\":\"SUCCEEDED\",\"through_turn\":11,\"version\":5}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 157,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "summary.ready",
+      "occurred_at": "2026-10-11T04:24:35.363751Z",
+      "payload": "{\"content\":\"本场讨论城市流浪猫管理应以定点投喂加绝育为主，还是转向收容与领养；专家在投喂点协商、生态与卫生前置条件、收容隔离分流上形成条件性共识，但扩容与执行保障尚未展开。\\n主要观点：\\n赵敏建议／观点：“我会把传染病风险放在第一位：同一区域猫群密度高、已有发病或死亡报告、且疫苗接种与食盆粪便消毒无法稳定落实的，收容位应优先给它们，因为收容位稀缺时先切断公共卫生外部性。”\\n已有共识：周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。；林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。；周颖、林禾、赵敏、王磊共同认同将投喂点位置/密度与夜间/喂食时段纳入社区约定或调整，以配合TNR管理。；林禾与王磊共同认同：将投喂点与城市绿地、水体的距离纳入社区约定；TNR应与有限收容并行而非替代。；王磊与赵敏共同认同高风险猫收容需按隔离等级分流，不能与普通猫同队列；传染病风险优先仅适用于隔离观察、疫苗记录和检测能力可用的收容位。\\n待澄清：\\n尚未解决的实施条件（王磊第4条）：“转向收容领养必须与领养渠道、绝育同步扩容，否则收容所满员后只会推高安乐死”\\n尚未解决的实施条件（赵敏第5条）：“同一约定至少还要加同步疫苗接种、食盆与粪便消毒、投喂人员防护和猫群健康监测。”\",\"created_at\":\"2026-10-11T04:24:35.363751Z\",\"through_turn\":11}"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "seq": 158,
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "schema_version": 1,
+      "type": "discussion.state_changed",
+      "occurred_at": "2026-10-11T04:24:35.363751Z",
+      "payload": "{\"failure_code\":null,\"failure_stage\":null,\"state\":\"COMPLETED\",\"version\":5}"
+    }
+  ],
+  "insight_jobs": [
+    {
+      "id": "dc03e1bd-c3eb-474f-bbfe-05f65ec1e15f",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 1,
+      "through_turn": 2,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "1933798f-29a7-46a1-8e94-ee759f043ddd",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 2,
+      "through_turn": 4,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "52c311ab-a983-4987-89d7-26213a55559a",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 3,
+      "through_turn": 6,
+      "state": "SUCCEEDED",
+      "error_code": null
+    },
+    {
+      "id": "490d4ef8-fdf6-4c99-8a72-af01b4a2c9d0",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 4,
+      "through_turn": 8,
+      "state": "SUPERSEDED",
+      "error_code": null
+    },
+    {
+      "id": "c8e0f0d4-cab0-415f-8195-b19380926068",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 5,
+      "through_turn": 11,
+      "state": "SUCCEEDED",
+      "error_code": null
+    }
+  ],
+  "insight_batches": [
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 1,
+      "through_turn": 2
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 2,
+      "through_turn": 4
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 3,
+      "through_turn": 6
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "version": 5,
+      "through_turn": 11
+    }
+  ],
+  "insights": [
+    {
+      "id": "4180b95a-c468-5b28-a0d3-fa59029aa3b1",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定，作为有约束推进TNR与投喂管理的条件。"
+    },
+    {
+      "id": "6aaa38f8-3839-504d-b997-73082b74f25e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "kind": "consensus",
+      "content": "林禾与王磊共同认同将投喂点与城市绿地、水体的距离纳入社区约定，作为投喂点协商的前置条件之一。"
+    },
+    {
+      "id": "7f8bb5fd-9736-55ed-8e3b-0cf870c46c3c",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "林禾与王磊共同认同把投喂点与城市绿地、水体的距离纳入社区约定。"
+    },
+    {
+      "id": "a2512c23-1f85-5a2a-a089-a2316bfe942c",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。"
+    },
+    {
+      "id": "c5a159ce-2a7f-52ab-b6b9-3e2dd57dfd4e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "kind": "consensus",
+      "content": "林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。"
+    },
+    {
+      "id": "40f83f31-0f64-5152-8109-999a77cce36e",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "kind": "consensus",
+      "content": "周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。"
+    },
+    {
+      "id": "8a8fe307-1608-52da-aa66-954239790b1d",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "kind": "consensus",
+      "content": "林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。"
+    },
+    {
+      "id": "9298bdb4-4ae1-51df-a47e-91d565119173",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "kind": "consensus",
+      "content": "周颖、林禾、赵敏、王磊共同认同将投喂点位置/密度与夜间/喂食时段纳入社区约定或调整，以配合TNR管理。"
+    },
+    {
+      "id": "db2bcab4-fe2f-54bc-b57a-1343a93075ee",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "kind": "consensus",
+      "content": "林禾与王磊共同认同：将投喂点与城市绿地、水体的距离纳入社区约定；TNR应与有限收容并行而非替代。"
+    },
+    {
+      "id": "eddbf5a1-fbd5-5d94-bc85-2b8b56cb1d17",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "kind": "consensus",
+      "content": "王磊与赵敏共同认同高风险猫收容需按隔离等级分流，不能与普通猫同队列；传染病风险优先仅适用于隔离观察、疫苗记录和检测能力可用的收容位。"
+    }
+  ],
+  "insight_sources": [
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "insight_id": "4180b95a-c468-5b28-a0d3-fa59029aa3b1",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "insight_id": "4180b95a-c468-5b28-a0d3-fa59029aa3b1",
+      "message_id": "f1862109-502e-44ac-9137-407155f4c680"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "insight_id": "6aaa38f8-3839-504d-b997-73082b74f25e",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 2,
+      "insight_id": "6aaa38f8-3839-504d-b997-73082b74f25e",
+      "message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "7f8bb5fd-9736-55ed-8e3b-0cf870c46c3c",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "7f8bb5fd-9736-55ed-8e3b-0cf870c46c3c",
+      "message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "a2512c23-1f85-5a2a-a089-a2316bfe942c",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "a2512c23-1f85-5a2a-a089-a2316bfe942c",
+      "message_id": "f1862109-502e-44ac-9137-407155f4c680"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "c5a159ce-2a7f-52ab-b6b9-3e2dd57dfd4e",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 3,
+      "insight_id": "c5a159ce-2a7f-52ab-b6b9-3e2dd57dfd4e",
+      "message_id": "466bfe1f-c946-4589-b9d5-7702b183ecd4"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "40f83f31-0f64-5152-8109-999a77cce36e",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "40f83f31-0f64-5152-8109-999a77cce36e",
+      "message_id": "f1862109-502e-44ac-9137-407155f4c680"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "8a8fe307-1608-52da-aa66-954239790b1d",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "8a8fe307-1608-52da-aa66-954239790b1d",
+      "message_id": "466bfe1f-c946-4589-b9d5-7702b183ecd4"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "9298bdb4-4ae1-51df-a47e-91d565119173",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "9298bdb4-4ae1-51df-a47e-91d565119173",
+      "message_id": "466bfe1f-c946-4589-b9d5-7702b183ecd4"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "9298bdb4-4ae1-51df-a47e-91d565119173",
+      "message_id": "bf602f16-65fe-474f-aa52-204b0b7673a1"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "9298bdb4-4ae1-51df-a47e-91d565119173",
+      "message_id": "f1862109-502e-44ac-9137-407155f4c680"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "db2bcab4-fe2f-54bc-b57a-1343a93075ee",
+      "message_id": "1770328e-31d9-40c9-a7f5-3cd07aa6b7a2"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "db2bcab4-fe2f-54bc-b57a-1343a93075ee",
+      "message_id": "4b4a87d2-9d72-410c-9606-b46b1e7b6617"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "db2bcab4-fe2f-54bc-b57a-1343a93075ee",
+      "message_id": "8412ef03-4b9a-4800-b59a-af1a3d07a2ef"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "eddbf5a1-fbd5-5d94-bc85-2b8b56cb1d17",
+      "message_id": "209c3de8-aad3-4974-bc76-36d77f974ba7"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "eddbf5a1-fbd5-5d94-bc85-2b8b56cb1d17",
+      "message_id": "5233a082-d04b-402c-819d-cca7e05614e3"
+    },
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "batch_version": 5,
+      "insight_id": "eddbf5a1-fbd5-5d94-bc85-2b8b56cb1d17",
+      "message_id": "62a496aa-bf0d-454b-8797-6596272c3cac"
+    }
+  ],
+  "summary_jobs": [
+    {
+      "id": "c027c244-4a05-4ab3-9833-a4ac98e8afda",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "attempt": 1,
+      "through_turn": 11,
+      "insight_version": 5,
+      "operation_id": null,
+      "status": "SUCCEEDED",
+      "error_code": null
+    }
+  ],
+  "summaries": [
+    {
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+      "content": "本场讨论城市流浪猫管理应以定点投喂加绝育为主，还是转向收容与领养；专家在投喂点协商、生态与卫生前置条件、收容隔离分流上形成条件性共识，但扩容与执行保障尚未展开。\n主要观点：\n赵敏建议／观点：“我会把传染病风险放在第一位：同一区域猫群密度高、已有发病或死亡报告、且疫苗接种与食盆粪便消毒无法稳定落实的，收容位应优先给它们，因为收容位稀缺时先切断公共卫生外部性。”\n已有共识：周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商或约定。；林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。；周颖、林禾、赵敏、王磊共同认同将投喂点位置/密度与夜间/喂食时段纳入社区约定或调整，以配合TNR管理。；林禾与王磊共同认同：将投喂点与城市绿地、水体的距离纳入社区约定；TNR应与有限收容并行而非替代。；王磊与赵敏共同认同高风险猫收容需按隔离等级分流，不能与普通猫同队列；传染病风险优先仅适用于隔离观察、疫苗记录和检测能力可用的收容位。\n待澄清：\n尚未解决的实施条件（王磊第4条）：“转向收容领养必须与领养渠道、绝育同步扩容，否则收容所满员后只会推高安乐死”\n尚未解决的实施条件（赵敏第5条）：“同一约定至少还要加同步疫苗接种、食盆与粪便消毒、投喂人员防护和猫群健康监测。”",
+      "through_turn": 11,
+      "created_at": "2026-10-11T04:24:35.363751+00:00"
+    }
+  ],
+  "operations": [
+    {
+      "id": "32764c92-8e8c-4da1-acbd-f77da5617fe6",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "scope": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "kind": "roster-generation",
+      "idempotency_key": "9a15e998-03ab-4ed2-982e-8e9dfa18639a",
+      "request_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "status": "SUCCEEDED",
+      "response_status": 202,
+      "response_json": "{\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"operation_id\":\"32764c92-8e8c-4da1-acbd-f77da5617fe6\",\"run_id\":null,\"state\":\"GENERATING\"}",
+      "error_code": null
+    },
+    {
+      "id": "32d0e6bf-84ae-4a20-b495-a69e45c2c293",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "scope": "global",
+      "kind": "create",
+      "idempotency_key": "7270406f-8a7c-4f18-837d-3568c5a15851",
+      "request_hash": "5d29d7736425eaba63d5e992d1b102277cdfa7eedaf3cb519d5d001864315ead",
+      "status": "SUCCEEDED",
+      "response_status": 201,
+      "response_json": "{\"discussion\":{\"created_at\":\"2026-10-11T04:17:31.504786Z\",\"expert_count\":4,\"failure_code\":null,\"failure_stage\":null,\"id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"roster_revision\":0,\"run_id\":null,\"state\":\"DRAFT\",\"topic\":\"城市中的流浪猫应该以定点投喂和绝育管理为主，还是逐步转向收容与领养？\",\"updated_at\":\"2026-10-11T04:17:31.504786Z\",\"version\":0},\"insight_status\":{\"error_code\":null,\"state\":\"IDLE\",\"through_turn\":0,\"version\":0},\"insights\":{\"items\":[],\"through_turn\":0,\"version\":0},\"last_event_seq\":1,\"messages\":[],\"participants\":[],\"role_states\":[],\"summary\":null}",
+      "error_code": null
+    },
+    {
+      "id": "b719a50d-f24c-4b37-9faf-04b9434ac7bc",
+      "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "scope": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+      "kind": "start",
+      "idempotency_key": "4646120d-9e2c-494f-8ad7-1173a8986c4a",
+      "request_hash": "ba161a6df89ab6117048077f2338362620642b0572be7c9d087c0166047f238e",
+      "status": "SUCCEEDED",
+      "response_status": 202,
+      "response_json": "{\"discussion_id\":\"aefbddbb-3a98-4a24-86c3-1913fecefc17\",\"operation_id\":\"b719a50d-f24c-4b37-9faf-04b9434ac7bc\",\"run_id\":\"78e4adaa-64de-4ef4-b228-aaa8b6be50f6\",\"state\":\"RUNNING\"}",
+      "error_code": null
+    }
+  ]
+}

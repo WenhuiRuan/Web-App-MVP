@@ -1,0 +1,115 @@
+{
+  "records": [
+    {
+      "evidence": "focused",
+      "http_attempts": 6,
+      "statuses": {
+        "succeeded": 4,
+        "MODEL_RESULT_INVALID": 2
+      },
+      "reported_total_tokens": 81400,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 235.814
+    },
+    {
+      "evidence": "focused-compact",
+      "http_attempts": 5,
+      "statuses": {
+        "MODEL_RESULT_INVALID": 1,
+        "succeeded": 4
+      },
+      "reported_total_tokens": 62912,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 183.125
+    },
+    {
+      "evidence": "focused-indexed",
+      "http_attempts": 5,
+      "statuses": {
+        "MODEL_RESULT_INVALID": 1,
+        "succeeded": 4
+      },
+      "reported_total_tokens": 60458,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 169.547
+    },
+    {
+      "evidence": "full",
+      "http_attempts": 73,
+      "statuses": {
+        "succeeded": 69,
+        "MODEL_RESULT_INVALID": 3,
+        "cancelled": 1
+      },
+      "reported_total_tokens": 284898,
+      "unknown_usage_calls": 1,
+      "http_seconds_sum": 684.462
+    },
+    {
+      "evidence": "post-full-correction",
+      "http_attempts": 4,
+      "statuses": {
+        "succeeded": 4
+      },
+      "reported_total_tokens": 64094,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 174.798
+    },
+    {
+      "evidence": "post-full-final",
+      "http_attempts": 4,
+      "statuses": {
+        "succeeded": 4
+      },
+      "reported_total_tokens": 55761,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 147.406
+    },
+    {
+      "evidence": "post-full-summary",
+      "http_attempts": 2,
+      "statuses": {
+        "succeeded": 2
+      },
+      "reported_total_tokens": 20288,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 45.203
+    },
+    {
+      "evidence": "focused-conditions",
+      "http_attempts": 2,
+      "statuses": {
+        "MODEL_RESULT_INVALID": 1,
+        "succeeded": 1
+      },
+      "reported_total_tokens": 22934,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 67.188
+    },
+    {
+      "evidence": "focused-final-review",
+      "http_attempts": 1,
+      "statuses": {
+        "succeeded": 1
+      },
+      "reported_total_tokens": 12650,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 31.172
+    },
+    {
+      "evidence": "focused-narrowing",
+      "http_attempts": 1,
+      "statuses": {
+        "succeeded": 1
+      },
+      "reported_total_tokens": 7701,
+      "unknown_usage_calls": 0,
+      "http_seconds_sum": 18.422
+    }
+  ],
+  "total_http_attempts": 103,
+  "reported_total_tokens": 673096,
+  "unknown_usage_calls": 1,
+  "fees": "unknown",
+  "note": "Includes preserved failed and focused corrections. Summed HTTP duration is not wall time; no hidden reasoning data consumed."
+}

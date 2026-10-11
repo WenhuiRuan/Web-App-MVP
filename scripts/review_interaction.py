@@ -7,7 +7,15 @@ from backend.app.contracts import Snapshot
 from scripts.review_quality_cases import review
 
 
-def scenarios():
+def scenarios(snapshot_path=None):
+    if snapshot_path:
+        saved=json.loads(Path(snapshot_path).read_text(encoding='utf-8'))
+        snap=Snapshot.model_validate(saved.get('snapshot',saved))
+        d=snap.discussion
+        yield 'retained-run',dict(discussion_id=d.id,run_id=d.run_id,topic=d.topic,expert_count=d.expert_count,
+            roster_revision=d.roster_revision,participants=snap.participants,messages=snap.messages,insights=snap.insights), \
+            '只重核保留的完整消息：合并同一原子主张，不以斜线串联不同对象；总结采用同一主张最新条件，保留真实未决保障，不覆盖原场。'
+        return
     snap=Snapshot.model_validate(json.loads(Path('data/quality/stage6c-interaction/original/snapshot.json').read_text(encoding='utf-8')))
     d=snap.discussion
     base=dict(discussion_id=d.id,run_id=d.run_id,topic=d.topic,expert_count=d.expert_count,
@@ -26,5 +34,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',required=True)
     parser.add_argument('--cases',nargs='*')
+    parser.add_argument('--snapshot',help='Read-only retained snapshot; run only affected extraction and summary')
+    parser.add_argument('--summaries-from',help='Reuse retained reviewed insights; only call summary')
     args=parser.parse_args()
-    asyncio.run(review(args.output,args.cases,scenario_cases=scenarios()))
+    asyncio.run(review(args.output,args.cases,summaries_from=args.summaries_from,scenario_cases=scenarios(args.snapshot)))

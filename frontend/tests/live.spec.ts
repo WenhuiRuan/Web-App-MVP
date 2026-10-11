@@ -50,6 +50,7 @@ test('real services create, confirm, stream two live evidence updates and comple
   await start(page)
   await expect(page.getByTestId('message')).toHaveCount(4)
   await expect(page.getByTestId('insight')).not.toHaveCount(0)
+  await expect(page.locator('.insights-panel .panel-footer')).toContainText('第 4 条')
   const first = await snapshot(page.request, id)
   expect(first.discussion.state).toBe('RUNNING'); expect(first.insights.through_turn).toBe(4)
   await control(page.request, id, { pause_after: 6 })

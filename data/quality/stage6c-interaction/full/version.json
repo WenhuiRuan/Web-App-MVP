@@ -1,0 +1,26 @@
+{
+  "database": "C:\\Users\\RWH\\Documents\\Codex\\2026-10-08\\ai-panel-studio-web-codex-gpt\\ai-panel-studio\\work\\stage6c-interaction-7929a8e2691045d0b5ddfc09a531d67b.sqlite3",
+  "port": 18082,
+  "budgets": {
+    "model_timeout_seconds": 120,
+    "insight_max_seconds": 240,
+    "summary_max_seconds": 180,
+    "discussion_max_seconds": 600
+  },
+  "thinking_mode": "enabled",
+  "reasoning_effort": "low",
+  "code_revision": "23db026489525f4336d9c6147819bacb20a53a61",
+  "dirty": false,
+  "prompt_sha256_utf8_normalized": {
+    "common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "host_control.md": "2fc424a684c4bf78102517839e61afb2b1681f75c3efd170e7654707a7ed4ae7",
+    "insights.md": "13da5437c939ff2438f9eb282895b212b89962117f0a19ea1a72a36a2480cfee",
+    "insights_repair.md": "d3b78543bc8376d2a02ec5ba99f93b38d68617f8d10347c647fa1d3c3cfec13c",
+    "insights_review.md": "1045456a3b8160cf2a558ba4c48fe827fdda3d76539f157e01650501752d40e8",
+    "intent.md": "1a746a04555073760a706cafe3ad1c23b9b0040be5c02e7896f997f714538511",
+    "roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "summary.md": "c582353742e586eaec92dac8b358eac69dc70aec8cb027d9a8979f222e963631",
+    "summary_review.md": "c67511aafa75521e2976bddd8406e1ad876c40eb0086abb7a50b13f7905401a7",
+    "utterance.md": "915f1642164a34fd486b57d11f5d348fa13ed2fb1fd2d7633c91ffed90e9b2a8"
+  }
+}

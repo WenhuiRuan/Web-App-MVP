@@ -79,7 +79,7 @@ def build(output):
     manifest = dict(format='ai-panel-studio-delivery-v1', revision=revision, working_tree_dirty=dirty,
                     files={name:hashlib.sha256(data).hexdigest() for name,data in files.items()},
                     omissions=['runtime .env/keys/dependencies/caches/databases/.git', 'redundant historical diagnostic dumps'],
-                    evidence_policy='Final public input/output, snapshot, metrics, review and version; two original quality records and regression fixture. Full historic audits remain in original local repository.',
+                    evidence_policy='Selected final public input/output, snapshot, metrics, version, preserved original interaction and focused correction evidence; no runtime database or hidden reasoning. Redundant historic audits remain in original local repository.',
                     security_check='Path exclusions, common credential patterns and JSON hidden-reasoning fields; no runtime key read.')
     files['delivery/manifest.json'] = (json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     output.parent.mkdir(parents=True,exist_ok=True)

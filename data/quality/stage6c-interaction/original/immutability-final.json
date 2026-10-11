@@ -1,0 +1,20 @@
+{
+  "original_unchanged": true,
+  "table_exact_rows": {
+    "discussions": true,
+    "participants": true,
+    "runs": true,
+    "messages": true,
+    "speaking_intents": true,
+    "turn_claims": true,
+    "events": true,
+    "insight_jobs": true,
+    "insight_batches": true,
+    "insights": true,
+    "insight_sources": true,
+    "summary_jobs": true,
+    "summaries": true,
+    "operations": true
+  },
+  "source_sha256": "6a2db1b44d68267cda8d3b470770296d30d1e8a810f67753ade32cd633ad76ac"
+}

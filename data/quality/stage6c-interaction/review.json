@@ -1,0 +1,55 @@
+{
+  "assessment": "Human content review; not a semantic guarantee from schema checks",
+  "preserved_full_run": "full/discussion.json",
+  "focused_insights": "post-full-final/retained-run.json",
+  "focused_summary": "post-full-summary/retained-run.json",
+  "claims": [
+    {
+      "content": "周颖与林禾共同建议把投喂点位置、喂食时段和责任人纳入社区协商。",
+      "source_turns": [
+        2,
+        3
+      ],
+      "judgment": "2建议位置/时段/责任；3明确认同该协商变量，没有把生态距离条件归给周颖。"
+    },
+    {
+      "content": "林禾与赵敏共同认同把投喂点密度、夜间投喂时段和残食清理写入社区约定，作为TNR继续推进的前置条件。",
+      "source_turns": [
+        3,
+        5
+      ],
+      "judgment": "3明确提出密度/夜间/残食前提；5认同这组前提，疫苗/防护只属赵敏另加条件，没有扩给林禾。"
+    },
+    {
+      "content": "林禾与王磊共同认同把投喂点与城市残存绿地、水体的距离纳入社区约定。",
+      "source_turns": [
+        3,
+        4
+      ],
+      "judgment": "3提出距绿地/水体变量；4明确认同，未把完整卫生条件扩大到双方。"
+    },
+    {
+      "content": "王磊与林禾共同认同TNR应与有限收容并行而非替代。",
+      "source_turns": [
+        4,
+        10
+      ],
+      "judgment": "4提出TNR与有限收容并行；10首句明确认同，11澄清不是取消TNR/整群收容。"
+    },
+    {
+      "content": "王磊与赵敏共同认同高风险猫收容需按隔离等级分流；传染病风险优先仅适用于隔离观察、疫苗记录和检测能力可用的收容位。",
+      "source_turns": [
+        8,
+        9
+      ],
+      "judgment": "8要求隔离分流与能力；9明确接受并收窄7的风险优先，当前来源仅8/9，不用7覆盖最新条件。"
+    }
+  ],
+  "summary_characters": 547,
+  "summary_judgment": "Quote11 keeps limited scope; quote9 keeps no-shared-shelter fallback and condition. Consensus includes latest isolation condition, pending4/5 retains implementation/capacity not answered by agreement. No false mutually exclusive disagreement or all-resolved footer.",
+  "limitations": [
+    "No full browser rerun after this focused semantic/source-selector correction; engine/host/UI/SSE complete evidence is clean23db026; affected extraction/summary actually reviewed separately.",
+    "Individual latest-source selection can omit older independent personal suggestions; it does not mark them withdrawn.",
+    "Model may miss shared claims/implicit disagreements, wording can remain repetitive; fees and real concurrent quality unknown."
+  ]
+}

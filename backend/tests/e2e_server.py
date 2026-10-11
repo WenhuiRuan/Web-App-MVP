@@ -41,7 +41,7 @@ class BrowserGateway(DeterministicModelGateway):
         await asyncio.sleep(control.delay)
         label = ''.join(c for c in request.topic[:45] if c not in '。！？!?.\n\r')
         if request.task == 'host_control':
-            return {'task': 'host_control', 'action': 'end' if len(request.messages) >= control.stop_after else 'linking' if len(request.messages) % 3 == 0 else 'followup', 'public_focus': f'公开关注：{label}的适用条件'}
+            return {'task': 'host_control', 'action': 'end' if len(request.messages) >= control.stop_after else 'linking' if len(request.messages) % 3 == 0 else 'continue', 'public_focus': f'公开关注：{label}的适用条件'}
         if request.task == 'summary' and control.summary_fails:
             return {'task': 'summary', 'content': '{"private":"not a natural summary"}'}
         if request.task == 'insights' and control.insights_fail_from is not None and request.through_turn >= control.insights_fail_from:

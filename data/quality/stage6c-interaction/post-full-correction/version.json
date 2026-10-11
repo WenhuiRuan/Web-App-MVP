@@ -1,0 +1,16 @@
+{
+  "base_revision": "23db026489525f4336d9c6147819bacb20a53a61",
+  "working_tree_patch": "Atomic same-object dedup; latest-position summary; explicit insight boundary metadata",
+  "prompt_sha256_utf8_normalized": {
+    "common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "host_control.md": "2fc424a684c4bf78102517839e61afb2b1681f75c3efd170e7654707a7ed4ae7",
+    "insights.md": "b2be7e72fe9066b7ebc392704c0603165d4f41be848acdc78915a0131da29c8b",
+    "insights_repair.md": "00afa70c70ac3b723818afe2923bd2d3dd180128ce48d574e345bb0c61ec939d",
+    "insights_review.md": "387cb122bc4e99406a25a690b2221dbe67840b95e2dfaafab567c50c3692c564",
+    "intent.md": "1a746a04555073760a706cafe3ad1c23b9b0040be5c02e7896f997f714538511",
+    "roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "summary.md": "09d24e3de24da207140c422034d6618a20437197f4a6bbe4875e531c8022020c",
+    "summary_review.md": "6f1eb23b5356f4647402e6643c4752f3b9436e0210c7c1ffa5783bee00f4cd23",
+    "utterance.md": "915f1642164a34fd486b57d11f5d348fa13ed2fb1fd2d7633c91ffed90e9b2a8"
+  }
+}

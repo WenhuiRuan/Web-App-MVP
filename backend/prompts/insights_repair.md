@@ -2,3 +2,5 @@
 先把候选拆为独立主张。若P且Q中仅Q有两位专家明确支持，则收窄为Q，保留必要共同条件及提案性质；任何一方没有直接支持就空。明确沿用具体做法且另加条件，支持的是沿用部分，例如“除Q之外还需Y”明确认可Q，但未代表另一作者认可Y。不能仅凭“我补充”或没反对认定同意。accepted_claims已保留的同一主张不要重复输出。
 每index恰好一次，kind只能consensus，不增加候选外来源；content目标120字内准确标支持者，source_turns每项至少两专家，evidence每来源一段原文连续短片段。不改变身份/引用/语义要求，确无交集检查false允许删除。
 只输出JSON，reviews每项含index、merge_with（[]）、kind、content、source_turns、evidence和checks；checks字段authors_correct/same_object/compatible_scope/every_condition_supported/explicit_positions/proposal_preserved/not_superseded均针对收窄后主张，只有全部true才保留。不要输出分析或原始推理。
+
+一项只保留一个能逐字溯源的共同主张；不要用“位置/密度”“A或B”等把不同对象包装为同一共识。上位概括若只是已列主张的重复部分、没有新的共同条件，不另列一项。复合候选拆到最关键的共同动作，其余独立主张只有确有不同内容才另列；合并时保留来源、实际支持者和共同条件，不能从一般认同推到整套细节。相同来源不是合并依据，不同来源也可以明确支持同一动作。

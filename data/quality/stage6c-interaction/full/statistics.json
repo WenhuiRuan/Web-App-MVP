@@ -1,0 +1,89 @@
+{
+  "code_revision": "23db026489525f4336d9c6147819bacb20a53a61",
+  "discussion_id": "aefbddbb-3a98-4a24-86c3-1913fecefc17",
+  "run_id": "78e4adaa-64de-4ef4-b228-aaa8b6be50f6",
+  "stop_reason": "host_end",
+  "max_turns": 20,
+  "max_seconds": 600,
+  "start_to_completed_seconds": 418.705,
+  "start_to_summarizing_seconds": 190.455,
+  "browser_elapsed_seconds": 426.795,
+  "formal_messages": 11,
+  "event_count": 158,
+  "event_sequences_continuous": true,
+  "insight_windows": [
+    {
+      "version": 1,
+      "through_turn": 2,
+      "state": "SUCCEEDED",
+      "start_seq": 30,
+      "end_seq": 32,
+      "seconds": 1.299,
+      "concurrent_message_turns": []
+    },
+    {
+      "version": 2,
+      "through_turn": 4,
+      "state": "SUCCEEDED",
+      "start_seq": 53,
+      "end_seq": 83,
+      "seconds": 28.965,
+      "concurrent_message_turns": [
+        5,
+        6
+      ]
+    },
+    {
+      "version": 3,
+      "through_turn": 6,
+      "state": "SUCCEEDED",
+      "start_seq": 84,
+      "end_seq": 116,
+      "seconds": 60.803,
+      "concurrent_message_turns": [
+        7,
+        8
+      ]
+    },
+    {
+      "version": 4,
+      "through_turn": 8,
+      "state": "SUPERSEDED",
+      "start_seq": 117,
+      "end_seq": 153,
+      "seconds": 56.235,
+      "concurrent_message_turns": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "version": 5,
+      "through_turn": 11,
+      "state": "SUCCEEDED",
+      "start_seq": 154,
+      "end_seq": 156,
+      "seconds": 172.494,
+      "concurrent_message_turns": []
+    }
+  ],
+  "http_attempts": 73,
+  "http_status_counts": {
+    "succeeded": 69,
+    "MODEL_RESULT_INVALID": 3,
+    "cancelled": 1
+  },
+  "reported_usage": {
+    "prompt_tokens": 143348,
+    "completion_tokens": 141550,
+    "total_tokens": 284898,
+    "prompt_cache_hit_tokens": 89856,
+    "prompt_cache_miss_tokens": 53492
+  },
+  "unknown_usage_calls": 1,
+  "fees": "unknown",
+  "actual_hidden_reasoning_usage": "unknown",
+  "summed_http_seconds_not_wall_time": 684.462,
+  "note": "Full browser run at clean23db026; subsequent semantic correction is independently recorded, not replacing this result."
+}
