@@ -5,7 +5,7 @@ import tempfile
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
-from uuid import UUID
+from uuid import UUID,uuid5
 
 import uvicorn
 from pydantic import BaseModel, ConfigDict, Field
@@ -23,6 +23,8 @@ class Control(BaseModel):
     summary_fails: bool = False
     insights_fail_from: int | None = Field(default=None, ge=1)
     long_content: bool = False
+    disagreement_demo: bool = False
+    insights_pause_from: int | None = Field(default=None, ge=1)
     stream_fault: Literal['gap', 'duplicate', 'disconnect'] | None = None
 
 
@@ -38,8 +40,38 @@ class BrowserGateway(DeterministicModelGateway):
             while control.pause_after is not None and len(request.messages) >= control.pause_after:
                 await asyncio.sleep(.01)
                 control = self.controls.get(request.discussion_id, Control())
+        if request.task == 'insights':
+            while control.insights_pause_from is not None and request.through_turn>=control.insights_pause_from:
+                await asyncio.sleep(.01)
+                control=self.controls.get(request.discussion_id,Control())
         await asyncio.sleep(control.delay)
         label = ''.join(c for c in request.topic[:45] if c not in '。！？!?.\n\r')
+        if control.disagreement_demo:
+            experts=[p for p in request.participants if p.kind=='EXPERT']
+            if request.task=='host_control':
+                return {'task':'host_control','action':'end' if len(request.messages)>=6 else 'continue','public_focus':'工程替身：按已发表内容继续或收束'}
+            if request.task=='intent':
+                selected=experts[(len(request.messages)-1)%2].id
+                participates=request.actor_id==selected
+                kind='REBUT' if participates and 2<=len(request.messages)<=3 else 'REQUEST' if participates else 'PASS'
+                return {'task':'intent','kind':kind,'relevance':90 if participates else 0,
+                    'target_message_id':request.messages[-1].id if kind=='REBUT' else None,'public_focus':'工程替身：独立口径判断'}
+            if request.task=='utterance':
+                lines={1:'夜间噪声是否应该纳入综合考核，大家怎么看？',2:'建议把夜间噪声纳入综合考核。',
+                    3:'我认为夜间噪声应单列，不应纳入综合考核。',4:'我仍主张纳入综合考核，便于统一比较。',
+                    5:'我接受把夜间噪声纳入综合考核，阈值仍需验证。',6:'我也赞同纳入，但阈值尚待验证。'}
+                return {'task':'utterance','sentences':[lines[len(request.messages)+1]]}
+            if request.task=='insights':
+                boundary=request.through_turn
+                if boundary<3:return {'task':'insights','items':[]}
+                resolved=boundary>=5
+                sources=(request.messages[1].id,request.messages[4 if resolved else 2].id)
+                return {'task':'insights','items':[{'id':str(uuid5(request.run_id,f'demo-insight:{boundary}')),
+                    'kind':'consensus' if resolved else 'disagreement',
+                    'content':'双方接受纳入综合考核，阈值仍待验证。' if resolved else '一方主张纳入综合考核，另一方主张单列而不纳入。',
+                    'source_message_ids':[str(i) for i in sources]}]}
+            if request.task=='summary':
+                return {'task':'summary','content':'主要观点：专家曾对纳入综合考核还是单列存在分歧；后续接受纳入，阈值仍待验证。'}
         if request.task == 'host_control':
             return {'task': 'host_control', 'action': 'end' if len(request.messages) >= control.stop_after else 'linking' if len(request.messages) % 3 == 0 else 'continue', 'public_focus': f'公开关注：{label}的适用条件'}
         if request.task == 'summary' and control.summary_fails:

@@ -80,6 +80,15 @@ class EvidenceChecks(Contract):
     explicit_positions: StrictBool
     proposal_preserved: StrictBool
     not_superseded: StrictBool
+    opposing_judgments_supported: StrictBool | None = None
+
+    def supported(self, kind):
+        # Agreement needs shared support; opposition needs evidence for each side,
+        # never joint endorsement of the two incompatible judgments.
+        common=(self.authors_correct and self.same_object and self.compatible_scope
+            and self.explicit_positions and self.proposal_preserved and self.not_superseded)
+        return common and (self.every_condition_supported if kind=='consensus'
+            else self.opposing_judgments_supported is True)
 
 
 class PointReview(Contract):
@@ -203,12 +212,12 @@ def reviewed_points(request, candidate, content, repair_candidates=None):
                 quotes={q['turn']:q for i in group for q in candidate['items'][i]['evidence']}
                 item=dict(original,source_turns=sorted(quotes),evidence=list(quotes.values()),index=len(repair_candidates))
                 if len(repair_candidates)<2: repair_candidates.append(item)
-        followers=[i for r in reviewed.reviews if all(r.checks.model_dump().values()) for i in r.merge_with]
+        followers=[i for r in reviewed.reviews if r.checks.supported(r.kind or candidate['items'][r.index]['kind']) for i in r.merge_with]
         if len(set(followers))!=len(followers): raise invalid('review_merge_overlap')
         failures=[]
         rejected_semantically=False
         for review in sorted(reviewed.reviews, key=lambda r: r.index):
-            if not all(review.checks.model_dump().values()):
+            if not review.checks.supported(review.kind or candidate['items'][review.index]['kind']):
                 rejected_semantically=True
                 continue
             original = candidate['items'][review.index]

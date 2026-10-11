@@ -1,0 +1,128 @@
+{
+  "format": "disagreement-live-v1",
+  "recorded_at": "2026-10-11T06:40:32.989856+00:00",
+  "baseline_revision": "7f7ec23172358c8f0ddbeb3fa2e2a09c75819572",
+  "identity_method": "Final source byte SHA256; resulting commit identified by Git/delivery manifest",
+  "code_sha256": {
+    "backend/app/__init__.py": "b4ff6768136e70cf87b50c843ee249cff65832e9ab83e309db27e1739d394d96",
+    "backend/app/config.py": "e84a80847103a504990f45237cfe7ad298fb4aa366be7807470a3b089aac7e69",
+    "backend/app/contracts.py": "385961495e408796fe50cab0fe4ab161164a78c0e2c41381d64fc98beb5109c8",
+    "backend/app/database.py": "20d3b46fbec72c61149f052be2a5709a1f7814e72a8f9a782295ec57bcf61456",
+    "backend/app/deepseek_gateway.py": "2932a6dad8f5fb6ddb6173411ba475e6fa05af94b644e7a00c4fc6df64646526",
+    "backend/app/discussion_api.py": "703379fd3f0188803b3d1d24687ed8d841f2c438b16d857681d8c9b9db332b90",
+    "backend/app/engine.py": "191e2aacbb142b8d241eabbc2d04d44a7eed2066c3f1aa3d4b26ab395a196040",
+    "backend/app/lifecycle.py": "d31abacc0491de230503b8dc26239d529d10efe5db94c2ec9d5422bf45cd8461",
+    "backend/app/main.py": "868e1778c566fa8aaabb52e846f105edde924363d398222252facf27097e84d2",
+    "backend/app/model_gateway.py": "38c10626cf11b2b25fb0e0107e0cc81d8842759d7379d1dc13d21198a2677d12",
+    "backend/app/repository.py": "eb08a22b5c0deb9e8aa044281abd73931192f1c5e51db442aeed45ec027a04c5",
+    "backend/app/run_repository.py": "13c541a57c6223a3055d43e7f90158f1dea8c107f9bfe8ef53ba90579a7f5fae",
+    "backend/app/scheduling.py": "5bd284f57a3bf463059be2079a7adf7b1428baf94780ab0182f4fbb761d692d8",
+    "backend/app/server.py": "04adcc64deae0c3e05468221485834776e002e507961505561b2bfa976295119",
+    "backend/app/sse.py": "81c912d0c7febe50ab348a5f373ba5c34c83b623cda4df046bbef995deb895fd",
+    "backend/app/synthesis.py": "a5386a9c5cd17677b65f2b25b96dbe9288bfb184e41f49a751e7c8c57fe0cb02",
+    "backend/app/synthesis_repository.py": "cd9a3d0928f3cf27db15c775456943b772cc7e21c9081e0f9c4156f88cb1f249",
+    "backend/app/tasks.py": "f73f4ea46c259fe818f53125b0252fa52145df250d70a149bcb0f2b09fdbc32b",
+    "backend/app/text_rules.py": "47e0729a0a0652572bc34d08fa4eb7e6e64712950f154683cf963f22a38acd7f"
+  },
+  "prompt_sha256": {
+    "backend/prompts/common.md": "07362cb1d54347ffd8feea94f8230e28f994c7a34eed9777c0dc5b445a918a26",
+    "backend/prompts/host_control.md": "e18e002761218a1ac6610f70cd3f62a15a1b1e0bbb0192e3e941d388e5a0ef8f",
+    "backend/prompts/insights.md": "6d12d871be63dbc9ad46648a5acf39bc15d44cb24784ddd118ea5296b55015d4",
+    "backend/prompts/insights_repair.md": "690effbd7af46fc4c7dfa8d6b08c9bd6ea20a74ff29a159a219c3fb1c1be4e83",
+    "backend/prompts/insights_review.md": "580b9c273c4e6c77914e1d6a79c8d74d875e287718fcb19c453a2f434405beee",
+    "backend/prompts/intent.md": "7f201d274e506da56cb59745f9b31c8555228315f46edd06b70e163e56552a7e",
+    "backend/prompts/opening.md": "41444f3854260024b34529fbe2f532e80c4b56915e5e8d7895fa558866856ae7",
+    "backend/prompts/roster.md": "2f807fac28db3a24b3dd709ab1f63c3e56be5981b9d7eb243942f88799d63e4f",
+    "backend/prompts/summary.md": "c818857c7dce1aac35c385290bdd87334bdf72f021c0b25c00ad2fae6535d75f",
+    "backend/prompts/summary_review.md": "ad28b8c279d8e92f97465f4fa28288bd2ddec95a75538a27fe176901fdb315ba",
+    "backend/prompts/utterance.md": "fde01743f1eddcfb870664c71bafab1df2912fa8124efddd21bb1dfdd6d7310f"
+  },
+  "frontend_sha256": {
+    "frontend/src/components/Insights.tsx": "7504f0aed8b916ee61ced078e419e7c9147c9396e9ee41e7f451d967a7d444af"
+  },
+  "original_unchanged": {
+    "checked_at": "2026-10-11T06:40:32.787758+00:00",
+    "original_sha256": "960b4a726b8ae27bd387a84c2600ca4bff46aa6da1272119d97aaaeb78d37771",
+    "source_rows_unchanged": true,
+    "tables": {
+      "discussions": 1,
+      "events": 170,
+      "insight_batches": 4,
+      "insight_jobs": 5,
+      "insight_sources": 23,
+      "insights": 10,
+      "messages": 12,
+      "model_diagnostics": 70,
+      "operations": 3,
+      "participants": 5,
+      "role_states": 5,
+      "rosters": 1,
+      "runs": 1,
+      "speaking_intents": 40,
+      "summaries": 1,
+      "summary_jobs": 1,
+      "turn_claims": 12
+    },
+    "read_only": true
+  },
+  "confirmed_causes": [
+    "Prefix10 cancelled after 44750ms on SUMMARIZING; no committed disagreement event",
+    "Shared support wording in insights prompts confuses agreement and independent opposed positions"
+  ],
+  "unknown": [
+    "Original draft/review outputs and cancellation substage",
+    "Effect of prompt ambiguity on unsaved original model output",
+    "Original exact HTTP subcall count/usage",
+    "Latest actual provider semantic effectiveness and latency"
+  ],
+  "controlled_validation": {
+    "red": {
+      "failed": 10,
+      "passed": 1,
+      "seconds": 3.12
+    },
+    "synthesis_regressions": {
+      "passed": 174,
+      "seconds": 71.02
+    },
+    "engine_regressions": {
+      "passed": 95,
+      "seconds": 46.31
+    },
+    "final_focused_and_archive": {
+      "new_tests": 15,
+      "total": 20,
+      "seconds": 5.7
+    },
+    "browser": {
+      "passed": 3,
+      "seconds": 25.0
+    },
+    "frontend_typecheck_and_build": true,
+    "scope_warning": "Overlapping results; controlled review responses do not prove semantic detection"
+  },
+  "budgets_unchanged": {
+    "http": 120,
+    "insights": 240,
+    "summary": 180,
+    "discussion": 600,
+    "model_attempts": 2
+  },
+  "queue_bound": "One active and one pending per run; first queued direct expert reply pinned, normal prefixes coalesced",
+  "normal_end": "Drain existing worker within original deadlines, then ensure final complete prefix; do not cancel valid process simply because it is older",
+  "late_results": "Cancelled/current run/version and transaction guards remain; failure/shutdown still cancel",
+  "final_failure": "Keep process panel/boundary; summary has full frozen messages and empty insights instead of stale process evidence",
+  "paid_model_calls": 0,
+  "real_quality_verification": "pending user new browser run",
+  "reused_checks": [
+    "unaffected installation",
+    "static layout",
+    "SSE protocol",
+    "unaffected E2E"
+  ],
+  "limitations": [
+    "Model checks are not semantic proof",
+    "Finite prefix coalescing cannot promise every transient conflict",
+    "Process update may arrive during SUMMARIZING; draining adds bounded end latency, no higher task timeouts"
+  ]
+}

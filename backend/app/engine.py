@@ -134,8 +134,13 @@ class DiscussionEngine:
                 if recovered=='STOPPED': return False
             raise
         committed=await self.db(self.repository.commit_turn,context,claim.id,output)
-        if committed and (len(context.snapshot.messages)+1)%2==0:
-            self.supervisor.request_insights(context.snapshot.discussion.id,context.snapshot.discussion.run_id,len(context.snapshot.messages)+1)
+        direct_reply=task.get('participation_kind')=='REBUT' and any(
+            m.id==task.get('target_message_id') and any(p.id==m.participant_id and p.kind=='EXPERT'
+                for p in context.snapshot.participants) for m in context.snapshot.messages)
+        if committed and (direct_reply or (len(context.snapshot.messages)+1)%2==0):
+            # REBUT is a scheduling hint, never proof of semantic disagreement.
+            self.supervisor.request_insights(context.snapshot.discussion.id,context.snapshot.discussion.run_id,
+                len(context.snapshot.messages)+1,priority=direct_reply)
         return committed
 
     async def run(self,did,rid):

@@ -1,0 +1,46 @@
+{
+  "browser": "installed Microsoft Edge",
+  "model": "controlled backend replacement",
+  "real_http_sse": true,
+  "stats": {
+    "startTime": "2026-10-11T06:34:20.249Z",
+    "duration": 24988.308999999997,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "real services create, confirm, stream two live evidence updates and complete a natural summary",
+      "expected": true,
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 5873
+        }
+      ]
+    },
+    {
+      "title": "failed extraction is streamed while last successful evidence stays visible",
+      "expected": true,
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 6331
+        }
+      ]
+    },
+    {
+      "title": "process disagreement publishes over real SSE then resolves at the final boundary",
+      "expected": true,
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 5724
+        }
+      ]
+    }
+  ],
+  "paid_model_calls": 0
+}

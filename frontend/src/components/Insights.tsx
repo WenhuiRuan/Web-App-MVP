@@ -13,18 +13,20 @@ export function SummaryText({ snapshot }: { snapshot: Snapshot }) {
 export function Insights({ snapshot, visible, onSource }: { snapshot: Snapshot; visible: boolean; onSource: (id: string) => void }) {
   const [tab, setTab] = useState<'insights' | 'summary'>('insights')
   useEffect(() => { if (snapshot.discussion.state === 'COMPLETED') setTab('summary') }, [snapshot.discussion.state])
-  const categories = [{ kind: 'consensus', label: '逐步形成的共识', symbol: '↗' }, { kind: 'disagreement', label: '仍在交锋的分歧', symbol: '↔' }] as const
+  const boundary = snapshot.insights.through_turn
+  const behind = boundary < snapshot.messages.length
+  const categories = [{ kind: 'consensus', label: '逐步形成的共识', symbol: '↗' }, { kind: 'disagreement', label: '该提取范围内的分歧', symbol: '↔' }] as const
   return <section className={`panel insights-panel ${visible ? 'mobile-visible' : ''}`} aria-label="共识分歧与总结区域">
     <div className="panel-heading"><div><span className="section-kicker">IDEAS IN MOTION</span><h2>观点与结论</h2></div><span className="live-small">{snapshot.discussion.state === 'COMPLETED' ? '已归档' : '随讨论更新'}</span></div>
     <div className="insight-tabs" role="tablist" aria-label="观点面板"><button role="tab" aria-selected={tab === 'insights'} onClick={() => setTab('insights')}>共识与分歧</button><button role="tab" aria-selected={tab === 'summary'} disabled={!snapshot.summary} onClick={() => setTab('summary')}>主持总结</button></div>
     <div className="insights-scroll" tabIndex={0}>
       {['FAILED', 'INTERRUPTED'].includes(snapshot.insight_status?.state) && <div className="alert warning" role="status" data-testid="insight-failure">观点提取{snapshot.insight_status.state === 'FAILED' ? '失败' : '中断'}（{snapshot.insight_status.error_code}），已保留最近成功的观点。后续发言边界会再次尝试；已结束时不会重放讨论。</div>}
-      {snapshot.insight_status?.state === 'PENDING' && <p className="insight-note" role="status">正在提炼至第 {snapshot.insight_status.through_turn} 条发言…</p>}
+      {snapshot.insight_status?.state === 'PENDING' && <p className="insight-note" role="status" data-testid="insight-progress">正在提炼至第 {snapshot.insight_status.through_turn} 条发言；已发布至第 {boundary} 条，现场已有 {snapshot.messages.length} 条。{snapshot.discussion.state === 'SUMMARIZING' ? '发言已结束，过程提取完成后还会核对最终范围。' : '后续发言继续推进。'}</p>}
       {tab === 'summary' && snapshot.summary ? <SummaryText snapshot={snapshot} /> : <>
         <p className="insight-note">观点来自已发生的发言。点击依据，可回到讨论现场。</p>
         {categories.map(category => <div className={`insight-section ${category.kind}`} key={category.kind}>
           <h3><span>{category.symbol}</span>{category.label}<b>{snapshot.insights.items.filter(i => i.kind === category.kind).length.toString().padStart(2, '0')}</b></h3>
-          {!snapshot.insights.items.some(i => i.kind === category.kind) && <div className="insight-empty">{category.kind === 'consensus' ? '观点仍在碰撞，暂未形成足够依据的共识。' : '尚未提取到有充分依据的未解决分歧；未回答的问题仍可能存在。'}</div>}
+          {!snapshot.insights.items.some(i => i.kind === category.kind) && <div className="insight-empty">{!snapshot.insights.version ? '尚未发布观点提取结果。' : category.kind === 'consensus' ? `截至第 ${boundary} 条，已发布结果暂未识别到充分共识。` : `截至第 ${boundary} 条，已发布结果未识别到有充分依据的未解决分歧。`}{behind ? '后续发言尚未完成提取，不能据此判断整场没有分歧。' : '未回答的问题仍可能存在。'}</div>}
           {snapshot.insights.items.filter(i => i.kind === category.kind).map(insight => <article className="insight-item" data-testid="insight" key={insight.id}><p>{insight.content}</p><div className="sources"><span>发言依据</span>{insight.source_message_ids.map(id => {
             const message = snapshot.messages.find(m => m.id === id)
             if (!message) return null

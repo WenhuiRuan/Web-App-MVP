@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TOP_LEVEL = {'.gitignore', '.gitattributes', '.env.example', 'AGENTS.md', 'README.md', 'pyproject.toml', 'pytest.ini'}
 SOURCE_DIRS = {'backend', 'frontend', 'scripts', 'db', 'docs', 'data'}
 EVIDENCE_PREFIXES = (
+    'data/quality/disagreement-live/',
     'data/quality/model-recovery/',
     'data/quality/stage6c-interaction/',
     'data/quality/stage6a-acceptance/complete-final/',

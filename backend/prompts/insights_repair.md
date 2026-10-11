@@ -4,3 +4,5 @@
 只输出JSON，reviews每项含index、merge_with（[]）、kind、content、source_turns、evidence和checks；checks字段authors_correct/same_object/compatible_scope/every_condition_supported/explicit_positions/proposal_preserved/not_superseded均针对收窄后主张，只有全部true才保留。不要输出分析或原始推理。
 
 一项只保留一个能逐字溯源的共同主张；不要用“位置/密度”“A或B”等把不同对象包装为同一共识。上位概括若只是已列主张的重复部分、没有新的共同条件，不另列一项。复合候选拆到最关键的共同动作，其余独立主张只有确有不同内容才另列；合并时保留来源、实际支持者和共同条件，不能从一般认同推到整套细节。相同来源不是合并依据，不同来源也可以明确支持同一动作。
+
+本任务只修复共识的共同条件，不处理分歧。分歧已经由insights_review按各方相反判断的独立证据审核，不得用这里的双方共同支持规则删改分歧。

@@ -130,7 +130,7 @@ Settings与.env.example统一enabled/low/16384、HTTP120、提取240、总结180
 
 ## 交付后提取并行与主持语义修正（当前实现）
 
-每次偶数正式消息提交后仅调用TaskSupervisor.request_insights，不等待模型。以run_id管理唯一insight_tasks及一个最新insight_targets边界；在途前缀不可变，排队中间边界合并。正常仍可连续提交观点版本，失败保留上版并显示状态。进入SUMMARIZING取消旧前缀，最终冻结前缀的有限预算提取完成/失败后才领取总结；不是无限等待，也不并行无限创建任务。
+每次偶数正式消息提交，以及专家REBUT回应已提交专家消息后，仅调用TaskSupervisor.request_insights，不等待模型；REBUT只是提取触发信号，不决定观点kind。以run_id管理唯一worker及一个待处理边界；普通更新取最新，排队中首次直接回应的边界由insight_priority保护到消费，不再被普通更新或后来的回应替换。最多一个在途/一个待处理，无无限积压。在途前缀不可变，成功事务发布其真实范围。正常进入SUMMARIZING先等待此worker及其待处理前缀在各自既有有限预算内结束，再请求冻结最终边界；不取消仅因较旧而仍有效的过程提取。最终成功批次必须覆盖完整冻结消息才作为总结的insights输入；最终失败时面板保留过程批次，总结使用完整原消息及空insights。失败、关停、取消与迟到守卫保持。等待会增加结束后观察时间，但不延长模型任务/重试预算，不要求发言逐条等提取。
 
 shutdown取消并收集所有insight worker、运行/总结/阵容/受理任务，等待SQLite后执行恢复；讨论失败先取消worker，再同事务标记残留PENDING提取FAILED及事件。取消旧作业后新领取原子SUPERSEDED，模型调用仍在事务外，提交受当前run/state/version约束。
 

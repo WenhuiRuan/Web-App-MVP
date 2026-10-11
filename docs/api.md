@@ -312,3 +312,11 @@ opening上游context使用独立opening.md（仍属于utterance任务），openi
 ```
 
 original_question直接来自request.topic；开场自然提出原题并向全场邀请看法，1–2句，不改成条件/应对子问题、不添加分析框架或逐人任务。开场context仅含task/topic/host_task/actor_slot、主持身份participants及attempt/output_correction，不携带专家职业/stance、public_focus、messages或观点，避免提前安排切入角度。slot仍使用本场原始位置，结果身份仍由后端校验绑定。讨论中的followup/linking仍使用原公开Transcript、实际回应对象和具体疑问；专家参与context及仲裁不变。HTTP/SSE和内部ModelRequest契约不变；不硬拼正文、不新增逐字匹配或语义保证。受控检查与真实待验范围见model-recovery。
+
+## 当前分歧证据与过程发布（PL-022，覆盖早期结束取消说明）
+
+业务HTTP/SSE/ModelRequest及SQLite版本仍007，不新增事件类型。insights.updated仍为带version/through_turn的完整批次；新REBUT触发不是公开分歧消息，正式Transcript仅发言。普通更新合并，首次待处理的直接专家回应边界被保护到消费。正常SUMMARIZING后可继续发布尚在预算内的过程批次，再发布最终完整边界；因此SUMMARIZING不意味着insights已覆盖全部消息。FAILED/INTERRUPTED关闭仍按原规则取消，迟到/旧版不能提交。
+
+Snapshot.insights指最后成功结果，insight_status指最新任务。页面同时展示已发布范围、在途范围和现场消息数，较旧零项只描述已提取前缀。最终提取成功且through_turn==冻结边界时总结使用该批次；失败时旧批次保留在面板，总结insights为空并回读完整冻结messages，不强制纳入可能已化解的旧分歧。
+
+上游EvidenceChecks增加可空opposing_judgments_supported。共同守卫authors_correct/same_object/compatible_scope/explicit_positions/proposal_preserved/not_superseded均须true；consensus另要求every_condition_supported=true，disagreement另要求opposing_judgments_supported=true（缺失不接受），不以every_condition_supported=false否定各方真实的相反判断。该标记是模型判断，不是程序语义证明。来源/专家归属/消息边界/连续引文及旧结果守卫不变；内部候选、checks与草稿仍不发送给页面。

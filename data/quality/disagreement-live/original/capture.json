@@ -1,0 +1,26 @@
+{
+  "readonly": true,
+  "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+  "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+  "captured_at": "2026-10-11T06:25:48.432218+00:00",
+  "sha256": "960b4a726b8ae27bd387a84c2600ca4bff46aa6da1272119d97aaaeb78d37771",
+  "tables": {
+    "discussions": 1,
+    "events": 170,
+    "insight_batches": 4,
+    "insight_jobs": 5,
+    "insight_sources": 23,
+    "insights": 10,
+    "messages": 12,
+    "model_diagnostics": 70,
+    "operations": 3,
+    "participants": 5,
+    "role_states": 5,
+    "rosters": 1,
+    "runs": 1,
+    "speaking_intents": 40,
+    "summaries": 1,
+    "summary_jobs": 1,
+    "turn_claims": 12
+  }
+}

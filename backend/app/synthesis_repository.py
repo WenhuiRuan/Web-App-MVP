@@ -107,7 +107,9 @@ class SynthesisRepository(RunRepository):
         attempt=(conn.execute('SELECT max(attempt) FROM summary_jobs WHERE discussion_id=? AND run_id=?',(str(did),str(rid))).fetchone()[0] or 0)+1
         jid=uuid4()
         conn.execute('INSERT INTO summary_jobs(id,discussion_id,run_id,attempt,through_turn,insight_version,operation_id) VALUES (?,?,?,?,?,?,?)',
-                     (str(jid),str(did),str(rid),attempt,run['summary_through_turn'],snapshot.insights.version,str(operation_id) if operation_id else None))
+                     (str(jid),str(did),str(rid),attempt,run['summary_through_turn'],
+                      snapshot.insights.version if snapshot.insights.through_turn==run['summary_through_turn'] else 0,
+                      str(operation_id) if operation_id else None))
         job=conn.execute('SELECT * FROM summary_jobs WHERE id=?',(str(jid),)).fetchone()
         return SynthesisClaim(jid,self._summary_request(conn,job))
 

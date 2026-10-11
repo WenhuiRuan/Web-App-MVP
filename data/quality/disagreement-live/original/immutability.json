@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-11T06:40:32.787758+00:00",
+  "original_sha256": "960b4a726b8ae27bd387a84c2600ca4bff46aa6da1272119d97aaaeb78d37771",
+  "source_rows_unchanged": true,
+  "tables": {
+    "discussions": 1,
+    "events": 170,
+    "insight_batches": 4,
+    "insight_jobs": 5,
+    "insight_sources": 23,
+    "insights": 10,
+    "messages": 12,
+    "model_diagnostics": 70,
+    "operations": 3,
+    "participants": 5,
+    "role_states": 5,
+    "rosters": 1,
+    "runs": 1,
+    "speaking_intents": 40,
+    "summaries": 1,
+    "summary_jobs": 1,
+    "turn_claims": 12
+  },
+  "read_only": true
+}

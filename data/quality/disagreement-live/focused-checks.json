@@ -1,0 +1,360 @@
+[
+  {
+    "through_turn": 10,
+    "input": {
+      "topic": "你认为AI的飞速发展,在未来几年是否会造成大规模失业?",
+      "messages": [
+        {
+          "id": "cd26956a-b9b5-46c0-864c-eb3012f7b091",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "40775511-773c-5243-86f4-f8a2a0d7ff13",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "AI的飞速发展，在未来几年是否会造成大规模失业？大家怎么看？",
+          "created_at": "2026-10-11T06:13:20.414379Z"
+        },
+        {
+          "id": "6d4a8515-fc7c-40c2-b012-be8c2f0baea8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我倾向于把问题拆成局部冲击和净失业两个口径：未来几年可标准化的认知与文书岗位很可能出现局部、成规模的失业，尤其冲击中等技能白领，但净失业规模取决于再培训速度、失业保障和总需求政策是否跟上。",
+          "created_at": "2026-10-11T06:13:31.183837Z"
+        },
+        {
+          "id": "384e2d57-a58f-467e-9c71-879203bf8f76",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "2aaa578b-b858-5b66-9746-b98dbe7e74d7",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "林禾把局部冲击和净失业分开是有用的，但从制造业看，局部冲击更早落在重复性质检和排产岗位，同时设备维护、人机协作和现场服务需求上升。如果职业教育更新跟不上产线技术，青年从学校到工厂的入口会收窄，这种结构性失业可能持续多年，并不只取决于再培训速度。",
+          "created_at": "2026-10-11T06:13:51.346981Z"
+        },
+        {
+          "id": "1a9652f7-0f7b-44f4-8623-809dedb5cb58",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "5ee1384a-14b6-57c4-93fb-9c856235b9be",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "孙敏，你提醒的青年入口收窄我接受，但从AI产业落地看，制造业替代速度受可靠性、合规、集成成本和产线组织惯性约束，未来几年更可能是入门岗位冻结和任务重组，而非整岗大规模裁撤。因此我判断职业教育的紧迫性在于帮青年获得设备维护、人机协作这些仍在扩张的入口，而不是等总量失业数据确认后再调整。",
+          "created_at": "2026-10-11T06:14:02.238440Z"
+        },
+        {
+          "id": "057e9e63-2a13-4372-8149-c209b3722ca8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "b93e84cf-deb2-51a2-8d45-f37de0c5dcd2",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "周岚，你判断入门岗位冻结和任务重组而非整岗裁撤，这在制造业或许成立，但在平台经济中，同样的重组常以外包、算法调度和零工化出现，劳动者没被裁却失去社保与议价能力。因此评估AI对就业的冲击，不能只看失业统计，而要纳入集体协商、数据权利和AI收益再分配这些条件，否则实际冲击会被系统性低估。",
+          "created_at": "2026-10-11T06:14:22.805167Z"
+        },
+        {
+          "id": "58676252-93e6-4362-8fda-1dc180316ff8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "赵启，你提醒的统计低估我接受，但测量口径和因果判断要分开：登记失业率确实可能因退出劳动力市场或转零工而不升。我主张把就业人口比、不充分就业率和社保覆盖同失业率并列来评估冲击，集体协商与再分配能修正结果，却不能替代对替代弹性和总需求的估计。",
+          "created_at": "2026-10-11T06:14:43.827533Z"
+        },
+        {
+          "id": "9d3a271a-f0c8-4b0b-b7cc-4c3c0d07286d",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "5ee1384a-14b6-57c4-93fb-9c856235b9be",
+          "turn_no": 7,
+          "kind": "statement",
+          "content": "赵启，平台零工化确实会掩盖失业并削弱社保，这个提醒我接受，但它更直接暴露的是劳动分类和社保便携性滞后，不能直接等同于AI替代速度。我仍主张未来几年受合规、可靠性和集成成本约束，主冲击是任务重组与入门冻结，企业技能升级建议做成可跨平台携带的技能账户，并先明确出资与认可规则，否则难以对冲入门岗位收窄。",
+          "created_at": "2026-10-11T06:15:05.491246Z"
+        },
+        {
+          "id": "dd7640a3-fdf0-4f35-8783-727ade01be62",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "40775511-773c-5243-86f4-f8a2a0d7ff13",
+          "turn_no": 8,
+          "kind": "linking",
+          "content": "林禾主张把就业人口比、不充分就业率和社保覆盖同失业率并列，赵启提醒平台重组常表现为失去社保和议价能力，周岚认为这更直接暴露劳动分类和社保便携性滞后。若未来几年失业率不升，但就业人口比下降、不充分就业增加或社保覆盖萎缩，你们各自会把它算作“大规模失业”的一部分，还是更倾向只算就业质量恶化？",
+          "created_at": "2026-10-11T06:15:29.628882Z"
+        },
+        {
+          "id": "a7300a1c-d3ff-447e-ae47-1aade1afd115",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "b93e84cf-deb2-51a2-8d45-f37de0c5dcd2",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。",
+          "created_at": "2026-10-11T06:15:43.570016Z"
+        },
+        {
+          "id": "2a7c2633-eea7-4da8-b623-5cf411c0a198",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。",
+          "created_at": "2026-10-11T06:16:02.524334Z"
+        }
+      ]
+    },
+    "controlled_candidate": {
+      "kind": "disagreement",
+      "content": "赵启主张把就业质量恶化计入广义失业，林禾主张归入劳动市场恶化而不统称失业。",
+      "source_turns": [
+        9,
+        10
+      ],
+      "evidence": [
+        {
+          "turn": 9,
+          "quote": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。"
+        },
+        {
+          "turn": 10,
+          "quote": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。"
+        }
+      ]
+    },
+    "controlled_review": {
+      "reviews": [
+        {
+          "index": 0,
+          "kind": "disagreement",
+          "content": "赵启主张把就业质量恶化计入广义失业，林禾主张归入劳动市场恶化而不统称失业。",
+          "source_turns": [
+            9,
+            10
+          ],
+          "evidence": [
+            {
+              "turn": 9,
+              "quote": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。"
+            },
+            {
+              "turn": 10,
+              "quote": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。"
+            }
+          ],
+          "checks": {
+            "authors_correct": true,
+            "same_object": true,
+            "compatible_scope": true,
+            "every_condition_supported": false,
+            "explicit_positions": true,
+            "proposal_preserved": true,
+            "not_superseded": true,
+            "opposing_judgments_supported": true
+          }
+        }
+      ]
+    },
+    "actual_validated_result": {
+      "task": "insights",
+      "items": [
+        {
+          "id": "5fa48c66-a09d-5712-a8d9-abdad01a45ef",
+          "kind": "disagreement",
+          "content": "赵启主张把就业质量恶化计入广义失业，林禾主张归入劳动市场恶化而不统称失业。",
+          "source_message_ids": [
+            "a7300a1c-d3ff-447e-ae47-1aade1afd115",
+            "2a7c2633-eea7-4da8-b623-5cf411c0a198"
+          ]
+        }
+      ]
+    },
+    "interpretation": "Human-assessed classification dispute at 9/10; 11 explicitly accepts distinction. Review response is controlled, not real provider judgment."
+  },
+  {
+    "through_turn": 12,
+    "input": {
+      "topic": "你认为AI的飞速发展,在未来几年是否会造成大规模失业?",
+      "messages": [
+        {
+          "id": "cd26956a-b9b5-46c0-864c-eb3012f7b091",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "40775511-773c-5243-86f4-f8a2a0d7ff13",
+          "turn_no": 1,
+          "kind": "opening",
+          "content": "AI的飞速发展，在未来几年是否会造成大规模失业？大家怎么看？",
+          "created_at": "2026-10-11T06:13:20.414379Z"
+        },
+        {
+          "id": "6d4a8515-fc7c-40c2-b012-be8c2f0baea8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 2,
+          "kind": "statement",
+          "content": "我倾向于把问题拆成局部冲击和净失业两个口径：未来几年可标准化的认知与文书岗位很可能出现局部、成规模的失业，尤其冲击中等技能白领，但净失业规模取决于再培训速度、失业保障和总需求政策是否跟上。",
+          "created_at": "2026-10-11T06:13:31.183837Z"
+        },
+        {
+          "id": "384e2d57-a58f-467e-9c71-879203bf8f76",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "2aaa578b-b858-5b66-9746-b98dbe7e74d7",
+          "turn_no": 3,
+          "kind": "statement",
+          "content": "林禾把局部冲击和净失业分开是有用的，但从制造业看，局部冲击更早落在重复性质检和排产岗位，同时设备维护、人机协作和现场服务需求上升。如果职业教育更新跟不上产线技术，青年从学校到工厂的入口会收窄，这种结构性失业可能持续多年，并不只取决于再培训速度。",
+          "created_at": "2026-10-11T06:13:51.346981Z"
+        },
+        {
+          "id": "1a9652f7-0f7b-44f4-8623-809dedb5cb58",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "5ee1384a-14b6-57c4-93fb-9c856235b9be",
+          "turn_no": 4,
+          "kind": "statement",
+          "content": "孙敏，你提醒的青年入口收窄我接受，但从AI产业落地看，制造业替代速度受可靠性、合规、集成成本和产线组织惯性约束，未来几年更可能是入门岗位冻结和任务重组，而非整岗大规模裁撤。因此我判断职业教育的紧迫性在于帮青年获得设备维护、人机协作这些仍在扩张的入口，而不是等总量失业数据确认后再调整。",
+          "created_at": "2026-10-11T06:14:02.238440Z"
+        },
+        {
+          "id": "057e9e63-2a13-4372-8149-c209b3722ca8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "b93e84cf-deb2-51a2-8d45-f37de0c5dcd2",
+          "turn_no": 5,
+          "kind": "statement",
+          "content": "周岚，你判断入门岗位冻结和任务重组而非整岗裁撤，这在制造业或许成立，但在平台经济中，同样的重组常以外包、算法调度和零工化出现，劳动者没被裁却失去社保与议价能力。因此评估AI对就业的冲击，不能只看失业统计，而要纳入集体协商、数据权利和AI收益再分配这些条件，否则实际冲击会被系统性低估。",
+          "created_at": "2026-10-11T06:14:22.805167Z"
+        },
+        {
+          "id": "58676252-93e6-4362-8fda-1dc180316ff8",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 6,
+          "kind": "statement",
+          "content": "赵启，你提醒的统计低估我接受，但测量口径和因果判断要分开：登记失业率确实可能因退出劳动力市场或转零工而不升。我主张把就业人口比、不充分就业率和社保覆盖同失业率并列来评估冲击，集体协商与再分配能修正结果，却不能替代对替代弹性和总需求的估计。",
+          "created_at": "2026-10-11T06:14:43.827533Z"
+        },
+        {
+          "id": "9d3a271a-f0c8-4b0b-b7cc-4c3c0d07286d",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "5ee1384a-14b6-57c4-93fb-9c856235b9be",
+          "turn_no": 7,
+          "kind": "statement",
+          "content": "赵启，平台零工化确实会掩盖失业并削弱社保，这个提醒我接受，但它更直接暴露的是劳动分类和社保便携性滞后，不能直接等同于AI替代速度。我仍主张未来几年受合规、可靠性和集成成本约束，主冲击是任务重组与入门冻结，企业技能升级建议做成可跨平台携带的技能账户，并先明确出资与认可规则，否则难以对冲入门岗位收窄。",
+          "created_at": "2026-10-11T06:15:05.491246Z"
+        },
+        {
+          "id": "dd7640a3-fdf0-4f35-8783-727ade01be62",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "40775511-773c-5243-86f4-f8a2a0d7ff13",
+          "turn_no": 8,
+          "kind": "linking",
+          "content": "林禾主张把就业人口比、不充分就业率和社保覆盖同失业率并列，赵启提醒平台重组常表现为失去社保和议价能力，周岚认为这更直接暴露劳动分类和社保便携性滞后。若未来几年失业率不升，但就业人口比下降、不充分就业增加或社保覆盖萎缩，你们各自会把它算作“大规模失业”的一部分，还是更倾向只算就业质量恶化？",
+          "created_at": "2026-10-11T06:15:29.628882Z"
+        },
+        {
+          "id": "a7300a1c-d3ff-447e-ae47-1aade1afd115",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "b93e84cf-deb2-51a2-8d45-f37de0c5dcd2",
+          "turn_no": 9,
+          "kind": "statement",
+          "content": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。",
+          "created_at": "2026-10-11T06:15:43.570016Z"
+        },
+        {
+          "id": "2a7c2633-eea7-4da8-b623-5cf411c0a198",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "dee3a03e-f4c5-5e39-a6d7-7096cb4050b4",
+          "turn_no": 10,
+          "kind": "statement",
+          "content": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。",
+          "created_at": "2026-10-11T06:16:02.524334Z"
+        },
+        {
+          "id": "543f182b-331d-42dd-8e0c-31bf012a8672",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "b93e84cf-deb2-51a2-8d45-f37de0c5dcd2",
+          "turn_no": 11,
+          "kind": "statement",
+          "content": "林禾，我接受把就业质量恶化和失业分开，但劳动利用不足指数仍可能把同一岗位被算法调度转为无社保零工时算作既有就业，从而漏掉可识别的替代性失业。建议在并列口径中单列用工变更披露和社保连续记录，专门追踪岗位内容未变而劳动关系被拆散的情况。",
+          "created_at": "2026-10-11T06:16:22.373011Z"
+        },
+        {
+          "id": "d9dfca3e-721c-4d14-aba8-01c62bad404d",
+          "discussion_id": "85a0569e-7507-41cc-a693-e8e26500ce56",
+          "run_id": "9a542c13-d1c9-4e0b-9838-ee3c3d3ccf60",
+          "participant_id": "2aaa578b-b858-5b66-9746-b98dbe7e74d7",
+          "turn_no": 12,
+          "kind": "statement",
+          "content": "林禾，把就业质量恶化与失业分开、用劳动利用不足指数并列，我接受，但从制造业看，总量口径仍可能漏掉青年入口冻结。我建议在制造业子口径中加职校对口就业率、学徒制转正率和入职十二个月社保连续率，否则失业率不升会掩盖结构性失业。",
+          "created_at": "2026-10-11T06:16:47.583292Z"
+        }
+      ]
+    },
+    "controlled_candidate": {
+      "kind": "disagreement",
+      "content": "赵启主张把就业质量恶化计入广义失业，林禾主张归入劳动市场恶化而不统称失业。",
+      "source_turns": [
+        9,
+        10
+      ],
+      "evidence": [
+        {
+          "turn": 9,
+          "quote": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。"
+        },
+        {
+          "turn": 10,
+          "quote": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。"
+        }
+      ]
+    },
+    "controlled_review": {
+      "reviews": [
+        {
+          "index": 0,
+          "kind": "disagreement",
+          "content": "赵启主张把就业质量恶化计入广义失业，林禾主张归入劳动市场恶化而不统称失业。",
+          "source_turns": [
+            9,
+            10
+          ],
+          "evidence": [
+            {
+              "turn": 9,
+              "quote": "我会把失业率不升但就业人口比下降、不充分就业增加和社保覆盖萎缩算作广义大规模失业的一部分，而不只是就业质量恶化。因为平台外包和算法调度常制造在册却无保障的就业，统计上没失业，劳动者的收入稳定性和集体协商能力却已被削弱。"
+            },
+            {
+              "turn": 10,
+              "quote": "陈序问的是口径选择，我会把就业人口比下降、不充分就业上升和社保覆盖萎缩归入广义劳动市场恶化，但不统称失业，否则会混淆AI替代弹性与社保制度滞后。我建议用劳动利用不足指数把这些指标与失业率并列作为政策触发口径，既不把就业质量恶化说成失业，也不让它被失业率掩盖。"
+            }
+          ],
+          "checks": {
+            "authors_correct": true,
+            "same_object": true,
+            "compatible_scope": true,
+            "every_condition_supported": false,
+            "explicit_positions": true,
+            "proposal_preserved": true,
+            "not_superseded": false,
+            "opposing_judgments_supported": true
+          }
+        }
+      ]
+    },
+    "actual_validated_result": {
+      "task": "insights",
+      "items": []
+    },
+    "interpretation": "Human-assessed classification dispute at 9/10; 11 explicitly accepts distinction. Review response is controlled, not real provider judgment."
+  }
+]

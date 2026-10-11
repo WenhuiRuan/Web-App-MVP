@@ -114,3 +114,9 @@ insights/summary/host_control上下文不传人设stance。insights上游message
 日常预算保持enabled/low/16384、HTTP120、观点240、总结180、讨论600秒/20条，不因输出错误增加额度。统一调用层在普通启动持久化尝试诊断，分为空内容/截断/JSON/字段/句数/长度及其他约束，非法结果下一次带具体安全output_correction；HTTP层仍不重试。007追加安全表，无原始响应/认证头/隐藏推理；历史非法输出无原因不倒推。非开场主持校验重试耗尽按DISCUSSION_HOST_SKIP_LIMIT最多2次累计跳过，专家重新自主参与，无虚假主持正文，认证/取消等不跳过。
 
 主持开场不按嘉宾职业分工排序，followup/linking只围绕已出现主张邀请回应；intent上下文participation_rules允许PASS及质疑提问，职业/stance/公开消息保留，public_focus不作为主持交派任务。六任务划分、身份和来源绑定不改。只完成受控验证，本轮真实付费复测由用户执行；重启后端加载代码/Prompt及迁移，详见[模型恢复报告](model-recovery.md)。
+
+## 当前：共识与分歧的证据检查分别适用
+
+insights草稿按完整公开前缀检查双方实际判断；引用分别支持各方主张，不要求分歧双方共同支持相反条件。insights_review的checks.opposing_judgments_supported（可空StrictBool）明确表示同一可比较对象上的各自不相容判断；disagreement须true。共识仍要求every_condition_supported=true，表示所有共同条件有各支持者明确认可；分歧不适用共同认可检查。其余六项作者/对象/范围/明确立场/提案/后续变化均需true。不同关注点、普通补充和未回答问题不能靠REBUT字样或非空要求变成分歧；最新接受/澄清删除或改变原项。insights_repair仅修复共识共同交集，不拿其规则删分歧。
+
+Prompt新增不同议题的分类冲突、接受后化解、共同动作加单方补充、主持未得到回答与部分共识并存示例；程序不按话题/姓名/序号分类。原85a0569e取消任务没有保存draft/review，不能确认其阶段性语义输出；本轮没有付费定向或完整讨论，受控返回只能验证契约和状态分支，真实效果待用户。

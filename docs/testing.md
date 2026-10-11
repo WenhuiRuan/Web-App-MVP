@@ -59,3 +59,11 @@
 PL-021开场隔离：先host_invitation 5 failed /4 passed（2.35秒），新规则缺失及mock固定框架；实现后`python -m pytest backend/tests/test_host_invitation.py backend/tests/test_deepseek.py backend/tests/test_deepseek_http.py -q`为84 passed /5.31秒。host_invitation现9项，验证四种原议题、独立开场Prompt、排除嘉宾立场/通用focus/专家分析示例、保留纠正反馈，后续追问仍有实际来源，以及专家自主PASS回归。替身实际HTTP不证明Prompt语义效果；付费调用0，原始质量记录保留。版本SHA另存opening-invitation.json；opening-question.json继续只对应b53d42b。未重跑未受影响布局/SSE/安装/完整E2E。
 
 契约/制品受影响补验21 passed /1.52秒；export_contracts --check通过，未修改公开接口或机器契约。文档检查147需求/157验收/25文档通过（首次因新证据文件尚未生成而链接缺失，生成后通过，非业务TDD失败）。提交后交付包按manifest和当前opening-invitation.json逐文件核对，解包独立临时数据库/样例/普通FastAPI启动结果见outputs/delivery-check.json；使用现有锁定环境，不冒称重新安装依赖。
+
+## PL-022：分歧与过程边界修复
+
+新test_disagreement_live先10 failed/1 passed（3.12秒），覆盖旧证据字段不能区分支持关系、结束丢弃过程结果、无保护边界、总结误用旧批次；实现后11 passed/2.69秒。扩展奇数REBUT触发、同库双讨论与吞取消迟到拒绝、原任务1秒预算后最终成功，到14 passed/5.17秒；加入原文中的部分共识+相反判断同时保留，新模块共15项。普通补充/不同关注点/未回答及接受后的删除为受控审查结果分支，不能据此声称真实模型已经语义正确。
+
+八文件：disagreement_live、insight_pipeline、interaction_revision、quality_continuity、summary_pipeline、summary_recovery、synthesis_call_budget、deepseek，174 passed/71.02秒。六文件：discussion_engine、model_recovery、provider_failure_persistence、host_invitation、contracts、artifacts，95 passed/46.31秒。最终新模块+delivery_archive 20 passed/5.70秒，范围重叠不合计全量。export_contracts与docs核对另列。生产业务没有测试控制入口。
+
+前端npm run build（含类型检查）通过。`PLAYWRIGHT_CHANNEL=msedge npm run test:live -- --grep 'process disagreement publishes|failed extraction is streamed|real services create'`：3 passed/25.0秒，新断言通过实际前端/HTTP/FastAPI/临时SQLite/SSE看到零项旧范围提示、RUNNING中分歧发布、后续接受后最终共识；截图保留。最初浏览器缺Playwright自带Chromium，改用已安装Edge；一次新夹具host_control的public_focus空字符串违反既有ShortText导致失败，仅修正夹具，不算业务TDD。未升级依赖或付费重跑，旧安装、布局和未受影响协议/完整E2E结果沿用。

@@ -22,6 +22,7 @@ class TaskSupervisor:
         self.insight_tasks: dict[str, asyncio.Task] = {}
         self.insight_targets: dict[str, int] = {}
         self.insight_inflight: dict[str, int] = {}
+        self.insight_priority: set[str] = set()
         self.admissions: set[asyncio.Task] = set()
         self.database_workers: set[asyncio.Task] = set()
         self.semaphore = asyncio.Semaphore(settings.model_max_concurrency)
@@ -69,12 +70,14 @@ class TaskSupervisor:
         if not task.cancelled() and task.exception() is not None:
             logger.error('discussion_task_requires_restart_recovery')
 
-    def request_insights(self,did,rid,through_turn):
-        """One worker and one coalesced pending boundary per run, no unbounded queue."""
+    def request_insights(self,did,rid,through_turn,*,priority=False):
+        """One worker and one pending prefix; preserve a queued direct reply."""
         rid=str(rid)
         if self.closing: return
         if through_turn<=self.insight_inflight.get(rid,0): return
-        self.insight_targets[rid]=max(through_turn,self.insight_targets.get(rid,0))
+        if rid not in self.insight_priority:
+            self.insight_targets[rid]=through_turn if priority else max(through_turn,self.insight_targets.get(rid,0))
+            if priority: self.insight_priority.add(rid)
         active=self.insight_tasks.get(rid)
         if active is not None and not active.done(): return
         task=asyncio.create_task(self._extract_pending(did,rid),name=f'insights:{did}:{rid}')
@@ -86,6 +89,7 @@ class TaskSupervisor:
         try:
             while not self.closing and rid in self.insight_targets:
                 boundary=self.insight_targets.pop(rid)
+                self.insight_priority.discard(rid)
                 self.insight_inflight[rid]=boundary
                 await SynthesisEngine(self).extract(did,rid,boundary)
         finally:
@@ -103,6 +107,7 @@ class TaskSupervisor:
             task.cancel()
             await asyncio.gather(task,return_exceptions=True)
         self.insight_targets.pop(rid,None)
+        self.insight_priority.discard(rid)
 
     async def finalize_insights(self,did,rid):
         rid=str(rid)
@@ -112,10 +117,11 @@ class TaskSupervisor:
             return
         boundary=len(snapshot.messages)
         task=self.insight_tasks.get(rid)
-        if task is not None and not task.done() and self.insight_inflight.get(rid)!=boundary:
-            # The final prefix replaces obsolete work; claiming it atomically supersedes
-            # the cancelled job. No old result is allowed to become the final projection.
-            await self.cancel_insights(rid)
+        if task is not None and not task.done():
+            # Preserve a real process boundary (possibly just before clarification).
+            # Its original finite deadline still applies; no extra retries or budget.
+            # Final evidence is requested only after this worker has drained.
+            await task
         self.request_insights(did,rid,boundary)
         task=self.insight_tasks.get(rid)
         if task is not None: await task
@@ -244,6 +250,7 @@ class TaskSupervisor:
         self.insight_tasks.clear()
         self.insight_targets.clear()
         self.insight_inflight.clear()
+        self.insight_priority.clear()
         self.scheduled_runs.clear()
         self.summary_tasks.clear()
         self.scheduled_summaries.clear()
